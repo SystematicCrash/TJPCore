@@ -1,0 +1,22 @@
+
+پروژه واقعی برای تسک چاگلر
+100%
+BP9
+
+مثال به یک فهالیت ساختمانی مهندس ناظررو احتصاص دادیم ، حال میخواهیم بگوییم مهندس ناظر چه زمان هایی دردسترس هست و هرنسک درچه زمان هایی می توند ار مهندس ناظر استفاده کند یا مهندس ناظررا رزروکند
+resource engineer1 "مهندس ناظر" {
+  rate 800000
+  booking fixed
+  workinghours mon,wed 08:00 - 12:00
+}
+
+
+
+مثال به یک فهالیت ساختمانی مهندس ناظررو احتصاص دادیم ، حال میخواهیم بگوییم مهندس ناظر چه زمان هایی دردسترس هست و هرنسک درچه زمان هایی می توند ار مهندس ناظر استفاده کند یا مهندس ناظررا رزروکند
+resource engineer1 "مهندس ناظر" {
+  rate 800000
+  booking fixed
+  workinghours mon,wed 08:00 - 12:00
+}
+Turn on screen reader support
+To enable screen reader support, press Ctrl+Alt+Z To learn about keyboard shortcuts, press Ctrl+slash

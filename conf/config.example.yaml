@@ -1,0 +1,15 @@
+elasticsearch:
+  hosts: ["http://localhost:9200"]
+  username: "user"
+  password: "StrongPassword"
+  verify_certs: false
+
+indexes:
+  - wbs_resources
+  - wbs_tasks
+  - wbs_info
+  - wbs_calendars
+
+
+tjp_output_path:
+  outputs/outputs.tjp

@@ -1,0 +1,43 @@
+project project_1 "Commercial Construction Project" 2025-07-01 +180d {
+  timezone "Asia/Tehran"
+  currency "IRR"
+  now 2025-07-01
+  workinghours sat-wed 08:00 - 16:00
+  scenario plan "Plan" {
+    scenario delayed "Delayed"
+  }
+}
+
+leaves
+holiday "Exception Day" 2025-08-01,
+holiday "Exception Day"2025-08-02,
+holiday "Exception Day"2025-08-03
+
+flags
+site_preparation,
+foundation,
+project_management
+
+account projectCost "Project Cost"{
+    account task_1Cost "task_1 Cost"
+}
+
+resource res_engineer "مهندس پروژه" {
+  workinghours sat-wed 08:00 - 19:00
+
+}
+resource res_laborer "کارگر ساختمانی" {
+}
+resource res_excavator "بیل مکانیکی" {
+}
+
+
+task task_1 "مدیریت پروژه" {
+  start 2025-07-01
+  priority 1
+  flags project_management
+  chargeset task_1Cost
+  charge 5000000.0 onend
+  note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت، و گزارش‌دهی"
+}
+
