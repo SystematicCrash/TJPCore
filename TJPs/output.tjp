@@ -1,8 +1,8 @@
-project project_1 "Commercial Construction Project" 2025-07-01 +180d {
+project project_1 "Commercial Construction Project" 2025-07-01 2027-08-03 {
   timezone "Asia/Tehran"
   currency "IRR"
   now 2025-07-01
-  workinghours sat-wed 08:00 - 16:00
+  workinghours sat-wed 08:00-16:00
   scenario plan "Plan" {
     scenario delayed "Delayed"
   }
@@ -23,7 +23,7 @@ account projectCost "Project Cost"{
 }
 
 resource res_engineer "مهندس پروژه" {
-  workinghours sat-wed 08:00 - 19:00
+  workinghours sat _ wed 08:00-19:00
 
 }
 resource res_laborer "کارگر ساختمانی" {

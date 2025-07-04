@@ -4,6 +4,9 @@ from data.calender import generate_calendars
 from data.resource import generate_resources
 from data.task import generate_tasks
 
+# Reading configurations from config.yaml file
+configurations = load_config('conf/config.yaml')
+
 
 # Fetching docs from index
 def fetch_data(es, index):
@@ -17,18 +20,20 @@ def fetch_data(es, index):
 
 # Defining flags from task_linking and resource_group fields (just from tasks index)
 def define_flags(data_map):
+    global configurations
     content = ''
     flags = set()
     for item in data_map.get('wbs_tasks', []):
-        body = item['_source']
-        if body.get('task_linking', ''):
-            flags.add(body["task_linking"])
+        source = item['_source']
+        if source.get('task_linking'):
+            flags.add(source['task_linking'])
 
     for item in data_map.get('wbs_resources', []):
-        body = item['_source']
-        if body.get('resource_group', ''):
-            flags.add(body["resource_group"])
-
+        source = item['_source']
+        if source.get('resource_group'):
+            flags.add(source['resource_group'])
+        if source.get('resource_type'):
+            flags.add(source['resource_type'])
     if flags:
         content += "flags\n"
         content += ",\n".join(flags)
@@ -37,12 +42,12 @@ def define_flags(data_map):
 
 # Defining several scenarios
 def define_scenarios():
+    global configurations
     content = ''
-    scenarios_lines = []
-    scenarios_lines.append(f"scenario plan \"Plan\" {{")
-    scenarios_lines.append(f"  scenario delayedStart \"Starts with delay\"")
-    scenarios_lines.append("}")
-    content += "\n".join(scenarios_lines)
+    # Default scenario = plan
+    content += f"scenario plan \"Plan\" {{\n"
+    content += f"  delayed \"Starts with delay\"\n"
+    content += "}"
     return content
 
 
@@ -76,12 +81,29 @@ def fetch_resource_types(datamap):
     return resource_types
 
 
+# Defining custom properties for tasks
+def define_tasks_extends():
+    global configurations
+    content = ''
+    content += f"extends task {{\n"
+    content += f"  date deadline \"Tasks deadline\""
+    content += "}"
+    return content
+
+
+# Defining custom properties for resources
+def define_resources_extends():
+    pass
+
+
 # Generating TJP file
-def generate_tjp(data_map, output_path="outputs/outputs.tjp"):
+def generate_tjp(data_map, output_path="TJPs/TJPs.tjp"):
     resource_types = fetch_resource_types(data_map.get('wbs_resources', []))
     project_sec = generate_project_info(data_map.get('wbs_info', []))
     calendar_info = generate_calendars(data_map.get('wbs_calendars', []))
     scenarios_sec = define_scenarios()
+    tasks_extends_sec = define_tasks_extends()
+    resources_extends_sec = define_resources_extends()
     flags_sec = define_flags(data_map)
     accounts_sec = define_accounts(data_map)
     resource_sec = generate_resources(data_map.get("wbs_resources", []), resource_types)
@@ -89,8 +111,9 @@ def generate_tjp(data_map, output_path="outputs/outputs.tjp"):
 
     content = (
             project_sec
-            + calendar_info
             + scenarios_sec
+            + calendar_info
+            + tasks_extends_sec
             + "\n"
             + flags_sec
             + "\n"
@@ -106,9 +129,9 @@ def generate_tjp(data_map, output_path="outputs/outputs.tjp"):
 
 # Running
 def main():
-    config = load_config()
-    es = connect_elasticsearch(config)
-    indexes = config["data"]
+    global configurations
+    es = connect_elasticsearch(configurations)
+    indexes = configurations["data"]
     data_map = {}
 
     print("Fetching data...")
@@ -116,8 +139,8 @@ def main():
         data_map[index] = fetch_data(es, index)
 
     print("Generating tjp...")
-    generate_tjp(data_map, config['tjp_output_path'])
-    print(f"[✔️] Generated Successfully: {config['tjp_output_path']}")
+    generate_tjp(data_map, configurations['tjp_output_path'])
+    print(f"[✔️] Generated Successfully: {configurations['tjp_output_path']}")
 
 
 if __name__ == "__main__":

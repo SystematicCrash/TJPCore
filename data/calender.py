@@ -42,7 +42,6 @@ def generate_calendars(calendars):
 
         if calendar.working_days and calendar.working_hours:
             calendar.working_days = day_to_an_abbreviation(calendar.working_days)
-            calendar.working_hours = calendar.working_hours.replace("-", " - ")
             calendar_lines.append(f"  workinghours {calendar.working_days} {calendar.working_hours}")
 
         calendar_lines.append("}\n")

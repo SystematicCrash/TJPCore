@@ -7,3 +7,6 @@ def day_to_an_abbreviation(days: str):
     days = days.replace("Thursday", "thu")
     days = days.replace("Friday", "fri")
     return days
+
+
+

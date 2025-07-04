@@ -1,7 +1,7 @@
 from dataclasses import dataclass, fields
 from datetime import datetime
 from utility import day_to_an_abbreviation
-
+import re
 
 @dataclass
 class Resource:
@@ -55,35 +55,55 @@ def generate_resources(resources, types: set):
         resource = Resource()
         resource.initializing(document)
 
-        if resource.resource_type in types:
-            section = body[resource.resource_type]
-            if not section:
-                section.append(
-                    f"resource {resource.resource_type} \"For resources of type {resource.resource_type}\" {{")
+        if not resource.resource_type in types:
+            continue
 
-            section.append(f"  resource {resource.resource_id} \"{resource.resource_name}\" {{")
+        section = body[resource.resource_type]
 
-            if resource.max_units:
-                section.append(f"    efficiency {resource.max_units}")
+        # Defining the top level resource
+        if not section:
+            section.append(f"resource {resource.resource_type}Resources \"For resources of type {resource.resource_type}\" {{")
 
-            if resource.base_cost and resource.cost_calculation_method:
-                section.append(f"    rate {resource.base_cost} {resource.cost_calculation_method}")
+        # Declaring the flags, this will inherited by all the sub resources
+        section.append(f"  flags {resource.resource_type}")
 
-            if resource.overtime_cost:
-                section.append(f"    rate.overtime {resource.overtime_cost}")
+        # SubResources definition
+        section.append(f"  resource {resource.resource_id} \"{resource.resource_name}\" {{")
 
-            if resource.working_days and resource.working_hours:
-                resource.working_days = day_to_an_abbreviation(resource.working_days)
-                resource.working_hours = resource.working_hours.replace('-', ' - ')
-                section.append(f"    workinghours {resource.working_days} {resource.working_hours}")
+        if resource.max_units:
+            section.append(f"    efficiency {resource.max_units}")
 
-            if resource.resource_group:
-                section.append(f"    flags {resource.resource_group}")
+        if resource.base_cost and resource.cost_calculation_method:
+            section.append(f"    rate {resource.base_cost}")
 
-            if resource.cost_center:
-                section.append(f"    chargeset {resource.cost_center}")
+        if resource.allowed_leave:
+            number = re.search("\d+", resource.allowed_leave)[0]
+            interval = 'd' if (resource.allowed_leave.__contains__("day")) \
+                else ('w' if (resource.allowed_leave.__contains__("week")) else 'm')
+            section.append(f"    leaveallowance {number}{interval}")
 
-            section.append("  }\n")
+        if resource.unavailability_date:
+            if isinstance(resource.unavailability_date, str):
+                section.append(f"    leaves annual {resource.unavailability_date}")
+            elif isinstance(resource.unavailability_date, list):
+                section.append(f"    leaves annual {', annual'.join(resource.unavailability_date)}")
+
+        # if resource.overtime_cost:
+        #     section.append(f"    rate.overtime {resource.overtime_cost}")
+
+        if resource.working_days and resource.working_hours:
+            resource.working_days = day_to_an_abbreviation(resource.working_days)
+            section.append(f"    workinghours {resource.working_days} {resource.working_hours}")
+
+        if resource.resource_group:
+            section.append(f"    flags {resource.resource_group}")
+
+        if resource.cost_center:
+            section.append(f"    chargeset {resource.cost_center}")
+
+        section.append("  }\n")
+
+        body[resource.resource_type] = section
 
     for section in body.keys():
         if body[section]:
