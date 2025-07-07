@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from utility import day_to_an_abbreviation
+from data.utility import day_to_an_abbreviation
 
 
 @dataclass
@@ -14,6 +14,11 @@ class Calender:
     working_days_exceptions: list[str] = field(default_factory=list)
     working_hours_exceptions: list[str] = field(default_factory=list)
     important_dates: list[str] = field(default_factory=list)
+    es_doc: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        if self.es_doc:
+            self.initializing(self.es_doc)
 
     def initializing(self, es_doc: dict):
         source = es_doc.get("_source", {})
@@ -31,25 +36,11 @@ class Calender:
 
 # Generating project calendar information
 def generate_calendars(calendars):
-    content = ''
-    for document in calendars:
-        calendar_lines = []
-        calendar = Calender()
-        calendar.initializing(document)
-
+    calendars_objs = []
+    for doc in calendars:
+        calendar = Calender(es_doc=doc)
         calendar.working_days_exceptions.append("2025-08-02")
         calendar.working_days_exceptions.append("2025-08-03")
-
-        if calendar.working_days and calendar.working_hours:
-            calendar.working_days = day_to_an_abbreviation(calendar.working_days)
-            calendar_lines.append(f"  workinghours {calendar.working_days} {calendar.working_hours}")
-
-        calendar_lines.append("}\n")
-
-        if calendar.working_days_exceptions:
-            exception_days = ",\nholiday \"Exception Day\"".join(calendar.working_days_exceptions)
-            calendar_lines.append(f"leaves\nholiday \"Exception Day\" {exception_days}")
-
-        content += "\n".join(calendar_lines)
-        content += "\n\n"
-    return content
+        calendar.working_days = day_to_an_abbreviation(calendar.working_days)
+        calendars_objs.append(calendar)
+    return calendars_objs[0] if len(calendars_objs) != 0 else Calender()

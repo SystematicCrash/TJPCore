@@ -1,43 +1,216 @@
-project project_1 "Commercial Construction Project" 2025-07-01 2027-08-03 {
-  timezone "Asia/Tehran"
-  currency "IRR"
-  now 2025-07-01
-  workinghours sat-wed 08:00-16:00
-  scenario plan "Plan" {
-    scenario delayed "Delayed"
-  }
-}
+project project_1 "پروژه ساختمانی تجاری" 2025-07-01 +180d {
+    timezone "Asia/Tehran"
+    currency "IRR"
+    now 2025-07-01
+    scenario plan "Planned"{
+        scenario delayed "Starts with delay"
+    }
+    workinghours sat-wed 08:00-16:00
+    extend task{
+    date Deadline "tasks deadline"
+    }
 
+}
 leaves
-holiday "Exception Day" 2025-08-01,
-holiday "Exception Day"2025-08-02,
-holiday "Exception Day"2025-08-03
+holiday "Exception day" 2025-08-01,
+holiday "Exception Day" 2025-08-02,
+holiday "Exception Day" 2025-08-03
 
 flags
+human,
 site_preparation,
+equipment,
 foundation,
+management,
+site_team,
 project_management
 
-account projectCost "Project Cost"{
-    account task_1Cost "task_1 Cost"
+account projectCosts "costs of project"{
+    account task_1Costs "Costs of task_1"
+    account task_1_1_1Costs "Costs of task_1_1_1"
+    account task_1_1_2Costs "Costs of task_1_1_2"
+    account task_2Costs "Costs of task_2"
+    account task_2_1_1Costs "Costs of task_2_1_1"
+    account task_3Costs "Costs of task_3"
+    account task_3_1_1Costs "Costs of task_3_1_1"
+    account task_3_1_2Costs "Costs of task_3_1_2"
+    account task_3_1_3Costs "Costs of task_3_1_3"
+    account task_3_1_4Costs "Costs of task_3_1_4"
+    account task_3_1_5Costs "Costs of task_3_1_5"
+    account engineering "Costs of engineering"
+    account construction "Costs of construction"
 }
 
-resource res_engineer "مهندس پروژه" {
-  workinghours sat _ wed 08:00-19:00
 
+resource human "resources of type human"{
+    flags human
+    resource res_engineer "مهندس پروژه"{
+        rate 10000.0
+        efficiency 1.0
+        workinghours sat-wed 08:00-16:00
+        flags management
+    }
+    resource res_laborer "کارگر ساختمانی"{
+        rate 5000.0
+        efficiency 5.0
+        workinghours sat-wed 08:00-16:00
+        flags site_team
+    }
 }
-resource res_laborer "کارگر ساختمانی" {
+resource equipment "resources of type equipment"{
+    flags equipment
+    resource res_excavator "بیل مکانیکی"{
+        rate 20000.0
+        efficiency 2.0
+        workinghours sat-wed 08:00-16:00
+        flags equipment
+    }
 }
-resource res_excavator "بیل مکانیکی" {
-}
+
 
 
 task task_1 "مدیریت پروژه" {
-  start 2025-07-01
-  priority 1
-  flags project_management
-  chargeset task_1Cost
-  charge 5000000.0 onend
-  note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت، و گزارش‌دهی"
+    period 2025-07-01 - 2025-12-28
+    allocate res_engineer
+    minstart 2025-07-01
+    Deadline 2025-12-31
+    priority 1
+    flags project_management
+    chargeset task_1Costs
+    charge 5000000.0 onend
+    note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت، و گزارش‌دهی"
+}
+
+task task_1_1_1 "تعریف اهداف پروژه" {
+    milestone
+    start 2025-07-01
+    allocate res_engineer
+    minstart 2025-07-01
+    Deadline 2025-07-07
+    priority 1
+    flags project_management
+    chargeset task_1_1_1Costs
+    charge 100000.0 onend
+    note "تدوین اهداف پروژه و مستندسازی"
+}
+
+task task_1_1_2 "زمان‌بندی (Gantt Chart)" {
+    milestone
+    start 2025-07-06
+    allocate res_engineer
+    depends task_1_1_1
+    minstart 2025-07-06
+    Deadline 2025-07-14
+    priority 1
+    flags project_management
+    chargeset task_1_1_2Costs
+    charge 150000.0 onend
+    note "تهیه نمودار گانت برای زمان‌بندی پروژه"
+}
+
+task task_2 "آماده‌سازی سایت" {
+    period 2025-07-13 - 2025-08-11
+    allocate res_laborer, res_excavator
+    depends task_1_1_2
+    minstart 2025-07-13
+    Deadline 2025-08-15
+    priority 2
+    flags site_preparation
+    chargeset task_2Costs
+    charge 2000000.0 onend
+    note "آماده‌سازی زمین برای شروع ساخت"
+}
+
+task task_2_1_1 "حذف گیاهان و موانع" {
+    period 2025-07-13 - 2025-07-17
+    allocate res_laborer
+    depends task_1_1_2
+    minstart 2025-07-13
+    Deadline 2025-07-18
+    priority 2
+    flags site_preparation
+    chargeset task_2_1_1Costs
+    charge 200000.0 onend
+    note "پاکسازی زمین از گیاهان و موانع"
+}
+
+task task_3 "فونداسیون" {
+    period 2025-08-12 - 2025-09-10
+    allocate res_engineer, res_laborer
+    depends task_2
+    minstart 2025-08-12
+    Deadline 2025-09-15
+    priority 3
+    flags foundation
+    chargeset task_3Costs
+    charge 2500000.0 onend
+    note "اجرای فونداسیون ساختمان شامل آرماتوربندی، قالب‌بندی و بتن‌ریزی"
+}
+
+task task_3_1_1 "آرماتوربندی پی" {
+    period 2025-08-12 - 2025-08-21
+    allocate res_laborer
+    depends task_2
+    minstart 2025-08-12
+    Deadline 2025-08-23
+    priority 3
+    flags foundation
+    chargeset task_3_1_1Costs
+    charge 500000.0 onend
+    note "اجرای آرماتوربندی برای فونداسیون"
+}
+
+task task_3_1_2 "قالب‌بندی پی" {
+    period 2025-08-22 - 2025-08-26
+    allocate res_laborer
+    depends task_3_1_1
+    minstart 2025-08-22
+    Deadline 2025-08-27
+    priority 3
+    flags foundation
+    chargeset task_3_1_2Costs
+    charge 300000.0 onend
+    note "نصب قالب‌های چوبی یا فلزی برای فونداسیون"
+}
+
+task task_3_1_3 "بتن‌ریزی پی" {
+    milestone
+    start 2025-08-27
+    allocate res_laborer
+    depends task_3_1_2
+    minstart 2025-08-27
+    Deadline 2025-09-04
+    priority 3
+    flags foundation
+    chargeset task_3_1_3Costs
+    charge 700000.0 onend
+    note "ریختن بتن برای فونداسیون"
+}
+
+task task_3_1_4 "عمل‌آوری بتن" {
+    period 2025-09-03 - 2025-09-07
+    allocate res_laborer
+    depends task_3_1_3
+    minstart 2025-09-03
+    Deadline 2025-09-08
+    priority 3
+    flags foundation
+    chargeset task_3_1_4Costs
+    charge 200000.0 onend
+    note "مراقبت و عمل‌آوری بتن فونداسیون"
+}
+
+task task_3_1_5 "باز کردن قالب‌ها" {
+    milestone
+    start 2025-09-08
+    allocate res_laborer
+    depends task_3_1_4
+    minstart 2025-09-08
+    Deadline 2025-09-11
+    priority 3
+    flags foundation
+    chargeset task_3_1_5Costs
+    charge 150000.0 onend
+    note "حذف قالب‌های فونداسیون پس از عمل‌آوری"
 }
 

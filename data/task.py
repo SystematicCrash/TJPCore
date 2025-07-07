@@ -35,10 +35,16 @@ class Task:
     baseline_fixed_cost_accrual: str = ''
     task_booking: str = ''
     charge: float = 0
+    chargeset: str = ''
     milestone: bool = False
     task_linking: list[str] = field(default_factory=list)
     resource_assignment: list[str] = field(default_factory=list)
     task_dependency: list[str] = field(default_factory=list)
+    es_doc: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        if self.es_doc:
+            self.initializing(self.es_doc)
 
     def initializing(self, es_doc: dict):
         source = es_doc.get("_source", {})
@@ -56,85 +62,12 @@ class Task:
 
 # Generating tasks
 def generate_tasks(tasks):
-    lines = ''
+    tasks_objs: list[Task] = []
     for document in tasks:
-        task_lines = []
-        task = Task()
-        task.initializing(document)
-        account_name = task.task_id + "Costs"
+        task = Task(es_doc=document)
+        task.chargeset = task.task_id + "Costs"
+        if task.milestone and task.task_start_date and task.task_end_date:
+            task.task_end_date = None
+        tasks_objs.append(task)
 
-        task_lines.append(f"task {task.task_id} \"{task.task_name}\" {{")
-
-        # milestone task just can have start or end date
-        if task.milestone:
-            task_lines.append("  milestone")
-            if task.task_start_date:
-                task_lines.append(f"  start {task.task_start_date}")
-            elif task.task_end_date:
-                task_lines.append(f"  end {task.task_end_date}")
-        else:
-            if task.task_start_date and task.task_end_date:
-                task_lines.append(f"  period {task.task_start_date} - {task.task_end_date}")
-            else:
-                if task.task_start_date:
-                    task_lines.append(f"  start {task.task_start_date}")
-                elif task.task_end_date:
-                    task_lines.append(f"  end {task.task_end_date}")
-
-        if task.work_duration:
-            task_lines.append(f"  length {task.work_duration}")
-
-        # TODO When resource assigned
-        # if task.task_effort > 0:
-        #     task_lines.append(f"  effort {int(task.task_effort)}d")
-        if task.resource_assignment:
-            task_lines.append(f"  allocate {','.join(task.resource_assignment)}")
-
-        # Defining task dependencies
-        if task.task_dependency:
-            task_lines.append(f"  depends {','.join(task.task_dependency)}")
-            if task.dependency_type in ["onstart", "onend"]:
-                task_lines.append(" {")
-                task_lines.append(f"    {task.dependency_type}")
-                task_lines.append("  }")
-
-        # Defining constraints
-        if task.constraint_date and task.constraint_type:
-            if task.constraint_type == 'start_no_earlier_than':
-                task_lines.append(f"  minstart {task.constraint_date}")
-
-            if task.constraint_type == 'start_on_later_than':
-                task_lines.append(f"  maxstart {task.constraint_date}")
-
-            if task.constraint_type == 'finish_no_earlier_than':
-                task_lines.append(f"  minend {task.constraint_date}")
-
-            if task.constraint_type == 'finish_no_later_than':
-                task_lines.append(f"  maxend {task.constraint_date}")
-
-            if task.constraint_type == 'must_finish_on':
-                task_lines.append(f"  minend {task.constraint_date}")
-                task_lines.append(f"  maxend {task.constraint_date}")
-
-            if task.constraint_type == 'must_start_on':
-                task_lines.append(f"  minstart {task.constraint_date}")
-                task_lines.append(f"  maxstart {task.constraint_date}")
-
-        if task.priority:
-            task_lines.append(f"  priority {task.priority}")
-
-        if task.task_linking:
-            task_lines.append(f'  flags {task.task_linking}')
-
-        task_lines.append(f"  chargeset {account_name}")
-
-        # TODO implement shift property for exception working hours
-        if task.task_cost:
-            task_lines.append(f"  charge {task.charge} onend")
-
-        task_lines.append(f"  note \"{task.summary_task}\"")
-
-        task_lines.append("}")
-        lines += "\n".join(task_lines)
-        lines += "\n\n"
-    return lines
+    return tasks_objs

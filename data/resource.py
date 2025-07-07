@@ -1,7 +1,8 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from datetime import datetime
-from utility import day_to_an_abbreviation
+from data.utility import day_to_an_abbreviation
 import re
+
 
 @dataclass
 class Resource:
@@ -29,6 +30,12 @@ class Resource:
     cost_increase_per_time_unit: int = 0
     enterprise: bool = False
     enterprise_team_member: str = ''
+    es_doc: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        if self.es_doc:
+            self.initializing(self.es_doc)
+            self.format_allow_leaves()
 
     def initializing(self, es_doc: dict):
         source = es_doc.get("_source", {})
@@ -44,72 +51,29 @@ class Resource:
         self.resource_id = es_doc.get("_id", '')
 
 
+    def format_allow_leaves(self):
+        if not self.allowed_leave:
+            return
+        number = str(''.join(list(filter(lambda x: x.isdigit(), self.allowed_leave))))
+        interval = 'd' if (self.allowed_leave.__contains__("day")) \
+            else ('w' if (self.allowed_leave.__contains__("week")) else 'm')
+        self.allowed_leave = number + interval
+
+
 # Generating resources
 def generate_resources(resources, types: set):
-    content = ''
-    body: dict[str:list] = {}
+    parent_resources = []
     for resource_type in types:
-        body[resource_type] = []
+        parent_res = {}
+        parent_res['id'] = resource_type
+        parent_res['name'] = 'resources of type ' + resource_type
+        parent_res['flags'] = [resource_type]
+        parent_res['child_resources'] = []
+        for doc in resources:
+            if doc['_source']['resource_type'] == resource_type:
+                resource = Resource(es_doc=doc)
+                resource.working_days = day_to_an_abbreviation(resource.working_days)
+                parent_res['child_resources'].append(resource)
+        parent_resources.append(parent_res)
 
-    for document in resources:
-        resource = Resource()
-        resource.initializing(document)
-
-        if not resource.resource_type in types:
-            continue
-
-        section = body[resource.resource_type]
-
-        # Defining the top level resource
-        if not section:
-            section.append(f"resource {resource.resource_type}Resources \"For resources of type {resource.resource_type}\" {{")
-
-        # Declaring the flags, this will inherited by all the sub resources
-        section.append(f"  flags {resource.resource_type}")
-
-        # SubResources definition
-        section.append(f"  resource {resource.resource_id} \"{resource.resource_name}\" {{")
-
-        if resource.max_units:
-            section.append(f"    efficiency {resource.max_units}")
-
-        if resource.base_cost and resource.cost_calculation_method:
-            section.append(f"    rate {resource.base_cost}")
-
-        if resource.allowed_leave:
-            number = re.search("\d+", resource.allowed_leave)[0]
-            interval = 'd' if (resource.allowed_leave.__contains__("day")) \
-                else ('w' if (resource.allowed_leave.__contains__("week")) else 'm')
-            section.append(f"    leaveallowance {number}{interval}")
-
-        if resource.unavailability_date:
-            if isinstance(resource.unavailability_date, str):
-                section.append(f"    leaves annual {resource.unavailability_date}")
-            elif isinstance(resource.unavailability_date, list):
-                section.append(f"    leaves annual {', annual'.join(resource.unavailability_date)}")
-
-        # if resource.overtime_cost:
-        #     section.append(f"    rate.overtime {resource.overtime_cost}")
-
-        if resource.working_days and resource.working_hours:
-            resource.working_days = day_to_an_abbreviation(resource.working_days)
-            section.append(f"    workinghours {resource.working_days} {resource.working_hours}")
-
-        if resource.resource_group:
-            section.append(f"    flags {resource.resource_group}")
-
-        if resource.cost_center:
-            section.append(f"    chargeset {resource.cost_center}")
-
-        section.append("  }\n")
-
-        body[resource.resource_type] = section
-
-    for section in body.keys():
-        if body[section]:
-            body[section].append("}")
-            content += "\n".join(body[section])
-            content += "\n"
-
-        content += "\n\n"
-    return content
+    return parent_resources

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from datetime import datetime
 from deep_translator import GoogleTranslator
 
@@ -30,6 +30,11 @@ class ProjectInfo:
     baseline: str = ''
     baseline_cost: float = 0
     baseline_fixed_cost: float = 0
+    es_doc: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        if self.es_doc:
+            self.initializing(self.es_doc)
 
     def initializing(self, es_doc: dict):
         source = es_doc.get("_source", {})
@@ -47,24 +52,9 @@ class ProjectInfo:
 
 # Generating project info at the top
 def generate_project_info(info):
-    content = ''
-    for document in info:
-        info_lines = []
-        info = ProjectInfo()
-        info.initializing(document)
-        project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
-
-        info_lines.append(
-            f"project {info.project_id} \"{project_name}\" {info.start_date} +{info.project_duration}d {{")
-        info_lines.append(f"  timezone \"{info.timezone}\"")
-
-        if info.financial_unit == 'ریال':
-            info_lines.append(f"  currency \"IRR\"")
-        else:
-            info_lines.append(f"  currency \"{info.financial_unit}\"")
-
-        info_lines.append(f"  now {info.status_date}")
-
-        content += '\n'.join(info_lines)
-        content += '\n'
-    return content
+    info_objs = []
+    for doc in info:
+        info = ProjectInfo(es_doc=doc)
+        # info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
+        info_objs.append(info)
+    return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

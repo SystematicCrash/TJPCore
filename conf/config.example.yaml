@@ -1,7 +1,7 @@
 elasticsearch:
   hosts: ["http://localhost:9200"]
-  username: "user"
-  password: "StrongPassword"
+  username: "username"
+  password: "password"
   verify_certs: false
 
 indexes:
@@ -10,6 +10,14 @@ indexes:
   - wbs_info
   - wbs_calendars
 
+# For custom properties definition
+extends:
+  tasks:
+    - type: date
+      id: Deadline
+      name: tasks deadline
+
+  resources:
 
 tjp_output_path:
-  TJPs/TJPs.tjp
+  TJPs/output.tjp
