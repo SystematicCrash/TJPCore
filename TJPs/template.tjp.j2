@@ -39,9 +39,11 @@ flags
 {{ flags | join(',\n') }}
 {% endif %}
 
-account projectCosts "costs of project"{
-    {% for key in accounts.keys() %}
-    account {{key}} "{{accounts[key]}}"
+account projectCosts "costs of project" {
+    {% for id, attributes in accounts.items() %}
+    account {{ id }} "{{attributes['name']}}" {
+        aggregate {{ attributes['aggregate'] }}
+    }
     {% endfor %}
 }
 
@@ -59,9 +61,9 @@ resource {{parent_resource['id']}} "{{parent_resource['name']}}"{
         {% if resource.max_units %}
         efficiency {{resource.max_units}}
         {% endif %}
-        {% if resource.allow_leave %}
-        leaveallowance {{resource.allow_leave}}
-        {% endif %}
+{#        {% if resource.allowed_leave %}#}
+{#        leaveallowance {{resource.allowed_leave}}#}
+{#        {% endif %}#}
         {% if resource.unavailability_date %}
         leaves annual {{resource.unavailability_date}}
         {% endif %}
@@ -71,9 +73,12 @@ resource {{parent_resource['id']}} "{{parent_resource['name']}}"{
         {% if resource.resource_group %}
         flags {{resource.resource_group}}
         {% endif %}
-{#        {% if resource.cost_center %}#}
-{#        chargeset {{resource.cost_center}}#}
-{#        {% endif %}#}
+        {% if resource.unavailability_date %}
+        leaves annual {{ resource.unavailability_date }}
+        {% endif %}
+        {% if resource.cost_center %}
+        chargeset {{resource.cost_center}}
+        {% endif %}
     }
     {% endfor %}
 }

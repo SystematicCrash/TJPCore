@@ -48,14 +48,21 @@ def define_scenarios():
 def define_accounts(datamap):
     accounts = {}
     for item in datamap.get('wbs_tasks', []):
+        account = {}
         task_id = item['_id']
-        accounts[task_id + "Costs"] =  f"Costs of {task_id}"
+        account_id = task_id + "Costs"
+        account['name'] = f"Costs of {task_id}"
+        account['aggregate'] = 'tasks'
+        accounts[account_id] = account
 
     for item in datamap.get('wbs_resources', []):
+        account = {}
         source = item['_source']
-        account_name = source['cost_center']
-        if account_name and account_name not in accounts.keys():
-            accounts[account_name] = f"Costs of {account_name}"
+        account_id = source['cost_center']
+        if not account_id in accounts.keys():
+            account['name'] = f"Costs of {account_id}"
+            account['aggregate'] = 'resources'
+            accounts[account_id] = account
     return accounts
 
 

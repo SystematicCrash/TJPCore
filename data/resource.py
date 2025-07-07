@@ -47,6 +47,7 @@ class Resource:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
+                        quit(1)
                 setattr(self, f.name, value)
         self.resource_id = es_doc.get("_id", '')
 
@@ -72,6 +73,7 @@ def generate_resources(resources, types: set):
         for doc in resources:
             if doc['_source']['resource_type'] == resource_type:
                 resource = Resource(es_doc=doc)
+                resource.unavailability_date = '2025-08-06'
                 resource.working_days = day_to_an_abbreviation(resource.working_days)
                 parent_res['child_resources'].append(resource)
         parent_resources.append(parent_res)

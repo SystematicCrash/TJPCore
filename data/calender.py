@@ -30,6 +30,7 @@ class Calender:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
+                        quit(1)
                 setattr(self, f.name, value)
         self.calendar_id = es_doc.get("_id", '')
 
@@ -40,7 +41,7 @@ def generate_calendars(calendars):
     for doc in calendars:
         calendar = Calender(es_doc=doc)
         calendar.working_days_exceptions.append("2025-08-02")
-        calendar.working_days_exceptions.append("2025-08-03")
+        calendar.working_days_exceptions.append("2025-08-24")
         calendar.working_days = day_to_an_abbreviation(calendar.working_days)
         calendars_objs.append(calendar)
     return calendars_objs[0] if len(calendars_objs) != 0 else Calender()

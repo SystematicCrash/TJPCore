@@ -46,6 +46,7 @@ class ProjectInfo:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
+                        quit(1)
                 setattr(self, f.name, value)
         self.project_id = es_doc.get('_id')
 
@@ -55,6 +56,10 @@ def generate_project_info(info):
     info_objs = []
     for doc in info:
         info = ProjectInfo(es_doc=doc)
-        # info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
+        # try:
+        #     info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
+        # except Exception as e:
+        #     print("Failed to connect to Google Translator!\nDetails:", e)
+        #     quit(1)
         info_objs.append(info)
     return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

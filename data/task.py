@@ -56,6 +56,7 @@ class Task:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
+                        quit(1)
                 setattr(self, f.name, value)
         self.task_id = es_doc.get("_id", '')
 
