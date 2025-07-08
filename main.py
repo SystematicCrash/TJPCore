@@ -4,6 +4,9 @@ from data.calender import generate_calendars
 from data.resource import generate_resources
 from data.task import generate_tasks
 from jinja2 import Environment, FileSystemLoader
+from concurrent.futures import ThreadPoolExecutor
+import threading
+import subprocess
 
 # Reading configurations from config.yaml file
 configurations = load_config('conf/config.yaml')
@@ -38,9 +41,11 @@ def define_flags(data_map):
 
 # Defining several scenarios
 def define_scenarios():
+    global configurations
     scenarios: list[dict] = []
     # Default scenario = plan
-    scenarios.append({'id': 'delayed', 'name': 'Starts with delay'})
+    for scenario in configurations.get('scenarios', []):
+        scenarios.append({'id': scenario['id'], 'name': scenario['name']})
     return scenarios
 
 
@@ -89,55 +94,92 @@ def define_tasks_extends():
 
 # Defining custom properties for resources
 def define_resources_extends():
-    pass
+    global configurations
+    extends: list[dict] = []
+    for extend in configurations['extends']['resources']:
+        extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
+    return extends
 
 
 # Generating TJP file
-def generate_tjp(data_map, output_path="TJPs/output.tjp"):
-    env = Environment(loader=FileSystemLoader("TJPs"), trim_blocks=True, lstrip_blocks=True)
-    template = env.get_template("template.tjp.j2")
+def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
+    global configurations
+    env = Environment(
+        loader=FileSystemLoader(configurations['paths']['templates']),
+        trim_blocks=True, lstrip_blocks=True
+    )
+    body_template = env.get_template("template.tjp.j2")
+    report_template = env.get_template("reports.tjp.j2")
 
-    resource_types = fetch_resource_types(data_map.get('wbs_resources', []))
+    executor_pool = ThreadPoolExecutor(max_workers=15)
+    with executor_pool as executor:
+        resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', [])).result()
+        info = executor.submit(generate_project_info, data_map.get('wbs_info', [])).result()
+        calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', [])).result()
+        scenarios = executor.submit(define_scenarios).result()
+        tasks_extends = executor.submit(define_tasks_extends).result()
+        resources_extends = executor.submit(define_resources_extends).result()
+        flags = executor.submit(define_flags, data_map).result()
+        accounts = executor.submit(define_accounts, data_map).result()
+        resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types).result()
+        tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", [])).result()
 
-    info = generate_project_info(data_map.get('wbs_info', []))
-    calendar = generate_calendars(data_map.get('wbs_calendars', []))
-    scenarios = define_scenarios()
-    tasks_extends = define_tasks_extends()
-    resources_extends_sec = define_resources_extends()
-    flags = define_flags(data_map)
-    accounts = define_accounts(data_map)
-    resources = generate_resources(data_map.get("wbs_resources", []), resource_types)
-    tasks = generate_tasks(data_map.get("wbs_tasks", []))
+    try:
+        export_path = configurations['paths']['exports']
+    except KeyError:
+        print("Export path not defined!")
+        quit(1)
 
-    rendered = template.render(
+    body = body_template.render(
         info=info,
         calendar=calendar,
+        outputdir=export_path,
         scenarios=scenarios,
         tasks_extends=tasks_extends,
+        resources_extends=resources_extends,
         flags=flags,
         accounts=accounts,
         resources=resources,
         tasks=tasks
     )
+    reports = report_template.render()
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(rendered)
+        f.write(body + reports)
 
 
 # Running
 def main():
     global configurations
+
+    with open('banner.txt', 'r', encoding="utf-8") as f:
+        content = f.read()
+    print(content)
+
     es = connect_elasticsearch(configurations)
     indexes = configurations["indexes"]
     data_map = {}
 
     print("Fetching data...")
-    for index in indexes:
-        data_map[index] = fetch_data(es, index)
+
+    executor_pool = ThreadPoolExecutor(max_workers=5)
+    with executor_pool as executor:
+        futures = {}
+        for index in indexes:
+            futures[index] = executor.submit(fetch_data, es, index)
+
+    for index_name, proceed in futures.items():
+        data_map[index_name] = proceed.result()
 
     print("Generating tjp...")
-    generate_tjp(data_map, configurations['tjp_output_path'])
-    print(f"[✔️] Generated Successfully: {configurations['tjp_output_path']}")
+    generate_tjp(data_map, configurations['paths']['tjp_output'])
+    print(f"[✔️] Generated Successfully: {configurations['paths']['tjp_output']}")
+
+    result = subprocess.run("tj3 " + configurations['paths']['tjp_output'], shell=True)
+    if result.returncode == 0:
+        print("[✔️]Reports generated successfully!")
+    else:
+        print("[]Failed to generate reports!")
 
 
 if __name__ == "__main__":

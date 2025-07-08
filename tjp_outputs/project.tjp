@@ -2,102 +2,102 @@ project project_1 "پروژه ساختمانی تجاری" 2025-07-01 +180d {
     timezone "Asia/Tehran"
     currency "IRR"
     now 2025-07-01
-    scenario plan "Planned"{
-        scenario delayed "Starts with delay"
-    }
     workinghours sat-wed 08:00-16:00
-    extend task{
-    date Deadline "tasks deadline"
-    }
 
+    scenario plan "Planned" {
+        scenario delayed "starts with delay"
+    }
+    extend task {
+        date Deadline "tasks deadline"
+    }
+    extend resource {
+        text Type "resource type"
+        number OvertimeCost "resource overtime cost"
+        date Availability "resources availability date"
+        date WorkinghoursChange "resource workinghours change on a specific event"
+        number BaseCost "base cost of resource"
+        number ActualCost "real cost of resource"
+        text AccrueAt "cost allocation of resource"
+    }
+    outputdir "exports/"
 }
+
+
+shift projectDefaultShift "project default shift" {
+    timezone "Asia/Tehran"
+    workinghours sat-wed 08:00-16:00
+}
+
+
 leaves
 holiday "Exception day" 2025-08-01,
 holiday "Exception Day" 2025-08-02,
 holiday "Exception Day" 2025-08-24
 
 flags
-site_team,
 human,
-equipment,
-management,
+foundation,
 site_preparation,
 project_management,
-foundation
+equipment,
+site_team,
+management
 
 account projectCosts "costs of project" {
-    account task_1Costs "Costs of task_1" {
-        aggregate tasks
-    }
-    account task_1_1_1Costs "Costs of task_1_1_1" {
-        aggregate tasks
-    }
-    account task_1_1_2Costs "Costs of task_1_1_2" {
-        aggregate tasks
-    }
-    account task_2Costs "Costs of task_2" {
-        aggregate tasks
-    }
-    account task_2_1_1Costs "Costs of task_2_1_1" {
-        aggregate tasks
-    }
-    account task_3Costs "Costs of task_3" {
-        aggregate tasks
-    }
-    account task_3_1_1Costs "Costs of task_3_1_1" {
-        aggregate tasks
-    }
-    account task_3_1_2Costs "Costs of task_3_1_2" {
-        aggregate tasks
-    }
-    account task_3_1_3Costs "Costs of task_3_1_3" {
-        aggregate tasks
-    }
-    account task_3_1_4Costs "Costs of task_3_1_4" {
-        aggregate tasks
-    }
-    account task_3_1_5Costs "Costs of task_3_1_5" {
-        aggregate tasks
-    }
-    account engineering "Costs of engineering" {
-        aggregate resources
-    }
-    account construction "Costs of construction" {
-        aggregate resources
-    }
+    account task_1Costs "Costs of task_1" { aggregate tasks }
+    account task_1_1_1Costs "Costs of task_1_1_1" { aggregate tasks }
+    account task_1_1_2Costs "Costs of task_1_1_2" { aggregate tasks }
+    account task_2Costs "Costs of task_2" { aggregate tasks }
+    account task_2_1_1Costs "Costs of task_2_1_1" { aggregate tasks }
+    account task_3Costs "Costs of task_3" { aggregate tasks }
+    account task_3_1_1Costs "Costs of task_3_1_1" { aggregate tasks }
+    account task_3_1_2Costs "Costs of task_3_1_2" { aggregate tasks }
+    account task_3_1_3Costs "Costs of task_3_1_3" { aggregate tasks }
+    account task_3_1_4Costs "Costs of task_3_1_4" { aggregate tasks }
+    account task_3_1_5Costs "Costs of task_3_1_5" { aggregate tasks }
+    account engineering "Costs of engineering" { aggregate resources }
+    account construction "Costs of construction" { aggregate resources }
 }
 
 
-resource human "resources of type human"{
-    flags human
-    resource res_engineer "مهندس پروژه"{
-        rate 10000.0
-        efficiency 1.0
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        shifts projectDefaultShift
         leaves annual 2025-08-06
-        workinghours sat-wed 08:00-16:00
-        flags management
-        leaves annual 2025-08-06
-        chargeset engineering
-    }
-    resource res_laborer "کارگر ساختمانی"{
-        rate 5000.0
-        efficiency 5.0
-        leaves annual 2025-08-06
-        workinghours sat-wed 08:00-16:00
-        flags site_team
-        leaves annual 2025-08-06
+        flags equipment
         chargeset construction
     }
 }
-resource equipment "resources of type equipment"{
-    flags equipment
-    resource res_excavator "بیل مکانیکی"{
-        rate 20000.0
-        efficiency 2.0
+resource human "resources of type human" {
+    flags human
+    resource res_engineer "مهندس پروژه" {
+        rate 10000.0
+        OvertimeCost 15000.0
+        AccrueAt "prorated"
+        Type "human"
+        efficiency 1.0
+        leaveallowances annual 2025-07-01 10d
+        shifts projectDefaultShift
         leaves annual 2025-08-06
-        workinghours sat-wed 08:00-16:00
-        flags equipment
+        flags management
+        chargeset engineering
+    }
+    resource res_laborer "کارگر ساختمانی" {
+        rate 5000.0
+        OvertimeCost 7500.0
+        AccrueAt "prorated"
+        Type "human"
+        efficiency 5.0
+        leaveallowances annual 2025-07-01 7d
+        shifts projectDefaultShift
         leaves annual 2025-08-06
+        flags site_team
         chargeset construction
     }
 }
@@ -249,3 +249,18 @@ task task_3_1_5 "باز کردن قالب‌ها" {
     note "حذف قالب‌های فونداسیون پس از عمل‌آوری"
 }
 
+
+
+
+textreport projectGantt "project gantt" {
+    formats html
+}
+
+resourcereport resourceUsage "Resources usage" {
+    formats html
+}
+
+taskreport costReport "Tasks report" {
+    formats html
+    columns id, name
+}
