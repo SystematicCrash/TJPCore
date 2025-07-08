@@ -1,15 +1,27 @@
-
-
-
-textreport projectGantt "project gantt" {
-    formats html
+{% if text_report %}
+textreport {{ text_report.id }} "{{ text_report.name }}" {
+    {% if text_report.formats %}
+    formats {{ text_report.formats | join(', ') }}
+    {% endif %}
 }
+{% endif %}
 
-resourcereport resourceUsage "Resources usage" {
-    formats html
+{% if resource_report %}
+resourcereport {{ resource_report.id }} "{{ resource_report.name }}" {
+    {% if resource_report.formats %}
+    formats {{ resource_report.formats | join(', ') }}
+    {% endif %}
 }
+{% endif %}
 
-taskreport costReport "Tasks report" {
-    formats html
-    columns id, name
+{% if task_report %}
+taskreport {{ task_report.id }} "{{ task_report.name }}" {
+    {% if task_report.formats %}
+    formats {{ task_report.formats | join(', ') }}
+    {% endif %}
+    {% if task_report.columns %}
+    columns {{ task_report.columns | join(', ') }}
+    {% endif %}
 }
+{% endif %}
+

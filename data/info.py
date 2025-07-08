@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
 from deep_translator import GoogleTranslator
-
+from sys import exit
 
 @dataclass
 class ProjectInfo:
@@ -46,7 +46,7 @@ class ProjectInfo:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
-                        quit(1)
+                        exit(1)
                 setattr(self, f.name, value)
         self.project_id = es_doc.get('_id')
 

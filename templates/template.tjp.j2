@@ -1,5 +1,7 @@
 project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.project_duration}}d {
+    {% if info.timezone %}
     timezone "{{info.timezone}}"
+    {% endif %}
     {% if info.financial_unit %}
         {% if info.financial_unit == "ریال" %}
     currency "IRR"

@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
 from data.utility import day_to_an_abbreviation
-import re
+from sys import exit
 
 
 @dataclass
@@ -47,7 +47,7 @@ class Resource:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
                         print("Invalid date format:", value)
-                        quit(1)
+                        exit(1)
                 setattr(self, f.name, value)
         self.resource_id = es_doc.get("_id", '')
 
