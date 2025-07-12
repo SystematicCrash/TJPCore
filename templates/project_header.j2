@@ -1,0 +1,46 @@
+{% macro define_header(info, calendar, scenarios, tasks_extends, resources_extends) %}
+project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.project_duration}}d {
+    {% if info.timezone %}
+    timezone "{{info.timezone}}"
+    {% endif %}
+    {% if info.financial_unit %}
+        {% if info.financial_unit == "ریال" %}
+    currency "IRR"
+        {% else %}
+    currency "{{info.financial_unit}}"
+        {% endif %}
+    {% endif %}
+        {% if info.status_date %}
+    now {{info.status_date}}
+        {% endif %}
+        {% if calendar.working_days and calendar.working_hours %}
+    workinghours {{calendar.working_days}} {{calendar.working_hours}}
+        {% endif %}
+
+    {% if scenarios %}
+    scenario plan "Planned" {
+        {% for scenario in scenarios %}
+        scenario {{scenario.id}} "{{scenario.name}}"
+        {% endfor %}
+    }
+    {% endif %}
+    {% if tasks_extends %}
+    extend task {
+        {% for extend in tasks_extends %}
+        {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
+        {% endfor %}
+    }
+    {% endif %}
+        {% if resources_extends %}
+    extend resource {
+        {% for extend in resources_extends %}
+        {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
+        {% endfor %}
+    }
+    {% endif %}
+    {% if outputdir %}
+    outputdir "{{ outputdir }}"
+    {% endif %}
+}
+{% endmacro %}
+

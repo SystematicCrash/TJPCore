@@ -1,0 +1,47 @@
+{% macro define_reports(text_report, resource_report, task_report) %}
+{% if resource_report %}
+resourcereport {{ resource_report.id }} "{{ resource_report.name }}" {
+    {% if resource_report.formats %}
+    formats {{ resource_report.formats | join(', ') }}
+    {% endif %}
+    {% if resource_report.columns %}
+    columns {{ resource_report.columns | join(', ') }}
+    {% endif %}
+}
+{% endif %}
+
+{% if task_report %}
+taskreport {{ task_report.id }} "{{ task_report.name }}" {
+    {% if task_report.formats %}
+    formats {{ task_report.formats | join(', ') }}
+    {% endif %}
+    {% if task_report.columns %}
+    columns {{ task_report.columns | join(', ') }}
+    {% endif %}
+    {% if task_report.resources.show %}
+        hideresource ~(isleaf() & isleaf_())
+        {% if task_report.resources.sort_by %}
+        {% if task_report.resources.ASC %}
+        sortresources {{ task_report.resources.sort_by }}.up
+        {% else %}
+        sortresources {{ task_report.resources.sort_by }}.down
+        {% endif %}
+        {% endif %}
+    {% endif %}
+}
+{% endif %}
+
+{% if text_report %}
+textreport {{ text_report.id }} "{{ text_report.name }}" {
+    {% if text_report.formats %}
+    formats {{ text_report.formats | join(', ') }}
+    {% endif %}
+    {% if text_report.resource_report %}
+    resourcereport {{ resource_report.id }} "Resources"
+    {% endif %}
+    {% if text_report.task_report %}
+    taskreport {{ task_report.id }} "Tasks"
+    {% endif %}
+}
+{% endif %}
+{% endmacro %}
