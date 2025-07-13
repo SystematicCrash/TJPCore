@@ -65,11 +65,8 @@ class Resource:
 def generate_resources(resources, types: set):
     parent_resources = []
     for resource_type in types:
-        parent_res = {}
-        parent_res['id'] = resource_type
-        parent_res['name'] = 'resources of type ' + resource_type
-        parent_res['flags'] = [resource_type]
-        parent_res['child_resources'] = []
+        parent_res = {'id': resource_type, 'name': 'resources of type ' + resource_type, 'flags': [resource_type],
+                      'child_resources': []}
         for doc in resources:
             if doc['_source']['resource_type'] == resource_type:
                 resource = Resource(es_doc=doc)

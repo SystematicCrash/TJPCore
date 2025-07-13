@@ -1,0 +1,5 @@
+{% macro define_account(accounts) %}
+{% for id, attributes in accounts.items() %}
+account {{ id }} "{{attributes['name']}}" { aggregate {{ attributes['aggregate'] }} }
+{% endfor %}
+{% endmacro %}

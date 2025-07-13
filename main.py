@@ -2,9 +2,10 @@ from conf.config_and_connection import load_config, connect_elasticsearch
 from data.info import generate_project_info
 from data.calender import generate_calendars
 from data.resource import generate_resources
-from data.task import generate_tasks
+from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
+from data.utility import colorized_print
 import subprocess
 from sys import exit
 
@@ -13,25 +14,38 @@ configurations = load_config('conf/config.yaml')
 
 
 # Fetching docs from index
-def fetch_data(es, index):
-    try:
-        result = es.search(index=index, query={"match_all": {}}, size=10000)
-        return result['hits']['hits']
-    except Exception as e:
-        print("Cannot make a query on elasticsearch!\nDetails:", e)
-        exit(1)
+def fetch_index(es, index):
+    result = es.search(index=index, query={"match_all": {}}, size=10000)
+    return result['hits']['hits']
 
 
-# Defining flags from task_linking and resource_group fields (just from tasks index)
-def define_flags(data_map):
+# Fetching from all indexes
+def fetch_all_data(es, indexes):
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        try:
+            results = {}
+            data_map = {}
+            for index in indexes:
+                results[index] = executor.submit(fetch_index, es, index)
+            for index_name, index_data in results.items():
+                data_map[index_name] = index_data.result()
+            return data_map
+        except Exception as e:
+            colorized_print('yellow', "❌Error fetching data from elasticsearch")
+            colorized_print('red', f"Details: {e}")
+            exit(1)
+
+
+# Flags definition from task_linking and resource_group fields (just from tasks index)
+def define_flags(tasks, resources):
     flags = set()
-    for item in data_map.get('wbs_tasks', []):
-        source = item['_source']
+    for task in tasks:
+        source = task['_source']
         if source.get('task_linking', ''):
             flags.add(source['task_linking'])
 
-    for item in data_map.get('wbs_resources', []):
-        source = item['_source']
+    for resource in resources:
+        source = resource['_source']
         if source.get('resource_group', ''):
             flags.add(source['resource_group'])
         if source.get('resource_type', ''):
@@ -49,20 +63,24 @@ def define_scenarios():
     return scenarios
 
 
-# Defining accounts for all tasks and a main account for project
-def define_accounts(datamap):
+# Tasks accounts definition
+def define_tasks_accounts(tasks: list[Task]):
     accounts = {}
-    for item in datamap.get('wbs_tasks', []):
+    for task in tasks:
         account = {}
-        task_id = item['_id']
-        account_id = task_id + "Costs"
-        account['name'] = f"Costs of {task_id}"
+        account_id = task.task_id + "Costs"
+        account['name'] = f"Costs of {task.task_id}"
         account['aggregate'] = 'tasks'
         accounts[account_id] = account
+    return accounts
 
-    for item in datamap.get('wbs_resources', []):
+
+# Resources accounts definition
+def define_resources_accounts(resources):
+    accounts = {}
+    for resource in resources:
         account = {}
-        source = item['_source']
+        source = resource['_source']
         account_id = source['cost_center']
         if not account_id in accounts.keys():
             account['name'] = f"Costs of {account_id}"
@@ -79,7 +97,6 @@ def fetch_resource_types(datamap):
         source = item['_source']
         if source.get("resource_type", ''):
             resource_types.add(source["resource_type"])
-
     return resource_types
 
 
@@ -106,36 +123,35 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     global configurations
     env = Environment(
         loader=FileSystemLoader(configurations['paths']['templates']),
-        trim_blocks=True, lstrip_blocks=True
-    )
-    body_template = env.get_template("template.tjp.j2")
-    report_template = env.get_template("reports.tjp.j2")
+        trim_blocks=True, lstrip_blocks=True)
+    body_template = env.get_template("main.j2")
+    with ThreadPoolExecutor(max_workers=15) as executor:
+        info = executor.submit(generate_project_info, data_map.get('wbs_info', [])).result()
+        calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', [])).result()
+        scenarios = executor.submit(define_scenarios).result()
+        resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', [])).result()
+        resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types).result()
+        tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", [])).result()
+        tasks_extends = executor.submit(define_tasks_extends).result()
+        resources_extends = executor.submit(define_resources_extends).result()
+        flags = executor.submit(define_flags, tasks=data_map.get('wbs_tasks', []),
+                                resources=data_map.get('wbs_resources', [])).result()
+        tasks_accounts = executor.submit(define_tasks_accounts, tasks).result()
+        resources_accounts = executor.submit(define_resources_accounts, data_map.get("wbs_resources", [])).result()
 
-    # executor_pool = ThreadPoolExecutor(max_workers=15)
-    # with executor_pool as executor:
-    #     resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', [])).result()
-    #     info = executor.submit(generate_project_info, data_map.get('wbs_info', [])).result()
-    #     calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', [])).result()
-    #     scenarios = executor.submit(define_scenarios).result()
-    #     tasks_extends = executor.submit(define_tasks_extends).result()
-    #     resources_extends = executor.submit(define_resources_extends).result()
-    #     flags = executor.submit(define_flags, data_map).result()
-    #     accounts = executor.submit(define_accounts, data_map).result()
-    #     resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types).result()
-    #     tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", [])).result()
-
-    resource_types = fetch_resource_types(data_map.get('wbs_resources', []))
-    info = generate_project_info(data_map.get('wbs_info', []))
-    calendar = generate_calendars(data_map.get('wbs_calendars', []))
-    scenarios = define_scenarios()
-    tasks_extends = define_tasks_extends()
-    resources_extends = define_resources_extends()
-    flags = define_flags(data_map)
-    accounts = define_accounts(data_map)
-    resources = generate_resources(data_map.get("wbs_resources", []), resource_types)
-    tasks = generate_tasks(data_map.get("wbs_tasks", []))
-
-    export_path = (configurations.get('paths')).get('exports')
+    # info = generate_project_info(data_map.get('wbs_info', []))
+    # calendar = generate_calendars(data_map.get('wbs_calendars', []))
+    # scenarios = define_scenarios()
+    # resource_types = fetch_resource_types(data_map.get('wbs_resources', []))
+    # resources = generate_resources(data_map.get("wbs_resources", []), resource_types)
+    # tasks = generate_tasks(data_map.get("wbs_tasks", []))
+    # tasks_extends = define_tasks_extends()
+    # resources_extends = define_resources_extends()
+    # flags = define_flags(tasks=data_map.get('wbs_tasks', []), resources=data_map.get('wbs_resources', []))
+    # tasks_accounts = define_tasks_accounts(tasks)
+    # resources_accounts = define_resources_accounts(data_map.get("wbs_resources", []))
+    export_path = configurations['paths']['exports']
+    reports_conf = configurations['reports']
 
     body = body_template.render(
         info=info,
@@ -145,21 +161,16 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         tasks_extends=tasks_extends,
         resources_extends=resources_extends,
         flags=flags,
-        accounts=accounts,
+        accounts=tasks_accounts | resources_accounts,
         resources=resources,
-        tasks=tasks
+        tasks=tasks,
+        text_report=reports_conf['text_report'],
+        resource_report=reports_conf['resource_report'],
+        task_report=reports_conf['task_report']
     )
-    reports_conf = configurations.get('reports', '')
-    reports = ''
-    if reports_conf:
-        reports = report_template.render(
-            text_report=reports_conf['text_report'],
-            resource_report=reports_conf['resource_report'],
-            task_report=reports_conf['task_report']
-        )
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(body + reports)
+        f.write(body)
 
 
 # Running
@@ -168,29 +179,29 @@ def main():
 
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
-    print(content)
+    colorized_print('light-blue', content)
 
     es = connect_elasticsearch(configurations)
     indexes = configurations["indexes"]
 
-    print("Fetching data...")
-    # TODO test this blocks, with parallel and without it
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = {}
-        for index in indexes:
-            futures[index] = executor.submit(fetch_data, es, index)
+    colorized_print('cyan', "🔸 Fetching data...")
+    data_map = fetch_all_data(es, indexes)
+    colorized_print('green', "✔️ Finished.")
 
-    data_map = {}
-    for index_name, proceed in futures.items():
-        data_map[index_name] = proceed.result()
-    # for index in indexes:
-    #     data_map[index] = fetch_data(es, index)
-    print("Generating tjp...")
+    colorized_print('cyan', "🔸 Generating tjp...")
     generate_tjp(data_map, configurations['paths']['tjp_output'])
-    print(f"[✔️] TJP generated Successfully: {configurations['paths']['tjp_output']}")
+    colorized_print('green', f"✔️ Finished.")
+    print("output: " + configurations['paths']['tjp_output'])
 
-    result = subprocess.run("tj3 " + configurations['paths']['tjp_output'], shell=True)
-    print("[✔️]Reports generated successfully!") if result.returncode == 0 else print("[]Failed to generate reports!")
+    colorized_print('cyan', "🔸 Running TJ3...")
+    result = subprocess.run("tj3 " + configurations['paths']['tjp_output'],
+                            shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8')
+    if result.returncode == 0:
+        colorized_print('green', "✔️ Reports generated successfully!")
+        print("export: " + configurations['paths']['exports'])
+    else:
+        colorized_print('yellow', "❌ Failed to finish processing! Because of below errors:")
+        colorized_print('red', result.stderr)
 
 
 if __name__ == "__main__":

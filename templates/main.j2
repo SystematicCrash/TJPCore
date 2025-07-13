@@ -1,6 +1,6 @@
 # ----------------Project Header-------------
 {% import "project_header.j2" as project_header_builder %}
-{{ project_header_builder.define_header(info, calendar, scenarios, tasks_extends, resources_extends) }}
+{{ project_header_builder.define_header(info, calendar, scenarios, tasks_extends, resources_extends, outputdir) }}
 # ------------END-------------
 
 # ------------Shifts-------------
@@ -34,8 +34,11 @@ flags
 # ----------------Accounts-------------
 {% import "accounts.j2" as account_builder %}
 account projectCosts "costs of project" {
-{{ account_builder.define_account(accounts) | indent(4, False) }}
+{{ account_builder.define_account(accounts) | indent(4, True) }}
 }
+account source "The source came"
+
+balance projectCosts source
 # ------------END-------------
 
 
