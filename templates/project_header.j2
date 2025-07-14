@@ -1,4 +1,4 @@
-{% macro define_header(info, calendar, scenarios, tasks_extends, resources_extends, outputdir) %}
+{% macro define_header(info, calendar, scenarios, tasks_extends, resources_extends, exports) %}
 project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.project_duration}}d {
     {% if info.timezone %}
     timezone "{{info.timezone}}"
@@ -38,8 +38,8 @@ project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.
         {% endfor %}
     }
     {% endif %}
-    {% if outputdir %}
-    outputdir "{{ outputdir }}"
+    {% if exports %}
+    outputdir "{{ exports.base_dir }}"
     {% endif %}
 }
 {% endmacro %}

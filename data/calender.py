@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from data.utility import day_to_an_abbreviation
+from src.utility import day_to_an_abbreviation
 from sys import exit
 
 @dataclass

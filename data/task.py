@@ -41,6 +41,7 @@ class Task:
     task_booking: str = ''
     charge: float = 0
     chargeset: str = ''
+    complete: int = 0
     milestone: bool = False
     inherited_task_linking: bool = False
     inherited_chargeset: bool = False

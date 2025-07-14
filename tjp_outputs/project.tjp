@@ -1,5 +1,5 @@
 # ----------------Project Header-------------
-project project_1 "Commercial Construction Project" 2025-07-01 +180d {
+project project_1 "پروژه ساختمانی تجاری" 2025-07-01 +180d {
     timezone "Asia/Tehran"
     currency "IRR"
     now 2025-07-01
@@ -43,18 +43,18 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-site_preparation,
-site_team,
 equipment,
 human,
 project_management,
+site_preparation,
+management,
 foundation,
-management
+site_team
 # ------------END-------------
 
 
 # ----------------Accounts-------------
-account projectCosts "costs of project" {
+account cost "costs of project" {
     account task_1Costs "Costs of task_1" { aggregate tasks }
     account task_2Costs "Costs of task_2" { aggregate tasks }
     account task_3Costs "Costs of task_3" { aggregate tasks }
@@ -62,13 +62,27 @@ account projectCosts "costs of project" {
     account construction "Costs of construction" { aggregate resources }
 
 }
-account source "The source came"
-
-balance projectCosts source
+account rev "Revenue"
+balance cost rev
 # ------------END-------------
 
 
 # ------------Resources-------------
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        shifts projectDefaultShift
+        leaves annual 2025-08-06
+        flags equipment
+        chargeset construction
+    }
+
+}
 resource human "resources of type human" {
     flags human
     resource res_engineer "مهندس پروژه" {
@@ -93,21 +107,6 @@ resource human "resources of type human" {
         shifts projectDefaultShift
         leaves annual 2025-08-06
         flags site_team
-        chargeset construction
-    }
-
-}
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        efficiency 2.0
-        shifts projectDefaultShift
-        leaves annual 2025-08-06
-        flags equipment
         chargeset construction
     }
 
@@ -160,7 +159,7 @@ resource equipment "resources of type equipment" {
 
         task task_2_1_1 "حذف گیاهان و موانع" {
         period 2025-07-13 - 2025-07-17
-            purge allocate
+        purge allocate
         allocate res_laborer
         minstart 2025-07-13
         Deadline 2025-07-18
@@ -182,7 +181,7 @@ resource equipment "resources of type equipment" {
 
         task task_3_1_1 "آرماتوربندی پی" {
         period 2025-08-12 - 2025-08-21
-            purge allocate
+        purge allocate
         allocate res_laborer
         minstart 2025-08-12
         Deadline 2025-08-23
@@ -200,7 +199,7 @@ resource equipment "resources of type equipment" {
             task task_3_1_3 "بتن‌ریزی پی" {
             milestone
             start 2025-08-27
-                purge depends
+            purge depends
             depends task_3.task_3_1_1.task_3_1_2
             minstart 2025-08-27
             Deadline 2025-09-04
@@ -210,7 +209,7 @@ resource equipment "resources of type equipment" {
             }
             task task_3_1_4 "عمل‌آوری بتن" {
             period 2025-09-03 - 2025-09-07
-                purge depends
+            purge depends
             depends task_3.task_3_1_1.task_3_1_3
             minstart 2025-09-03
             Deadline 2025-09-08
@@ -221,7 +220,7 @@ resource equipment "resources of type equipment" {
             task task_3_1_5 "باز کردن قالب‌ها" {
             milestone
             start 2025-09-08
-                purge depends
+            purge depends
             depends task_3.task_3_1_1.task_3_1_4
             minstart 2025-09-08
             Deadline 2025-09-11
@@ -235,19 +234,44 @@ resource equipment "resources of type equipment" {
 
 
 # ------------Reports-------------
+taskreport taskReports "task_report" {
+    headline "Tasks Table"
+    formats csv
+    columns
+    bsi{title "wbs"}, id{title "id"}, name{title "name"},
+    start{title "start"}, end{title "end"},
+    minstart{title "min_start"}, maxstart{title "max_start"},
+    minend{title "min_end"}, maxend{title "max_end"},
+    Deadline{title "deadline"}, duration{title "duration"},
+    effort{title "effort"}, priority{title "priority"},
+    children{title "sub_tasks"}, resources{title "resources"},
+    flags{title "task_linking"} , complete{title "complete"}
+    balance cost rev
+    hideresource @all
+}
 
+taskreport tasksGanttChart "tasks gantt chart" {
+    headline "Tasks Gantt Chart"
+    formats csv
+    columns id, name, start, end, duration, effort, chart
+}
 
-textreport projectReports "project gantt chart" {
-    formats html, csv
-    resourcereport resourcesReports "Resources" {
-        formats html
-        columns id, name, rate, Type, AccrueAt, flags, OvertimeCost, efficiency, WorkinghoursChange, BaseCost, ActualCost, Availability, managers
+resourcereport resourceReports "resource_report" {
+    headline "Resources Table"
+    formats csv
+    columns
+    bsi{title "wbs"}, id{title "id"}, name{title "name"},
+    BaseCost{title "base_cost"}, ActualCost{title "actual_cost"},
+    rate{title "rate"}, AccrueAt{title "accrue_at"},
+    OvertimeCost{title "overtime_cost"}, efficiency{title "efficiency"}, Type{title "type"},
+    Availability{title "availability"}, flags{title "resource_group"}
+    hidetask @all
+    sortresources tree
+}
 
-    }
-    taskreport taskReports "Tasks" {
-        formats html
-        columns id, name, start, end, minstart, maxstart, minend, maxend, duration, effort, Deadline, priority, note, chart
-    }
+accountreport accountReports "account_report" {
+    formats csv
+    columns bsi, id, name
 }
 
 # ------------END-------------

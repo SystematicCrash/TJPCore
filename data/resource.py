@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from data.utility import day_to_an_abbreviation
+from src.utility import day_to_an_abbreviation
 from sys import exit
 
 
@@ -62,7 +62,7 @@ class Resource:
 
 
 # Generating resources
-def generate_resources(resources, types: set):
+def generate_resources(resources: list, types: set):
     parent_resources = []
     for resource_type in types:
         parent_res = {'id': resource_type, 'name': 'resources of type ' + resource_type, 'flags': [resource_type],

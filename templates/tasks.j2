@@ -13,16 +13,19 @@ end {{ task.task_end_date }}
 {% if task.work_duration > 0 %}
 duration {{ task.work_duration }}d
 {% endif %}
+{% if task.complete > 0 %}
+complete {{ task.complete }}
+{% endif %}
 {% if not task.inherited_resource_assignment and task.resource_assignment %}
-    {% if task.task_level != 1 %}
-    purge allocate
-    {% endif %}
+{% if task.task_level != 1 %}
+purge allocate
+{% endif %}
 allocate {{ task.resource_assignment | join(', ') }}
 {% endif %}
 {% if not task.inherited_dependencies and task.task_dependency %}
-    {% if task.task_level != 1 %}
-    purge depends
-    {% endif %}
+{% if task.task_level != 1 %}
+purge depends
+{% endif %}
 depends {{ task.task_dependency | join(', ') }}
 {% if task.dependency_type in ['onstart','onend'] %} {
 {{task.dependency_type}}
@@ -56,9 +59,9 @@ Deadline {{task.deadline}}
 priority {{ task.priority }}
 {% endif %}
 {% if not task.inherited_task_linking and task.task_linking %}
-    {% if task.task_level != 1 %}
-    purge flags
-    {% endif %}
+{% if task.task_level != 1 %}
+purge flags
+{% endif %}
 flags {{ task.task_linking }}
 {% endif %}
 {% if not task.inherited_chargeset and task.chargeset %}

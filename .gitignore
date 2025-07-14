@@ -1,3 +1,4 @@
 .idea
-conf/config.yaml
-venv
+conf/config.json
+.venv
+exports/*
