@@ -39,7 +39,7 @@ project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.
     }
     {% endif %}
     {% if exports %}
-    outputdir "{{ exports.base_dir }}"
+    outputdir "{{ exports.dirs.csv_dir }}"
     {% endif %}
 }
 {% endmacro %}

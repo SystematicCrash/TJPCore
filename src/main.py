@@ -1,28 +1,41 @@
-from conf.config_and_connection import load_config, connect_elasticsearch
+from conf.config_and_connection import connect_elasticsearch, get_config
 from data.info import generate_project_info
 from data.calender import generate_calendars
 from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from src.utility import colorized_print, read_csv, convert_csv_to_json
+from src.utility import colorized_print, convert_csv_to_json, logger, read_json
+from elasticsearch import Elasticsearch, helpers
 import time
 import subprocess
 from sys import exit
 from os import path
 
-# Reading configurations from config.yaml file
-configurations = load_config('conf/config.json')
+
+# Writing data to elasticsearch index
+def write_on_index(connection: Elasticsearch, data, index_name):
+    try:
+        for item in data:
+            actions = [{
+                "_index": index_name,
+                "_id": item["id"],
+                "_source": item
+            }]
+            helpers.bulk(connection, actions)
+    except Exception as e:
+        colorized_print(f"red", f"Failed to write data to index named ({index_name}).\nDetails: {e}")
+        exit(1)
 
 
 # Fetching docs from index
-def fetch_index(es, index):
+def fetch_index(es: Elasticsearch, index):
     result = es.search(index=index, query={"match_all": {}}, size=10000)
     return result['hits']['hits']
 
 
 # Fetching from all indexes
-def fetch_all_data(es, indexes):
+def fetch_all_data(es: Elasticsearch, indexes):
     with ThreadPoolExecutor(max_workers=10) as executor:
         try:
             results = {}
@@ -33,8 +46,8 @@ def fetch_all_data(es, indexes):
                 data_map[index_name] = index_data.result()
             return data_map
         except Exception as e:
-            colorized_print('yellow', "❌Error fetching data from elasticsearch")
-            colorized_print('red', f"Details: {e}")
+            colorized_print("red", f"Error while fetching data from Elasticsearch!\nDetails:{e}")
+            logger(f"{e}", "error", console=False)
             exit(1)
 
 
@@ -57,10 +70,9 @@ def define_flags(tasks, resources):
 
 # Defining several scenarios
 def define_scenarios():
-    global configurations
     scenarios: list[dict] = []
     # Default scenario = plan
-    for scenario in configurations.get('scenarios', []):
+    for scenario in get_config("scenarios"):
         scenarios.append({'id': scenario['id'], 'name': scenario['name']})
     return scenarios
 
@@ -94,7 +106,6 @@ def define_resources_accounts(resources):
 # Fetching resource types from resources
 def fetch_resource_types(datamap):
     resource_types = set()
-
     for item in datamap:
         source = item['_source']
         if source.get("resource_type", ''):
@@ -104,28 +115,24 @@ def fetch_resource_types(datamap):
 
 # Defining custom properties for tasks
 def define_tasks_extends():
-    global configurations
     extends: list[dict] = []
-    for extend in configurations.get('extends', {}).get('tasks', {}):
+    for extend in get_config("extends.tasks"):
         extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
     return extends
 
 
 # Defining custom properties for resources
 def define_resources_extends():
-    global configurations
     extends: list[dict] = []
-    for extend in configurations.get('extends', {}).get('resources', {}):
+    for extend in get_config("extends.resources"):
         extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
     return extends
 
 
 # Reports definition
 def define_reports():
-    global configurations
-
     reports: list[dict] = []
-    for report in configurations.get('reports', []):
+    for report in get_config("reports"):
         if report['type'] not in ['task', 'resource', 'account', 'trace']:
             raise ValueError(
                 "Invalid report type declared! report type must be 'task', 'resource', 'account' or 'trace'")
@@ -139,28 +146,28 @@ def define_reports():
 
 # Generating TJP file
 def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
-    global configurations
-
-    env = Environment(loader=FileSystemLoader(configurations['paths']['templates']),
+    env = Environment(loader=FileSystemLoader(get_config("paths.templates")),
                       trim_blocks=True, lstrip_blocks=True)
     body_template = env.get_template("main.j2")
-
     with ThreadPoolExecutor(max_workers=15) as executor:
-        info = executor.submit(generate_project_info, data_map.get('wbs_info', []))
-        calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', []))
-        scenarios = executor.submit(define_scenarios)
-        resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', []))
-        resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types.result())
-        tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", []))
-        tasks_extends = executor.submit(define_tasks_extends)
-        resources_extends = executor.submit(define_resources_extends)
-        flags = executor.submit(define_flags, tasks=data_map.get('wbs_tasks', []),
-                                resources=data_map.get('wbs_resources', []))
-        tasks_accounts = executor.submit(define_tasks_accounts, tasks.result())
-        resources_accounts = executor.submit(define_resources_accounts, data_map.get("wbs_resources", []))
+        try:
+            info = executor.submit(generate_project_info, data_map.get('wbs_info', []))
+            calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', []))
+            scenarios = executor.submit(define_scenarios)
+            resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', []))
+            resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types.result())
+            tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", []))
+            tasks_extends = executor.submit(define_tasks_extends)
+            resources_extends = executor.submit(define_resources_extends)
+            flags = executor.submit(define_flags, tasks=data_map.get('wbs_tasks', []),
+                                    resources=data_map.get('wbs_resources', []))
+            tasks_accounts = executor.submit(define_tasks_accounts, tasks.result())
+            resources_accounts = executor.submit(define_resources_accounts, data_map.get("wbs_resources", []))
+        except Exception as e:
+            colorized_print("red", f"{e}")
+            logger(f"{e}", "error", console=False)
 
-    export_path = configurations['paths']['exports']
-
+    export_path = get_config("paths.exports")
     body = body_template.render(
         info=info.result(),
         calendar=calendar.result(),
@@ -173,60 +180,47 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         tasks=tasks.result(),
         exports=export_path,
     )
-
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(body)
 
 
+# Saving report result into the database indexes
+def indexing_reports(connection: Elasticsearch):
+    csv_dir = get_config("paths.exports.dirs.csv_dir")
+    json_dir = get_config("paths.exports.dirs.json_dir")
+    for file_name in get_config("paths.exports.files"):
+        csv_path = csv_dir + file_name + '.csv'
+        json_path = json_dir + file_name + '.json'
+        if not path.exists(csv_path):
+            colorized_print('red', f"Path does not exist: {csv_path} in config.json: paths->exports->csv_path")
+            exit(1)
+        convert_csv_to_json(csv_path, json_path)
+        json_data = read_json(json_path)
+        # write_on_index(connection, json_data, index_name=file_name)
 
-def indexing_reports():
-    global configurations
-
-    base_dir = configurations['paths']['exports']['base_dir']
-
-    for file in configurations['paths']['exports']:
-        file_path = base_dir + file + '.csv'
-        if path.exists(file_path):
-            convert_csv_to_json(file_path, file_path.replace('.csv', '.json'))
 
 # Running
 def main():
-    global configurations
-
     start = time.time()
-
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
         colorized_print('blue', content)
-
-    connection = connect_elasticsearch(configurations)
-    indexes = configurations.get("data_indexes", [])
-
-    colorized_print('cyan', "🔸 Fetching data...")
+    colorized_print("light-cyan", "processing...")
+    connection = connect_elasticsearch()
+    indexes = get_config('data_indexes')
     data_map = fetch_all_data(connection, indexes)
-    colorized_print('green', "✔️ Finished")
-
-    colorized_print('cyan', "🔸 Generating tjp...")
-    generate_tjp(data_map, configurations['paths']['tjp_output'])
-    colorized_print('green', f"✔️ Finished")
-
-    colorized_print('cyan', "🔸 Running TJ3...")
-    result = subprocess.run("tj3 " + configurations['paths']['tjp_output'],
+    generate_tjp(data_map, get_config("paths.tjp_output"))
+    result = subprocess.run("tj3 " + get_config("paths.tjp_output"),
                             shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8')
-    if result.returncode == 0:
-        colorized_print('green', f"✔️ Finished")
-    else:
-        colorized_print('yellow', "❌ Failed to finish processing! Because of below errors:")
-        colorized_print('red', result.stderr)
-
-    colorized_print('cyan', "🔸 Indexing reports...")
-    indexing_reports()
-    colorized_print('green', f"✔️ Finished")
-
-    colorized_print('light-cyan', "All Done!")
+    if result.returncode != 0:
+        colorized_print('red', f"Failed to finish processing! Because of below errors:\n{result.stderr}")
+        logger(f"{result.stderr}", "error", console=False)
+        exit(1)
+    indexing_reports(connection)
     duration = time.time() - start
-
+    colorized_print("light-green", "Done!")
     colorized_print('light-yellow', f"Duration: {duration:.2f}s")
+
 
 if __name__ == "__main__":
     main()

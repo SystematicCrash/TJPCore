@@ -1,5 +1,5 @@
 {% macro define_reports(exports) %}
-taskreport taskReports "{{ exports.task_report }}" {
+taskreport taskReports "{{ exports.files.task_report }}" {
     headline "Tasks Table"
     formats csv
     columns
@@ -15,13 +15,13 @@ taskreport taskReports "{{ exports.task_report }}" {
     hideresource @all
 }
 
-taskreport tasksGanttChart "tasks gantt chart" {
+taskreport tasksGanttChart "{{ exports.files.task_gantt_chart }}" {
     headline "Tasks Gantt Chart"
     formats csv
-    columns id, name, start, end, duration, effort, chart
+    columns id{title "id"}, name, start, end, duration, effort, chart
 }
 
-resourcereport resourceReports "{{ exports.resource_report }}" {
+resourcereport resourceReports "{{ exports.files.resource_report }}" {
     headline "Resources Table"
     formats csv
     columns
@@ -34,8 +34,8 @@ resourcereport resourceReports "{{ exports.resource_report }}" {
     sortresources tree
 }
 
-accountreport accountReports "{{ exports.account_report }}" {
+accountreport accountReports "{{ exports.files.account_report }}" {
     formats csv
-    columns bsi, id, name
+    columns bsi, id{title "id"}, name
 }
 {% endmacro %}

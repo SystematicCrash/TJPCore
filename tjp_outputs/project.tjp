@@ -20,7 +20,7 @@ project project_1 "پروژه ساختمانی تجاری" 2025-07-01 +180d {
         number ActualCost "Actual Cost"
         text AccrueAt "Accrue at"
     }
-    outputdir "exports/"
+    outputdir "exports/csv/"
 }
 
 # ------------END-------------
@@ -43,13 +43,13 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
+project_management,
+site_team,
+management,
+site_preparation,
 equipment,
 human,
-project_management,
-site_preparation,
-management,
-foundation,
-site_team
+foundation
 # ------------END-------------
 
 
@@ -68,21 +68,6 @@ balance cost rev
 
 
 # ------------Resources-------------
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        efficiency 2.0
-        shifts projectDefaultShift
-        leaves annual 2025-08-06
-        flags equipment
-        chargeset construction
-    }
-
-}
 resource human "resources of type human" {
     flags human
     resource res_engineer "مهندس پروژه" {
@@ -107,6 +92,21 @@ resource human "resources of type human" {
         shifts projectDefaultShift
         leaves annual 2025-08-06
         flags site_team
+        chargeset construction
+    }
+
+}
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        shifts projectDefaultShift
+        leaves annual 2025-08-06
+        flags equipment
         chargeset construction
     }
 
@@ -250,10 +250,10 @@ taskreport taskReports "task_report" {
     hideresource @all
 }
 
-taskreport tasksGanttChart "tasks gantt chart" {
+taskreport tasksGanttChart "task_gantt_chart" {
     headline "Tasks Gantt Chart"
     formats csv
-    columns id, name, start, end, duration, effort, chart
+    columns id{title "id"}, name, start, end, duration, effort, chart
 }
 
 resourcereport resourceReports "resource_report" {
@@ -271,7 +271,7 @@ resourcereport resourceReports "resource_report" {
 
 accountreport accountReports "account_report" {
     formats csv
-    columns bsi, id, name
+    columns bsi, id{title "id"}, name
 }
 
 # ------------END-------------
