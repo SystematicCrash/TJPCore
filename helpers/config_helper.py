@@ -1,9 +1,8 @@
-from elasticsearch import Elasticsearch
 import ijson
 
 
 # Load config only once when the module is first imported
-def _load_config(path="conf/config.json"):
+def _load_config(path="config.json"):
     with open(path, 'r') as f:
         return next(ijson.items(f, '', multiple_values=False))
 
@@ -25,12 +24,3 @@ def get_config(property_name=None):
             raise KeyError(f"Invalid property name: {property_name}")
     return value
 
-
-# Making connection to elasticsearch
-def connect_elasticsearch():
-    conf = get_config("elasticsearch")
-    return Elasticsearch(
-        conf["host"],
-        basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
-        verify_certs=conf.get("verify_certs", True)
-    )

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, fields, field
 
 
 @dataclass
@@ -15,6 +15,11 @@ class ResourceReport:
     type: str = ''
     availability: str = ''
     resource_group: str = ''
+    es_doc: dict = field(default_factory=dict)
+
+    def __post_init__(self):
+        if self.es_doc:
+            self.initializing(self.es_doc)
 
     def initializing(self, data: dict):
         for f in fields(self):
@@ -26,7 +31,7 @@ class ResourceReport:
 def generate_resources_reports(resources: list):
     resources_objs = []
     for resource in resources:
-        resources_objs.append(ResourceReport(**resource))
+        resources_objs.append(ResourceReport(es_doc=resource))
     return resources_objs
 
 

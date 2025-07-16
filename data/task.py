@@ -63,7 +63,7 @@ class Task:
     """ Check if task has a parent ? that's mean current task is a subtask of the other task """
 
     def __has_parent(self) -> bool:
-        return len(self.task_code) > 1
+        return self.task_type != 'summery'
 
     """ Specifying task's parent ID based on task_code """
 

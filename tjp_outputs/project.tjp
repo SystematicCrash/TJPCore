@@ -1,5 +1,5 @@
 # ----------------Project Header-------------
-project project_1 "پروژه ساختمانی تجاری" 2025-07-01 +180d {
+project project_1 "Commercial Construction Project" 2025-07-01 +180d {
     timezone "Asia/Tehran"
     currency "IRR"
     now 2025-07-01
@@ -43,13 +43,13 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-project_management,
-site_team,
-management,
-site_preparation,
-equipment,
 human,
-foundation
+foundation,
+site_team,
+equipment,
+project_management,
+management,
+site_preparation
 # ------------END-------------
 
 
@@ -264,7 +264,7 @@ resourcereport resourceReports "resource_report" {
     BaseCost{title "base_cost"}, ActualCost{title "actual_cost"},
     rate{title "rate"}, AccrueAt{title "accrue_at"},
     OvertimeCost{title "overtime_cost"}, efficiency{title "efficiency"}, Type{title "type"},
-    Availability{title "availability"}, flags{title "resource_group"}
+    Availability{title "availability_date"}, flags
     hidetask @all
     sortresources tree
 }

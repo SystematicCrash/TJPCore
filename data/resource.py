@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from src.utility import day_to_an_abbreviation
+from helpers.utility import day_to_an_abbreviation
 from sys import exit
 
 
@@ -70,7 +70,7 @@ def generate_resources(resources: list, types: set):
         for doc in resources:
             if doc['_source']['resource_type'] == resource_type:
                 resource = Resource(es_doc=doc)
-                resource.unavailability_date = '2025-08-06'
+                resource.unavailability_date = '2025-08-06' # TODO remove this later
                 resource.working_days = day_to_an_abbreviation(resource.working_days)
                 parent_res['child_resources'].append(resource)
         parent_resources.append(parent_res)

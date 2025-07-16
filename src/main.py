@@ -1,54 +1,18 @@
-from conf.config_and_connection import connect_elasticsearch, get_config
+from src.elastic_controller import connect_elasticsearch, fetch_all_data, write_on_index
+from helpers.config_helper import get_config
 from data.info import generate_project_info
 from data.calender import generate_calendars
 from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from src.utility import colorized_print, convert_csv_to_json, logger, read_json
-from elasticsearch import Elasticsearch, helpers
+from helpers.utility import colorized_print, cast_string_fields_to_numbers
+from helpers.file_helpers import logger, read_csv
+from elasticsearch import Elasticsearch
 import time
 import subprocess
+import threading
 from sys import exit
-from os import path
-
-
-# Writing data to elasticsearch index
-def write_on_index(connection: Elasticsearch, data, index_name):
-    try:
-        for item in data:
-            actions = [{
-                "_index": index_name,
-                "_id": item["id"],
-                "_source": item
-            }]
-            helpers.bulk(connection, actions)
-    except Exception as e:
-        colorized_print(f"red", f"Failed to write data to index named ({index_name}).\nDetails: {e}")
-        exit(1)
-
-
-# Fetching docs from index
-def fetch_index(es: Elasticsearch, index):
-    result = es.search(index=index, query={"match_all": {}}, size=10000)
-    return result['hits']['hits']
-
-
-# Fetching from all indexes
-def fetch_all_data(es: Elasticsearch, indexes):
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        try:
-            results = {}
-            data_map = {}
-            for index in indexes:
-                results[index] = executor.submit(fetch_index, es, index)
-            for index_name, index_data in results.items():
-                data_map[index_name] = index_data.result()
-            return data_map
-        except Exception as e:
-            colorized_print("red", f"Error while fetching data from Elasticsearch!\nDetails:{e}")
-            logger(f"{e}", "error", console=False)
-            exit(1)
 
 
 # Flags definition from task_linking and resource_group fields (just from tasks index)
@@ -167,7 +131,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             colorized_print("red", f"{e}")
             logger(f"{e}", "error", console=False)
 
-    export_path = get_config("paths.exports")
+    report_path = get_config("paths.reports")
     body = body_template.render(
         info=info.result(),
         calendar=calendar.result(),
@@ -178,25 +142,33 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         accounts=tasks_accounts.result() | resources_accounts.result(),
         resources=resources.result(),
         tasks=tasks.result(),
-        exports=export_path,
+        reports=report_path,
     )
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(body)
 
 
-# Saving report result into the database indexes
+# Indexing reports into database
 def indexing_reports(connection: Elasticsearch):
-    csv_dir = get_config("paths.exports.dirs.csv_dir")
-    json_dir = get_config("paths.exports.dirs.json_dir")
-    for file_name in get_config("paths.exports.files"):
-        csv_path = csv_dir + file_name + '.csv'
-        json_path = json_dir + file_name + '.json'
-        if not path.exists(csv_path):
-            colorized_print('red', f"Path does not exist: {csv_path} in config.json: paths->exports->csv_path")
-            exit(1)
-        convert_csv_to_json(csv_path, json_path)
-        json_data = read_json(json_path)
-        # write_on_index(connection, json_data, index_name=file_name)
+    reports_result = dict()
+    sources: dict = get_config("paths.reports.files")
+    csv_dir = get_config("paths.reports.dirs.csv_dir")
+    for report_name, file_name in sources.items():
+        reports_result[report_name] = read_csv(csv_dir + file_name + ".csv")
+
+    futures = {}
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        for k, v in reports_result.items():
+            futures[k] = executor.submit(cast_string_fields_to_numbers, v)
+
+    for k in futures.keys():
+        reports_result[k] = futures[k].result()
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        for report_name, data in reports_result.items():
+            report_name = report_name.replace("_report", "")
+            if report_name.__contains__("resource"):
+                executor.submit(write_on_index, connection, data, report_name)
 
 
 # Running
@@ -205,7 +177,7 @@ def main():
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
         colorized_print('blue', content)
-    colorized_print("light-cyan", "processing...")
+    colorized_print("cyan", "processing...")
     connection = connect_elasticsearch()
     indexes = get_config('data_indexes')
     data_map = fetch_all_data(connection, indexes)
@@ -218,8 +190,8 @@ def main():
         exit(1)
     indexing_reports(connection)
     duration = time.time() - start
-    colorized_print("light-green", "Done!")
-    colorized_print('light-yellow', f"Duration: {duration:.2f}s")
+    colorized_print("green", "Done!")
+    colorized_print('yellow', f"Duration: {duration:.2f}s")
 
 
 if __name__ == "__main__":

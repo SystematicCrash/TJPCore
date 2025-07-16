@@ -1,40 +1,17 @@
-from colorama import Fore, Style as st
-import csv, json
+import csv
+import json
 import logging
-from conf.config_and_connection import get_config
+from os import path
+from helpers.config_helper import get_config
+from helpers.utility import colorized_print
 
 
+def generating_json_file_from_csv(csv_path: str, json_path: str):
+    if not path.exists(csv_path):
+        message = f"Path does not exist: {csv_path} in config.json: paths->reports->csv_path"
+        colorized_print('red', message)
+        exit(1)
 
-def day_to_an_abbreviation(days: str):
-    days = days.replace("Saturday", "sat")
-    days = days.replace("Sunday", "sun")
-    days = days.replace("Monday", "mon")
-    days = days.replace("Tuesday", "tue")
-    days = days.replace("Wednesday", "wed")
-    days = days.replace("Thursday", "thu")
-    days = days.replace("Friday", "fri")
-    return days
-
-
-def colorized_print(color: str, text: str):
-    colors = {
-        'blue': Fore.BLUE,
-        'red': Fore.RED,
-        'cyan': Fore.CYAN,
-        'yellow': Fore.YELLOW,
-        'white': Fore.WHITE,
-        'green': Fore.GREEN,
-        'light-blue': Fore.LIGHTBLUE_EX,
-        'light-green': Fore.LIGHTGREEN_EX,
-        'light-red': Fore.LIGHTRED_EX,
-        'light-white': Fore.LIGHTWHITE_EX,
-        'light-cyan': Fore.LIGHTCYAN_EX,
-        'light-yellow': Fore.LIGHTYELLOW_EX,
-    }
-    print(colors[color] + st.BRIGHT + text + st.RESET_ALL)
-
-
-def convert_csv_to_json(csv_path: str, json_path: str):
     with open(csv_path, mode='r', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')
         content = list(reader)
@@ -45,7 +22,7 @@ def convert_csv_to_json(csv_path: str, json_path: str):
 
 def read_csv(csv_path: str):
     with open(csv_path, mode='r', newline='', encoding='utf-8') as csvfile:
-        return list(csv.DictReader(csvfile))
+        return list(csv.DictReader(csvfile, delimiter=';'))
 
 
 def read_json(json_path: str):
@@ -63,7 +40,7 @@ def logger(message: str, mode: str = 'warning', console: bool = True):
             filename=get_config('logging.filename'),
             filemode=get_config('logging.filemode'),
             level=mode.upper(), format="{levelname}: {message} - {asctime}",
-            datefmt="%Y-%m-%d-%H:%M:%S", style='{')
+            datefmt="%Y-%m-%d %H:%M:%S", style='{')
     if mode == 'debug':
         logging.debug(message)
     elif mode == 'info':

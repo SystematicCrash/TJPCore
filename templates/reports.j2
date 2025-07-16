@@ -1,5 +1,5 @@
-{% macro define_reports(exports) %}
-taskreport taskReports "{{ exports.files.task_report }}" {
+{% macro define_reports(reports) %}
+taskreport taskReports "{{ reports.files.task_report }}" {
     headline "Tasks Table"
     formats csv
     columns
@@ -15,13 +15,13 @@ taskreport taskReports "{{ exports.files.task_report }}" {
     hideresource @all
 }
 
-taskreport tasksGanttChart "{{ exports.files.task_gantt_chart }}" {
+taskreport tasksGanttChart "{{ reports.files.task_gantt_report }}" {
     headline "Tasks Gantt Chart"
     formats csv
     columns id{title "id"}, name, start, end, duration, effort, chart
 }
 
-resourcereport resourceReports "{{ exports.files.resource_report }}" {
+resourcereport resourceReports "{{ reports.files.resource_report }}" {
     headline "Resources Table"
     formats csv
     columns
@@ -29,12 +29,12 @@ resourcereport resourceReports "{{ exports.files.resource_report }}" {
     BaseCost{title "base_cost"}, ActualCost{title "actual_cost"},
     rate{title "rate"}, AccrueAt{title "accrue_at"},
     OvertimeCost{title "overtime_cost"}, efficiency{title "efficiency"}, Type{title "type"},
-    Availability{title "availability"}, flags{title "resource_group"}
+    Availability{title "availability_date"}, flags
     hidetask @all
     sortresources tree
 }
 
-accountreport accountReports "{{ exports.files.account_report }}" {
+accountreport accountReports "{{ reports.files.account_report }}" {
     formats csv
     columns bsi, id{title "id"}, name
 }

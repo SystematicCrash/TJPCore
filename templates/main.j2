@@ -1,6 +1,6 @@
 # ----------------Project Header-------------
 {% import "project_header.j2" as project_header_builder %}
-{{ project_header_builder.define_header(info, calendar, scenarios, tasks_extends, resources_extends, exports) }}
+{{ project_header_builder.define_header(info, calendar, scenarios, tasks_extends, resources_extends, reports) }}
 # ------------END-------------
 
 # ------------Shifts-------------
@@ -78,6 +78,6 @@ resource {{parent_resource['id']}} "{{parent_resource['name']}}" {
 
 # ------------Reports-------------
 {% import "reports.j2" as report_builder %}
-{{ report_builder.define_reports(exports) }}
+{{ report_builder.define_reports(reports) }}
 # ------------END-------------
 

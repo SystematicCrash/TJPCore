@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from src.utility import day_to_an_abbreviation
+from helpers.utility import day_to_an_abbreviation
 from sys import exit
 
 @dataclass
@@ -40,7 +40,7 @@ def generate_calendars(calendars):
     calendars_objs = []
     for doc in calendars:
         calendar = Calender(es_doc=doc)
-        calendar.working_days_exceptions.append("2025-08-02")
+        calendar.working_days_exceptions.append("2025-08-02") # TODO remove these later
         calendar.working_days_exceptions.append("2025-08-24")
         calendar.working_days = day_to_an_abbreviation(calendar.working_days)
         calendars_objs.append(calendar)

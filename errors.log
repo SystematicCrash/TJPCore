@@ -21,3 +21,33 @@ ERROR: tjp_outputs/project.tjp:77: Error: Undeclared flag 'management'
 ERROR: tjp_outputs/project.tjp:2: Error: Output directory may not be empty.
 }
  - 2025-07-15-13:25:26
+ERROR: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x0000028A3E0F0310>: Failed to establish a new connection: [WinError 10065] A socket operation was attempted to an unreachable host)) - 2025-07-15 13:51:29
+ERROR: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x000002FB520F0310>: Failed to establish a new connection: [WinError 10065] A socket operation was attempted to an unreachable host)) - 2025-07-15 13:51:33
+ERROR: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000578B40F0310>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it)) - 2025-07-15 14:18:30
+ERROR: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000483180F0310>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it)) - 2025-07-15 14:23:20
+ERROR: Connection error caused by: ConnectionError(Connection error caused by: NewConnectionError(<urllib3.connection.HTTPConnection object at 0x00000229940F0310>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it)) - 2025-07-15 14:49:21
+ERROR: 1 document(s) failed to index. - 2025-07-15 15:18:58
+ERROR: 1 document(s) failed to index. - 2025-07-15 15:25:02
+ERROR: 1 document(s) failed to index. - 2025-07-15 15:44:39
+ERROR: -1 - 2025-07-15 15:59:49
+ERROR: -1 - 2025-07-15 16:02:13
+ERROR: -1 - 2025-07-15 16:03:36
+ERROR: -1 - 2025-07-15 16:04:35
+ERROR: -1 - 2025-07-15 16:05:05
+ERROR: -1 - 2025-07-15 16:05:57
+ERROR: 1 document(s) failed to index. - 2025-07-15 16:07:58
+ERROR: -1 - 2025-07-15 16:08:26
+ERROR: 1 document(s) failed to index. - 2025-07-15 16:10:00
+ERROR: -1 - 2025-07-15 16:12:14
+ERROR: tjp_outputs/project.tjp:139: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_1_1.task_1_1_2
+ - 2025-07-15 16:13:15
+ERROR: 1 document(s) failed to index. - 2025-07-15 16:14:38
+ERROR: 1 document(s) failed to index. - 2025-07-16 14:44:47
+ERROR: 1 document(s) failed to index. - 2025-07-16 14:53:46
+ERROR: 1 document(s) failed to index. - 2025-07-16 14:56:09
+ERROR: 1 document(s) failed to index. - 2025-07-16 14:57:16
+ERROR: 1 document(s) failed to index. - 2025-07-16 16:06:35
+ERROR: tjp_outputs/project.tjp:253: Error: Report tasksGanttChart has output formats requested, but the file name is empty.
+ - 2025-07-16 18:32:47
+ERROR: 1 document(s) failed to index. - 2025-07-16 18:33:35
+ERROR: 'NoneType' object is not iterable - 2025-07-16 20:18:52
