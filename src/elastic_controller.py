@@ -1,12 +1,12 @@
 from elasticsearch import Elasticsearch, helpers
 from helpers.utility import colorized_print
-from helpers.file_helpers import logger
+from helpers.io_helpers import logger
 from concurrent.futures import ThreadPoolExecutor
 from helpers.config_helper import get_config
 
 
 # Making connection to elasticsearch
-def connect_elasticsearch():
+def make_connection():
     conf = get_config("elasticsearch")
     return Elasticsearch(
         conf["host"],
@@ -17,9 +17,6 @@ def connect_elasticsearch():
 
 # Writing data to elasticsearch index
 def write_on_index(connection: Elasticsearch, data, index_name):
-    for index in get_config("report_indexes"):
-        if index.__contains__(index_name):
-            index_name = index
     try:
         for item in data:
             actions = [{

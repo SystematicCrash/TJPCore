@@ -1,5 +1,8 @@
 import re
+import sys
+import time
 from colorama import Fore, Style as st
+from colorama import Style
 
 
 def day_to_an_abbreviation(days: str):
@@ -28,7 +31,7 @@ def colorized_print(color: str, text: str):
         'light-cyan': Fore.LIGHTCYAN_EX,
         'light-yellow': Fore.LIGHTYELLOW_EX,
     }
-    print(colors[color] + st.BRIGHT + text + st.RESET_ALL)
+    print(colors[color] + st.DIM + text + st.RESET_ALL)
 
 
 def cast_string_fields_to_numbers(data_set: dict):
@@ -47,4 +50,18 @@ def cast_string_fields_to_numbers(data_set: dict):
     return data_set
 
 
+end_of_process = False
 
+
+def animate_processing():
+    dots = 0
+    direction = 1
+    while not end_of_process:
+        dot_str = "." * dots + " " * (5 - dots)
+        message = f"\r{Fore.LIGHTCYAN_EX}Processing{dot_str}{Style.DIM}"
+        print(message, end="")
+        sys.stdout.flush()
+        time.sleep(0.3)
+        dots += direction
+        if dots == 5 or dots == 0:
+            dots = 0

@@ -1,4 +1,4 @@
-from src.elastic_controller import connect_elasticsearch, fetch_all_data, write_on_index
+from src.elastic_controller import make_connection, fetch_all_data, write_on_index
 from helpers.config_helper import get_config
 from data.info import generate_project_info
 from data.calender import generate_calendars
@@ -6,12 +6,13 @@ from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from helpers.utility import colorized_print, cast_string_fields_to_numbers
-from helpers.file_helpers import logger, read_csv
+from helpers.utility import colorized_print, cast_string_fields_to_numbers, animate_processing
+from helpers.io_helpers import logger, read_csv, error_register
 from elasticsearch import Elasticsearch
 import time
 import subprocess
 import threading
+from helpers import utility
 from sys import exit
 
 
@@ -155,20 +156,16 @@ def indexing_reports(connection: Elasticsearch):
     csv_dir = get_config("paths.reports.dirs.csv_dir")
     for report_name, file_name in sources.items():
         reports_result[report_name] = read_csv(csv_dir + file_name + ".csv")
-
-    futures = {}
     with ThreadPoolExecutor(max_workers=10) as executor:
+        futures = {}
         for k, v in reports_result.items():
             futures[k] = executor.submit(cast_string_fields_to_numbers, v)
-
-    for k in futures.keys():
-        reports_result[k] = futures[k].result()
-
-    with ThreadPoolExecutor(max_workers=10) as executor:
+        reports_result = {k: v.result() for k,v in futures.items()}
         for report_name, data in reports_result.items():
-            report_name = report_name.replace("_report", "")
-            if report_name.__contains__("resource"):
-                executor.submit(write_on_index, connection, data, report_name)
+            index_name = report_name.replace("_report", "")
+            for index in get_config("report_indexes"):
+                if index.__contains__(index_name):
+                    executor.submit(write_on_index, connection, data, index)
 
 
 # Running
@@ -177,21 +174,24 @@ def main():
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
         colorized_print('blue', content)
-    colorized_print("cyan", "processing...")
-    connection = connect_elasticsearch()
-    indexes = get_config('data_indexes')
-    data_map = fetch_all_data(connection, indexes)
+    animation_thread = threading.Thread(target=animate_processing)
+    animation_thread.daemon = True
+    animation_thread.start()
+    connection = make_connection()
+    data_map = fetch_all_data(connection, get_config("data_indexes"))
     generate_tjp(data_map, get_config("paths.tjp_output"))
     result = subprocess.run("tj3 " + get_config("paths.tjp_output"),
                             shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8')
     if result.returncode != 0:
         colorized_print('red', f"Failed to finish processing! Because of below errors:\n{result.stderr}")
+        error_register(connection, result.stderr)
         logger(f"{result.stderr}", "error", console=False)
         exit(1)
     indexing_reports(connection)
+    utility.end_of_process = True
     duration = time.time() - start
-    colorized_print("green", "Done!")
-    colorized_print('yellow', f"Duration: {duration:.2f}s")
+    colorized_print("light-green", "\nDone!")
+    colorized_print('light-yellow', f"Finished at: {duration:.2f}s")
 
 
 if __name__ == "__main__":

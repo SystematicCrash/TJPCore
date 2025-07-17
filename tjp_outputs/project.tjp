@@ -43,13 +43,13 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-human,
-foundation,
-site_team,
-equipment,
-project_management,
 management,
-site_preparation
+site_team,
+foundation,
+equipment,
+human,
+site_preparation,
+project_management
 # ------------END-------------
 
 
@@ -117,7 +117,8 @@ resource equipment "resources of type equipment" {
 
 # ------------Tasks-------------
     task task_1 "مدیریت پروژه" {
-    period 2025-07-01 - 2025-12-28
+    milestone
+    start 2025-07-01
     allocate res_engineer
     minstart 2025-07-01
     Deadline 2025-12-31
