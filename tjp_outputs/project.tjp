@@ -43,13 +43,13 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-management,
 site_team,
-foundation,
 equipment,
 human,
-site_preparation,
-project_management
+management,
+foundation,
+project_management,
+site_preparation
 # ------------END-------------
 
 
@@ -68,6 +68,21 @@ balance cost rev
 
 
 # ------------Resources-------------
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        shifts projectDefaultShift
+        leaves annual 2025-08-06
+        flags equipment
+        chargeset construction
+    }
+
+}
 resource human "resources of type human" {
     flags human
     resource res_engineer "مهندس پروژه" {
@@ -92,21 +107,6 @@ resource human "resources of type human" {
         shifts projectDefaultShift
         leaves annual 2025-08-06
         flags site_team
-        chargeset construction
-    }
-
-}
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        efficiency 2.0
-        shifts projectDefaultShift
-        leaves annual 2025-08-06
-        flags equipment
         chargeset construction
     }
 
@@ -270,7 +270,7 @@ resourcereport resourceReports "resource_report" {
     sortresources tree
 }
 
-accountreport accountReports "account_report" {
+accountreport accountReports "cost_report" {
     formats csv
     columns bsi, id{title "id"}, name
 }

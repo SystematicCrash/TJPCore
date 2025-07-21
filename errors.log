@@ -83,3 +83,13 @@ ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Container task task_
  - 2025-07-17 11:56:20
 ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Container task task_1 may not be marked as a milestone.
  - 2025-07-17 11:56:44
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Container task task_1 may not be marked as a milestone.
+ - 2025-07-19 12:45:09
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_resources]', wbs_resources, index_or_alias) - 2025-07-19 12:46:08
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_resources]', wbs_resources, index_or_alias) - 2025-07-20 12:58:52
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_resources]', wbs_resources, index_or_alias) - 2025-07-20 12:59:16
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:44:26
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:45:15
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:46:07
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:48:34
+ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:50:34

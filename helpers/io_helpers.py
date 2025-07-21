@@ -55,7 +55,7 @@ def logger(message: str, mode: str = 'warning', console: bool = True):
 
 # Writing logical tj3 errors on elasticsearch index
 def error_register(connection: Elasticsearch, error_message: str):
-    from src.elastic_controller import write_on_index
+    from helpers.elastic_helper import write_on_index
     data = {'id': uuid4().hex, 'message': error_message}
     with ThreadPoolExecutor(max_workers=1) as executor:
         executor.submit(write_on_index, connection, [data], get_config('error_index'))

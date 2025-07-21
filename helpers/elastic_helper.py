@@ -26,7 +26,7 @@ def write_on_index(connection: Elasticsearch, data, index_name):
             }]
             helpers.bulk(connection, actions)
     except Exception as e:
-        colorized_print(f"red", f"Failed to write data to index named ({index_name}).\nDetails: {e}")
+        colorized_print(f"red", f"\nFailed to write data to index named ({index_name}).\nDetails: {e}")
         logger(f"{e}", mode="error", console=False)
         exit(1)
 
@@ -49,6 +49,6 @@ def fetch_all_data(es: Elasticsearch, indexes):
                 data_map[index_name] = index_data.result()
             return data_map
         except Exception as e:
-            colorized_print("red", f"Error while fetching data from Elasticsearch!\nDetails:{e}")
+            colorized_print("red", f"\nError while fetching data from Elasticsearch!\nDetails:{e}")
             logger(f"{e}", "error", console=False)
             exit(1)

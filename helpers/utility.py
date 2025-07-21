@@ -3,7 +3,7 @@ import sys
 import time
 from colorama import Fore, Style as st
 from colorama import Style
-
+from tqdm import tqdm
 
 def day_to_an_abbreviation(days: str):
     days = days.replace("Saturday", "sat")
@@ -31,7 +31,10 @@ def colorized_print(color: str, text: str):
         'light-cyan': Fore.LIGHTCYAN_EX,
         'light-yellow': Fore.LIGHTYELLOW_EX,
     }
-    print(colors[color] + st.DIM + text + st.RESET_ALL)
+    if color in colors:
+        print(colors[color] + st.DIM + text + st.RESET_ALL)
+    else:
+        raise ValueError(f"{color} is not present in colors")
 
 
 def cast_string_fields_to_numbers(data_set: dict):
@@ -51,9 +54,11 @@ def cast_string_fields_to_numbers(data_set: dict):
 
 
 end_of_process = False
+progress = 0
 
 
 def animate_processing():
+    global progress, end_of_process
     dots = 0
     direction = 1
     while not end_of_process:
@@ -65,3 +70,15 @@ def animate_processing():
         dots += direction
         if dots == 5 or dots == 0:
             dots = 0
+
+
+
+def progress_bar():
+    global progress, end_of_process
+    with tqdm(total=1000, desc="Progress", unit="step", file=sys.stdout) as pbar:
+        last = 0
+        while not end_of_process:
+            pbar.update(progress - last)
+            last = progress
+            time.sleep(0.1)
+        pbar.update(100 - last)
