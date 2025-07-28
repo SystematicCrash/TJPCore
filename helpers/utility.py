@@ -32,7 +32,7 @@ def colorized_print(color: str, text: str):
         'light-yellow': Fore.LIGHTYELLOW_EX,
     }
     if color in colors:
-        print(colors[color] + st.DIM + text + st.RESET_ALL)
+        print(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
     else:
         raise ValueError(f"{color} is not present in colors")
 

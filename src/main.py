@@ -1,3 +1,5 @@
+import traceback
+
 from helpers.elastic_helper import make_connection, fetch_all_data, write_on_index
 from helpers.config_helper import get_config
 from data.info import generate_project_info
@@ -130,7 +132,9 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             resources_accounts = executor.submit(define_resources_accounts, data_map.get("wbs_resources", []))
         except Exception as e:
             colorized_print("red", f"{e}")
+            traceback.print_exc()
             logger(f"{e}", "error", console=False)
+            exit(1)
 
     report_path = get_config("paths.reports")
     body = body_template.render(
@@ -192,7 +196,7 @@ def main():
         logger(f"{result.stderr}", "error", console=False)
         exit(1)
     utility.progress += 200
-    indexing_reports(connection)
+    # indexing_reports(connection)
     utility.progress += 200
     utility.end_of_process = True
     duration = time.time() - start

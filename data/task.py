@@ -28,6 +28,7 @@ class Task:
     assignment_owner: str = ''
     assignment_units: int = ''
     resource_calendar: str = ''
+    task_dependency: str = ''
     priority: int = 0
     task_cost: float = ''
     pending_status_team: str = ''
@@ -50,7 +51,6 @@ class Task:
     inherited_priority: bool = False
     task_linking: list[str] = field(default_factory=list)
     resource_assignment: list[str] = field(default_factory=list)
-    task_dependency: list[str] = field(default_factory=list)
     sub_tasks: list = field(default_factory=list)
     es_doc: dict = field(default_factory=dict)
 
@@ -63,7 +63,8 @@ class Task:
     """ Check if task has a parent ? that's mean current task is a subtask of the other task """
 
     def __has_parent(self) -> bool:
-        return self.task_type != 'summery'
+        code = self.task_code.replace('.', '')
+        return len(code) == 1
 
     """ Specifying task's parent ID based on task_code """
 
@@ -71,10 +72,10 @@ class Task:
         if not self.__has_parent():
             return ''
         code = self.task_code.replace('.', '')
-        if code.endswith('1'):
+        if len(code) == 2:
             return 'task_' + code[0]
         else:
-            code = code[:2] + '1'
+            code = code[:2]
             return 'task_' + '_'.join(code)
 
     """ Identifying task level. level-one = top-level, level-two = mid-level, level-three = low-level """
@@ -83,29 +84,25 @@ class Task:
         code = self.task_code.replace('.', '')
         if len(code) == 1:
             return 1
-        elif len(code) == 3 and code.endswith('1'):
+        elif len(code) == 2:
             return 2
-        elif len(code) == 3 and not code.endswith('1'):
+        elif len(code) == 3:
             return 3
         return -1
 
     """ Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
-
+    # TODO Sync this with new WBS
     def __convert_dependencies_ids_to_absolute(self):
-        absolute_ids = set()
-        for task_id in self.task_dependency:
-            code = ''.join(re.findall(r'\d+', task_id))
-            if len(code) == 1:
-                continue
-            if code.endswith('1'):
-                absolute_ids.add(
-                    'task_' + code[0] + '.' + task_id
-                )
-            else:
-                absolute_ids.add(
-                    'task_' + code[0] + '.' + 'task_' + '_'.join(code[:2] + '1') + '.' + task_id
-                )
-        return list(absolute_ids)
+        if not self.task_dependency or self.task_dependency == 'none':
+            return ''
+        code = ''.join(re.findall(r'\d+', self.task_dependency))
+        if len(code) == 1:
+            return ''
+        if len(code) == 2:
+            return 'task_' + code[0] + '.' + self.task_dependency
+        else:
+            return 'task_' + code[0] + '.' + 'task_' + '_'.join(code[:2]) + '.' + self.task_dependency
+
 
     """ Initialing class fields with elastic document values """
 

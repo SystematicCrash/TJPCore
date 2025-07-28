@@ -93,3 +93,29 @@ ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]
 ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:46:07
 ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:48:34
 ERROR: NotFoundError(404, 'index_not_found_exception', 'no such index [wbs_info]', wbs_info, index_or_alias) - 2025-07-21 19:50:34
+ERROR: string index out of range - 2025-07-25 14:30:26
+ERROR: string index out of range - 2025-07-25 14:33:11
+ERROR: string index out of range - 2025-07-25 14:37:03
+ERROR: string index out of range - 2025-07-25 14:41:27
+ERROR: string index out of range - 2025-07-25 14:41:54
+ERROR: string index out of range - 2025-07-25 14:43:28
+ERROR: string index out of range - 2025-07-25 15:52:46
+ERROR: string index out of range - 2025-07-25 15:53:24
+ERROR: string index out of range - 2025-07-28 16:27:57
+ERROR: string index out of range - 2025-07-28 16:30:13
+ERROR: string index out of range - 2025-07-28 16:32:35
+ERROR: string index out of range - 2025-07-28 16:46:56
+ERROR: string index out of range - 2025-07-28 16:47:42
+ERROR: string index out of range - 2025-07-28 16:49:05
+ERROR: string index out of range - 2025-07-28 16:49:59
+ERROR: string index out of range - 2025-07-28 16:54:10
+ERROR: string index out of range - 2025-07-28 16:55:05
+ERROR: string index out of range - 2025-07-28 16:56:01
+ERROR: string index out of range - 2025-07-28 16:57:59
+ERROR: string index out of range - 2025-07-28 16:58:24
+ERROR: string index out of range - 2025-07-28 17:00:49
+ERROR: string index out of range - 2025-07-28 17:01:18
+ERROR: string index out of range - 2025-07-28 17:01:42
+ERROR: string index out of range - 2025-07-28 17:02:54
+ERROR: string index out of range - 2025-07-28 17:03:19
+ERROR: string index out of range - 2025-07-28 17:03:40
