@@ -122,7 +122,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', []))
             scenarios = executor.submit(define_scenarios)
             resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', []))
-            resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types.result())
+            # resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types.result())
             tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", []))
             tasks_extends = executor.submit(define_tasks_extends)
             resources_extends = executor.submit(define_resources_extends)
@@ -145,7 +145,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         resources_extends=resources_extends.result(),
         flags=flags.result(),
         accounts=tasks_accounts.result() | resources_accounts.result(),
-        resources=resources.result(),
+        resources=[],
         tasks=tasks.result(),
         reports=report_path,
     )

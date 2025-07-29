@@ -28,7 +28,6 @@ class Task:
     assignment_owner: str = ''
     assignment_units: int = ''
     resource_calendar: str = ''
-    task_dependency: str = ''
     priority: int = 0
     task_cost: float = ''
     pending_status_team: str = ''
@@ -50,6 +49,7 @@ class Task:
     inherited_resource_assignment: bool = False
     inherited_priority: bool = False
     task_linking: list[str] = field(default_factory=list)
+    task_dependency: list[str] = field(default_factory=list)
     resource_assignment: list[str] = field(default_factory=list)
     sub_tasks: list = field(default_factory=list)
     es_doc: dict = field(default_factory=dict)
@@ -93,15 +93,18 @@ class Task:
     """ Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
     # TODO Sync this with new WBS
     def __convert_dependencies_ids_to_absolute(self):
-        if not self.task_dependency or self.task_dependency == 'none':
-            return ''
-        code = ''.join(re.findall(r'\d+', self.task_dependency))
-        if len(code) == 1:
-            return ''
-        if len(code) == 2:
-            return 'task_' + code[0] + '.' + self.task_dependency
-        else:
-            return 'task_' + code[0] + '.' + 'task_' + '_'.join(code[:2]) + '.' + self.task_dependency
+        if not self.task_dependency:
+            return []
+        absolute_dependencies_ids = set()
+        for dependency_id in self.task_dependency:
+            code = ''.join(re.findall(r'\d+', dependency_id))
+            if len(code) == 1:
+                continue
+            if len(code) == 2:
+                absolute_dependencies_ids.add('task_' + code[0] + '.' + dependency_id)
+            else:
+                absolute_dependencies_ids.add('task_' + code[0] + '.' + 'task_' + '_'.join(code[:2]) + '.' + dependency_id)
+        return list(absolute_dependencies_ids)
 
 
     """ Initialing class fields with elastic document values """

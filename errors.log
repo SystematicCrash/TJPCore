@@ -119,3 +119,6 @@ ERROR: string index out of range - 2025-07-28 17:01:42
 ERROR: string index out of range - 2025-07-28 17:02:54
 ERROR: string index out of range - 2025-07-28 17:03:19
 ERROR: string index out of range - 2025-07-28 17:03:40
+ERROR: tjp_outputs/project.tjp:44: Error: Unexpected token 'Equipment' found. Expecting :eof
+Heavy Equipment
+ - 2025-07-29 09:12:13
