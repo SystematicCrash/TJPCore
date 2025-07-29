@@ -91,7 +91,6 @@ class Task:
         return -1
 
     """ Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
-    # TODO Sync this with new WBS
     def __convert_dependencies_ids_to_absolute(self):
         if not self.task_dependency:
             return []
