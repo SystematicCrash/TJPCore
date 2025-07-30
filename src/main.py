@@ -61,9 +61,9 @@ def define_resources_accounts(resources):
     accounts = {}
     for resource in resources:
         account = {}
-        source = resource['_source']
-        account_id = source['cost_center']
-        if not account_id in accounts.keys():
+        source = resource.get('_source', {})
+        account_id = source.get('cost_center', '')
+        if account_id and not account_id in accounts.keys():
             account['name'] = f"Costs of {account_id}"
             account['aggregate'] = 'resources'
             accounts[account_id] = account
@@ -118,18 +118,18 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     body_template = env.get_template("main.j2")
     with ThreadPoolExecutor(max_workers=15) as executor:
         try:
-            info = executor.submit(generate_project_info, data_map.get('wbs_info', []))
-            calendar = executor.submit(generate_calendars, data_map.get('wbs_calendars', []))
+            info = executor.submit(generate_project_info, data_map.get('info', []))
+            calendar = executor.submit(generate_calendars, data_map.get('calendar', []))
             scenarios = executor.submit(define_scenarios)
-            resource_types = executor.submit(fetch_resource_types, data_map.get('wbs_resources', []))
-            # resources = executor.submit(generate_resources, data_map.get("wbs_resources", []), resource_types.result())
-            tasks = executor.submit(generate_tasks, data_map.get("wbs_tasks", []))
+            resource_types = executor.submit(fetch_resource_types, data_map.get('resource', []))
+            resources = executor.submit(generate_resources, data_map.get("resource", []), resource_types.result())
+            tasks = executor.submit(generate_tasks, data_map.get("task", []))
             tasks_extends = executor.submit(define_tasks_extends)
             resources_extends = executor.submit(define_resources_extends)
-            flags = executor.submit(define_flags, tasks=data_map.get('wbs_tasks', []),
-                                    resources=data_map.get('wbs_resources', []))
+            flags = executor.submit(define_flags, tasks=data_map.get('task', []),
+                                    resources=data_map.get('resource', []))
             tasks_accounts = executor.submit(define_tasks_accounts, tasks.result())
-            resources_accounts = executor.submit(define_resources_accounts, data_map.get("wbs_resources", []))
+            resources_accounts = executor.submit(define_resources_accounts, data_map.get("resource", []))
         except Exception as e:
             colorized_print("red", f"{e}")
             traceback.print_exc()
@@ -145,7 +145,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         resources_extends=resources_extends.result(),
         flags=flags.result(),
         accounts=tasks_accounts.result() | resources_accounts.result(),
-        resources=[],
+        resources=resources.result(),
         tasks=tasks.result(),
         reports=report_path,
     )

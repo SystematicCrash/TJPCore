@@ -92,7 +92,7 @@ class Task:
 
     """ Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
     def __convert_dependencies_ids_to_absolute(self):
-        if not self.task_dependency:
+        if not self.task_dependency or type(self.task_dependency) != list:
             return []
         absolute_dependencies_ids = set()
         for dependency_id in self.task_dependency:

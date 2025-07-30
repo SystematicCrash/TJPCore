@@ -37,23 +37,14 @@ shift projectDefaultShift "project default shift" {
 
 # ------------Flags-------------
 flags
-task_5,
-task_5_1,
-human,
-equipment,
-Heavy Equipment,
-none,
 site_team,
-HeavyMachines,
-task_1_1,
-task_2_1,
-task_1,
-task_2,
-task_3_1,
-task_3,
-task_4,
+site_cleaning,
+site_preparation,
+project_management,
+foundation,
+human,
 management,
-task_1_2
+equipment
 # ------------END-------------
 
 
@@ -62,9 +53,6 @@ account cost "costs of project" {
     account task_1Costs "Costs of task_1" { aggregate tasks }
     account task_2Costs "Costs of task_2" { aggregate tasks }
     account task_3Costs "Costs of task_3" { aggregate tasks }
-    account task_4Costs "Costs of task_4" { aggregate tasks }
-    account task_5Costs "Costs of task_5" { aggregate tasks }
-    account CC123 "Costs of CC123" { aggregate resources }
     account engineering "Costs of engineering" { aggregate resources }
     account construction "Costs of construction" { aggregate resources }
 
@@ -75,70 +63,92 @@ balance cost rev
 
 
 # ------------Resources-------------
+resource human "resources of type human" {
+    flags human
+    resource res_engineer "مهندس پروژه" {
+        rate 10000.0
+        OvertimeCost 15000.0
+        AccrueAt "prorated"
+        Type "human"
+        efficiency 1.0
+        leaveallowances annual 2025-01-01 10m
+        workinghours sat-wed 08:00-16:00
+        leaves annual 2025-08-06
+        flags management
+        chargeset engineering
+    }
+    resource res_laborer "کارگر ساختمانی" {
+        rate 5000.0
+        OvertimeCost 7500.0
+        AccrueAt "prorated"
+        Type "human"
+        efficiency 5.0
+        leaveallowances annual 2025-01-01 7m
+        workinghours sat-wed 08:00-16:00
+        leaves annual 2025-08-06
+        flags site_team
+        chargeset construction
+    }
+
+}
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        workinghours sat-wed 08:00-16:00
+        leaves annual 2025-08-06
+        flags equipment
+        chargeset construction
+    }
+
+}
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
     task task_1 "مدیریت پروژه" {
-    period 2025-06-01 - 2025-11-27
-    allocate p, r, o, j, e, c, t, _, m, a, n, a, g, e, r
-    minstart 2025-06-01
-    Deadline 2025-11-27
+    period 2025-07-01 - 2025-12-28
+    allocate res_engineer
+    minstart 2025-07-01
+    Deadline 2025-12-31
     priority 1
-    flags none
+    flags project_management
     chargeset task_1Costs
-    charge 1000000.0 onend
-    note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت و گزارش‌دهی"
+    charge 5000000.0 onend
+    note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت، و گزارش‌دهی"
 
 }
     task task_2 "آماده‌سازی سایت" {
-    period 2025-07-31 - 2025-09-28
-    allocate s, i, t, e, _, m, a, n, a, g, e, r
-    depends t, a, s, k, _, 1, ., t, a, s, k, _, 1, _, 2, ., t, a, s, k, _, 1, _, 2, _, 1
-    minstart 2025-07-31
-    Deadline 2025-09-28
-    priority 1
-    flags none
+    period 2025-07-13 - 2025-08-11
+    allocate res_laborer, res_excavator
+    depends task_1.1.2
+     {
+    onend
+    }
+    minstart 2025-07-13
+    Deadline 2025-08-15
+    priority 2
+    flags site_preparation
     chargeset task_2Costs
-    charge 300000.0 onend
-    note "آماده‌سازی محل پروژه برای ساخت"
+    charge 2000000.0 onend
+    note "آماده‌سازی زمین برای شروع ساخت"
 
 }
-    task task_3 "اجرای اسکلت ساختمان" {
-    period 2025-09-29 - 2026-01-26
-    allocate c, i, v, i, l, _, e, n, g, i, n, e, e, r
-    minstart 2025-09-29
-    Deadline 2026-01-26
-    priority 1
-    flags none
+    task task_3 "فونداسیون" {
+    period 2025-08-12 - 2025-09-10
+    allocate res_engineer, res_laborer
+    minstart 2025-08-12
+    Deadline 2025-09-15
+    priority 3
+    flags foundation
     chargeset task_3Costs
-    charge 1000000.0 onend
-    note "اجرای اسکلت اصلی ساختمان"
-
-}
-    task task_4 "سفت‌کاری" {
-    period 2025-11-08 - 2026-02-05
-    allocate c, i, v, i, l, _, e, n, g, i, n, e, e, r
-    minstart 2025-11-08
-    Deadline 2026-02-05
-    priority 1
-    flags none
-    chargeset task_4Costs
-    charge 800000.0 onend
-    note "اجرای سفت‌کاری ساختمان"
-
-}
-    task task_5 "تأسیسات مکانیکی و برقی" {
-    period 2026-02-06 - 2026-04-06
-    allocate m, e, c, h, a, n, i, c, a, l, _, e, n, g, i, n, e, e, r
-    minstart 2026-02-06
-    Deadline 2026-04-06
-    priority 1
-    flags none
-    chargeset task_5Costs
-    charge 600000.0 onend
-    note "نصب تأسیسات مکانیکی و برقی"
+    charge 2500000.0 onend
+    note "اجرای فونداسیون ساختمان شامل آرماتوربندی، قالب‌بندی و بتن‌ریزی"
 
 }
 # ------------END-------------

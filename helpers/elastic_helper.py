@@ -1,3 +1,5 @@
+import traceback
+
 from elasticsearch import Elasticsearch, helpers
 from helpers.utility import colorized_print
 from helpers.io_helpers import logger
@@ -38,17 +40,19 @@ def fetch_index(es: Elasticsearch, index):
 
 
 # Fetching from all indexes
-def fetch_all_data(es: Elasticsearch, indexes):
+def fetch_all_data(es: Elasticsearch, indexes: dict):
     with ThreadPoolExecutor(max_workers=10) as executor:
         try:
             results = {}
             data_map = {}
-            for index in indexes:
-                results[index] = executor.submit(fetch_index, es, index)
-            for index_name, index_data in results.items():
-                data_map[index_name] = index_data.result()
+            print(indexes)
+            for obj, index_name in indexes.items():
+                results[obj] = executor.submit(fetch_index, es, index_name)
+            for obj, index_data in results.items():
+                data_map[obj] = index_data.result()
             return data_map
         except Exception as e:
             colorized_print("red", f"\nError while fetching data from Elasticsearch!\nDetails:{e}")
             logger(f"{e}", "error", console=False)
+            traceback.print_exc()
             exit(1)

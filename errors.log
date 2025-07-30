@@ -122,3 +122,34 @@ ERROR: string index out of range - 2025-07-28 17:03:40
 ERROR: tjp_outputs/project.tjp:44: Error: Unexpected token 'Equipment' found. Expecting :eof
 Heavy Equipment
  - 2025-07-29 09:12:13
+ERROR: string index out of range - 2025-07-30 20:02:36
+ERROR: string index out of range - 2025-07-30 20:03:19
+ERROR: string index out of range - 2025-07-30 20:04:21
+ERROR: string index out of range - 2025-07-30 20:04:34
+ERROR: string index out of range - 2025-07-30 20:05:03
+ERROR: tjp_outputs/project.tjp:76: Error: p is not a defined resource.
+    allocate p
+ - 2025-07-30 20:07:53
+ERROR: Error: No tasks defined
+ - 2025-07-30 20:09:47
+ERROR: tjp_outputs/project.tjp:44: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+    account 1
+ - 2025-07-30 20:11:47
+ERROR: too many values to unpack (expected 2) - 2025-07-30 20:15:51
+ERROR: too many values to unpack (expected 2) - 2025-07-30 20:16:49
+ERROR: too many values to unpack (expected 2) - 2025-07-30 20:17:23
+ERROR: too many values to unpack (expected 2) - 2025-07-30 20:17:37
+ERROR: tjp_outputs/project.tjp:73: Error: Unknown account engineering
+        chargeset engineering
+ - 2025-07-30 20:18:01
+ERROR: Error: No tasks defined
+ - 2025-07-30 20:19:52
+ERROR: tjp_outputs/project.tjp:53: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+    account 1
+ - 2025-07-30 20:20:49
+ERROR: tjp_outputs/project.tjp:129: Error: Unexpected token '0.1' found. Expecting '}'
+    depends task_1.1
+ - 2025-07-30 20:38:06
+ERROR: tjp_outputs/project.tjp:129: Error: Unexpected token '0.1' found. Expecting '}'
+    depends task_1.1
+ - 2025-07-30 20:40:08
