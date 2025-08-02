@@ -16,7 +16,8 @@ def day_to_an_abbreviation(days: str):
     return days
 
 
-def colorized_print(color: str, text: str):
+def colorized_tqdm_write(color: str, text: str):
+    from tqdm import tqdm
     colors = {
         'blue': Fore.BLUE,
         'red': Fore.RED,
@@ -32,12 +33,12 @@ def colorized_print(color: str, text: str):
         'light-yellow': Fore.LIGHTYELLOW_EX,
     }
     if color in colors:
-        print(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+        tqdm.write(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
     else:
         raise ValueError(f"{color} is not present in colors")
 
 
-def cast_string_fields_to_numbers(data_set: dict):
+def cast_string_fields_to_numeric_types(data_set: dict):
     INTEGER_REGEX = r'^[+-]?\d+$'
     FLOAT_REGEX = r'^[+-]?(?:\d+\.\d*|\.\d+|\d+\.\d+)(?:[eE][+-]?\d+)?$'
     for item in data_set:

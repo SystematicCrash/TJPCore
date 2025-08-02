@@ -1,7 +1,17 @@
+from __future__ import annotations
 from dataclasses import dataclass, field, fields
 from datetime import datetime
 from helpers.utility import day_to_an_abbreviation
 from sys import exit
+
+
+def _format_allow_leaves(resource: Resource):
+    if not resource.allowed_leave:
+        return
+    number = str(''.join(list(filter(lambda x: x.isdigit(), resource.allowed_leave))))
+    interval = 'd' if (resource.allowed_leave.__contains__("day")) \
+        else ('w' if (resource.allowed_leave.__contains__("week")) else 'm')
+    resource.allowed_leave = number + interval
 
 
 @dataclass
@@ -35,7 +45,6 @@ class Resource:
     def __post_init__(self):
         if self.es_doc:
             self.initializing(self.es_doc)
-            self.format_allow_leaves()
 
     def initializing(self, es_doc: dict):
         source = es_doc.get("_source", {})
@@ -50,15 +59,9 @@ class Resource:
                         exit(1)
                 setattr(self, f.name, value)
         self.resource_id = es_doc.get("_id", '')
+        _format_allow_leaves(self)
 
 
-    def format_allow_leaves(self):
-        if not self.allowed_leave:
-            return
-        number = str(''.join(list(filter(lambda x: x.isdigit(), self.allowed_leave))))
-        interval = 'd' if (self.allowed_leave.__contains__("day")) \
-            else ('w' if (self.allowed_leave.__contains__("week")) else 'm')
-        self.allowed_leave = number + interval
 
 
 # Generating resources

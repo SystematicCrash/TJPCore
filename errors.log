@@ -229,3 +229,193 @@ ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not 
  - 2025-08-02 15:37:11
 ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
  - 2025-08-02 15:40:05
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:59:29
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:21:45
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:26:13
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:30:41
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:31:52
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:32:18
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 16:35:27
+ERROR: tjp_outputs/project.tjp:132: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_1.task_1_1_2
+ - 2025-08-02 17:19:16
+ERROR: tjp_outputs/project.tjp:132: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_1.task_1_1_2
+ - 2025-08-02 17:25:28
+ERROR: tjp_outputs/project.tjp:132: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_2
+ - 2025-08-02 17:27:12
+ERROR: tjp_outputs/project.tjp:132: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_1
+ - 2025-08-02 17:27:26
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 17:27:57
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 17:32:25
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 17:50:34
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 18:08:08
+ERROR: Connection timed out - 2025-08-02 18:49:38
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 18:50:08
+ERROR: tjp_outputs/project.tjp:131: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_2
+ - 2025-08-02 19:09:51
+ERROR: tjp_outputs/project.tjp:131: Error in scenario plan: Task task_2 has unknown depends task_1.task_1_2
+ - 2025-08-02 19:10:22
+ERROR: Connection timed out - 2025-08-02 19:12:27
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:12:32
+ERROR: Connection timed out - 2025-08-02 19:13:47
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:13:59
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:16:13
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:28:45
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:34:15
+ERROR: tjp_outputs/project.tjp:119: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 19:36:47
+ERROR: too many values to unpack (expected 2) - 2025-08-02 19:43:02
+ERROR: Connection timed out - 2025-08-02 19:48:11
+ERROR: Connection timed out - 2025-08-02 19:49:06
+ERROR: Connection timed out - 2025-08-02 19:51:06
+ERROR: Connection timed out - 2025-08-02 19:52:11
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 19:54:11
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:02:35
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:02:47
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:09:35
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:10:08
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:23:47
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:24:17
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:28:25
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:28:50
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:44:55
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:46:07
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:46:24
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:46:24
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:47:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:341: Error: Report tasksGanttChart has output formats requested, but the file name is empty.
+ - 2025-08-02 20:47:37
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:48:08
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:48:24
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:48:24
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:51:04
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:51:04
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:52:18
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:52:18
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:53:50
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:54:08
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:54:08
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:54:42
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:54:42
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:55:38
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:55:38
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:55:56
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:56:14
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:56:31
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:56:31
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 20:58:12
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:58:50
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 20:58:50
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 21:01:42
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-02 21:01:56
+ERROR: 
+Failed to connect to Google Translator! used for project name translation - 2025-08-02 21:02:23
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:02:26
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:02:26
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:06:34
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:06:34
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:07:28
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 21:07:28

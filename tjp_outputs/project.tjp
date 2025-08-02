@@ -1,8 +1,9 @@
 # ----------------Project Header-------------
-project project_tehran "پروژه ساختمانی تهران" 2025-01-01 +546d {
+project project_tehran "Tehran Construction Project" 2025-01-01 +546d {
     timezone "Asia/Tehran"
     currency "IRR"
     now 2025-05-26
+    workinghours sat-wed 08:00-16:00
 
     scenario plan "Planned" {
         scenario delayed "starts with delay"
@@ -27,6 +28,7 @@ project project_tehran "پروژه ساختمانی تهران" 2025-01-01 +546d
 # ------------Shifts-------------
 shift projectDefaultShift "project default shift" {
     timezone "Asia/Tehran"
+    workinghours sat-wed 08:00-16:00
 }
 # ------------END-------------
 
@@ -40,14 +42,14 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
+equipment,
+foundation,
+human,
+site_cleaning,
+site_preparation,
 project_management,
 site_team,
-equipment,
-site_preparation,
-management,
-site_cleaning,
-foundation,
-human
+management
 # ------------END-------------
 
 
@@ -66,21 +68,6 @@ balance cost rev
 
 
 # ------------Resources-------------
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        efficiency 2.0
-        workinghours sat-wed 08:00-16:00
-        leaves annual 2025-08-06
-        flags equipment
-        chargeset construction
-    }
-
-}
 resource human "resources of type human" {
     flags human
     resource res_engineer "مهندس پروژه" {
@@ -90,7 +77,7 @@ resource human "resources of type human" {
         Type "human"
         efficiency 1.0
         leaveallowances annual 2025-01-01 10m
-        workinghours sat-wed 08:00-16:00
+        shifts projectDefaultShift
         leaves annual 2025-08-06
         flags management
         chargeset engineering
@@ -102,9 +89,24 @@ resource human "resources of type human" {
         Type "human"
         efficiency 5.0
         leaveallowances annual 2025-01-01 7m
-        workinghours sat-wed 08:00-16:00
+        shifts projectDefaultShift
         leaves annual 2025-08-06
         flags site_team
+        chargeset construction
+    }
+
+}
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        shifts projectDefaultShift
+        leaves annual 2025-08-06
+        flags equipment
         chargeset construction
     }
 
@@ -116,7 +118,6 @@ resource human "resources of type human" {
 # ------------Tasks-------------
 task task_1 "مدیریت پروژه" {
     period 2025-07-01 - 2025-12-28
-    allocate res_engineer
     minstart 2025-07-01
     Deadline 2025-12-31
     priority 1
@@ -134,6 +135,8 @@ task task_1 "مدیریت پروژه" {
 
         task task_1_1_1 "برنامه‌ریزی اولیه اهداف" {
             period 2025-07-01 - 2025-07-03
+            purge allocate
+            allocate res_engineer
             minstart 2025-07-01
             Deadline 2025-07-04
             charge 10000.0 onend
@@ -153,6 +156,8 @@ task task_1 "مدیریت پروژه" {
 
         task task_1_2_1 "تنظیم اولیه گانت" {
             period 2025-07-06 - 2025-07-08
+            purge allocate
+            allocate res_engineer
             purge depends
             minstart 2025-07-06
             Deadline 2025-07-09
@@ -164,7 +169,6 @@ task task_1 "مدیریت پروژه" {
 }
 task task_2 "آماده‌سازی سایت" {
     period 2025-07-13 - 2025-08-11
-    allocate res_laborer, res_excavator
     depends task_1.task_1_2
     { onend }
     minstart 2025-07-13
@@ -177,8 +181,6 @@ task task_2 "آماده‌سازی سایت" {
 
     task task_2_1 "حذف گیاهان و موانع" {
         period 2025-07-13 - 2025-07-17
-        purge allocate
-        allocate res_laborer
         minstart 2025-07-13
         Deadline 2025-07-18
         charge 200000.0 onend
@@ -186,6 +188,8 @@ task task_2 "آماده‌سازی سایت" {
 
         task task_2_1_1 "شناسایی موانع" {
             period 2025-07-13 - 2025-07-15
+            purge allocate
+            allocate res_laborer
             purge depends
             minstart 2025-07-13
             Deadline 2025-07-16
@@ -199,7 +203,6 @@ task task_2 "آماده‌سازی سایت" {
 }
 task task_3 "فونداسیون" {
     period 2025-08-12 - 2025-09-10
-    allocate res_engineer, res_laborer
     minstart 2025-08-12
     Deadline 2025-09-15
     priority 3
@@ -210,8 +213,6 @@ task task_3 "فونداسیون" {
 
     task task_3_1 "آرماتوربندی پی" {
         period 2025-08-12 - 2025-08-21
-        purge allocate
-        allocate res_laborer
         minstart 2025-08-12
         Deadline 2025-08-23
         charge 500000.0 onend
@@ -219,6 +220,8 @@ task task_3 "فونداسیون" {
 
         task task_3_1_1 "تهیه نقشه آرماتور" {
             period 2025-08-12 - 2025-08-14
+            purge allocate
+            allocate res_laborer
             minstart 2025-08-12
             Deadline 2025-08-15
             charge 50000.0 onend
@@ -228,8 +231,6 @@ task task_3 "فونداسیون" {
     }
     task task_3_2 "قالب‌بندی پی" {
         period 2025-08-22 - 2025-08-26
-        purge allocate
-        allocate res_laborer
         purge depends
         depends task_3.task_3_1
         { onend }
@@ -240,6 +241,8 @@ task task_3 "فونداسیون" {
 
         task task_3_2_1 "تهیه مواد قالب‌بندی" {
             period 2025-08-22 - 2025-08-24
+            purge allocate
+            allocate res_laborer
             purge depends
             minstart 2025-08-22
             Deadline 2025-08-25
@@ -250,8 +253,6 @@ task task_3 "فونداسیون" {
     }
     task task_3_3 "بتن‌ریزی پی" {
         period 2025-08-27 - 2025-09-02
-        purge allocate
-        allocate res_laborer
         purge depends
         depends task_3.task_3_2
         { onend }
@@ -262,6 +263,8 @@ task task_3 "فونداسیون" {
 
         task task_3_3_1 "آماده‌سازی بتن" {
             period 2025-08-27 - 2025-08-29
+            purge allocate
+            allocate res_laborer
             purge depends
             minstart 2025-08-27
             Deadline 2025-08-30
@@ -272,8 +275,6 @@ task task_3 "فونداسیون" {
     }
     task task_3_4 "عمل‌آوری بتن" {
         period 2025-09-03 - 2025-09-07
-        purge allocate
-        allocate res_laborer
         purge depends
         depends task_3.task_3_3
         { onend }
@@ -284,6 +285,8 @@ task task_3 "فونداسیون" {
 
         task task_3_4_1 "نظارت بر عمل‌آوری" {
             period 2025-09-03 - 2025-09-05
+            purge allocate
+            allocate res_laborer
             purge depends
             minstart 2025-09-03
             Deadline 2025-09-06
@@ -294,8 +297,6 @@ task task_3 "فونداسیون" {
     }
     task task_3_5 "باز کردن قالب‌ها" {
         period 2025-09-08 - 2025-09-10
-        purge allocate
-        allocate res_laborer
         purge depends
         depends task_3.task_3_4
         { onend }
@@ -306,6 +307,8 @@ task task_3 "فونداسیون" {
 
         task task_3_5_1 "بررسی قالب‌ها" {
             period 2025-09-08 - 2025-09-09
+            purge allocate
+            allocate res_laborer
             purge depends
             minstart 2025-09-08
             Deadline 2025-09-10

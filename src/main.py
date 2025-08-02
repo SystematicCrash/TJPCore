@@ -8,7 +8,7 @@ from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from helpers.utility import colorized_print, cast_string_fields_to_numbers, progress_bar
+from helpers.utility import colorized_tqdm_write, cast_string_fields_to_numeric_types, progress_bar
 from helpers.io_helpers import logger, read_csv, error_register
 from elasticsearch import Elasticsearch
 import time
@@ -133,9 +133,9 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             tasks_accounts = executor.submit(define_tasks_accounts, tasks.result())
             resources_accounts = executor.submit(define_resources_accounts, data_map.get("resource", []))
         except Exception as e:
-            colorized_print("red", f"{e}")
-            traceback.print_exc()
-            logger(f"{e}", "error", console=False)
+            message = f"Failed to generate tjp file!\nDetails: {e}"
+            colorized_tqdm_write("red", message)
+            logger(message, "error", console=False)
             exit(1)
 
     report_path = get_config("paths.reports")
@@ -165,39 +165,39 @@ def indexing_reports(connection: Elasticsearch):
     with ThreadPoolExecutor(max_workers=10) as executor:
         futures = {}
         for k, v in reports_result.items():
-            futures[k] = executor.submit(cast_string_fields_to_numbers, v)
+            futures[k] = executor.submit(cast_string_fields_to_numeric_types, v)
         reports_result = {k: v.result() for k,v in futures.items()}
         for report_name, data in reports_result.items():
-            index_name = report_name.replace("_report", "")
-            for index in get_config("report_indexes"):
-                if index.__contains__(index_name):
-                    executor.submit(write_on_index, connection, data, index)
+            for component, index_name in dict(get_config("report_indexes")).items():
+                if report_name.__contains__(component):
+                    executor.submit(write_on_index, connection, data, index_name)
 
 
 # Running
 def main():
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
-        colorized_print('blue', content)
+        colorized_tqdm_write('blue', content)
     animation_thread = threading.Thread(target=progress_bar)
     animation_thread.daemon = True
     animation_thread.start()
     connection = make_connection()
-    utility.progress += 100
+    utility.progress += 200
     data_map = fetch_all_data(connection, get_config("data_indexes"))
-    utility.progress += 100
+    utility.progress += 200
     generate_tjp(data_map, get_config("paths.tjp_output"))
     utility.progress += 200
     result = subprocess.run("tj3 " + get_config("paths.tjp_output"),
                             shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8')
     utility.progress += 200
     if result.returncode != 0:
-        colorized_print('red', f"Failed to finish processing! Because of below errors:\n{result.stderr}")
-        error_register(connection, result.stderr)
-        logger(f"{result.stderr}", "error", console=False)
+        message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
+        colorized_tqdm_write('red', message)
+        error_register(connection, message)
+        logger(message, "error", console=False)
         exit(1)
     utility.progress += 200
-    # indexing_reports(connection)
+    indexing_reports(connection)
     utility.progress += 200
     utility.end_of_process = True
 
@@ -206,6 +206,8 @@ if __name__ == "__main__":
     start = time.time()
     main()
     duration = time.time() - start
-    colorized_print("light-green", "...Done!")
-    colorized_print('light-yellow', f"Duration: {duration:.2f}s")
+    print('Done!')
+    print(f'Duration: {duration}s')
+    colorized_tqdm_write("light-green", "...Done!")
+    colorized_tqdm_write('light-yellow', f"Duration: {duration:.2f}s")
 

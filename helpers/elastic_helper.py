@@ -1,7 +1,7 @@
 import traceback
-
+from tqdm import tqdm
 from elasticsearch import Elasticsearch, helpers
-from helpers.utility import colorized_print
+from helpers.utility import colorized_tqdm_write
 from helpers.io_helpers import logger
 from concurrent.futures import ThreadPoolExecutor
 from helpers.config_helper import get_config
@@ -28,8 +28,9 @@ def write_on_index(connection: Elasticsearch, data, index_name):
             }]
             helpers.bulk(connection, actions)
     except Exception as e:
-        colorized_print(f"red", f"\nFailed to write data to index named ({index_name}).\nDetails: {e}")
-        logger(f"{e}", mode="error", console=False)
+        message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
+        colorized_tqdm_write(f"red", message)
+        logger(message, mode="error", console=False)
         exit(1)
 
 
@@ -51,7 +52,7 @@ def fetch_all_data(es: Elasticsearch, indexes: dict):
                 data_map[obj] = index_data.result()
             return data_map
         except Exception as e:
-            colorized_print("red", f"\nError while fetching data from Elasticsearch!\nDetails:{e}")
-            logger(f"{e}", "error", console=False)
-            traceback.print_exc()
+            message = f"\nError while fetching data from Elasticsearch!\nDetails: {e}"
+            colorized_tqdm_write("red", message)
+            logger(message, "error", console=False)
             exit(1)
