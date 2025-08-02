@@ -61,4 +61,5 @@ def generate_project_info(info):
         except Exception as e:
             print("Failed to connect to Google Translator! used for project name translation")
         info_objs.append(info)
+    print('info done') # TODO debug log
     return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

@@ -4,6 +4,51 @@ from sys import exit
 import re
 
 
+def _find_parent_id(task_id: str):
+    code = ''.join(re.findall(r'\d+', task_id))
+    if len(code) == 1:
+        return None
+    if len(code) == 2:
+        return 'task_' + code[0]
+    else:
+        code = code[:2]
+        return 'task_' + '_'.join(code)
+
+
+""" Identifying task level. level-one = top-level, level-two = mid-level, level-three = low-level """
+def _find_level(task_code: str):
+    code = task_code.replace('.', '')
+    if len(code) == 1:
+        return 1
+    elif len(code) == 2:
+        return 2
+    elif len(code) == 3:
+        return 3
+    return -1
+
+
+""" Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
+
+def _convert_dependencies_ids_to_absolute(task_dependency: list):
+    if not task_dependency:
+        return []
+    absolute_dependencies_ids = set()
+    for dependency_id in task_dependency:
+        parents = []
+        parent_id = _find_parent_id(dependency_id)
+        if not parent_id:
+            continue
+        parents.append(parent_id)
+        while True:
+            parent_id = _find_parent_id(parent_id)
+            if not parent_id:
+                break
+            parents.append(parent_id)
+        absolute_dependencies_ids.add('.'.join(parents[::-1]) + '.' + dependency_id)
+        print(absolute_dependencies_ids)
+    return list(absolute_dependencies_ids)
+
+
 @dataclass
 class Task:
     task_level: int = 0
@@ -66,46 +111,6 @@ class Task:
         code = self.task_code.replace('.', '')
         return len(code) == 1
 
-    """ Specifying task's parent ID based on task_code """
-
-    def __find_parent_id(self):
-        if not self.__has_parent():
-            return ''
-        code = self.task_code.replace('.', '')
-        if len(code) == 2:
-            return 'task_' + code[0]
-        else:
-            code = code[:2]
-            return 'task_' + '_'.join(code)
-
-    """ Identifying task level. level-one = top-level, level-two = mid-level, level-three = low-level """
-
-    def __find_level(self):
-        code = self.task_code.replace('.', '')
-        if len(code) == 1:
-            return 1
-        elif len(code) == 2:
-            return 2
-        elif len(code) == 3:
-            return 3
-        return -1
-
-    """ Converting actual IDs to absolutes, task_3_1_2 --> task_3.task_3_1_1.task_3_1_2 """
-    def __convert_dependencies_ids_to_absolute(self):
-        if not self.task_dependency or type(self.task_dependency) != list:
-            return []
-        absolute_dependencies_ids = set()
-        for dependency_id in self.task_dependency:
-            code = ''.join(re.findall(r'\d+', dependency_id))
-            if len(code) == 1:
-                continue
-            if len(code) == 2:
-                absolute_dependencies_ids.add('task_' + code[0] + '.' + dependency_id)
-            else:
-                absolute_dependencies_ids.add('task_' + code[0] + '.' + 'task_' + '_'.join(code[:2]) + '.' + dependency_id)
-        return list(absolute_dependencies_ids)
-
-
     """ Initialing class fields with elastic document values """
 
     def initializing(self, es_doc: dict):
@@ -120,10 +125,9 @@ class Task:
                         print("Invalid date format:", value)
                         exit(1)
                 setattr(self, f.name, value)
-        self.task_id = es_doc.get("_id", '')
-        self.task_level = self.__find_level()
-        self.task_parent_id = self.__find_parent_id()
-        self.task_dependency = self.__convert_dependencies_ids_to_absolute()
+        self.task_level = _find_level(self.task_code)
+        self.task_parent_id = _find_parent_id(self.task_id)
+        self.task_dependency = _convert_dependencies_ids_to_absolute(self.task_dependency)
         self.sorting_code = int(self.task_code.replace(".", ""))
         """ Task unique account ID """
         self.chargeset = self.task_id + "Costs"
@@ -172,4 +176,5 @@ def generate_tasks(tasks):
             if task.task_parent_id:
                 link_to_parent(tasks_objs.get(task.task_level - 1, {}).get(task.task_parent_id), task)
 
+    print('tasks done') # TODO debug log
     return tasks_objs.get(1).values()

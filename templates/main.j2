@@ -58,19 +58,19 @@ resource {{parent_resource['id']}} "{{parent_resource['name']}}" {
 # ------------Tasks-------------
 {% import "tasks.j2" as task_builder %}
 {% for level_one in tasks %}
-    {{ task_builder.define_task(level_one) | indent(4, False) }}
-    {% if level_one.sub_tasks %}
+{{ task_builder.define_task(level_one) | indent(4, False) }}
+{% if level_one.sub_tasks %}
     {% for level_two in level_one.sub_tasks %}
-        {{ task_builder.define_task(level_two) | indent(8, False) }}
-        {% if level_two.sub_tasks %}
-            {% for level_three in level_two.sub_tasks %}
-            {{  task_builder.define_task(level_three) | indent(12, False) }}
-            }
-            {%  endfor %}
-        {% endif %}
+    {{ task_builder.define_task(level_two) | indent(8, False) }}
+    {% if level_two.sub_tasks %}
+        {% for level_three in level_two.sub_tasks %}
+        {{  task_builder.define_task(level_three) | indent(12, False) }}
+        }
+        {%  endfor %}
+    {% endif %}
     }
     {% endfor %}
-    {% endif %}
+{% endif %}
 }
 {% endfor %}
 # ------------END-------------

@@ -27,9 +27,8 @@ allocate {{ task.resource_assignment | join(', ') }}
 purge depends
 {% endif %}
 depends {{ task.task_dependency | join(', ') }}
-{% if task.dependency_type in ['onstart','onend'] %} {
-{{task.dependency_type}}
-}
+{% if task.dependency_type in ['onstart','onend'] %}
+{ {{task.dependency_type}} }
 {% endif %}
 {% endif %}
 {% if task.constraint_date and task.constraint_type %}

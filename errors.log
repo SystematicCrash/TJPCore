@@ -153,3 +153,58 @@ ERROR: tjp_outputs/project.tjp:129: Error: Unexpected token '0.1' found. Expecti
 ERROR: tjp_outputs/project.tjp:129: Error: Unexpected token '0.1' found. Expecting '}'
     depends task_1.1
  - 2025-07-30 20:40:08
+ERROR: tjp_outputs/project.tjp:56: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+    account 1
+ - 2025-08-02 11:51:15
+ERROR: tjp_outputs/project.tjp:132: Error: Unexpected token '0.1' found. Expecting '}'
+    depends task_1.1
+ - 2025-08-02 12:03:16
+ERROR: expected string or bytes-like object, got 'NoneType' - 2025-08-02 12:57:10
+ERROR: tjp_outputs/project.tjp:128: Error in scenario plan: Container task task_1.task_1_1 may not be marked as a milestone.
+ - 2025-08-02 12:59:16
+ERROR: tjp_outputs/project.tjp:135: Error in scenario plan: Task task_1.task_1_1.task_1_1_1 cannot depend on parent task_1.task_1_1
+ - 2025-08-02 13:03:39
+ERROR: tjp_outputs/project.tjp:156: Error in scenario plan: Task task_1.task_1_2.task_1_2_1 cannot depend on parent task_1.task_1_2
+ - 2025-08-02 13:04:45
+ERROR: tjp_outputs/project.tjp:190: Error in scenario plan: Task task_2.task_2_1.task_2_1_1 cannot depend on parent task_2.task_2_1
+ - 2025-08-02 13:05:15
+ERROR: tjp_outputs/project.tjp:222: Error in scenario plan: Task task_3.task_3_1.task_3_1_1 cannot depend on parent task_3.task_3_1
+ - 2025-08-02 13:05:39
+ERROR: tjp_outputs/project.tjp:245: Error in scenario plan: Task task_3.task_3_2.task_3_2_1 cannot depend on parent task_3.task_3_2
+ - 2025-08-02 13:05:57
+ERROR: tjp_outputs/project.tjp:268: Error in scenario plan: Task task_3.task_3_3.task_3_3_1 cannot depend on parent task_3.task_3_3
+ - 2025-08-02 13:06:16
+ERROR: tjp_outputs/project.tjp:291: Error in scenario plan: Task task_3.task_3_4.task_3_4_1 cannot depend on parent task_3.task_3_4
+ - 2025-08-02 13:06:39
+ERROR: tjp_outputs/project.tjp:314: Error in scenario plan: Task task_3.task_3_5.task_3_5_1 cannot depend on parent task_3.task_3_5
+ - 2025-08-02 13:06:58
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:07:17
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:10:01
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:10:41
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:11:33
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:12:05
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:12:59
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:13:54
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:14:40
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:15:05
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:16:21
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:16:47
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:19:20
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:19:58
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:21:23
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 13:21:49

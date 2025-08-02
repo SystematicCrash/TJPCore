@@ -44,4 +44,5 @@ def generate_calendars(calendars):
         calendar.working_days_exceptions.append("2025-08-24")
         calendar.working_days = day_to_an_abbreviation(calendar.working_days)
         calendars_objs.append(calendar)
+    print('calendar done') # TODO debug log
     return calendars_objs[0] if len(calendars_objs) != 0 else Calender()

@@ -45,7 +45,6 @@ def fetch_all_data(es: Elasticsearch, indexes: dict):
         try:
             results = {}
             data_map = {}
-            print(indexes)
             for obj, index_name in indexes.items():
                 results[obj] = executor.submit(fetch_index, es, index_name)
             for obj, index_data in results.items():
