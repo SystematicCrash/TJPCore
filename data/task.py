@@ -45,7 +45,6 @@ def _convert_dependencies_ids_to_absolute(task_dependency: list):
                 break
             parents.append(parent_id)
         absolute_dependencies_ids.add('.'.join(parents[::-1]) + '.' + dependency_id)
-        print(absolute_dependencies_ids)
     return list(absolute_dependencies_ids)
 
 
@@ -175,6 +174,4 @@ def generate_tasks(tasks):
         for task in tasks_objs[level].values():
             if task.task_parent_id:
                 link_to_parent(tasks_objs.get(task.task_level - 1, {}).get(task.task_parent_id), task)
-
-    print('tasks done') # TODO debug log
     return tasks_objs.get(1).values()

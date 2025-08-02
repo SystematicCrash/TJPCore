@@ -74,5 +74,4 @@ def generate_resources(resources: list, types: set):
                 resource.working_days = day_to_an_abbreviation(resource.working_days)
                 parent_res['child_resources'].append(resource)
         parent_resources.append(parent_res)
-    print('resources done') # TODO debug log
     return parent_resources

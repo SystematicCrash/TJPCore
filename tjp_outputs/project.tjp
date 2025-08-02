@@ -1,5 +1,5 @@
 # ----------------Project Header-------------
-project project_tehran "Tehran Construction Project" 2025-01-01 +546d {
+project project_tehran "پروژه ساختمانی تهران" 2025-01-01 +546d {
     timezone "Asia/Tehran"
     currency "IRR"
     now 2025-05-26
@@ -40,14 +40,14 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-site_cleaning,
-human,
-management,
 project_management,
-equipment,
 site_team,
+equipment,
+site_preparation,
+management,
+site_cleaning,
 foundation,
-site_preparation
+human
 # ------------END-------------
 
 
@@ -66,6 +66,21 @@ balance cost rev
 
 
 # ------------Resources-------------
+resource equipment "resources of type equipment" {
+    flags equipment
+    resource res_excavator "بیل مکانیکی" {
+        rate 20000.0
+        OvertimeCost 30000.0
+        AccrueAt "prorated"
+        Type "equipment"
+        efficiency 2.0
+        workinghours sat-wed 08:00-16:00
+        leaves annual 2025-08-06
+        flags equipment
+        chargeset construction
+    }
+
+}
 resource human "resources of type human" {
     flags human
     resource res_engineer "مهندس پروژه" {
@@ -90,21 +105,6 @@ resource human "resources of type human" {
         workinghours sat-wed 08:00-16:00
         leaves annual 2025-08-06
         flags site_team
-        chargeset construction
-    }
-
-}
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        efficiency 2.0
-        workinghours sat-wed 08:00-16:00
-        leaves annual 2025-08-06
-        flags equipment
         chargeset construction
     }
 
@@ -153,6 +153,7 @@ task task_1 "مدیریت پروژه" {
 
         task task_1_2_1 "تنظیم اولیه گانت" {
             period 2025-07-06 - 2025-07-08
+            purge depends
             minstart 2025-07-06
             Deadline 2025-07-09
             charge 15000.0 onend
@@ -185,6 +186,7 @@ task task_2 "آماده‌سازی سایت" {
 
         task task_2_1_1 "شناسایی موانع" {
             period 2025-07-13 - 2025-07-15
+            purge depends
             minstart 2025-07-13
             Deadline 2025-07-16
             purge flags
@@ -238,6 +240,7 @@ task task_3 "فونداسیون" {
 
         task task_3_2_1 "تهیه مواد قالب‌بندی" {
             period 2025-08-22 - 2025-08-24
+            purge depends
             minstart 2025-08-22
             Deadline 2025-08-25
             charge 30000.0 onend
@@ -259,6 +262,7 @@ task task_3 "فونداسیون" {
 
         task task_3_3_1 "آماده‌سازی بتن" {
             period 2025-08-27 - 2025-08-29
+            purge depends
             minstart 2025-08-27
             Deadline 2025-08-30
             charge 70000.0 onend
@@ -280,6 +284,7 @@ task task_3 "فونداسیون" {
 
         task task_3_4_1 "نظارت بر عمل‌آوری" {
             period 2025-09-03 - 2025-09-05
+            purge depends
             minstart 2025-09-03
             Deadline 2025-09-06
             charge 20000.0 onend
@@ -301,6 +306,7 @@ task task_3 "فونداسیون" {
 
         task task_3_5_1 "بررسی قالب‌ها" {
             period 2025-09-08 - 2025-09-09
+            purge depends
             minstart 2025-09-08
             Deadline 2025-09-10
             charge 15000.0 onend

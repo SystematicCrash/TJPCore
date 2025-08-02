@@ -32,7 +32,6 @@ def define_flags(tasks, resources):
             flags.add(source['resource_group'])
         if source.get('resource_type', ''):
             flags.add(source['resource_type'])
-    print('flags done') # TODO debug log
     return flags
 
 
@@ -42,7 +41,6 @@ def define_scenarios():
     # Default scenario = plan
     for scenario in get_config("scenarios"):
         scenarios.append({'id': scenario['id'], 'name': scenario['name']})
-    print('scenario done') # TODO debug log
     return scenarios
 
 
@@ -55,7 +53,6 @@ def define_tasks_accounts(tasks: list[Task]):
         account['name'] = f"Costs of {task.task_id}"
         account['aggregate'] = 'tasks'
         accounts[account_id] = account
-    print('tasks accounts done') # TODO debug log
     return accounts
 
 
@@ -70,7 +67,6 @@ def define_resources_accounts(resources):
             account['name'] = f"Costs of {account_id}"
             account['aggregate'] = 'resources'
             accounts[account_id] = account
-    print('resources accounts done') # TODO debug log
     return accounts
 
 
@@ -81,7 +77,6 @@ def fetch_resource_types(datamap):
         source = item['_source']
         if source.get("resource_type", ''):
             resource_types.add(source["resource_type"])
-    print('resource type done') # TODO debug log
     return resource_types
 
 
@@ -91,7 +86,6 @@ def define_tasks_extends():
     for extend in get_config("extends.tasks"):
         extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
 
-    print('tasks extends done')  # TODO debug log
     return extends
 
 
@@ -101,7 +95,6 @@ def define_resources_extends():
     for extend in get_config("extends.resources"):
         extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
 
-    print('resources extends done') # TODO debug log
     return extends
 
 
@@ -183,7 +176,6 @@ def indexing_reports(connection: Elasticsearch):
 
 # Running
 def main():
-    start = time.time()
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
         colorized_print('blue', content)
@@ -208,10 +200,12 @@ def main():
     # indexing_reports(connection)
     utility.progress += 200
     utility.end_of_process = True
+
+
+if __name__ == "__main__":
+    start = time.time()
+    main()
     duration = time.time() - start
     colorized_print("light-green", "...Done!")
     colorized_print('light-yellow', f"Duration: {duration:.2f}s")
 
-
-if __name__ == "__main__":
-    main()

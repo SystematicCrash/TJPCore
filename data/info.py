@@ -56,10 +56,9 @@ def generate_project_info(info):
     info_objs = []
     for doc in info:
         info = ProjectInfo(es_doc=doc)
-        try:
-            info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
-        except Exception as e:
-            print("Failed to connect to Google Translator! used for project name translation")
+        # try:
+        #     info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
+        # except Exception as e:
+        #     print("Failed to connect to Google Translator! used for project name translation")
         info_objs.append(info)
-    print('info done') # TODO debug log
     return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

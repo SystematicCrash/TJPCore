@@ -208,3 +208,24 @@ ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not 
  - 2025-08-02 13:21:23
 ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
  - 2025-08-02 13:21:49
+ERROR: tjp_outputs/project.tjp:120: Error: Unexpected token 'onstart' found. Expecting one of 'alternative', 'limits', 'select', 'persistent', 'mandatory', 'shift', 'shifts', '}'
+    { onstart
+ - 2025-08-02 14:52:00
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 14:53:30
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 14:56:21
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 14:56:41
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:00:31
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:01:06
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:03:15
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:27:46
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:37:11
+ERROR: tjp_outputs/project.tjp:117: Error in scenario plan: Task task_1 has not been marked as scheduled.
+ - 2025-08-02 15:40:05

@@ -22,13 +22,15 @@ purge allocate
 {% endif %}
 allocate {{ task.resource_assignment | join(', ') }}
 {% endif %}
-{% if not task.inherited_dependencies and task.task_dependency %}
+{% if not task.inherited_dependencies %}
 {% if task.task_level != 1 %}
 purge depends
 {% endif %}
+{% if task.task_dependency %}
 depends {{ task.task_dependency | join(', ') }}
 {% if task.dependency_type in ['onstart','onend'] %}
 { {{task.dependency_type}} }
+{% endif %}
 {% endif %}
 {% endif %}
 {% if task.constraint_date and task.constraint_type %}
