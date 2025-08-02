@@ -16,9 +16,9 @@ resource {{resource.resource_id}} "{{resource.resource_name}}" {
     {% if resource.resource_type %}
     Type "{{ resource.resource_type }}"
     {% endif %}
-{#    {% if resource.availability_date %}#}
-{#    Availability {{ resource.availability_date | join(' - ') }}#}
-{#    {% endif %}#}
+    {% if resource.availability_date %}
+    Availability {{ resource.availability_date | join(' - ') }}
+    {% endif %}
     {% if resource.max_units %}
     efficiency {{resource.max_units}}
     {% endif %}

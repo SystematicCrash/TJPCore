@@ -1,77 +1,77 @@
 {% macro define_task(task) %}
 task {{ task.task_id }} "{{ task.task_name }}" {
-{% if task.milestone %}
-milestone
-{% endif %}
-{% if task.task_start_date and task.task_end_date %}
-period {{ task.task_start_date }} - {{ task.task_end_date }}
-{% elif task.task_start_date %}
-start {{ task.task_start_date }}
-{% elif task.task_end_date %}
-end {{ task.task_end_date }}
-{% endif %}
-{% if task.work_duration > 0 %}
-duration {{ task.work_duration }}d
-{% endif %}
-{% if task.complete > 0 %}
-complete {{ task.complete }}
-{% endif %}
-{% if not task.inherited_resource_assignment and task.resource_assignment %}
-{% if task.task_level != 1 %}
-purge allocate
-{% endif %}
-allocate {{ task.resource_assignment | join(', ') }}
-{% endif %}
-{% if not task.inherited_dependencies %}
-{% if task.task_level != 1 %}
-purge depends
-{% endif %}
-{% if task.task_dependency %}
-depends {{ task.task_dependency | join(', ') }}
-{% if task.dependency_type in ['onstart','onend'] %}
-{ {{task.dependency_type}} }
-{% endif %}
-{% endif %}
-{% endif %}
-{% if task.constraint_date and task.constraint_type %}
-{% if task.constraint_type == 'start_no_earlier_than' %}
-minstart {{ task.constraint_date }}
-{% elif task.constraint_type == 'start_no_later_than' %}
-maxstart {{ task.constraint_date }}
-{% elif task.constraint_type == 'finish_no_earlier_than' %}
-minend {{ task.constraint_date }}
-{% elif task.constraint_type == 'finish_no_later_than' %}
-maxend {{ task.constraint_date }}
-{% elif task.constraint_type == 'must_finish_on' %}
-minend {{ task.constraint_date }}
-maxend {{ task.constraint_date }}
-{% elif task.constraint_type == 'must_start_on' %}
-minstart {{ task.constraint_date }}
-maxstart {{ task.constraint_date }}
-{% elif task.constraint_type == 'as_soon_as_possible' %}
-scheduling asap
-{% elif task.constraint_type == 'as_late_as_possible' %}
-{% endif %}
-{% endif %}
-{% if task.deadline %}
-Deadline {{task.deadline}}
-{% endif %}
-{% if not task.inherited_priority and task.priority %}
-priority {{ task.priority }}
-{% endif %}
-{% if not task.inherited_task_linking and task.task_linking %}
-{% if task.task_level != 1 %}
-purge flags
-{% endif %}
-flags {{ task.task_linking }}
-{% endif %}
-{% if not task.inherited_chargeset and task.chargeset %}
-chargeset {{ task.chargeset }}
-{% endif %}
-{% if task.task_cost %}
-charge {{ task.task_cost }} onend
-{% endif %}
-{% if task.summary_task %}
-note "{{ task.summary_task }}"
-{% endif %}
+    {% if task.milestone %}
+    milestone
+    {% endif %}
+    {% if task.task_start_date and task.task_end_date %}
+    period {{ task.task_start_date }} - {{ task.task_end_date }}
+    {% elif task.task_start_date %}
+    start {{ task.task_start_date }}
+    {% elif task.task_end_date %}
+    end {{ task.task_end_date }}
+    {% endif %}
+    {% if task.work_duration > 0 %}
+    duration {{ task.work_duration }}d
+    {% endif %}
+    {% if task.complete > 0 %}
+    complete {{ task.complete }}
+    {% endif %}
+    {% if not task.inherited_resource_assignment and task.resource_assignment %}
+    {% if task.task_level != 1 %}
+    purge allocate
+    {% endif %}
+    allocate {{ task.resource_assignment | join(', ') }}
+    {% endif %}
+    {% if not task.inherited_dependencies %}
+    {% if task.task_level != 1 %}
+    purge depends
+    {% endif %}
+    {% if task.task_dependency %}
+    depends {{ task.task_dependency | join(', ') }}
+    {% if task.dependency_type in ['onstart','onend'] %}
+    { {{task.dependency_type}} }
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% if task.constraint_date and task.constraint_type %}
+    {% if task.constraint_type == 'start_no_earlier_than' %}
+    minstart {{ task.constraint_date }}
+    {% elif task.constraint_type == 'start_no_later_than' %}
+    maxstart {{ task.constraint_date }}
+    {% elif task.constraint_type == 'finish_no_earlier_than' %}
+    minend {{ task.constraint_date }}
+    {% elif task.constraint_type == 'finish_no_later_than' %}
+    maxend {{ task.constraint_date }}
+    {% elif task.constraint_type == 'must_finish_on' %}
+    minend {{ task.constraint_date }}
+    maxend {{ task.constraint_date }}
+    {% elif task.constraint_type == 'must_start_on' %}
+    minstart {{ task.constraint_date }}
+    maxstart {{ task.constraint_date }}
+    {% elif task.constraint_type == 'as_soon_as_possible' %}
+    scheduling asap
+    {% elif task.constraint_type == 'as_late_as_possible' %}
+    {% endif %}
+    {% endif %}
+    {% if task.deadline %}
+    Deadline {{task.deadline}}
+    {% endif %}
+    {% if not task.inherited_priority and task.priority %}
+    priority {{ task.priority }}
+    {% endif %}
+    {% if not task.inherited_task_linking and task.task_linking %}
+    {% if task.task_level != 1 %}
+    purge flags
+    {% endif %}
+    flags {{ task.task_linking }}
+    {% endif %}
+    {% if not task.inherited_chargeset and task.chargeset %}
+    chargeset {{ task.chargeset }}
+    {% endif %}
+    {% if task.task_cost %}
+    charge {{ task.task_cost }} onend
+    {% endif %}
+    {% if task.summary_task %}
+    note "{{ task.summary_task }}"
+    {% endif %}
 {% endmacro %}

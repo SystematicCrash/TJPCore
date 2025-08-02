@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from helpers.utility import colorized_tqdm_write
+from helpers.utility import colorized_print
 from helpers.io_helpers import logger
 from deep_translator import GoogleTranslator
 from sys import exit
@@ -62,7 +62,7 @@ def generate_project_info(info):
             info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
         except Exception as e:
             message = "\nFailed to connect to Google Translator! used for project name translation"
-            colorized_tqdm_write('red', message)
+            colorized_print('red', message)
             logger(message, 'error', console=False)
         info_objs.append(info)
     return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

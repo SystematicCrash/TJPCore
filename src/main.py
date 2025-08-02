@@ -8,7 +8,7 @@ from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from helpers.utility import colorized_tqdm_write, cast_string_fields_to_numeric_types, progress_bar
+from helpers.utility import colorized_print, cast_string_fields_to_numeric_types, progress_bar
 from helpers.io_helpers import logger, read_csv, error_register
 from elasticsearch import Elasticsearch
 import time
@@ -134,7 +134,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             resources_accounts = executor.submit(define_resources_accounts, data_map.get("resource", []))
         except Exception as e:
             message = f"Failed to generate tjp file!\nDetails: {e}"
-            colorized_tqdm_write("red", message)
+            colorized_print("red", message)
             logger(message, "error", console=False)
             exit(1)
 
@@ -177,7 +177,7 @@ def indexing_reports(connection: Elasticsearch):
 def main():
     with open('banner.txt', 'r', encoding="utf-8") as f:
         content = f.read()
-        colorized_tqdm_write('blue', content)
+        colorized_print('blue', content)
     animation_thread = threading.Thread(target=progress_bar)
     animation_thread.daemon = True
     animation_thread.start()
@@ -192,7 +192,7 @@ def main():
     utility.progress += 200
     if result.returncode != 0:
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
-        colorized_tqdm_write('red', message)
+        colorized_print('red', message)
         error_register(connection, message)
         logger(message, "error", console=False)
         exit(1)
@@ -206,8 +206,6 @@ if __name__ == "__main__":
     start = time.time()
     main()
     duration = time.time() - start
-    print('Done!')
-    print(f'Duration: {duration}s')
-    colorized_tqdm_write("light-green", "...Done!")
-    colorized_tqdm_write('light-yellow', f"Duration: {duration:.2f}s")
+    colorized_print("light-green", "...Done!", tqdm_write=False)
+    colorized_print('light-yellow', f"Duration: {duration:.2f}s", tqdm_write=False)
 

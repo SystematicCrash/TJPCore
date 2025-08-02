@@ -4,14 +4,14 @@ import logging
 from concurrent.futures.thread import ThreadPoolExecutor
 from os import path
 from helpers.config_helper import get_config
-from helpers.utility import colorized_tqdm_write
+from helpers.utility import colorized_print
 from elasticsearch import Elasticsearch
 from uuid import uuid4
 
 def generating_json_file_from_csv(csv_path: str, json_path: str):
     if not path.exists(csv_path):
         message = f"Path does not exist: {csv_path} in config.json: paths->reports->csv_path"
-        colorized_tqdm_write('red', message)
+        colorized_print('red', message)
         exit(1)
     with open(csv_path, mode='r', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=';')

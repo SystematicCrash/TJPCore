@@ -42,14 +42,14 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-equipment,
 foundation,
-human,
-site_cleaning,
-site_preparation,
-project_management,
+management,
 site_team,
-management
+site_cleaning,
+project_management,
+human,
+equipment,
+site_preparation
 # ------------END-------------
 
 
@@ -75,6 +75,7 @@ resource human "resources of type human" {
         OvertimeCost 15000.0
         AccrueAt "prorated"
         Type "human"
+        Availability 2025-07-01
         efficiency 1.0
         leaveallowances annual 2025-01-01 10m
         shifts projectDefaultShift
@@ -87,6 +88,7 @@ resource human "resources of type human" {
         OvertimeCost 7500.0
         AccrueAt "prorated"
         Type "human"
+        Availability 2025-07-01
         efficiency 5.0
         leaveallowances annual 2025-01-01 7m
         shifts projectDefaultShift
@@ -103,6 +105,7 @@ resource equipment "resources of type equipment" {
         OvertimeCost 30000.0
         AccrueAt "prorated"
         Type "equipment"
+        Availability 2025-07-01
         efficiency 2.0
         shifts projectDefaultShift
         leaves annual 2025-08-06

@@ -419,3 +419,69 @@ Details: 1 document(s) failed to index. - 2025-08-02 21:07:28
 ERROR: 
 Failed to write data to index named (report_tasks).
 Details: 1 document(s) failed to index. - 2025-08-02 21:07:28
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:04:20
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:04:20
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:05:05
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:05:05
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:07:27
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:07:27
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:10:30
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:10:30
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:10:55
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:10:55
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:78: Error: Unexpected token '2' found. Expecting one of :DATE, '%'
+        Availability 2
+ - 2025-08-02 22:19:01
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:78: Error: Unexpected token '2' found. Expecting one of :DATE, '%'
+        Availability 2
+ - 2025-08-02 22:24:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:78: Error: Unexpected token '2' found. Expecting one of :DATE, '%'
+        Availability 2
+ - 2025-08-02 22:25:09
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:25:48
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:25:48
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:27:16
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:27:16
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:27:32
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:27:32
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:30:14
+ERROR: 
+Failed to write data to index named (report_tasks).
+Details: 1 document(s) failed to index. - 2025-08-02 22:30:14

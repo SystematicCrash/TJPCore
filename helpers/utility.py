@@ -16,8 +16,7 @@ def day_to_an_abbreviation(days: str):
     return days
 
 
-def colorized_tqdm_write(color: str, text: str):
-    from tqdm import tqdm
+def colorized_print(color: str, text: str, tqdm_write=True):
     colors = {
         'blue': Fore.BLUE,
         'red': Fore.RED,
@@ -33,7 +32,12 @@ def colorized_tqdm_write(color: str, text: str):
         'light-yellow': Fore.LIGHTYELLOW_EX,
     }
     if color in colors:
-        tqdm.write(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+        if tqdm_write:
+            from tqdm import tqdm
+            tqdm.write(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+        else:
+            print(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+
     else:
         raise ValueError(f"{color} is not present in colors")
 

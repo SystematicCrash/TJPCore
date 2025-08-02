@@ -4,38 +4,38 @@ project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.
     timezone "{{info.timezone}}"
     {% endif %}
     {% if info.financial_unit %}
-        {% if info.financial_unit == "ریال" %}
+    {% if info.financial_unit == "ریال" %}
     currency "IRR"
-        {% else %}
+    {% else %}
     currency "{{info.financial_unit}}"
-        {% endif %}
     {% endif %}
-        {% if info.status_date %}
+    {% endif %}
+    {% if info.status_date %}
     now {{info.status_date}}
-        {% endif %}
-        {% if calendar.working_days and calendar.working_hours %}
+    {% endif %}
+    {% if calendar.working_days and calendar.working_hours %}
     workinghours {{calendar.working_days}} {{calendar.working_hours}}
-        {% endif %}
+    {% endif %}
 
     {% if scenarios %}
     scenario plan "Planned" {
-        {% for scenario in scenarios %}
+    {% for scenario in scenarios %}
         scenario {{scenario.id}} "{{scenario.name}}"
-        {% endfor %}
+    {% endfor %}
     }
     {% endif %}
     {% if tasks_extends %}
     extend task {
-        {% for extend in tasks_extends %}
+    {% for extend in tasks_extends %}
         {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
-        {% endfor %}
+    {% endfor %}
     }
     {% endif %}
         {% if resources_extends %}
     extend resource {
-        {% for extend in resources_extends %}
+    {% for extend in resources_extends %}
         {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
-        {% endfor %}
+    {% endfor %}
     }
     {% endif %}
     {% if reports %}
