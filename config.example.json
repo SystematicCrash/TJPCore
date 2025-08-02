@@ -1,0 +1,100 @@
+{
+  "elasticsearch": {
+    "host": "http://127.0.0.1:9200",
+    "username": "username",
+    "password": "password",
+    "verify_certs": false
+  },
+  "data_indexes": {
+    "resource": "resource_index",
+    "task": "task_index",
+    "info": "info_index",
+    "calendar": "calender_index"
+  },
+  "error_index": "error_index",
+  "report_indexes": {
+    "resource": "report_resources_index",
+    "task": "report_tasks_index",
+    "cost": "report_cost_index"
+  },
+  "scenarios": [
+    {
+      "id": "delayed",
+      "name": "starts with delay"
+    }
+  ],
+  "accounts": {
+    "creation_mode": {
+      "for_all_tasks": false
+    }
+  },
+  "extends": {
+    "tasks": [
+      {
+        "type": "date",
+        "id": "Deadline",
+        "name": "Deadline"
+      }
+    ],
+    "resources": [
+      {
+        "type": "text",
+        "id": "Type",
+        "name": "Type"
+      },
+      {
+        "type": "number",
+        "id": "OvertimeCost",
+        "name": "Overtime Cost"
+      },
+      {
+        "type": "date",
+        "id": "Availability",
+        "name": "Availability Date"
+      },
+      {
+        "type": "date",
+        "id": "WorkinghoursChange",
+        "name": "Workinghours Change"
+      },
+      {
+        "type": "number",
+        "id": "BaseCost",
+        "name": "Base Cost"
+      },
+      {
+        "type": "number",
+        "id": "ActualCost",
+        "name": "Actual Cost"
+      },
+      {
+        "type": "text",
+        "id": "AccrueAt",
+        "name": "Accrue at"
+      }
+    ]
+  },
+  "exceptions": {
+    "save_logs_in_db": true
+  },
+  "paths": {
+    "tjp_output": "tjp_outputs/project.tjp",
+    "templates": "templates/",
+    "reports": {
+      "dirs": {
+        "csv_dir": "exports/csv/",
+        "json_dir": "exports/json/"
+      },
+      "files": {
+        "task_report": "task_report",
+        "resource_report": "resource_report",
+        "account_report": "cost_report",  
+        "task_gantt_report": "task_gantt_chart"
+      }
+    }
+  },
+  "logging": {
+    "filename": "errors.log",
+    "filemode": "a"
+  }
+}
