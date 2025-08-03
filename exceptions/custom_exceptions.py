@@ -6,7 +6,7 @@ class AppConnectionError(HTTPException):
 
 
 class ElasticSearchConnectionError(AppConnectionError):
-    def __init__(self, message: str = 'Failed to connect to elastic search', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'Failed to connect to elastic search', status_code: int = 504) -> None:
         super().__init__(message=message, status_code=status_code)
 
 
@@ -16,25 +16,25 @@ class ExternalToolConnectionError(AppConnectionError):
 
 
 class ElasticSearchQueryError(HTTPException):
-    def __init__(self, message: str = 'Failed to query elasticsearch', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'Failed to query elasticsearch', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)
 
 
 class DataValidationError(HTTPException):
-    def __init__(self, message: str = 'Data validation failed', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'Data validation failed', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)
 
 
 class TJ3ProcessError(HTTPException):
-    def __init__(self, message: str = 'TJ3 process failed', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'TJ3 process failed', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)
 
 
 class BadConfigurationError(HTTPException):
-    def __init__(self, message: str = 'Bad configuration', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'Bad configuration', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)
 
 
 class ProcessFailureError(HTTPException):
-    def __init__(self, message: str = 'Process failed', status_code: int = 503) -> None:
+    def __init__(self, message: str = 'Process failed', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)

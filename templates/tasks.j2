@@ -51,6 +51,7 @@ task {{ task.task_id }} "{{ task.task_name }}" {
     {% elif task.constraint_type == 'as_soon_as_possible' %}
     scheduling asap
     {% elif task.constraint_type == 'as_late_as_possible' %}
+    scheduling alap
     {% endif %}
     {% endif %}
     {% if task.deadline %}
