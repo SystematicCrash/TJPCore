@@ -1,0 +1,6 @@
+"wbs";"id";"name";"base_cost";"actual_cost";"rate";"accrue_at";"overtime_cost";"efficiency";"type";"availability_date";"Flags"
+"2";"human";"resources of type human";"";"";"15000,00";"";"";1.0;"";"";"human"
+"2.1";"res_engineer";"  مهندس پروژه";"";"";"10000,00";"prorated";15000.0;1.0;"human";"2025-07-01";"human, management"
+"2.2";"res_laborer";"  کارگر ساختمانی";"";"";"5000,00";"prorated";7500.0;5.0;"human";"2025-07-01";"human, site_team"
+"1";"equipment";"resources of type equipment";"";"";"20000,00";"";"";1.0;"";"";"equipment"
+"1.1";"res_excavator";"  بیل مکانیکی";"";"";"20000,00";"prorated";30000.0;2.0;"equipment";"2025-07-01";"equipment"

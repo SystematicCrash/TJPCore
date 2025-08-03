@@ -34,9 +34,9 @@ def colorized_print(color: str, text: str, tqdm_write=True):
     if color in colors:
         if tqdm_write:
             from tqdm import tqdm
-            tqdm.write(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+            tqdm.write(colors[color] + st.DIM +  text + st.RESET_ALL)
         else:
-            print(colors[color] + st.DIM + '\n' + text + st.RESET_ALL)
+            print(colors[color] + st.DIM +  text + st.RESET_ALL)
 
     else:
         raise ValueError(f"{color} is not present in colors")

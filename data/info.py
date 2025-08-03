@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
-from helpers.utility import colorized_print
-from helpers.io_helpers import logger
 from deep_translator import GoogleTranslator
-from sys import exit
+
+from exceptions.custom_exceptions import DataValidationError, ExternalToolConnectionError
+
 
 @dataclass
 class ProjectInfo:
@@ -47,8 +47,7 @@ class ProjectInfo:
                     try:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
-                        print("Invalid date format:", value)
-                        exit(1)
+                        raise DataValidationError("Invalid date format:" + value, 500)
                 setattr(self, f.name, value)
         self.project_id = es_doc.get('_id')
 
@@ -62,7 +61,6 @@ def generate_project_info(info):
             info.project_name = GoogleTranslator(source="fa", target="en").translate(info.project_name)
         except Exception as e:
             message = "\nFailed to connect to Google Translator! used for project name translation"
-            colorized_print('red', message)
-            logger(message, 'error', console=False)
+            raise ExternalToolConnectionError(message, 503)
         info_objs.append(info)
     return info_objs[0] if len(info_objs) != 0 else ProjectInfo()

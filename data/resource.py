@@ -1,8 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass, field, fields
 from datetime import datetime
+
+from exceptions.custom_exceptions import DataValidationError
 from helpers.utility import day_to_an_abbreviation
-from sys import exit
 
 
 def _format_allow_leaves(resource: Resource):
@@ -55,8 +56,7 @@ class Resource:
                     try:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
-                        print("Invalid date format:", value)
-                        exit(1)
+                        raise DataValidationError("Invalid date format:" + value, 500)
                 setattr(self, f.name, value)
         self.resource_id = es_doc.get("_id", '')
         _format_allow_leaves(self)

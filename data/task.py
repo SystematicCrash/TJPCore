@@ -4,6 +4,8 @@ from datetime import datetime
 from sys import exit
 import re
 
+from exceptions.custom_exceptions import DataValidationError
+
 
 # Check if task has a parent ? that's mean current task is a subtask of the other task
 def _has_parent(task_code: str) -> bool:
@@ -139,8 +141,7 @@ class Task:
                     try:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
-                        print("Invalid date format:", value)
-                        exit(1)
+                        raise DataValidationError("Invalid date format:" + value, 500)
                 setattr(self, f.name, value)
         self.__reformations()
 

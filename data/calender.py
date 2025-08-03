@@ -1,7 +1,8 @@
 from dataclasses import dataclass, field, fields
 from datetime import datetime
+
+from exceptions.custom_exceptions import DataValidationError
 from helpers.utility import day_to_an_abbreviation
-from sys import exit
 
 @dataclass
 class Calender:
@@ -29,8 +30,7 @@ class Calender:
                     try:
                         datetime.strptime(value, '%Y-%m-%d')
                     except ValueError:
-                        print("Invalid date format:", value)
-                        exit(1)
+                        raise DataValidationError("Invalid date format:" + value, 500)
                 setattr(self, f.name, value)
         self.calendar_id = es_doc.get("_id", '')
 

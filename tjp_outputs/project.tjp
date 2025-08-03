@@ -42,13 +42,13 @@ holiday "Exception Day" 2025-08-24
 
 # ------------Flags-------------
 flags
-management,
-foundation,
-site_team,
-project_management,
 equipment,
-human,
+foundation,
 site_cleaning,
+project_management,
+site_team,
+human,
+management,
 site_preparation
 # ------------END-------------
 

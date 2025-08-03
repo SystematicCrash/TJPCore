@@ -1,10 +1,7 @@
-import traceback
-from tqdm import tqdm
 from elasticsearch import Elasticsearch, helpers
-from helpers.utility import colorized_print
-from helpers.io_helpers import logger
 from concurrent.futures import ThreadPoolExecutor
 from helpers.config_helper import get_config
+from exceptions.custom_exceptions import ElasticSearchQueryError
 
 
 # Making connection to elasticsearch
@@ -29,13 +26,11 @@ def write_on_index(connection: Elasticsearch, data, index_name):
             helpers.bulk(connection, actions)
     except Exception as e:
         message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
-        colorized_print(f"red", message)
-        logger(message, mode="error", console=False)
-        exit(1)
+        raise ElasticSearchQueryError(message, 503)
 
 
 # Fetching docs from index
-def fetch_index(es: Elasticsearch, index):
+def _fetch_index(es: Elasticsearch, index):
     result = es.search(index=index, query={"match_all": {}}, size=10000)
     return result['hits']['hits']
 
@@ -45,14 +40,10 @@ def fetch_all_data(es: Elasticsearch, indexes: dict):
     with ThreadPoolExecutor(max_workers=10) as executor:
         try:
             results = {}
-            data_map = {}
             for obj, index_name in indexes.items():
-                results[obj] = executor.submit(fetch_index, es, index_name)
-            for obj, index_data in results.items():
-                data_map[obj] = index_data.result()
-            return data_map
+                results[obj] = executor.submit(_fetch_index, es, index_name)
+            results = {k: v.result() for k,v in results.items()}
+            return results
         except Exception as e:
             message = f"\nError while fetching data from Elasticsearch!\nDetails: {e}"
-            colorized_print("red", message)
-            logger(message, "error", console=False)
-            exit(1)
+            raise ElasticSearchQueryError(message, 503)

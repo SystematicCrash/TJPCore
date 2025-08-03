@@ -1,5 +1,8 @@
-import traceback
-
+import time
+from fastapi import FastAPI
+from fastapi.exceptions import HTTPException
+from fastapi.responses import JSONResponse
+from helpers.io_helpers import logger
 from helpers.elastic_helper import make_connection, fetch_all_data, write_on_index
 from helpers.config_helper import get_config
 from data.info import generate_project_info
@@ -9,13 +12,12 @@ from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
 from helpers.utility import colorized_print, cast_string_fields_to_numeric_types, progress_bar
-from helpers.io_helpers import logger, read_csv, error_register
+from helpers.io_helpers import read_csv, error_register
 from elasticsearch import Elasticsearch
-import time
+from exceptions.custom_exceptions import ProcessFailureError, BadConfigurationError, TJ3ProcessError
 import subprocess
 import threading
 from helpers import utility
-from sys import exit
 
 
 # Flags definition from task_linking and resource_group fields (just from tasks index)
@@ -103,8 +105,8 @@ def define_reports():
     reports: list[dict] = []
     for report in get_config("reports"):
         if report['type'] not in ['task', 'resource', 'account', 'trace']:
-            raise ValueError(
-                "Invalid report type declared! report type must be 'task', 'resource', 'account' or 'trace'")
+            raise BadConfigurationError(
+                "Invalid report type declared! report type must be 'task', 'resource', 'account' or 'trace'", 500)
         reports.append({
             'type': report['type'] + 'report',
             'id': report['id'], 'name': report['name'],
@@ -134,9 +136,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
             resources_accounts = executor.submit(define_resources_accounts, data_map.get("resource", []))
         except Exception as e:
             message = f"Failed to generate tjp file!\nDetails: {e}"
-            colorized_print("red", message)
-            logger(message, "error", console=False)
-            exit(1)
+            raise ProcessFailureError(message, 500)
 
     report_path = get_config("paths.reports")
     body = body_template.render(
@@ -174,38 +174,43 @@ def indexing_reports(connection: Elasticsearch):
 
 
 # Running
-def main():
-    with open('banner.txt', 'r', encoding="utf-8") as f:
-        content = f.read()
-        colorized_print('blue', content)
-    animation_thread = threading.Thread(target=progress_bar)
-    animation_thread.daemon = True
-    animation_thread.start()
+def main(banner=True):
+    if banner:
+        with open('banner.txt', 'r', encoding="utf-8") as f:
+            content = f.read()
+            colorized_print('blue', content)
     connection = make_connection()
-    utility.progress += 200
     data_map = fetch_all_data(connection, get_config("data_indexes"))
-    utility.progress += 200
     generate_tjp(data_map, get_config("paths.tjp_output"))
-    utility.progress += 200
-    result = subprocess.run("tj3 " + get_config("paths.tjp_output"),
-                            shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, encoding='utf-8')
-    utility.progress += 200
+    result = subprocess.run(
+        "tj3 " + get_config("paths.tjp_output"), shell=True, stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE, text=True, encoding='utf-8'
+    )
     if result.returncode != 0:
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
-        colorized_print('red', message)
         error_register(connection, message)
-        logger(message, "error", console=False)
-        exit(1)
-    utility.progress += 200
+        raise TJ3ProcessError(message, 500)
     indexing_reports(connection)
-    utility.progress += 200
-    utility.end_of_process = True
 
 
-if __name__ == "__main__":
+
+app = FastAPI()
+
+
+@app.post('/tjp-core/run')
+def run():
     start = time.time()
-    main()
+    try:
+        main(banner=False)
+    except HTTPException as exp:
+        colorized_print('red', exp.detail)
+        logger(exp.detail,mode='error', console=False)
+        return JSONResponse(exp.detail, exp.status_code)
     duration = time.time() - start
-    colorized_print("light-green", "...Done!", tqdm_write=False)
+    colorized_print("light-green", "\n...Done!", tqdm_write=False)
     colorized_print('light-yellow', f"Duration: {duration:.2f}s", tqdm_write=False)
+    return JSONResponse(
+        content={'message' : 'Process finished!', 'duration' : f'{duration:.2f}'},
+        status_code=200)
+
 
