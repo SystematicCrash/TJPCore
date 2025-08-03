@@ -1,5 +1,6 @@
 import time
-from fastapi import FastAPI
+
+from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
 from helpers.io_helpers import logger
@@ -11,13 +12,11 @@ from data.resource import generate_resources
 from data.task import generate_tasks, Task
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
-from helpers.utility import colorized_print, cast_string_fields_to_numeric_types, progress_bar
+from helpers.utility import colorized_print, cast_string_fields_to_numeric_types
 from helpers.io_helpers import read_csv, error_register
 from elasticsearch import Elasticsearch
 from exceptions.custom_exceptions import ProcessFailureError, BadConfigurationError, TJ3ProcessError
 import subprocess
-import threading
-from helpers import utility
 
 
 # Flags definition from task_linking and resource_group fields (just from tasks index)
@@ -198,14 +197,18 @@ app = FastAPI()
 
 
 @app.post('/tjp-core/run')
-def run():
+async def run(request: Request):
+    auth_header = request.headers.get("authorization")
+    expected_token = 'Bearer ' + get_config('api_key')
+    if auth_header != expected_token:
+        return Response('Access Denied!', 403)
     start = time.time()
     try:
         main(banner=False)
     except HTTPException as exp:
         colorized_print('red', exp.detail)
         logger(exp.detail,mode='error', console=False)
-        return JSONResponse(exp.detail, exp.status_code)
+        return Response(exp.detail, exp.status_code)
     duration = time.time() - start
     colorized_print("light-green", "\n...Done!", tqdm_write=False)
     colorized_print('light-yellow', f"Duration: {duration:.2f}s", tqdm_write=False)
