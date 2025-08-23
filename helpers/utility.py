@@ -5,16 +5,15 @@ from colorama import Fore, Style as st
 from colorama import Style
 from tqdm import tqdm
 
-def day_to_an_abbreviation(days: str):
-    days = days.replace("Saturday", "sat")
-    days = days.replace("Sunday", "sun")
-    days = days.replace("Monday", "mon")
-    days = days.replace("Tuesday", "tue")
-    days = days.replace("Wednesday", "wed")
-    days = days.replace("Thursday", "thu")
-    days = days.replace("Friday", "fri")
-    return days
 
+def sort_weekdays(days: list[str]) -> list[str]:
+    order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    order_map = {day: i for i, day in enumerate(order)}
+    return sorted(days, key=lambda d: order_map[d])
+
+
+def day_to_an_abbreviation(days: list):
+    return [(day[:3]).lower() for day in days]
 
 def colorized_print(color: str, text: str, tqdm_write=True):
     colors = {

@@ -2,7 +2,8 @@ from dataclasses import dataclass, field, fields
 from datetime import datetime
 
 from exceptions.custom_exceptions import DataValidationError
-from helpers.utility import day_to_an_abbreviation
+from helpers.utility import sort_weekdays, day_to_an_abbreviation
+
 
 @dataclass
 class Calender:
@@ -10,8 +11,9 @@ class Calender:
     project_calendar: str = ''
     working_hours: str = ''
     non_working_hours: str = ''
-    working_days: str = ''
-    non_working_days: str = ''
+    working_days_abbreviation: str = ''
+    non_working_days: list[str] = field(default_factory=list)
+    working_days: list[str] = field(default_factory=list)
     working_days_exceptions: list[str] = field(default_factory=list)
     working_hours_exceptions: list[str] = field(default_factory=list)
     important_dates: list[str] = field(default_factory=list)
@@ -42,6 +44,9 @@ def generate_calendars(calendars):
         calendar = Calender(es_doc=doc)
         calendar.working_days_exceptions.append("2025-08-02") # TODO remove these later
         calendar.working_days_exceptions.append("2025-08-24")
+        calendar.working_days = sort_weekdays(calendar.working_days)
         calendar.working_days = day_to_an_abbreviation(calendar.working_days)
+        calendar.working_days_abbreviation = calendar.working_days[0] + '-' + calendar.working_days[-1]
+        print(calendar.working_days_abbreviation)
         calendars_objs.append(calendar)
     return calendars_objs[0] if len(calendars_objs) != 0 else Calender()

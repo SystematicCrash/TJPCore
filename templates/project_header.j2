@@ -13,8 +13,8 @@ project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.
     {% if info.status_date %}
     now {{info.status_date}}
     {% endif %}
-    {% if calendar.working_days and calendar.working_hours %}
-    workinghours {{calendar.working_days}} {{calendar.working_hours}}
+    {% if calendar.working_days_abbreviation and calendar.working_hours %}
+    workinghours {{calendar.working_days_abbreviation}} {{calendar.working_hours}}
     {% endif %}
 
     {% if scenarios %}

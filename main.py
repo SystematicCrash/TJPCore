@@ -189,7 +189,7 @@ def main(banner=True):
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
         error_register(connection, message)
         raise TJ3ProcessError(message, 500)
-    indexing_reports(connection)
+    # indexing_reports(connection)
 
 
 

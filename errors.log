@@ -527,3 +527,124 @@ Details: 1 document(s) failed to index. - 2025-08-03 15:41:19
 ERROR: 
 Failed to write data to index named (report_tasks).
 Details: 1 document(s) failed to index. - 2025-08-03 15:41:19
+ERROR: Failed to finish processing! Because of below errors:
+/bin/sh: line 1: tj3: command not found
+ - 2025-08-16 11:27:23
+ERROR: Failed to finish processing! Because of below errors:
+/bin/sh: line 1: tj3: command not found
+ - 2025-08-16 11:40:07
+ERROR: Failed to finish processing! Because of below errors:
+/bin/sh: line 1: tj3: command not found
+ - 2025-08-16 11:40:16
+ERROR: Failed to finish processing! Because of below errors:
+/bin/sh: line 1: tj3: command not found
+ - 2025-08-16 11:40:45
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:41:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:42:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:42:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:43:15
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:49:06
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 11:53:56
+ERROR: 
+Failed to connect to Google Translator! used for project name translation - 2025-08-16 12:11:14
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-16 12:11:44
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '-' found. Expecting :STRING
+project ef0928b4-
+ - 2025-08-16 12:16:45
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-01-01
+ - 2025-08-16 12:22:59
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-01-01
+ - 2025-08-16 12:23:08
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-01-02
+ - 2025-08-16 12:30:25
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:38: Error: The date must be aligned to the timing resolution (60 min) of the project.
+holiday "Exception day" 2025-08-02
+ - 2025-08-16 12:35:19
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-01-02
+ - 2025-08-16 12:35:40
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-01-02
+ - 2025-08-16 12:38:07
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-19 17:44:56
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-19 17:45:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-19 17:48:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 11:58:36
+ERROR: 
+Failed to connect to Google Translator! used for project name translation - 2025-08-20 12:02:14
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-20 12:03:15
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-20 12:03:30
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:14:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:36: Error: The date must be aligned to the timing resolution (60 min) of the project.
+holiday "Exception day" 2025-08-02
+ - 2025-08-20 12:16:26
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:17:59
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:18:56
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:43:38
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:57:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
+    now 2025-05-26
+ - 2025-08-20 12:58:20
