@@ -648,3 +648,31 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:5: Error: The date must be aligned to the timing resolution (60 min) of the project.
     now 2025-05-26
  - 2025-08-20 12:58:20
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:30:28
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:30:42
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:30:56
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:32:11
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timeout caused by: ConnectionError(Connection error caused by: ProtocolError(('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')))) - 2025-08-24 17:35:56
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:36:39
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: Connection timed out - 2025-08-24 17:36:55
+ERROR: 
+Error while fetching data from Elasticsearch!
+Details: BadRequestError(400, 'parsing_exception', 'unknown query [_source]') - 2025-08-24 17:37:05
+ERROR: Failed to generate tjp file!
+Details: name 'generate_tasks' is not defined - 2025-08-24 17:49:51
+ERROR: Project with id: jlklk not found! - 2025-08-24 22:45:27
+ERROR: Project with id=jlklk not found! - 2025-08-24 22:45:59

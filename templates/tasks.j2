@@ -1,78 +1,117 @@
-{% macro define_task(task) %}
+{% macro tasks(tasks) %}
+{% for task in tasks %}
 task {{ task.task_id }} "{{ task.task_name }}" {
-    {% if task.milestone %}
+    {%- if task.milestone %}
     milestone
     {% endif %}
-    {% if task.task_start_date and task.task_end_date %}
-    period {{ task.task_start_date }} - {{ task.task_end_date }}
-    {% elif task.task_start_date %}
-    start {{ task.task_start_date }}
-    {% elif task.task_end_date %}
-    end {{ task.task_end_date }}
+
+    {%- if task.note %}
+    note {{task.note}}
     {% endif %}
-    {% if task.work_duration > 0 %}
-    duration {{ task.work_duration }}d
+
+    {%- if task.scheduling %}
+    scheduling {{task.scheduling}}
     {% endif %}
-    {% if task.complete > 0 %}
-    complete {{ task.complete }}
+
+    {%- if task.responsible %}
+    responsible {{task.responsible}}
     {% endif %}
-    {% if not task.inherited_resource_assignment and task.resource_assignment %}
-    {% if task.task_level != 1 %}
-    purge allocate
+
+    {%- if task.schedulingmode %}
+    schedulingmode {{task.schedulingmode}}
     {% endif %}
-    allocate {{ task.resource_assignment | join(', ') }}
+
+    {%- if task.shifts %}
+    shifts {{task.shifts}}
     {% endif %}
-    {% if not task.inherited_dependencies %}
-    {% if task.task_level != 1 %}
-    purge depends
+
+    {%- if task.chargeset %}
+    chargeset {{task.chargeset}}
     {% endif %}
-    {% if task.task_dependency %}
-    depends {{ task.task_dependency | join(', ') }}
-    {% if task.dependency_type in ['onstart','onend'] %}
-    { {{task.dependency_type}} }
+
+    {%- if task.depends %}
+    depends {{task.depends}}
     {% endif %}
+
+    {%- if task.precedes %}
+    precedes {{task.precedes}}
     {% endif %}
+
+    {%- if task.scheduled %}
+    scheduled
     {% endif %}
-    {% if task.constraint_date and task.constraint_type %}
-    {% if task.constraint_type == 'start_no_earlier_than' %}
-    minstart {{ task.constraint_date }}
-    {% elif task.constraint_type == 'start_no_later_than' %}
-    maxstart {{ task.constraint_date }}
-    {% elif task.constraint_type == 'finish_no_earlier_than' %}
-    minend {{ task.constraint_date }}
-    {% elif task.constraint_type == 'finish_no_later_than' %}
-    maxend {{ task.constraint_date }}
-    {% elif task.constraint_type == 'must_finish_on' %}
-    minend {{ task.constraint_date }}
-    maxend {{ task.constraint_date }}
-    {% elif task.constraint_type == 'must_start_on' %}
-    minstart {{ task.constraint_date }}
-    maxstart {{ task.constraint_date }}
-    {% elif task.constraint_type == 'as_soon_as_possible' %}
-    scheduling asap
-    {% elif task.constraint_type == 'as_late_as_possible' %}
-    scheduling alap
+
+    {%- if task.priority %}
+    priority {{task.priority}}
     {% endif %}
+
+    {%- if task.effort %}
+    effort {{task.effort}}d
     {% endif %}
-    {% if task.deadline %}
-    Deadline {{task.deadline}}
+
+    {%- if task.effortdone %}
+    effortdone {{task.effortdone}}d
     {% endif %}
-    {% if not task.inherited_priority and task.priority %}
-    priority {{ task.priority }}
+
+    {%- if task.duration %}
+    duration {{task.duration}}d
     {% endif %}
-    {% if not task.inherited_task_linking and task.task_linking %}
-    {% if task.task_level != 1 %}
-    purge flags
+
+    {%- if task.effortleft %}
+    effortleft {{task.effortleft}}d
     {% endif %}
-    flags {{ task.task_linking }}
+
+    {%- if task.length %}
+    length {{task.length}}d
     {% endif %}
-    {% if not task.inherited_chargeset and task.chargeset %}
-    chargeset {{ task.chargeset }}
+
+    {%- if task.complete %}
+    complete {{task.complete}}
     {% endif %}
-    {% if task.task_cost %}
-    charge {{ task.task_cost }} onend
+
+    {%- if task.maxstart %}
+    maxstart {{task.maxstart}}
     {% endif %}
-    {% if task.summary_task %}
-    note "{{ task.summary_task }}"
+
+    {%- if task.minstart %}
+    minstart {{task.minstart}}
     {% endif %}
+
+    {%- if task.maxend %}
+    maxend {{task.maxend}}
+    {% endif %}
+
+    {%- if task.minend %}
+    minend {{task.minend}}
+    {% endif %}
+
+    {%- if task.start %}
+    start {{task.start}}
+    {% endif %}
+
+    {%- if task.end %}
+    end {{task.end}}
+    {% endif %}
+
+    {%- if task.charge %}
+    charge {{task.charge}}
+    {% endif %}
+
+    {%- if task.maxend %}
+    maxend {{task.maxend}}
+    {% endif %}
+
+    {%- if task.flags %}
+    flag {{ flags | join(', ') }}
+    {% endif %}
+
+    {%- for sub_task in task.tasks %}
+    task {{sub_task["id"]}} {{sub_task["name"]}}
+    {% endfor %}
+
+    {%- if task.period %}
+    period {{task.period["start"]}} - {{task.period["end"]}}
+    {% endif %}
+}
+{% endfor %}
 {% endmacro %}

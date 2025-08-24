@@ -4,7 +4,7 @@ from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
 
 
-# Making connection to elasticsearch
+# Making connection to DB
 def make_connection():
     conf = get_config("elasticsearch")
     return Elasticsearch(
@@ -14,7 +14,7 @@ def make_connection():
     )
 
 
-# Writing data to elasticsearch index
+# Writing data to an index
 def write_on_index(connection: Elasticsearch, data, index_name):
     try:
         for item in data:
@@ -29,21 +29,15 @@ def write_on_index(connection: Elasticsearch, data, index_name):
         raise ElasticSearchQueryError(message, 503)
 
 
-# Fetching docs from index
-def _fetch_index(es: Elasticsearch, index):
-    result = es.search(index=index, query={"match_all": {}}, size=10000)
+# Fetching docs from an index
+def fetch_index(es: Elasticsearch, index):
+    result = es.search(index=index, body={"_source": {"excludes": ["*vector"]}, "query": {"match_all": {}}}, size=10000)
     return result['hits']['hits']
 
+        
 
-# Fetching from all indexes
-def fetch_all_data(es: Elasticsearch, indexes: dict):
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        try:
-            results = {}
-            for obj, index_name in indexes.items():
-                results[obj] = executor.submit(_fetch_index, es, index_name)
-            results = {k: v.result() for k,v in results.items()}
-            return results
-        except Exception as e:
-            message = f"\nError while fetching data from Elasticsearch!\nDetails: {e}"
-            raise ElasticSearchQueryError(message, 503)
+# Run custom queries
+def run_query(es: Elasticsearch, index: str, query: dict):
+    result = es.search(index=index, body=query, size=10000)
+    hits = result['hits']['hits']
+    return hits or None

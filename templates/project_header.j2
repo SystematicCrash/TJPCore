@@ -1,46 +1,61 @@
-{% macro define_header(info, calendar, scenarios, tasks_extends, resources_extends, reports) %}
-project {{info.project_id}} "{{info.project_name}}" {{info.start_date}} +{{info.project_duration}}d {
-    {% if info.timezone %}
-    timezone "{{info.timezone}}"
-    {% endif %}
-    {% if info.financial_unit %}
-    {% if info.financial_unit == "ریال" %}
+{% macro header(project, scenarios) %}
+project {{project.project_id}}{{project.version}} "{{project.project_name}}" {{project.start}} +{{project.duration}}d {
+{%- if project.timezone %}
+    timezone "{{project.timezone}}"
+{% endif %}
+
+{%- if project.currency %}
+    {% if project.currency == "ریال" %}
     currency "IRR"
     {% else %}
-    currency "{{info.financial_unit}}"
+    currency "{{project.currency}}"
     {% endif %}
-    {% endif %}
-    {% if info.status_date %}
-    now {{info.status_date}}
-    {% endif %}
-    {% if calendar.working_days_abbreviation and calendar.working_hours %}
-    workinghours {{calendar.working_days_abbreviation}} {{calendar.working_hours}}
-    {% endif %}
+{% endif %}
 
-    {% if scenarios %}
-    scenario plan "Planned" {
+{%- if project.now %}
+    now {{project.status_date}}
+{% endif %}
+
+{%- if project.workinghours %}
+    {% set days = project.workinghours.keys() | list | first %}
+    {% set hours = project.workinghours.get(days) %}
+    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+{% endif %}
+
+{%- if scenarios %}
     {% for scenario in scenarios %}
-        scenario {{scenario.id}} "{{scenario.name}}"
+        scenario {{scenario.id}} "{{scenario.name}}"{
+            {% if scenario.active %}
+            active yes
+            {% else %}
+            active no
+            {% endif %}
+        }
     {% endfor %}
-    }
-    {% endif %}
-    {% if tasks_extends %}
-    extend task {
-    {% for extend in tasks_extends %}
-        {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
-    {% endfor %}
-    }
-    {% endif %}
-        {% if resources_extends %}
-    extend resource {
-    {% for extend in resources_extends %}
-        {{ extend.type }} {{ extend.id }} "{{ extend.name }}"
-    {% endfor %}
-    }
-    {% endif %}
-    {% if reports %}
-    outputdir "{{ reports.dirs.csv_dir }}"
-    {% endif %}
+{% endif %}
+
+{%- if project.markdate %}
+markdate {{project.markdate}}
+{% endif %}
+
+{%- if project.dailyworkinghours %}
+dailyworkinghours project.dailyworkinghours
+{% endif %}
+
+{%- if project.timingresolution %}
+timingresolution {{project.timingresolution}}min
+{% endif %}
+
+{%- if project.yearlyworkingdays %}
+yearlyworkingdays {{project.yearlyworkingdays}}min
+{% endif %}
+
+{%- if project.weekstartsmonday %}
+weekstartsmonday
+{%- elif project.weekstartssunday %}
+weekstartssunday
+{% endif %}
+
 }
 {% endmacro %}
 

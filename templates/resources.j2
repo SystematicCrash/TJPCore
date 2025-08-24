@@ -1,49 +1,51 @@
-{% macro define_resource(resources, info, calendar) %}
+{% macro resources(resources, info) %}
 {% for resource in resources %}
 resource {{resource.resource_id}} "{{resource.resource_name}}" {
-    {% if resource.base_cost %}
-    rate {{resource.base_cost}}
+    {%- if resource.rate %}
+    rate {{resource.rate}}
     {% endif %}
-    {% if resource.overtime_cost %}
-    OvertimeCost {{ resource.overtime_cost }}
+
+    {%- if resource.email%}
+    email {{resource.email}}
+    {% endif%}
+
+    {%- if resource.managers %}
+    managers {{resource.managers}}
     {% endif %}
-    {% if resource.accrue_at %}
-    AccrueAt "{{ resource.accrue_at }}"
+
+    {%- if resource.flags %}
+    flag {{ flags | join(',\n') }}
     {% endif %}
-    {% if resource.actual_cost %}
-    ActualCost {{resource.actual_cost}}
+
+    {%- if resource.efficiency %}
+    efficiency {{resource.efficiency}}
     {% endif %}
-    {% if resource.resource_type %}
-    Type "{{ resource.resource_type }}"
+
+    {%- if resource.shifts %}
+    shifts {{resource.shifts}}
     {% endif %}
-    {% if resource.availability_date %}
-    Availability {{ resource.availability_date | join(' - ') }}
+
+    {%- if resource.workinghours %}
+        {% set days = resource.workinghours.keys() | list | first %}
+        {% set hours = resource.workinghours.get(days) %}
+        workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+    {% endif %}    
+
+    {%- if resource.leaves %}
+    {% for leave in resource.leaves %}
+    {% set type = leave.keys() | list | first %}
+    {% set date = leave.get(type) %}
+    leaves {{type}} {{date}}
+    {% endfor %}
     {% endif %}
-    {% if resource.max_units %}
-    efficiency {{resource.max_units}}
-    {% endif %}
-    {% if resource.allowed_leave %}
-    leaveallowances annual {{info.start_date}} {{ resource.allowed_leave }}
-    {% endif %}
-    {% if resource.working_hours == calendar.working_hours and resource.working_days == calendar.working_days %}
-    shifts projectDefaultShift
-    {% else %}
-    {% if resource.working_days and resource.working_hours %}
-    workinghours {{resource.working_days}} {{resource.working_hours}}
-    {% endif %}
-    {% endif %}
-    {% if resource.unavailability_date %}
-    leaves annual {{resource.unavailability_date}}
-    {% endif %}
-    {% if resource.working_hours_change %}
-    WorkinghoursChange {{ resource.working_hours_change }}
-    {% endif %}
-    {% if resource.resource_group %}
-    flags {{resource.resource_group}}
-    {% endif %}
-    {% if resource.cost_center %}
-    chargeset {{resource.cost_center}}
-    {% endif %}
+
+    {%- for vacation in resource.vacation %}
+    vacation {{vacation.get("name")}} {{vacation["interval"]["start"]}}-{{vacation["interval"]["end"]}}
+    {% endfor%}
+
+    {% for sub_resource in resource.resources %}
+    resource {{sub_resource["id"]}} "{{sub_resource["name"]}}"
+    {% endfor %}
 }
 {% endfor %}
 {% endmacro %}

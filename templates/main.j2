@@ -1,25 +1,11 @@
 # ----------------Project Header-------------
-{% import "project_header.j2" as project_header_builder %}
-{{ project_header_builder.define_header(info, calendar, scenarios, tasks_extends, resources_extends, reports) }}
+{% import "project_header.j2" as project_header %}
+{{ project_header.header(project, scenarios) }}
 # ------------END-------------
 
 # ------------Shifts-------------
-shift projectDefaultShift "project default shift" {
-    {% if info.timezone %}
-    timezone "{{ info.timezone }}"
-    {% endif %}
-    {% if calendar.working_hours and calendar.working_days %}
-    workinghours {{calendar.working_days}} {{calendar.working_hours}}
-    {% endif %}
-}
-# ------------END-------------
-
-
-# ------------Holidays-------------
-{% if calendar.working_days_exceptions %}
-leaves
-holiday "Exception day" {{ calendar.working_days_exceptions | join(',\nholiday "Exception Day" ') }}
-{% endif %}
+{% import "shifts.j2" as shift %}
+{{ shift.shifts(shifts) }}
 # ------------END-------------
 
 
@@ -32,52 +18,21 @@ flags
 
 
 # ----------------Accounts-------------
-{% import "accounts.j2" as account_builder %}
-account cost "costs of project" {
-{{ account_builder.define_account(accounts) | indent(4, True) }}
-}
-account rev "Revenue"
-balance cost rev
+{% import "accounts.j2" as account %}
+{{ account.accounts(accounts) }}
 # ------------END-------------
 
 
 # ------------Resources-------------
-{% import "resources.j2" as res_builder %}
-{% for parent_resource in resources %}
-resource {{parent_resource['id']}} "{{parent_resource['name']}}" {
-    {% if parent_resource.flags %}
-    flags {{ parent_resource['flags'] | join(', ')}}
-    {% endif %}
-{{ res_builder.define_resource(parent_resource.child_resources, info, calendar) | indent(4, True) }}
-}
-{% endfor %}
+{% import "resources.j2" as resource %}
+{{ resource.resources(resources) }}
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
-{% import "tasks.j2" as task_builder %}
-{% for level_one in tasks %}
-{{ task_builder.define_task(level_one) }}
-{% if level_one.children %}
-    {% for level_two in level_one.children %}
-    {{ task_builder.define_task(level_two) | indent(4, False) }}
-    {% if level_two.children %}
-        {% for level_three in level_two.children %}
-        {{  task_builder.define_task(level_three) | indent(8, False) }}
-        }
-        {%  endfor %}
-    {% endif %}
-    }
-    {% endfor %}
-{% endif %}
-}
-{% endfor %}
+{% import "tasks.j2" as task %}
+{{ task.tasks(tasks) }}
 # ------------END-------------
 
-
-# ------------Reports-------------
-{% import "reports.j2" as report_builder %}
-{{ report_builder.define_reports(reports) }}
-# ------------END-------------
 

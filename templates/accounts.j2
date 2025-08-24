@@ -1,5 +1,21 @@
-{% macro define_account(accounts) %}
-{% for id, attributes in accounts.items() %}
-account {{ id }} "{{attributes['name']}}" { aggregate {{ attributes['aggregate'] }} }
+{% macro accounts(accounts) %}
+{%- for account in accounts %}
+account {{ account.id }} "{{ account.name }}" {
+    {% if account.aggregate %}
+    aggregate {{ account.aggregate }}
+    {% endif %}
+
+    {%- if account.flags %}
+    flag {{ flags | join(',\n') }}
+    {% endif %}
+
+    {%- for sub_account in account.accounts %}
+    account {{sub_account.get("id")}} {{sub_account.get("name")}}
+    {% endfor %}
+
+    {%- for credit in account.credits %}
+    credits {{credit.get("date")}} "{{credit.get("description")}}" {{credit.get("amount")}}
+    {% endfor %}
+}
 {% endfor %}
 {% endmacro %}

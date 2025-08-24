@@ -1,117 +1,42 @@
 import time
-
+import json
+from dataclasses import fields
 from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, fetch_all_data, write_on_index
+from helpers.elastic_helper import make_connection, write_on_index, run_query, fetch_index
 from helpers.config_helper import get_config
-from data.info import generate_project_info
-from data.calender import generate_calendars
-from data.resource import generate_resources
-from data.task import generate_tasks, Task
+from new_data.project import initialize_projects, Project
+from new_data.task import initialize_tasks, Task
+from new_data.resource import initialize_resources, Resource
+from new_data.account import initialize_accounts, Account
+from new_data.shift import initialize_shifts, Shift
+from new_data.scenario import initialize_scenarios, Scenario
 from jinja2 import Environment, FileSystemLoader
 from concurrent.futures import ThreadPoolExecutor
 from helpers.utility import colorized_print, cast_string_fields_to_numeric_types
 from helpers.io_helpers import read_csv, error_register
 from elasticsearch import Elasticsearch
-from exceptions.custom_exceptions import ProcessFailureError, BadConfigurationError, TJ3ProcessError
+from exceptions.custom_exceptions import ProcessFailureError, \
+BadConfigurationError, TJ3ProcessError, ElasticSearchQueryError, BadInputError
 import subprocess
 
 
-# Flags definition from task_linking and resource_group fields (just from tasks index)
+
 def define_flags(tasks, resources):
     flags = set()
     for task in tasks:
         source = task['_source']
-        if source.get('task_linking', ''):
-            flags.add(source['task_linking'])
+        if source.get('flags', []):
+            flags.update(source['flags'])
 
     for resource in resources:
         source = resource['_source']
-        if source.get('resource_group', ''):
-            flags.add(source['resource_group'])
-        if source.get('resource_type', ''):
-            flags.add(source['resource_type'])
+        if source.get('flags', []):
+            flags.update(source['flags'])
     return flags
 
-
-# Defining several scenarios
-def define_scenarios():
-    scenarios: list[dict] = []
-    # Default scenario = plan
-    for scenario in get_config("scenarios"):
-        scenarios.append({'id': scenario['id'], 'name': scenario['name']})
-    return scenarios
-
-
-# Tasks accounts definition
-def define_tasks_accounts(tasks: list[Task]):
-    accounts = {}
-    for task in tasks:
-        account = {}
-        account_id = task.task_id + "Costs"
-        account['name'] = f"Costs of {task.task_id}"
-        account['aggregate'] = 'tasks'
-        accounts[account_id] = account
-    return accounts
-
-
-# Resources accounts definition
-def define_resources_accounts(resources):
-    accounts = {}
-    for resource in resources:
-        account = {}
-        source = resource.get('_source', {})
-        account_id = source.get('cost_center', '')
-        if account_id and not account_id in accounts.keys():
-            account['name'] = f"Costs of {account_id}"
-            account['aggregate'] = 'resources'
-            accounts[account_id] = account
-    return accounts
-
-
-# Fetching resource types from resources
-def fetch_resource_types(datamap):
-    resource_types = set()
-    for item in datamap:
-        source = item['_source']
-        if source.get("resource_type", ''):
-            resource_types.add(source["resource_type"])
-    return resource_types
-
-
-# Defining custom properties for tasks
-def define_tasks_extends():
-    extends: list[dict] = []
-    for extend in get_config("extends.tasks"):
-        extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
-
-    return extends
-
-
-# Defining custom properties for resources
-def define_resources_extends():
-    extends: list[dict] = []
-    for extend in get_config("extends.resources"):
-        extends.append({'type': extend['type'], 'id': extend['id'], 'name': extend['name']})
-
-    return extends
-
-
-# Reports definition
-def define_reports():
-    reports: list[dict] = []
-    for report in get_config("reports"):
-        if report['type'] not in ['task', 'resource', 'account', 'trace']:
-            raise BadConfigurationError(
-                "Invalid report type declared! report type must be 'task', 'resource', 'account' or 'trace'", 500)
-        reports.append({
-            'type': report['type'] + 'report',
-            'id': report['id'], 'name': report['name'],
-            'formats': report['formats'], 'columns': report['columns']
-        })
-    return reports
 
 
 # Generating TJP file
@@ -121,31 +46,24 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     body_template = env.get_template("main.j2")
     with ThreadPoolExecutor(max_workers=15) as executor:
         try:
-            info = executor.submit(generate_project_info, data_map.get('info', []))
-            calendar = executor.submit(generate_calendars, data_map.get('calendar', []))
-            scenarios = executor.submit(define_scenarios)
-            resource_types = executor.submit(fetch_resource_types, data_map.get('resource', []))
-            resources = executor.submit(generate_resources, data_map.get("resource", []), resource_types.result())
-            tasks = executor.submit(generate_tasks, data_map.get("task", []))
-            tasks_extends = executor.submit(define_tasks_extends)
-            resources_extends = executor.submit(define_resources_extends)
-            flags = executor.submit(define_flags, tasks=data_map.get('task', []),
-                                    resources=data_map.get('resource', []))
-            tasks_accounts = executor.submit(define_tasks_accounts, tasks.result())
-            resources_accounts = executor.submit(define_resources_accounts, data_map.get("resource", []))
+            projects = executor.submit(initialize_projects, data_map.get("project", []))
+            shifts = executor.submit(initialize_shifts, data_map.get("shifts", []))
+            tasks = executor.submit(initialize_tasks, data_map.get("tasks", []))
+            resources = executor.submit(initialize_resources, data_map.get("resources", []))
+            accounts = executor.submit(initialize_accounts, data_map.get("accounts", []))
+            scenarios = executor.submit(initialize_scenarios, data_map.get("scenarios", []))
+            flags = executor.submit(define_flags, tasks=data_map.get('tasks', []), resources=data_map.get('resources', []))
         except Exception as e:
             message = f"Failed to generate tjp file!\nDetails: {e}"
             raise ProcessFailureError(message, 500)
 
     report_path = get_config("paths.reports")
     body = body_template.render(
-        info=info.result(),
-        calendar=calendar.result(),
+        project=projects.result()[0],
         scenarios=scenarios.result(),
-        tasks_extends=tasks_extends.result(),
-        resources_extends=resources_extends.result(),
+        shifts=shifts.result(),
+        accounts=accounts.result(),
         flags=flags.result(),
-        accounts=tasks_accounts.result() | resources_accounts.result(),
         resources=resources.result(),
         tasks=tasks.result(),
         reports=report_path,
@@ -172,46 +90,77 @@ def indexing_reports(connection: Elasticsearch):
                     executor.submit(write_on_index, connection, data, index_name)
 
 
-# Running
-def main(banner=True):
-    if banner:
-        with open('banner.txt', 'r', encoding="utf-8") as f:
-            content = f.read()
-            colorized_print('blue', content)
+# Processing
+def main(project_id: str):
+    project_query = {
+        "_source": {
+            "excludes": ["*vector"]
+        },
+        "query": {
+            "term": {
+                "_id": project_id
+            }
+        }
+    }
+    tasks_query = {
+        "_source": {
+            "excludes": ["*vector"]
+        },
+        "query": {
+            "term": {
+                "projectid": project_id
+            }
+        }
+    }
     connection = make_connection()
-    data_map = fetch_all_data(connection, get_config("data_indexes"))
+    data_map = {}
+    data_map['project'] = run_query(connection, index=get_config("data_indexes.project"), query=project_query)
+
+    if not data_map['project']:
+        raise BadInputError(message=f"Project with id={project_id} not found!", status_code=404)
+
+    data_map['tasks'] = run_query(connection, index=get_config("data_indexes.task"), query=tasks_query)
+    data_map['resources'] = fetch_index(connection, index=get_config("data_indexes.resource"))
+    data_map['accounts'] = fetch_index(connection, index=get_config("data_indexes.account"))
+    data_map['shifts'] = fetch_index(connection, index=get_config("data_indexes.shift"))
+    data_map['scenarios'] = fetch_index(connection, index=get_config("data_indexes.scenario"))
+
     generate_tjp(data_map, get_config("paths.tjp_output"))
-    result = subprocess.run(
-        "tj3 " + get_config("paths.tjp_output"), shell=True, stdout=subprocess.DEVNULL,
-        stderr=subprocess.PIPE, text=True, encoding='utf-8'
-    )
-    if result.returncode != 0:
-        message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
-        error_register(connection, message)
-        raise TJ3ProcessError(message, 500)
+
+    # result = subprocess.run(
+    #     "tj3 " + get_config("paths.tjp_output"), shell=True, stdout=subprocess.DEVNULL,
+    #     stderr=subprocess.PIPE, text=True, encoding='utf-8'
+    # )
+    # if result.returncode != 0:
+    #     message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
+    #     error_register(connection, message)
+    #     raise TJ3ProcessError(message, 500)
     # indexing_reports(connection)
 
-
+# if __name__ == "__main__":
+#     main("proj2025")
 
 app = FastAPI()
 
 
-@app.post('/tjp-core/run')
-async def run(request: Request):
+@app.post('/tjp-core/run/{project_id}')
+async def run(request: Request, project_id: str):
     auth_header = request.headers.get("authorization")
     expected_token = 'Bearer ' + get_config('api_key')
+
     if auth_header != expected_token:
         return Response('Access Denied!', 403)
+    
+    if not project_id:
+        return Resource('No project id specified!', 400)
+    
     start = time.time()
     try:
-        main(banner=False)
+        main(project_id)
     except HTTPException as exp:
-        colorized_print('red', exp.detail)
         logger(exp.detail,mode='error', console=False)
         return Response(exp.detail, exp.status_code)
     duration = time.time() - start
-    colorized_print("light-green", "\n...Done!", tqdm_write=False)
-    colorized_print('light-yellow', f"Duration: {duration:.2f}s", tqdm_write=False)
     return JSONResponse(
         content={'message' : 'Process finished!', 'duration' : f'{duration:.2f}'},
         status_code=200)

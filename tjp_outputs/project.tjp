@@ -1,202 +1,431 @@
 # ----------------Project Header-------------
-project project_tehran "Tehran Construction Project" 2025-01-01 +546d {
-    timezone "Asia/Tehran"
-    currency "IRR"
-    now 2025-05-26
-
-    scenario plan "Planned" {
-        scenario delayed "starts with delay"
-    }
-    extend task {
-        date Deadline "Deadline"
-    }
-    extend resource {
-        text Type "Type"
-        number OvertimeCost "Overtime Cost"
-        date Availability "Availability Date"
-        date WorkinghoursChange "Workinghours Change"
-        number BaseCost "Base Cost"
-        number ActualCost "Actual Cost"
-        text AccrueAt "Accrue at"
-    }
-    outputdir "exports/csv/"
+project 1.0 "" 2025-01-01 +364d {    timezone "UTC"
+    currency "USD"
+    now 
+    workinghours thu 9-17
+        scenario base "Baseline Scenario"{
+            active yes
+        }
+        scenario optimistic "Optimistic Scenario"{
+            active no
+        }
+        scenario pessimistic "Pessimistic Scenario"{
+            active no
+        }
+markdate 2025-06-15
+dailyworkinghours project.dailyworkinghours
+timingresolution 60min
+yearlyworkingdays 250min
+weekstartsmonday
 }
 
 # ------------END-------------
 
 # ------------Shifts-------------
-shift projectDefaultShift "project default shift" {
-    timezone "Asia/Tehran"
+shift shift1 "Day Shift" {
+    replace
+    timezone UTC
+    workinghours mon-fri 9-17
+    leaves holiday 2025-12-25
+shifts
 }
-# ------------END-------------
+shift shift2 "Evening Shift" {
+    timezone UTC
+    workinghours mon-fri 13-21
+    shift subshift2_1 "Sub Evening"
+shifts
+}
+shift shift3 "Night Shift" {
+    timezone UTC
+    workinghours mon-fri 21-5
+shifts
+}
 
 
-# ------------Holidays-------------
-leaves
-holiday "Exception day" 2025-08-02,
-holiday "Exception Day" 2025-08-24
+
 # ------------END-------------
 
 
 # ------------Flags-------------
 flags
-human,
-management,
-site_cleaning,
-equipment,
-foundation,
-site_team,
-site_preparation,
-project_management
+adj,
+analyst,
+manager,
+qa,
+sec,
+mig,
+maint,
+design,
+req,
+doc,
+requirements,
+opt,
+dev,
+uat,
+train,
+planning,
+deploy,
+audit,
+arch
 # ------------END-------------
 
 
 # ----------------Accounts-------------
-account cost "costs of project" {
-    account 1Costs "Costs of 1" { aggregate tasks }
-    account 2Costs "Costs of 2" { aggregate tasks }
-    account 3Costs "Costs of 3" { aggregate tasks }
-    account engineering "Costs of engineering" { aggregate resources }
-    account construction "Costs of construction" { aggregate resources }
-
+account acct1 "Project Expenses" {
+    aggregate sum
+    flag 
+    account subacct1_1 Salaries
+    account subacct1_2 Hardware
+    credits 2025-01-01 "Initial funding" 100000.0
+    credits 2025-06-01 "Mid-year funding" 50000.0
 }
-account rev "Revenue"
-balance cost rev
+account acct2 "Revenue" {
+    aggregate sum
+    flag 
+    credits None "Expected revenue" 200000.0
+}
+
 # ------------END-------------
 
 
 # ------------Resources-------------
-resource human "resources of type human" {
-    flags human
-    resource res_engineer "مهندس پروژه" {
-        rate 10000.0
-        OvertimeCost 15000.0
-        AccrueAt "prorated"
-        Type "human"
-        Availability 2 - 0 - 2 - 5 - - - 0 - 7 - - - 0 - 1
-        efficiency 1.0
-        leaveallowances annual 2025-01-01 10m
-        workinghours ['s', 'a', 't', 'u', 'r', 'd', 'a', 'y', '-', 'w', 'e', 'd', 'n', 'e', 's', 'd', 'a', 'y'] 08:00-16:00
-        leaves annual 2025-08-06
-        flags management
-        chargeset engineering
-    }
-    resource res_laborer "کارگر ساختمانی" {
-        rate 5000.0
-        OvertimeCost 7500.0
-        AccrueAt "prorated"
-        Type "human"
-        Availability 2 - 0 - 2 - 5 - - - 0 - 7 - - - 0 - 1
-        efficiency 5.0
-        leaveallowances annual 2025-01-01 7m
-        workinghours ['s', 'a', 't', 'u', 'r', 'd', 'a', 'y', '-', 'w', 'e', 'd', 'n', 'e', 's', 'd', 'a', 'y'] 08:00-16:00
-        leaves annual 2025-08-06
-        flags site_team
-        chargeset construction
-    }
+resource  "" {    rate 150.0
+    email pm@example.com
+    flag 
+    efficiency 1.0
+    shifts shift1
+        workinghours mon-fri 9-18
+    leaves start 2025-07-01
+    vacation Summer Vacation 2025-07-01-2025-07-10
 
 }
-resource equipment "resources of type equipment" {
-    flags equipment
-    resource res_excavator "بیل مکانیکی" {
-        rate 20000.0
-        OvertimeCost 30000.0
-        AccrueAt "prorated"
-        Type "equipment"
-        Availability 2 - 0 - 2 - 5 - - - 0 - 7 - - - 0 - 1
-        efficiency 2.0
-        workinghours ['s', 'a', 't', 'u', 'r', 'd', 'a', 'y', '-', 'w', 'e', 'd', 'n', 'e', 's', 'd', 'a', 'y'] 08:00-16:00
-        leaves annual 2025-08-06
-        flags equipment
-        chargeset construction
-    }
+resource  "" {    rate 120.0
+    email ba@example.com
+    managers res1
+    flag 
+    efficiency 0.9
+    shifts shift1
 
 }
+resource  "" {    rate 130.0
+    email re@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift2
+
+    resource subres3_1 "Assistant RE"
+}
+resource  "" {    rate 140.0
+    email designer@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift1
+
+}
+resource  "" {    rate 160.0
+    email arch@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift1
+
+}
+resource  "" {    rate 100.0
+    email dev1@example.com
+    managers res1
+    flag 
+    efficiency 0.95
+    shifts shift3
+
+}
+resource  "" {    rate 100.0
+    email dev2@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift3
+
+}
+resource  "" {    rate 100.0
+    email dev3@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift3
+
+}
+resource  "" {    rate 110.0
+    email tester1@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift2
+
+}
+resource  "" {    rate 110.0
+    email tester2@example.com
+    managers res1
+    flag 
+    efficiency 1.0
+    shifts shift2
+
+}
+
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
-task 1 "مدیریت پروژه" {
-    period 2025-07-01 - 2025-12-28
-    allocate res_engineer
-    minstart 2025-07-01
-    Deadline 2025-12-31
-    priority 1
-    flags project_management
-    chargeset 1Costs
-    charge 5000000.0 onend
-    note "مدیریت کلی پروژه شامل برنامه‌ریزی، نظارت، و گزارش‌دهی"
-
+task  "" {    note Initial planning task.
+    scheduling asap
+    responsible res1
+    schedulingmode effort
+    shifts shift1
+    chargeset planning
+    precedes task2
+    scheduled
+    priority 1000
+    effort 120.0d
+    effortdone 120.0d
+    duration 15.0d
+    length 15.0d
+    complete 100.0
+    minstart 2025-01-01
+    maxend 2025-01-20
+    minend 2025-01-10
+    end 2025-01-15
+    charge 5000.0
+    maxend 2025-01-20
+    flag 
 }
-task 2 "آماده‌سازی سایت" {
-    period 2025-07-13 - 2025-08-11
-    allocate res_laborer, res_excavator
-    depends task_1.1.2
-    { onend }
-    minstart 2025-07-13
-    Deadline 2025-08-15
-    priority 2
-    flags site_preparation
-    chargeset 2Costs
-    charge 2000000.0 onend
-    note "آماده‌سازی زمین برای شروع ساخت"
-
+task  "" {    note Gather requirements from stakeholders.
+    scheduling asap
+    responsible res3
+    schedulingmode effort
+    shifts shift2
+    chargeset requirements
+    depends task1
+    precedes task3
+    priority 900
+    effort 240.0d
+    effortdone 192.0d
+    duration 30.0d
+    effortleft 48.0d
+    length 30.0d
+    complete 80.0
+    maxstart 2025-01-16
+    minstart 2025-01-16
+    maxend 2025-02-20
+    minend 2025-02-10
+    charge 8000.0
+    maxend 2025-02-20
+    flag 
+    task subtask2_1 Interview Users
+    task subtask2_2 Document Requirements
 }
-task 3 "فونداسیون" {
-    period 2025-08-12 - 2025-09-10
-    allocate res_engineer, res_laborer
-    minstart 2025-08-12
-    Deadline 2025-09-15
-    priority 3
-    flags foundation
-    chargeset 3Costs
-    charge 2500000.0 onend
-    note "اجرای فونداسیون ساختمان شامل آرماتوربندی، قالب‌بندی و بتن‌ریزی"
-
+task  "" {    note System design.
+    scheduling alap
+    responsible res4
+    schedulingmode duration
+    chargeset design
+    depends task2
+    priority 800
+    effort 360.0d
+    effortdone 180.0d
+    duration 45.0d
+    effortleft 180.0d
+    length 45.0d
+    complete 50.0
+    charge 10000.0
+    flag 
+    task subtask3_1 Architecture Design
+    task subtask3_2 UI/UX Design
+    task subtask3_3 Database Design
 }
+task  "" {    note Code development.
+    scheduling asap
+    responsible res6
+    schedulingmode effort
+    chargeset dev
+    depends task3
+    priority 700
+    effort 720.0d
+    effortdone 144.0d
+    duration 90.0d
+    effortleft 576.0d
+    length 90.0d
+    complete 20.0
+    charge 20000.0
+    flag 
+    task subtask4_1 Frontend Development
+    task subtask4_2 Backend Development
+    task subtask4_3 Integration
+}
+task  "" {    note Quality assurance.
+    scheduling asap
+    responsible res9
+    schedulingmode effort
+    chargeset qa
+    depends task4
+    priority 600
+    effort 480.0d
+    duration 60.0d
+    effortleft 480.0d
+    length 60.0d
+    charge 15000.0
+    flag 
+    task subtask5_1 Unit Testing
+    task subtask5_2 Integration Testing
+    task subtask5_3 System Testing
+}
+task  "" {    milestone
+    note Final deployment.
+    scheduling asap
+    responsible res1
+    schedulingmode duration
+    chargeset deploy
+    depends task5
+    priority 500
+    effort 120.0d
+    duration 15.0d
+    effortleft 120.0d
+    length 15.0d
+    charge 5000.0
+    flag 
+}
+task  "" {    note Post-deployment maintenance.
+    scheduling alap
+    responsible res2
+    schedulingmode effort
+    chargeset maint
+    depends task6
+    priority 400
+    effort 240.0d
+    duration 30.0d
+    effortleft 240.0d
+    length 30.0d
+    charge 3000.0
+    flag 
+}
+task  "" {    note Project documentation.
+    scheduling asap
+    responsible res3
+    schedulingmode length
+    chargeset doc
+    depends task3
+    priority 300
+    effort 360.0d
+    effortdone 36.0d
+    duration 45.0d
+    effortleft 324.0d
+    length 45.0d
+    complete 10.0
+    charge 4000.0
+    flag 
+    task subtask8_1 User Manual
+    task subtask8_2 Technical Docs
+}
+task  "" {    note User training sessions.
+    scheduling asap
+    responsible res4
+    schedulingmode effort
+    chargeset train
+    depends task5
+    priority 200
+    effort 160.0d
+    duration 20.0d
+    effortleft 160.0d
+    length 20.0d
+    charge 2000.0
+    flag 
+}
+task  "" {    milestone
+    note Final review.
+    scheduling asap
+    responsible res5
+    schedulingmode duration
+    chargeset audit
+    depends task6
+    priority 100
+    effort 80.0d
+    duration 10.0d
+    effortleft 80.0d
+    length 10.0d
+    charge 1000.0
+    flag 
+}
+task  "" {    note Migrate existing data.
+    scheduling asap
+    responsible res6
+    schedulingmode effort
+    chargeset mig
+    depends task4
+    priority 850
+    effort 240.0d
+    duration 30.0d
+    effortleft 240.0d
+    length 30.0d
+    charge 6000.0
+    flag 
+}
+task  "" {    note Conduct security checks.
+    scheduling asap
+    responsible res7
+    schedulingmode effort
+    chargeset sec
+    depends task5
+    priority 950
+    effort 160.0d
+    duration 20.0d
+    effortleft 160.0d
+    length 20.0d
+    charge 7000.0
+    flag 
+}
+task  "" {    note Optimize system performance.
+    scheduling asap
+    responsible res8
+    schedulingmode effort
+    chargeset opt
+    depends task4
+    priority 750
+    effort 200.0d
+    duration 25.0d
+    effortleft 200.0d
+    length 25.0d
+    charge 4000.0
+    flag 
+}
+task  "" {    note UAT phase.
+    scheduling asap
+    responsible res9
+    schedulingmode effort
+    chargeset uat
+    depends task5
+    priority 650
+    effort 240.0d
+    duration 30.0d
+    effortleft 240.0d
+    length 30.0d
+    charge 5000.0
+    flag 
+}
+task  "" {    note Make final changes.
+    scheduling asap
+    responsible res10
+    schedulingmode effort
+    chargeset adj
+    depends task14
+    priority 550
+    effort 80.0d
+    duration 10.0d
+    effortleft 80.0d
+    length 10.0d
+    charge 2000.0
+    flag 
+}
+
 # ------------END-------------
 
-
-# ------------Reports-------------
-taskreport taskReports "task_report" {
-    headline "Tasks Table"
-    formats csv
-    columns
-    bsi{title "wbs"}, id{title "id"}, name{title "name"},
-    start{title "start"}, end{title "end"},
-    minstart{title "min_start"}, maxstart{title "max_start"},
-    minend{title "min_end"}, maxend{title "max_end"},
-    Deadline{title "deadline"}, duration{title "duration"},
-    effort{title "effort"}, priority{title "priority"},
-    children{title "sub_tasks"}, resources{title "resources"},
-    flags{title "task_linking"} , complete{title "complete"}
-    balance cost rev
-    hideresource @all
-}
-
-taskreport tasksGanttChart "task_gantt_chart" {
-    headline "Tasks Gantt Chart"
-    formats csv
-    columns id{title "id"}, name, start, end, duration, effort, chart
-}
-
-resourcereport resourceReports "resource_report" {
-    headline "Resources Table"
-    formats csv
-    columns
-    bsi{title "wbs"}, id{title "id"}, name{title "name"},
-    BaseCost{title "base_cost"}, ActualCost{title "actual_cost"},
-    rate{title "rate"}, AccrueAt{title "accrue_at"},
-    OvertimeCost{title "overtime_cost"}, efficiency{title "efficiency"}, Type{title "type"},
-    Availability{title "availability_date"}, flags
-    hidetask @all
-    sortresources tree
-}
-
-accountreport accountReports "cost_report" {
-    formats csv
-    columns bsi, id{title "id"}, name
-}
-
-# ------------END-------------

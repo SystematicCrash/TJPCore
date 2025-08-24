@@ -1,0 +1,42 @@
+{% macro shifts(shifts) %}
+
+{%- for shift in shifts %}
+shift {{shift.id}} "{{shift.name}}" {
+    {% if shift.replace %}
+    replace
+    {% endif %}
+
+    {%- if shift.timezone %}
+    timezone {{shift.timezone}}
+    {% endif %}
+
+    {%- if shift.workinghours %}
+        {% set days = shift.workinghours.keys() | list | first %}
+        {% set hours = shift.workinghours.get(days) %}
+    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+    {% endif %}
+
+    {%- if shift.leaves %}
+    {% for leave in shift.leaves %}
+    {% set type = leave.keys() | list | first %}
+    {% set date = leave.get(type) %}
+    leaves {{type}} {{date}}
+    {% endfor %}
+    {% endif %}
+
+    {%- for sub_shift in shift.shifts %}
+    shift {{sub_shift.get("id")}} "{{sub_shift.get("name")}}"
+    {% endfor %}shifts
+
+    {%- if shift.vacations %}
+    {% for vacation in shift.vacations %}
+    {% set name = next(iter(vacation))%}
+    vacation {{name}} {{vacation.get("start")}}-{{vacation.get("end")}}
+    {% endfor %}
+    {% endif %}
+
+}
+{% endfor %}
+
+
+{% endmacro %}

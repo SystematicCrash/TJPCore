@@ -38,3 +38,8 @@ class BadConfigurationError(HTTPException):
 class ProcessFailureError(HTTPException):
     def __init__(self, message: str = 'Process failed', status_code: int = 500) -> None:
         super().__init__(detail=message, status_code=status_code)
+
+
+class BadInputError(HTTPException):
+    def __init__(self, message: str = "Bad input!", status_code: int = 400)-> None:
+        super().__init__(detail=message, status_code=status_code)
