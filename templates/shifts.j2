@@ -7,7 +7,7 @@ shift {{shift.id}} "{{shift.name}}" {
     {% endif %}
 
     {%- if shift.timezone %}
-    timezone {{shift.timezone}}
+    timezone "{{shift.timezone}}"
     {% endif %}
 
     {%- if shift.workinghours %}
@@ -26,7 +26,7 @@ shift {{shift.id}} "{{shift.name}}" {
 
     {%- for sub_shift in shift.shifts %}
     shift {{sub_shift.get("id")}} "{{sub_shift.get("name")}}"
-    {% endfor %}shifts
+    {% endfor %}
 
     {%- if shift.vacations %}
     {% for vacation in shift.vacations %}
@@ -34,9 +34,7 @@ shift {{shift.id}} "{{shift.name}}" {
     vacation {{name}} {{vacation.get("start")}}-{{vacation.get("end")}}
     {% endfor %}
     {% endif %}
-
 }
+
 {% endfor %}
-
-
 {% endmacro %}

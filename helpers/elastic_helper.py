@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch, helpers
+from elasticsearch import AsyncElasticsearch, helpers
 from concurrent.futures import ThreadPoolExecutor
 from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
@@ -7,7 +7,7 @@ from exceptions.custom_exceptions import ElasticSearchQueryError
 # Making connection to DB
 def make_connection():
     conf = get_config("elasticsearch")
-    return Elasticsearch(
+    return AsyncElasticsearch(
         conf["host"],
         basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
         verify_certs=conf.get("verify_certs", True)
@@ -15,7 +15,7 @@ def make_connection():
 
 
 # Writing data to an index
-def write_on_index(connection: Elasticsearch, data, index_name):
+async def write_on_index(connection: AsyncElasticsearch, data, index_name):
     try:
         for item in data:
             actions = [{
@@ -30,14 +30,21 @@ def write_on_index(connection: Elasticsearch, data, index_name):
 
 
 # Fetching docs from an index
-def fetch_index(es: Elasticsearch, index):
-    result = es.search(index=index, body={"_source": {"excludes": ["*vector"]}, "query": {"match_all": {}}}, size=10000)
-    return result['hits']['hits']
+async def fetch_index(es: AsyncElasticsearch, index_name):
+    query = {
+        "_source": {
+            "excludes": ["*vector"]
+        },
+        "query": {
+            "match_all": {}
+        }
+    }
+    result = await es.search(index=index_name, body=query, size=10000)
+    return {index_name : result['hits']['hits']} or None
 
         
 
 # Run custom queries
-def run_query(es: Elasticsearch, index: str, query: dict):
-    result = es.search(index=index, body=query, size=10000)
-    hits = result['hits']['hits']
-    return hits or None
+async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
+    result = await es.search(index=index_name, body=query, size=10000)
+    return {index_name : result['hits']['hits']} or None

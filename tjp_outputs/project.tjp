@@ -1,22 +1,23 @@
 # ----------------Project Header-------------
-project 1.0 "" 2025-01-01 +364d {    timezone "UTC"
+project proj2025 "AI Development Project v1.0" 2025-01-01 +364d {
+    timezone "UTC"
     currency "USD"
-    now 
+    now 2025-08-20
     workinghours thu 9-17
-        scenario base "Baseline Scenario"{
-            active yes
-        }
-        scenario optimistic "Optimistic Scenario"{
-            active no
-        }
-        scenario pessimistic "Pessimistic Scenario"{
-            active no
-        }
-markdate 2025-06-15
-dailyworkinghours project.dailyworkinghours
-timingresolution 60min
-yearlyworkingdays 250min
-weekstartsmonday
+    scenario base "Baseline Scenario" {
+        active yes
+    }
+    scenario optimistic "Optimistic Scenario" {
+        active no
+    }
+    scenario pessimistic "Pessimistic Scenario" {
+        active no
+    }
+    markdate 2025-06-15
+    dailyworkinghours 8.0
+    timingresolution 60min
+    yearlyworkingdays 250
+    weekstartsmonday
 }
 
 # ------------END-------------
@@ -24,23 +25,21 @@ weekstartsmonday
 # ------------Shifts-------------
 shift shift1 "Day Shift" {
     replace
-    timezone UTC
+    timezone "UTC"
     workinghours mon-fri 9-17
     leaves holiday 2025-12-25
-shifts
-}
-shift shift2 "Evening Shift" {
-    timezone UTC
-    workinghours mon-fri 13-21
-    shift subshift2_1 "Sub Evening"
-shifts
-}
-shift shift3 "Night Shift" {
-    timezone UTC
-    workinghours mon-fri 21-5
-shifts
 }
 
+shift shift2 "Evening Shift" {
+    timezone "UTC"
+    workinghours mon-fri 13-21
+    shift subshift2_1 "Sub Evening"
+}
+
+shift shift3 "Night Shift" {
+    timezone "UTC"
+    workinghours mon-fri 21-5
+}
 
 
 # ------------END-------------
@@ -48,137 +47,150 @@ shifts
 
 # ------------Flags-------------
 flags
-adj,
-analyst,
-manager,
-qa,
-sec,
-mig,
-maint,
 design,
-req,
-doc,
 requirements,
-opt,
+manager,
+sec,
+maint,
+arch,
 dev,
-uat,
-train,
 planning,
-deploy,
+train,
 audit,
-arch
+analyst,
+qa,
+opt,
+adj,
+deploy,
+uat,
+mig,
+doc,
+req
 # ------------END-------------
 
 
 # ----------------Accounts-------------
 account acct1 "Project Expenses" {
     aggregate sum
-    flag 
+    flag expenses
     account subacct1_1 Salaries
     account subacct1_2 Hardware
     credits 2025-01-01 "Initial funding" 100000.0
     credits 2025-06-01 "Mid-year funding" 50000.0
 }
+
 account acct2 "Revenue" {
     aggregate sum
-    flag 
+    flag revenue
     credits None "Expected revenue" 200000.0
 }
+
 
 # ------------END-------------
 
 
 # ------------Resources-------------
-resource  "" {    rate 150.0
+resource res1 "Project Manager" {
+    rate 150.0
     email pm@example.com
-    flag 
+    flag manager
     efficiency 1.0
     shifts shift1
-        workinghours mon-fri 9-18
+    workinghours mon-fri 9-18
     leaves start 2025-07-01
     vacation Summer Vacation 2025-07-01-2025-07-10
-
 }
-resource  "" {    rate 120.0
+
+resource res2 "Business Analyst" {
+    rate 120.0
     email ba@example.com
     managers res1
-    flag 
+    flag analyst
     efficiency 0.9
     shifts shift1
-
 }
-resource  "" {    rate 130.0
+
+resource res3 "Requirements Engineer" {
+    rate 130.0
     email re@example.com
     managers res1
-    flag 
+    flag req
     efficiency 1.0
     shifts shift2
-
     resource subres3_1 "Assistant RE"
 }
-resource  "" {    rate 140.0
+
+resource res4 "Designer" {
+    rate 140.0
     email designer@example.com
     managers res1
-    flag 
+    flag design
     efficiency 1.0
     shifts shift1
-
 }
-resource  "" {    rate 160.0
+
+resource res5 "Architect" {
+    rate 160.0
     email arch@example.com
     managers res1
-    flag 
+    flag arch
     efficiency 1.0
     shifts shift1
-
 }
-resource  "" {    rate 100.0
+
+resource res6 "Developer 1" {
+    rate 100.0
     email dev1@example.com
     managers res1
-    flag 
+    flag dev
     efficiency 0.95
     shifts shift3
-
 }
-resource  "" {    rate 100.0
+
+resource res7 "Developer 2" {
+    rate 100.0
     email dev2@example.com
     managers res1
-    flag 
+    flag dev
     efficiency 1.0
     shifts shift3
-
 }
-resource  "" {    rate 100.0
+
+resource res8 "Developer 3" {
+    rate 100.0
     email dev3@example.com
     managers res1
-    flag 
+    flag dev
     efficiency 1.0
     shifts shift3
-
 }
-resource  "" {    rate 110.0
+
+resource res9 "Tester 1" {
+    rate 110.0
     email tester1@example.com
     managers res1
-    flag 
+    flag qa
     efficiency 1.0
     shifts shift2
-
 }
-resource  "" {    rate 110.0
+
+resource res10 "Tester 2" {
+    rate 110.0
     email tester2@example.com
     managers res1
-    flag 
+    flag qa
     efficiency 1.0
     shifts shift2
-
 }
+
 
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
-task  "" {    note Initial planning task.
+task task1 "Project Planning" {
+    note "Initial planning task."
     scheduling asap
     responsible res1
     schedulingmode effort
@@ -198,9 +210,11 @@ task  "" {    note Initial planning task.
     end 2025-01-15
     charge 5000.0
     maxend 2025-01-20
-    flag 
+    flag planning
 }
-task  "" {    note Gather requirements from stakeholders.
+
+task task2 "Requirements Gathering" {
+    note "Gather requirements from stakeholders."
     scheduling asap
     responsible res3
     schedulingmode effort
@@ -221,11 +235,13 @@ task  "" {    note Gather requirements from stakeholders.
     minend 2025-02-10
     charge 8000.0
     maxend 2025-02-20
-    flag 
-    task subtask2_1 Interview Users
-    task subtask2_2 Document Requirements
+    flag requirements
+    task subtask2_1 "Interview Users"
+    task subtask2_2 "Document Requirements"
 }
-task  "" {    note System design.
+
+task task3 "Design Phase" {
+    note "System design."
     scheduling alap
     responsible res4
     schedulingmode duration
@@ -239,12 +255,14 @@ task  "" {    note System design.
     length 45.0d
     complete 50.0
     charge 10000.0
-    flag 
-    task subtask3_1 Architecture Design
-    task subtask3_2 UI/UX Design
-    task subtask3_3 Database Design
+    flag design
+    task subtask3_1 "Architecture Design"
+    task subtask3_2 "UI/UX Design"
+    task subtask3_3 "Database Design"
 }
-task  "" {    note Code development.
+
+task task4 "Implementation" {
+    note "Code development."
     scheduling asap
     responsible res6
     schedulingmode effort
@@ -258,12 +276,14 @@ task  "" {    note Code development.
     length 90.0d
     complete 20.0
     charge 20000.0
-    flag 
-    task subtask4_1 Frontend Development
-    task subtask4_2 Backend Development
-    task subtask4_3 Integration
+    flag dev
+    task subtask4_1 "Frontend Development"
+    task subtask4_2 "Backend Development"
+    task subtask4_3 "Integration"
 }
-task  "" {    note Quality assurance.
+
+task task5 "Testing" {
+    note "Quality assurance."
     scheduling asap
     responsible res9
     schedulingmode effort
@@ -275,13 +295,15 @@ task  "" {    note Quality assurance.
     effortleft 480.0d
     length 60.0d
     charge 15000.0
-    flag 
-    task subtask5_1 Unit Testing
-    task subtask5_2 Integration Testing
-    task subtask5_3 System Testing
+    flag qa
+    task subtask5_1 "Unit Testing"
+    task subtask5_2 "Integration Testing"
+    task subtask5_3 "System Testing"
 }
-task  "" {    milestone
-    note Final deployment.
+
+task task6 "Deployment" {
+    milestone
+    note "Final deployment."
     scheduling asap
     responsible res1
     schedulingmode duration
@@ -293,9 +315,11 @@ task  "" {    milestone
     effortleft 120.0d
     length 15.0d
     charge 5000.0
-    flag 
+    flag deploy
 }
-task  "" {    note Post-deployment maintenance.
+
+task task7 "Maintenance Planning" {
+    note "Post-deployment maintenance."
     scheduling alap
     responsible res2
     schedulingmode effort
@@ -307,9 +331,11 @@ task  "" {    note Post-deployment maintenance.
     effortleft 240.0d
     length 30.0d
     charge 3000.0
-    flag 
+    flag maint
 }
-task  "" {    note Project documentation.
+
+task task8 "Documentation" {
+    note "Project documentation."
     scheduling asap
     responsible res3
     schedulingmode length
@@ -323,11 +349,13 @@ task  "" {    note Project documentation.
     length 45.0d
     complete 10.0
     charge 4000.0
-    flag 
-    task subtask8_1 User Manual
-    task subtask8_2 Technical Docs
+    flag doc
+    task subtask8_1 "User Manual"
+    task subtask8_2 "Technical Docs"
 }
-task  "" {    note User training sessions.
+
+task task9 "Training" {
+    note "User training sessions."
     scheduling asap
     responsible res4
     schedulingmode effort
@@ -339,10 +367,12 @@ task  "" {    note User training sessions.
     effortleft 160.0d
     length 20.0d
     charge 2000.0
-    flag 
+    flag train
 }
-task  "" {    milestone
-    note Final review.
+
+task task10 "Review and Audit" {
+    milestone
+    note "Final review."
     scheduling asap
     responsible res5
     schedulingmode duration
@@ -354,9 +384,11 @@ task  "" {    milestone
     effortleft 80.0d
     length 10.0d
     charge 1000.0
-    flag 
+    flag audit
 }
-task  "" {    note Migrate existing data.
+
+task task11 "Data Migration" {
+    note "Migrate existing data."
     scheduling asap
     responsible res6
     schedulingmode effort
@@ -368,9 +400,11 @@ task  "" {    note Migrate existing data.
     effortleft 240.0d
     length 30.0d
     charge 6000.0
-    flag 
+    flag mig
 }
-task  "" {    note Conduct security checks.
+
+task task12 "Security Audit" {
+    note "Conduct security checks."
     scheduling asap
     responsible res7
     schedulingmode effort
@@ -382,9 +416,11 @@ task  "" {    note Conduct security checks.
     effortleft 160.0d
     length 20.0d
     charge 7000.0
-    flag 
+    flag sec
 }
-task  "" {    note Optimize system performance.
+
+task task13 "Performance Optimization" {
+    note "Optimize system performance."
     scheduling asap
     responsible res8
     schedulingmode effort
@@ -396,9 +432,11 @@ task  "" {    note Optimize system performance.
     effortleft 200.0d
     length 25.0d
     charge 4000.0
-    flag 
+    flag opt
 }
-task  "" {    note UAT phase.
+
+task task14 "User Acceptance Testing" {
+    note "UAT phase."
     scheduling asap
     responsible res9
     schedulingmode effort
@@ -410,9 +448,11 @@ task  "" {    note UAT phase.
     effortleft 240.0d
     length 30.0d
     charge 5000.0
-    flag 
+    flag uat
 }
-task  "" {    note Make final changes.
+
+task task15 "Final Adjustments" {
+    note "Make final changes."
     scheduling asap
     responsible res10
     schedulingmode effort
@@ -424,8 +464,9 @@ task  "" {    note Make final changes.
     effortleft 80.0d
     length 10.0d
     charge 2000.0
-    flag 
+    flag adj
 }
+
 
 # ------------END-------------
 

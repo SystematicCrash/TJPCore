@@ -6,7 +6,7 @@ account {{ account.id }} "{{ account.name }}" {
     {% endif %}
 
     {%- if account.flags %}
-    flag {{ flags | join(',\n') }}
+    flag {{ account.flags | join(', ') }}
     {% endif %}
 
     {%- for sub_account in account.accounts %}
@@ -17,5 +17,6 @@ account {{ account.id }} "{{ account.name }}" {
     credits {{credit.get("date")}} "{{credit.get("description")}}" {{credit.get("amount")}}
     {% endfor %}
 }
+
 {% endfor %}
 {% endmacro %}

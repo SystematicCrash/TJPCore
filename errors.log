@@ -676,3 +676,101 @@ ERROR: Failed to generate tjp file!
 Details: name 'generate_tasks' is not defined - 2025-08-24 17:49:51
 ERROR: Project with id: jlklk not found! - 2025-08-24 22:45:27
 ERROR: Project with id=jlklk not found! - 2025-08-24 22:45:59
+ERROR: Project with id=klkl not found! - 2025-08-25 11:56:55
+ERROR: Project with id = klkl not found! - 2025-08-25 11:57:21
+ERROR: Project with id = klkl not found! - 2025-08-25 12:00:55
+ERROR: Project with id = klkl not found! - 2025-08-25 12:01:45
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '-' found. Expecting :STRING
+project proj2025-
+ - 2025-08-25 12:02:06
+ERROR: Failed to generate tjp file!
+Details: 'coroutine' object has no attribute 'get' - 2025-08-25 13:19:46
+ERROR: Failed to generate tjp file!
+Details: 'coroutine' object is not iterable - 2025-08-25 13:41:22
+ERROR: Failed to generate tjp file!
+Details: 'coroutine' object is not iterable - 2025-08-25 13:42:51
+ERROR: Failed to generate tjp file!
+Details: 'coroutine' object is not iterable - 2025-08-25 13:43:38
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 13:46:25
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 13:46:45
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 13:48:26
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 13:48:40
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 13:49:40
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:00:05
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:03:30
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:04:30
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:05:23
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:06:41
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:08:19
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:12:11
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:13:02
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:14:23
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:14:55
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:26:15
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:27:10
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:28:25
+ERROR: Failed to generate tjp file!
+Details: 'str' object has no attribute 'get' - 2025-08-25 14:29:24
+ERROR: Failed to generate tjp file!
+Details: 'resources' - 2025-08-25 14:37:09
+ERROR: Failed to generate tjp file!
+Details: cannot access local variable 'source' where it is not associated with a value - 2025-08-25 14:37:37
+ERROR: Failed to finish processing! Because of below errors:
+/bin/sh: line 1: tj: command not found
+ - 2025-08-25 14:38:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '-' found. Expecting :STRING
+project proj2025-
+ - 2025-08-25 14:38:40
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '0.0' found. Expecting :STRING
+project proj2025_1.0
+ - 2025-08-25 14:39:21
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '0.0' found. Expecting :STRING
+project proj20251.0
+ - 2025-08-25 14:39:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 14:40:15
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f7317c86c10> - 2025-08-25 14:40:44
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 14:40:45
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 14:41:05
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f7317add370>, 12172.556371942), (<aiohttp.client_proto.ResponseHandler object at 0x7f7317b1d010>, 12172.593389078), (<aiohttp.client_proto.ResponseHandler object at 0x7f7317b1d250>, 12172.593552805), (<aiohttp.client_proto.ResponseHandler object at 0x7f7317b1d1f0>, 12172.599254081), (<aiohttp.client_proto.ResponseHandler object at 0x7f7317b1d3d0>, 12172.617808673)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f7317c87750> - 2025-08-25 14:41:18
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 14:41:19
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 14:41:33

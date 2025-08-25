@@ -1,6 +1,6 @@
 {% macro header(project, scenarios) %}
-project {{project.project_id}}{{project.version}} "{{project.project_name}}" {{project.start}} +{{project.duration}}d {
-{%- if project.timezone %}
+project {{project.id}} "{{project.name}} v{{project.version}}" {{project.start}} +{{project.duration}}d {
+{% if project.timezone %}
     timezone "{{project.timezone}}"
 {% endif %}
 
@@ -13,7 +13,7 @@ project {{project.project_id}}{{project.version}} "{{project.project_name}}" {{p
 {% endif %}
 
 {%- if project.now %}
-    now {{project.status_date}}
+    now {{project.now}}
 {% endif %}
 
 {%- if project.workinghours %}
@@ -24,36 +24,36 @@ project {{project.project_id}}{{project.version}} "{{project.project_name}}" {{p
 
 {%- if scenarios %}
     {% for scenario in scenarios %}
-        scenario {{scenario.id}} "{{scenario.name}}"{
-            {% if scenario.active %}
-            active yes
-            {% else %}
-            active no
-            {% endif %}
-        }
+    scenario {{scenario.id}} "{{scenario.name}}" {
+        {% if scenario.active %}
+        active yes
+        {% else %}
+        active no
+        {% endif %}
+    }
     {% endfor %}
 {% endif %}
 
 {%- if project.markdate %}
-markdate {{project.markdate}}
+    markdate {{project.markdate}}
 {% endif %}
 
 {%- if project.dailyworkinghours %}
-dailyworkinghours project.dailyworkinghours
+    dailyworkinghours {{project.dailyworkinghours}}
 {% endif %}
 
 {%- if project.timingresolution %}
-timingresolution {{project.timingresolution}}min
+    timingresolution {{project.timingresolution}}min
 {% endif %}
 
 {%- if project.yearlyworkingdays %}
-yearlyworkingdays {{project.yearlyworkingdays}}min
+    yearlyworkingdays {{project.yearlyworkingdays}}
 {% endif %}
 
 {%- if project.weekstartsmonday %}
-weekstartsmonday
+    weekstartsmonday
 {%- elif project.weekstartssunday %}
-weekstartssunday
+    weekstartssunday
 {% endif %}
 
 }

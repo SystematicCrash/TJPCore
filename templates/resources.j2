@@ -1,7 +1,7 @@
 {% macro resources(resources, info) %}
 {% for resource in resources %}
-resource {{resource.resource_id}} "{{resource.resource_name}}" {
-    {%- if resource.rate %}
+resource {{resource.id}} "{{resource.name}}" {
+    {% if resource.rate %}
     rate {{resource.rate}}
     {% endif %}
 
@@ -14,7 +14,7 @@ resource {{resource.resource_id}} "{{resource.resource_name}}" {
     {% endif %}
 
     {%- if resource.flags %}
-    flag {{ flags | join(',\n') }}
+    flag {{ resource.flags | join(',\n') }}
     {% endif %}
 
     {%- if resource.efficiency %}
@@ -28,7 +28,7 @@ resource {{resource.resource_id}} "{{resource.resource_name}}" {
     {%- if resource.workinghours %}
         {% set days = resource.workinghours.keys() | list | first %}
         {% set hours = resource.workinghours.get(days) %}
-        workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
     {% endif %}    
 
     {%- if resource.leaves %}
@@ -43,9 +43,10 @@ resource {{resource.resource_id}} "{{resource.resource_name}}" {
     vacation {{vacation.get("name")}} {{vacation["interval"]["start"]}}-{{vacation["interval"]["end"]}}
     {% endfor%}
 
-    {% for sub_resource in resource.resources %}
+    {%- for sub_resource in resource.resources %}
     resource {{sub_resource["id"]}} "{{sub_resource["name"]}}"
     {% endfor %}
 }
+
 {% endfor %}
 {% endmacro %}

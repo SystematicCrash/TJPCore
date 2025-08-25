@@ -1,12 +1,12 @@
 {% macro tasks(tasks) %}
 {% for task in tasks %}
-task {{ task.task_id }} "{{ task.task_name }}" {
-    {%- if task.milestone %}
+task {{ task.id }} "{{ task.name }}" {
+    {% if task.milestone %}
     milestone
     {% endif %}
 
     {%- if task.note %}
-    note {{task.note}}
+    note "{{task.note}}"
     {% endif %}
 
     {%- if task.scheduling %}
@@ -102,16 +102,17 @@ task {{ task.task_id }} "{{ task.task_name }}" {
     {% endif %}
 
     {%- if task.flags %}
-    flag {{ flags | join(', ') }}
+    flag {{ task.flags | join(', ') }}
     {% endif %}
 
     {%- for sub_task in task.tasks %}
-    task {{sub_task["id"]}} {{sub_task["name"]}}
+    task {{sub_task["id"]}} "{{sub_task["name"]}}"
     {% endfor %}
 
     {%- if task.period %}
     period {{task.period["start"]}} - {{task.period["end"]}}
     {% endif %}
 }
+
 {% endfor %}
 {% endmacro %}
