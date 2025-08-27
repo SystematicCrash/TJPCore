@@ -14,7 +14,7 @@ from helpers.config_helper import get_config
 from models.project import initialize_projects
 from models.task import initialize_tasks, Task
 from models.resource import initialize_resources, Resource
-from models.account import initialize_accounts
+from models.account import initialize_accounts, Account
 from models.shift import initialize_shifts
 from models.scenario import initialize_scenarios
 from helpers.utility import cast_string_fields_to_numeric_types
@@ -24,7 +24,7 @@ from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, B
 
 indexes_names = get_config('data_indexes')
 
-def define_flags(tasks: list[Task], resources: list[Resource]):
+def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Account]):
     flags = set()
     for task in tasks:
         if task.flags:
@@ -33,6 +33,10 @@ def define_flags(tasks: list[Task], resources: list[Resource]):
     for resource in resources:
         if resource.flags:
             flags.update(resource.flags)
+    
+    for account in accounts:
+        if account.flags:
+            flags.update(account.flags)
     return flags
 
 
@@ -96,7 +100,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         resources = initialize_resources(data_map.get(indexes_names['resource'], []))
         accounts = initialize_accounts(data_map.get(indexes_names['account'], []))
         scenarios = initialize_scenarios(data_map.get(indexes_names['scenario'], []))
-        flags = define_flags(tasks, resources)
+        flags = define_flags(tasks, resources, accounts)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
         traceback.print_exc()

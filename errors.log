@@ -794,3 +794,109 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
     workinghours thu 9
  - 2025-08-25 17:51:32
+ERROR: Failed to generate tjp file!
+Details: 'Project' object has no attribute 'end' - 2025-08-27 18:04:20
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 18:08:52
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3a1a2e1810> - 2025-08-27 18:16:58
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 18:16:59
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3a1a2e1810> - 2025-08-27 19:52:52
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 19:57:20
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 19:59:19
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3a1a2e02d0> - 2025-08-27 20:43:30
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 20:43:31
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 20:45:12
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 20:46:16
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0bcac1c910> - 2025-08-27 20:48:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0bcac73250> - 2025-08-27 20:48:48
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project v" 2025-01-01 +0d
+ - 2025-08-27 20:48:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project" 2025-01-01 +0d
+ - 2025-08-27 20:50:15
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project" 2025-01-01 +0d
+ - 2025-08-27 20:50:57
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0bcac0bb10> - 2025-08-27 20:53:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project" 2025-01-01 +0d
+ - 2025-08-27 20:54:19
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0bcac0a5d0> - 2025-08-27 20:55:24
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: The interval duration may not be 0.
+project proj2025 "AI Development Project" 2025-01-01 +0d
+ - 2025-08-27 20:55:24
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:59: Error: Unexpected token 'Unknown' found. Expecting one of 'project', 'annual', 'special', 'sick', 'unpaid', 'holiday', 'unemployed'
+    leaves Unknown
+ - 2025-08-27 20:58:29
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:59: Error: Unexpected token 'Unknown' found. Expecting one of 'project', 'annual', 'special', 'sick', 'unpaid', 'holiday', 'unemployed'
+    leaves "Unknown"
+ - 2025-08-27 21:00:07
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f210e6a8910> - 2025-08-27 21:01:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:95: Error: Unexpected token 'flag' found. Expecting '}'
+    flag
+ - 2025-08-27 21:01:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:92: Error: Undeclared flag 'expenses'
+    flags expenses
+ - 2025-08-27 21:02:40
+ERROR: Failed to generate tjp file!
+Details: define_flags() missing 1 required positional argument: 'accounts' - 2025-08-27 21:04:31
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:96: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
+    credits 2025-06-01
+ - 2025-08-27 21:05:04
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:96: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
+    credits 2025-06-01
+ - 2025-08-27 21:07:07
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fbaf13507d0> - 2025-08-27 21:08:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:96: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
+    credits 2025-06-01
+ - 2025-08-27 21:08:24
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:96: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
+    credits 2025-06-01
+ - 2025-08-27 21:10:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:96: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
+    credits 2025-06-01
+ - 2025-08-27 21:15:41

@@ -17,24 +17,20 @@ task {{ task.id }} "{{ task.name }}" {
     responsible {{task.responsible}}
     {% endif %}
 
-    {%- if task.schedulingmode %}
-    schedulingmode {{task.schedulingmode}}
-    {% endif %}
-
     {%- if task.shifts %}
-    shifts {{task.shifts}}
+    shifts {{ task.shifts | join(', ') }}
     {% endif %}
 
     {%- if task.chargeset %}
-    chargeset {{task.chargeset}}
+    chargeset {{ task.chargeset | join(', ') }}
     {% endif %}
 
     {%- if task.depends %}
-    depends {{task.depends}}
+    depends {{ task.depends | join(', ') }}
     {% endif %}
 
     {%- if task.precedes %}
-    precedes {{task.precedes}}
+    precedes {{ task.precedes | join(', ') }}
     {% endif %}
 
     {%- if task.scheduled %}
@@ -102,17 +98,8 @@ task {{ task.id }} "{{ task.name }}" {
     {% endif %}
 
     {%- if task.flags %}
-    flag {{ task.flags | join(', ') }}
-    {% endif %}
-
-    {%- for sub_task in task.tasks %}
-    task {{sub_task["id"]}} "{{sub_task["name"]}}"
-    {% endfor %}
-
-    {%- if task.period %}
-    period {{task.period["start"]}} - {{task.period["end"]}}
+    flags {{ task.flags | join(', ') }}
     {% endif %}
 }
-
 {% endfor %}
 {% endmacro %}

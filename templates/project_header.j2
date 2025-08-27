@@ -1,5 +1,5 @@
 {% macro header(project, scenarios) %}
-project {{project.id}} "{{project.name}} v{{project.version}}" {{project.start}} +{{project.duration}}d {
+project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}}d {
 {% if project.timezone %}
     timezone "{{project.timezone}}"
 {% endif %}
@@ -17,12 +17,12 @@ project {{project.id}} "{{project.name}} v{{project.version}}" {{project.start}}
 {% endif %}
 
 {%- if project.workinghours %}
-    {% for day in project.workinghours.keys() | list %}
-    {% set hours = project.workinghours.get(day) %}
-    {% if not hours %}
-    workinghours {{day}} off
+    {% for key in project.workinghours.keys() | list %}
+    {% set day = project.workinghours.get(key, {}) %}
+    {% if not day %}
+    workinghours {{key}} off
     {% else %}
-    workinghours {{day}} {{hours[0]}} - {{hours[1]}}
+    workinghours {{key}} {{day["start"]}} - {{day["end"]}}
     {% endif %}
     {% endfor %}
 {% endif %}
@@ -60,7 +60,6 @@ project {{project.id}} "{{project.name}} v{{project.version}}" {{project.start}}
 {%- elif project.weekstartssunday %}
     weekstartssunday
 {% endif %}
-
 }
 {% endmacro %}
 

@@ -5,29 +5,18 @@ from datetime import date, datetime
 class Project:
     id: str = ''
     name: str = ''
-    version: str = ''
-    numberformat: str = ''
-    outputdir: str = ''
-    shorttimeformat: str = ''
-    timeformat: str = ''
     timezone: str = ''
     currency: str = ''
-    currencyformat: str = ''
-    include: str = ''
     trackingscenario: str = ''
     start: date = None
-    end: date = None
     markdate: date = None
     now: date = None
     dailyworkinghours: float = 0
-    timingresolution: int = 0
     yearlyworkingdays: float = 0
     duration: int = 0
+    duration_unit: str = ''
     weekstartsmonday: bool = False
     weekstartssunday: bool = False
-    alertlevels: dict = field(default_factory=dict)
-    extend: dict = field(default_factory=dict)
-    journalentry: list[dict] = field(default_factory=list[dict])
     workinghours: dict = field(default_factory=dict)
     json_document: dict = field(default_factory=dict)
 
@@ -44,13 +33,6 @@ class Project:
 
             value = source[f.name]
             setattr(self, f.name, value)
-
-        date_format = "%Y-%m-%d"  
-
-        self.start = datetime.strptime(self.start, date_format).date()
-        self.end = datetime.strptime(self.end, date_format).date()
-
-        self.duration = (self.end - self.start).days
 
 
 

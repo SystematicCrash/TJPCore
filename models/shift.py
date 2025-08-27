@@ -5,12 +5,12 @@ from dataclasses import dataclass, field, fields
 class Shift:
     id: str = ''
     name: str = ''
+    projectid: str = ''
     replace: bool = False
     timezone: str = ''
     vacation: list[dict] = field(default_factory=list[dict])
     leaves: list[dict] = field(default_factory=list[dict])
     workinghours: dict = field(default_factory=dict)
-    shifts: list[dict] = field(default_factory=list[dict])
     json_document: dict = field(default_factory=dict)
 
     def __post_init__(self):
@@ -25,7 +25,6 @@ class Shift:
 
             value = source[f.name]
             setattr(self, f.name, value)
-
 
 
 def initialize_shifts(data: list):

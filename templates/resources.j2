@@ -10,11 +10,11 @@ resource {{resource.id}} "{{resource.name}}" {
     {% endif%}
 
     {%- if resource.managers %}
-    managers {{resource.managers}}
+    managers {{ resource.managers | join(', ') }}
     {% endif %}
 
     {%- if resource.flags %}
-    flag {{ resource.flags | join(',\n') }}
+    flags {{ resource.flags | join(', ') }}
     {% endif %}
 
     {%- if resource.efficiency %}
@@ -22,31 +22,29 @@ resource {{resource.id}} "{{resource.name}}" {
     {% endif %}
 
     {%- if resource.shifts %}
-    shifts {{resource.shifts}}
+    shifts {{ resource.shifts | join(', ') }}
     {% endif %}
 
-    {%- if resource.workinghours %}
-        {% set days = resource.workinghours.keys() | list | first %}
-        {% set hours = resource.workinghours.get(days) %}
-    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
-    {% endif %}    
-
-    {%- if resource.leaves %}
-    {% for leave in resource.leaves %}
-    {% set type = leave.keys() | list | first %}
-    {% set date = leave.get(type) %}
-    leaves {{type}} {{date}}
+{%- if resource.workinghours %}
+    {% for key in resource.workinghours.keys() | list %}
+    {% set day = resource.workinghours.get(key, {}) %}
+    {% if not day %}
+    workinghours {{key}} off
+    {% else %}
+    workinghours {{key}} {{day["start"]}} - {{day["end"]}}
+    {% endif %}
     {% endfor %}
+{% endif %}
+
+    {%- for leave in resource.leaves %}
+    {% if leave.get("duration_unit") %}
+    leaves {{leave.get("type")}} "{{leave.get("name")}}" {{leave.get("start")}} +{{leave.get("duration")}}{{leave.get("duration_unit")[0]}}
     {% endif %}
+    {% endfor %}
 
     {%- for vacation in resource.vacation %}
-    vacation {{vacation.get("name")}} {{vacation["interval"]["start"]}}-{{vacation["interval"]["end"]}}
-    {% endfor%}
-
-    {%- for sub_resource in resource.resources %}
-    resource {{sub_resource["id"]}} "{{sub_resource["name"]}}"
+    vacation "{{vacation.get("name")}}" {{vacation.get("start")}} - {{vacation.get("end")}}
     {% endfor %}
 }
-
 {% endfor %}
 {% endmacro %}

@@ -12,15 +12,6 @@ class Task:
     note: str = ''
     scheduling: str = ''
     responsible: str = ''
-    schedulingmode: str = ''
-    shifts: str = ''
-    fail: str = ''
-    warn: str = ''
-    adopt: str = ''
-    chargeset: str = ''
-    depends: str = ''
-    purge: str = ''
-    precedes: str = ''
     scheduled: bool = False
     milestone: bool = False
     priority: int = 0
@@ -37,14 +28,13 @@ class Task:
     strat: date = None
     end: date = None
     charge: Decimal = Decimal("0")
+    shifts: list[str] = field(default_factory=list[str])
+    chargeset: list[str] = field(default_factory=list[str])
     flags: list[str]  = field(default_factory=list[str])
-    booking: list[dict] = field(default_factory=list[dict])
+    depends: list[str] = field(default_factory=list[str])
+    precedes: list[str] = field(default_factory=list[str])
     limits: dict = field(default_factory=dict)
-    journalentry: list[dict] = field(default_factory=list[dict])
-    priod: dict = field(default_factory=dict)
     allocate: list[dict] = field(default_factory=list[dict])
-    supplement: dict = field(default_factory=dict)
-    tasks: list[dict] = field(default_factory=list[dict])
     json_document: dict = field(default_factory=dict)
 
     def __post_init__(self):
@@ -71,10 +61,3 @@ def initialize_tasks(data: list):
     for task in data:
         tasks.append(Task(json_document=task))
     return tasks
-
-
-
-        
-
-
-

@@ -36,7 +36,6 @@ def colorized_print(color: str, text: str, tqdm_write=True):
             tqdm.write(colors[color] + st.DIM +  text + st.RESET_ALL)
         else:
             print(colors[color] + st.DIM +  text + st.RESET_ALL)
-
     else:
         raise ValueError(f"{color} is not present in colors")
 

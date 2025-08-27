@@ -11,36 +11,25 @@ shift {{shift.id}} "{{shift.name}}" {
     {% endif %}
 
 {%- if shift.workinghours %}
-    {% for day in shift.workinghours.keys() | list %}
-    {% set hours = shift.workinghours.get(day) %}
-    {% if not hours %}
-    workinghours {{day}} off
+    {% for key in shift.workinghours.keys() | list %}
+    {% set day = shift.workinghours.get(key, {}) %}
+    {% if not day %}
+    workinghours {{key}} off
     {% else %}
-    workinghours {{day}} {{hours[0]}} - {{hours[1]}}
+    workinghours {{key}} {{day["start"]}} - {{day["end"]}}
     {% endif %}
     {% endfor %}
 {% endif %}
 
     {%- if shift.leaves %}
     {% for leave in shift.leaves %}
-    {% set type = leave.keys() | list | first %}
-    {% set date = leave.get(type) %}
-    leaves {{type}} {{date}}
+    leaves {{leave.get("type")}} "{{leave.get("name")}}" {{leave.get("start")}} +{{leave.get("duration")}}{{leave.get("duration_unit")[0]}}
     {% endfor %}
     {% endif %}
 
-    {%- for sub_shift in shift.shifts %}
-    shift {{sub_shift.get("id")}} "{{sub_shift.get("name")}}"
+    {%- for vacation in shift.vacation %}
+    vacation "{{vacation.get("name")}}" {{vacation.get("start")}} - {{vacation.get("end")}}
     {% endfor %}
-
-    {%- if shift.vacation %}
-    {% for vacation in shift.vacation %}
-    {% set name = vacation.keys() | list %}
-    {% set start_to_end = vacation.get(name) %}
-    vacation {{name}} {{start_to_end.get("start")}} - {{start_to_end.get("end")}}
-    {% endfor %}
-    {% endif %}
 }
-
 {% endfor %}
 {% endmacro %}
