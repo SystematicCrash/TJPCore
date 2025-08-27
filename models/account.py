@@ -31,3 +31,4 @@ def initialize_accounts(data: list):
     for account in data:
         accounts.append(Account(json_document=account))
     return accounts
+

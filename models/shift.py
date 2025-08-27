@@ -7,7 +7,7 @@ class Shift:
     name: str = ''
     replace: bool = False
     timezone: str = ''
-    vacations: list[dict] = field(default_factory=list[dict])
+    vacation: list[dict] = field(default_factory=list[dict])
     leaves: list[dict] = field(default_factory=list[dict])
     workinghours: dict = field(default_factory=dict)
     shifts: list[dict] = field(default_factory=list[dict])

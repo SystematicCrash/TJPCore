@@ -19,9 +19,9 @@ class Project:
     end: date = None
     markdate: date = None
     now: date = None
-    dailyworkinghours: int = float
+    dailyworkinghours: float = 0
     timingresolution: int = 0
-    yearlyworkingdays: int = 0
+    yearlyworkingdays: float = 0
     duration: int = 0
     weekstartsmonday: bool = False
     weekstartssunday: bool = False
@@ -51,6 +51,8 @@ class Project:
         self.end = datetime.strptime(self.end, date_format).date()
 
         self.duration = (self.end - self.start).days
+
+
 
 
 def initialize_projects(data: list):

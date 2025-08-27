@@ -10,11 +10,16 @@ shift {{shift.id}} "{{shift.name}}" {
     timezone "{{shift.timezone}}"
     {% endif %}
 
-    {%- if shift.workinghours %}
-        {% set days = shift.workinghours.keys() | list | first %}
-        {% set hours = shift.workinghours.get(days) %}
-    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+{%- if shift.workinghours %}
+    {% for day in shift.workinghours.keys() | list %}
+    {% set hours = shift.workinghours.get(day) %}
+    {% if not hours %}
+    workinghours {{day}} off
+    {% else %}
+    workinghours {{day}} {{hours[0]}} - {{hours[1]}}
     {% endif %}
+    {% endfor %}
+{% endif %}
 
     {%- if shift.leaves %}
     {% for leave in shift.leaves %}
@@ -28,10 +33,11 @@ shift {{shift.id}} "{{shift.name}}" {
     shift {{sub_shift.get("id")}} "{{sub_shift.get("name")}}"
     {% endfor %}
 
-    {%- if shift.vacations %}
-    {% for vacation in shift.vacations %}
-    {% set name = next(iter(vacation))%}
-    vacation {{name}} {{vacation.get("start")}}-{{vacation.get("end")}}
+    {%- if shift.vacation %}
+    {% for vacation in shift.vacation %}
+    {% set name = vacation.keys() | list %}
+    {% set start_to_end = vacation.get(name) %}
+    vacation {{name}} {{start_to_end.get("start")}} - {{start_to_end.get("end")}}
     {% endfor %}
     {% endif %}
 }

@@ -17,9 +17,14 @@ project {{project.id}} "{{project.name}} v{{project.version}}" {{project.start}}
 {% endif %}
 
 {%- if project.workinghours %}
-    {% set days = project.workinghours.keys() | list | first %}
-    {% set hours = project.workinghours.get(days) %}
-    workinghours {{days}} {{hours[0]}}-{{hours[1]}}
+    {% for day in project.workinghours.keys() | list %}
+    {% set hours = project.workinghours.get(day) %}
+    {% if not hours %}
+    workinghours {{day}} off
+    {% else %}
+    workinghours {{day}} {{hours[0]}} - {{hours[1]}}
+    {% endif %}
+    {% endfor %}
 {% endif %}
 
 {%- if scenarios %}

@@ -3,7 +3,13 @@ project proj2025 "AI Development Project v1.0" 2025-01-01 +364d {
     timezone "UTC"
     currency "USD"
     now 2025-08-20
-    workinghours thu 9-17
+    workinghours thu 9 - 17
+    workinghours tue 9 - 17
+    workinghours wed 9 - 17
+    workinghours sat off
+    workinghours fri 9 - 17
+    workinghours mon 9 - 17
+    workinghours sun off
     scenario base "Baseline Scenario" {
         active yes
     }
@@ -28,6 +34,7 @@ shift shift1 "Day Shift" {
     timezone "UTC"
     workinghours mon-fri 9-17
     leaves holiday 2025-12-25
+    vacation summer 2025-07-01 - 2025-07-31
 }
 
 shift shift2 "Evening Shift" {
@@ -47,25 +54,25 @@ shift shift3 "Night Shift" {
 
 # ------------Flags-------------
 flags
-design,
-requirements,
-manager,
-sec,
-maint,
-arch,
-dev,
 planning,
-train,
 audit,
 analyst,
-qa,
-opt,
-adj,
-deploy,
-uat,
-mig,
 doc,
-req
+design,
+requirements,
+uat,
+qa,
+arch,
+maint,
+mig,
+opt,
+deploy,
+req,
+adj,
+sec,
+manager,
+train,
+dev
 # ------------END-------------
 
 

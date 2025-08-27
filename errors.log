@@ -774,3 +774,23 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
     workinghours thu 9
  - 2025-08-25 14:41:33
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'
+    workinghours 9
+ - 2025-08-25 17:13:43
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 17:17:31
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 17:50:00
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 17:50:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:6: Error: Unexpected token '9' found. Expecting one of 'off', :TIME
+    workinghours thu 9
+ - 2025-08-25 17:51:32
