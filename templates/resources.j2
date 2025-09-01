@@ -30,7 +30,7 @@ resource {{resource.id}} "{{resource.name}}" {
     {% set day = resource.workinghours.get(key, {}) %}
     {% if not day %}
     workinghours {{key}} off
-    {% else %}
+    {% elif day.get("start") and day.get("end") %}
     workinghours {{key}} {{day["start"]}} - {{day["end"]}}
     {% endif %}
     {% endfor %}

@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from concurrent.futures import ThreadPoolExecutor
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, write_on_index, run_query, fetch_index
+from helpers.elastic_helper import make_connection, write_on_index, term_query, fetch_index
 from helpers.config_helper import get_config
 from models.project import initialize_projects
 from models.task import initialize_tasks, Task
@@ -43,41 +43,19 @@ def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Ac
 
 async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
     data_map = {}
-    project_query = {
-        "_source": {
-            "excludes": ["*vector"]
-        },
-        "query": {
-            "term": {
-                "_id": project_id
-            }
-        }
-    }
-    tasks_query = {
-        "_source": {
-            "excludes": ["*vector"]
-        },
-        "query": {
-            "term": {
-                "projectid": project_id
-            }
-        }
-    }
-    project_data: dict | None = await run_query(
-        connection, index_name=indexes_names['project'], query=project_query
-        )
-
+    project_data: dict | None = await term_query(connection, indexes_names['project'], "_id", project_id)
+    
     if not project_data:
         raise BadInputError(message=f"Project with id = {project_id} not found!", status_code=404)
     
     data_map[indexes_names['project']] = list(project_data.values())[0]
              
     results = await asyncio.gather(
-        run_query(connection, index_name=indexes_names['task'], query=tasks_query),
-        fetch_index(connection, index_name=indexes_names['resource']),
-        fetch_index(connection, index_name=indexes_names['account']),
-        fetch_index(connection, index_name=indexes_names['shift']),
-        fetch_index(connection, index_name=indexes_names['scenario'])
+        term_query(connection, indexes_names['task'], "projectid", project_id),
+        term_query(connection, indexes_names['resource'], "projectid", project_id),
+        term_query(connection, indexes_names['account'], "projectid", project_id),
+        term_query(connection, indexes_names['shift'], "projectid", project_id),
+        term_query(connection, indexes_names['scenario'], "projectid", project_id)
     )
 
     data_map.update({list(r.keys())[0]: list(r.values())[0] for r in results})

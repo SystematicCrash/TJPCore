@@ -46,5 +46,21 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
 
 # Run custom queries
 async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
-    result = await es.search(index=index_name, body=query, size=10000)
-    return {index_name : result['hits']['hits']} or None
+    result = await es.search(index=index_name, body=query, size=10_000)
+    return {index_name : result['hits']['hits']} or None 
+
+
+
+async def term_query(es: AsyncElasticsearch, index_name: str, field: str, value: str):
+    query = {
+        "_source": {
+            "excludes": ["*vector"]
+        },
+        "query": {
+            "term": {
+                field: value
+            }
+        }
+    }
+    result = await es.search(index=index_name, body=query, size=10_000)
+    return {index_name: result['hits']['hits']} or None

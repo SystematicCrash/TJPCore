@@ -25,8 +25,8 @@ class Task:
     minstart: date = None
     maxend: date = None
     minend: date = None
-    strat: date = None
-    end: date = None
+    start_date: date = None
+    end_date: date = None
     charge: Decimal = Decimal("0")
     shifts: list[str] = field(default_factory=list[str])
     chargeset: list[str] = field(default_factory=list[str])

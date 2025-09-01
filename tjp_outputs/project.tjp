@@ -7,16 +7,6 @@ project proj2025 "AI Development Project" 2025-01-01 +10d {
     workinghours fri 9:00 - 17:00
     workinghours mon 9:00 - 17:00
     workinghours sun off
-    scenario base "Baseline Scenario" {
-        active yes
-    }
-    scenario optimistic "Optimistic Scenario" {
-        active no
-    }
-    scenario pessimistic "Pessimistic Scenario" {
-        active no
-    }
-
 }
 
 # ------------END-------------
@@ -32,7 +22,6 @@ shift shift2 "Evening Shift" {
     workinghours mon off
     workinghours sun off
 }
-
 shift shift3 "Night Shift" {
     timezone "UTC"
     workinghours thu off
@@ -43,7 +32,6 @@ shift shift3 "Night Shift" {
     workinghours mon off
     workinghours sun off
 }
-
 shift shift1 "Day Shift" {
     replace
     timezone "UTC"
@@ -58,33 +46,13 @@ shift shift1 "Day Shift" {
     vacation "Unknown" 2025-01-01 - 2025-03-04
 }
 
-
 # ------------END-------------
 
 
 # ------------Flags-------------
 flags
-audit,
-req,
-mig,
-deploy,
-arch,
-qa,
-dev,
-uat,
-analyst,
 revenue,
-opt,
-expenses,
-design,
-sec,
-train,
-manager,
-planning,
-doc,
-requirements,
-maint,
-adj
+expenses
 # ------------END-------------
 
 
@@ -95,434 +63,22 @@ account acct1 "Project Expenses" {
     credits 2025-01-01 "Initial funding" 100000.0
     credits 2025-06-01 "Mid-year funding" 50000.0
 }
-
 account acct2 "Revenue" {
     aggregate tasks
     flags revenue
     credits 2025-01-01 "Expected revenue" 200000
 }
 
-
 # ------------END-------------
 
 
 # ------------Resources-------------
-resource res1 "Project Manager" {
-    rate 150.0
-    email pm@example.com
-    flags manager
-    efficiency 1.0
-    shifts s, h, i, f, t, 1
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-    leaves vacation "شهادت امام باقر؟" 2025-07-01 +5d
-    vacation "Summer Vacation" 2025-07-01 - 2025-07-10
-}
-
-resource res3 "Requirements Engineer" {
-    rate 130.0
-    email re@example.com
-    managers r, e, s, 1
-    flags req
-    efficiency 1.0
-    shifts s, h, i, f, t, 2
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res4 "Designer" {
-    rate 140.0
-    email designer@example.com
-    managers r, e, s, 1
-    flags design
-    efficiency 1.0
-    shifts s, h, i, f, t, 1
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res5 "Architect" {
-    rate 160.0
-    email arch@example.com
-    managers r, e, s, 1
-    flags arch
-    efficiency 1.0
-    shifts s, h, i, f, t, 1
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res6 "Developer 1" {
-    rate 100.0
-    email dev1@example.com
-    managers r, e, s, 1
-    flags dev
-    efficiency 0.95
-    shifts s, h, i, f, t, 3
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res7 "Developer 2" {
-    rate 100.0
-    email dev2@example.com
-    managers r, e, s, 1
-    flags dev
-    efficiency 1.0
-    shifts s, h, i, f, t, 3
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res8 "Developer 3" {
-    rate 100.0
-    email dev3@example.com
-    managers r, e, s, 1
-    flags dev
-    efficiency 1.0
-    shifts s, h, i, f, t, 3
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res9 "Tester 1" {
-    rate 110.0
-    email tester1@example.com
-    managers r, e, s, 1
-    flags qa
-    efficiency 1.0
-    shifts s, h, i, f, t, 2
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res10 "Tester 2" {
-    rate 110.0
-    email tester2@example.com
-    managers r, e, s, 1
-    flags qa
-    efficiency 1.0
-    shifts s, h, i, f, t, 2
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
-resource res2 "Business Analyst" {
-    rate 120.0
-    email ba@example.com
-    flags analyst
-    efficiency 0.9
-    shifts s, h, i, f, t, 1
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-
 
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
-task task1 "Project Planning" {
-    note "Initial planning task."
-    scheduling asap
-    responsible res1
-    shifts shift1
-    chargeset planning
-    precedes task2
-    scheduled
-    priority 1000
-    effort 120.0d
-    effortdone 120.0d
-    duration 15.0d
-    length 15.0d
-    complete 100.0
-    minstart 2025-01-01
-    maxend 2025-01-20
-    minend 2025-01-10
-    end 2025-01-15
-    charge 5000.0
-    maxend 2025-01-20
-    flags planning
-}
-
-task task2 "Requirements Gathering" {
-    note "Gather requirements from stakeholders."
-    scheduling asap
-    responsible res3
-    shifts shift2
-    chargeset requirements
-    depends task1
-    precedes task3
-    priority 900
-    effort 240.0d
-    effortdone 192.0d
-    duration 30.0d
-    effortleft 48.0d
-    length 30.0d
-    complete 80.0
-    maxstart 2025-01-16
-    minstart 2025-01-16
-    maxend 2025-02-20
-    minend 2025-02-10
-    charge 8000.0
-    maxend 2025-02-20
-    flags requirements
-}
-
-task task3 "Design Phase" {
-    note "System design."
-    scheduling alap
-    responsible res4
-    chargeset design
-    depends task2
-    priority 800
-    effort 360.0d
-    effortdone 180.0d
-    duration 45.0d
-    effortleft 180.0d
-    length 45.0d
-    complete 50.0
-    charge 10000.0
-    flags design
-}
-
-task task4 "Implementation" {
-    note "Code development."
-    scheduling asap
-    responsible res6
-    chargeset dev
-    depends task3
-    priority 700
-    effort 720.0d
-    effortdone 144.0d
-    duration 90.0d
-    effortleft 576.0d
-    length 90.0d
-    complete 20.0
-    charge 20000.0
-    flags dev
-}
-
-task task5 "Testing" {
-    note "Quality assurance."
-    scheduling asap
-    responsible res9
-    chargeset qa
-    depends task4
-    priority 600
-    effort 480.0d
-    duration 60.0d
-    effortleft 480.0d
-    length 60.0d
-    charge 15000.0
-    flags qa
-}
-
-task task6 "Deployment" {
-    milestone
-    note "Final deployment."
-    scheduling asap
-    responsible res1
-    chargeset deploy
-    depends task5
-    priority 500
-    effort 120.0d
-    duration 15.0d
-    effortleft 120.0d
-    length 15.0d
-    charge 5000.0
-    flags deploy
-}
-
-task task7 "Maintenance Planning" {
-    note "Post-deployment maintenance."
-    scheduling alap
-    responsible res2
-    chargeset maint
-    depends task6
-    priority 400
-    effort 240.0d
-    duration 30.0d
-    effortleft 240.0d
-    length 30.0d
-    charge 3000.0
-    flags maint
-}
-
-task task8 "Documentation" {
-    note "Project documentation."
-    scheduling asap
-    responsible res3
-    chargeset doc
-    depends task3
-    priority 300
-    effort 360.0d
-    effortdone 36.0d
-    duration 45.0d
-    effortleft 324.0d
-    length 45.0d
-    complete 10.0
-    charge 4000.0
-    flags doc
-}
-
-task task9 "Training" {
-    note "User training sessions."
-    scheduling asap
-    responsible res4
-    chargeset train
-    depends task5
-    priority 200
-    effort 160.0d
-    duration 20.0d
-    effortleft 160.0d
-    length 20.0d
-    charge 2000.0
-    flags train
-}
-
-task task10 "Review and Audit" {
-    milestone
-    note "Final review."
-    scheduling asap
-    responsible res5
-    chargeset audit
-    depends task6
-    priority 100
-    effort 80.0d
-    duration 10.0d
-    effortleft 80.0d
-    length 10.0d
-    charge 1000.0
-    flags audit
-}
-
-task task11 "Data Migration" {
-    note "Migrate existing data."
-    scheduling asap
-    responsible res6
-    chargeset mig
-    depends task4
-    priority 850
-    effort 240.0d
-    duration 30.0d
-    effortleft 240.0d
-    length 30.0d
-    charge 6000.0
-    flags mig
-}
-
-task task12 "Security Audit" {
-    note "Conduct security checks."
-    scheduling asap
-    responsible res7
-    chargeset sec
-    depends task5
-    priority 950
-    effort 160.0d
-    duration 20.0d
-    effortleft 160.0d
-    length 20.0d
-    charge 7000.0
-    flags sec
-}
-
-task task13 "Performance Optimization" {
-    note "Optimize system performance."
-    scheduling asap
-    responsible res8
-    chargeset opt
-    depends task4
-    priority 750
-    effort 200.0d
-    duration 25.0d
-    effortleft 200.0d
-    length 25.0d
-    charge 4000.0
-    flags opt
-}
-
-task task14 "User Acceptance Testing" {
-    note "UAT phase."
-    scheduling asap
-    responsible res9
-    chargeset uat
-    depends task5
-    priority 650
-    effort 240.0d
-    duration 30.0d
-    effortleft 240.0d
-    length 30.0d
-    charge 5000.0
-    flags uat
-}
-
-task task15 "Final Adjustments" {
-    note "Make final changes."
-    scheduling asap
-    responsible res10
-    chargeset adj
-    depends task14
-    priority 550
-    effort 80.0d
-    duration 10.0d
-    effortleft 80.0d
-    length 10.0d
-    charge 2000.0
-    flags adj
-}
-
 
 # ------------END-------------
 

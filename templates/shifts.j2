@@ -15,7 +15,7 @@ shift {{shift.id}} "{{shift.name}}" {
     {% set day = shift.workinghours.get(key, {}) %}
     {% if not day %}
     workinghours {{key}} off
-    {% else %}
+    {% elif day.get("start") and day.get("end") %}
     workinghours {{key}} {{day["start"]}} - {{day["end"]}}
     {% endif %}
     {% endfor %}

@@ -1,5 +1,5 @@
 {% macro header(project, scenarios) %}
-project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}}d {
+project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}}{{project.duration_unit[0]}} {
 {% if project.timezone %}
     timezone "{{project.timezone}}"
 {% endif %}
@@ -21,7 +21,7 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
     {% set day = project.workinghours.get(key, {}) %}
     {% if not day %}
     workinghours {{key}} off
-    {% else %}
+    {% elif day.get("start") and day.get("end") %}
     workinghours {{key}} {{day["start"]}} - {{day["end"]}}
     {% endif %}
     {% endfor %}
