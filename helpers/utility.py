@@ -15,6 +15,14 @@ def sort_weekdays(days: list[str]) -> list[str]:
 def day_to_an_abbreviation(days: list):
     return [(day[:3]).lower() for day in days]
 
+
+def time_unit_to_an_abbreviation(unit: str):
+    if unit in ["months", "minutes"]:
+        return unit[:3]
+    elif unit in ["days", "years", "weeks"]:
+        return unit[:3]
+
+
 def colorized_print(color: str, text: str, tqdm_write=True):
     colors = {
         'blue': Fore.BLUE,

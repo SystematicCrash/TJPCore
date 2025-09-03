@@ -31,36 +31,48 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
 
 # Fetching docs from an index
 async def fetch_index(es: AsyncElasticsearch, index_name):
-    query = {
-        "_source": {
-            "excludes": ["*vector"]
-        },
-        "query": {
-            "match_all": {}
+    try:
+        query = {
+            "_source": {
+                "excludes": ["*vector"]
+            },
+            "query": {
+                "match_all": {}
+            }
         }
-    }
-    result = await es.search(index=index_name, body=query, size=10000)
-    return {index_name : result['hits']['hits']} or None
+        result = await es.search(index=index_name, body=query, size=10000)
+        return {index_name : result['hits']['hits']} or None
+    except Exception as e:
+        message = f"\nFailed to fetch data from index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 503)
 
         
 
 # Run custom queries
 async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
-    result = await es.search(index=index_name, body=query, size=10_000)
-    return {index_name : result['hits']['hits']} or None 
+    try:
+        result = await es.search(index=index_name, body=query, size=10_000)
+        return {index_name : result['hits']['hits']} or None 
+    except Exception as e:
+        message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 503)
 
 
 
 async def term_query(es: AsyncElasticsearch, index_name: str, field: str, value: str):
-    query = {
-        "_source": {
-            "excludes": ["*vector"]
-        },
-        "query": {
-            "term": {
-                field: value
+    try:
+        query = {
+            "_source": {
+                "excludes": ["*vector"]
+            },
+            "query": {
+                "term": {
+                    field: value
+                }
             }
         }
-    }
-    result = await es.search(index=index_name, body=query, size=10_000)
-    return {index_name: result['hits']['hits']} or None
+        result = await es.search(index=index_name, body=query, size=10_000)
+        return {index_name: result['hits']['hits']} or None
+    except Exception as e:
+        message = f"\nFailed to perorm query on index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 503)

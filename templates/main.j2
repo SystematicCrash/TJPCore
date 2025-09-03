@@ -1,11 +1,15 @@
 # ----------------Project Header-------------
+{% if project %}
 {% import "project_header.j2" as project_header %}
 {{ project_header.header(project, scenarios) }}
+{% endif %}
 # ------------END-------------
 
 # ------------Shifts-------------
+{% if shifts %}
 {% import "shifts.j2" as shift %}
 {{ shift.shifts(shifts) }}
+{% endif %}
 # ------------END-------------
 
 
@@ -18,21 +22,29 @@ flags
 
 
 # ----------------Accounts-------------
+{% if accounts %}
 {% import "accounts.j2" as account %}
 {{ account.accounts(accounts) }}
+{% else %}
+account dev "Primary account"
+{% endif %}
 # ------------END-------------
 
 
 # ------------Resources-------------
+{% if resources %}
 {% import "resources.j2" as resource %}
 {{ resource.resources(resources) }}
+{% endif %}
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
+{% if tasks %}
 {% import "tasks.j2" as task %}
 {{ task.tasks(tasks) }}
+{% endif %}
 # ------------END-------------
 
 

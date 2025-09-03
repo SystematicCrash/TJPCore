@@ -1,84 +1,1422 @@
 # ----------------Project Header-------------
-project proj2025 "AI Development Project" 2025-01-01 +10d {
-    workinghours thu 9:00 - 17:00
-    workinghours tue 9:00 - 17:00
-    workinghours wed 9:00 - 17:00
-    workinghours sat off
-    workinghours fri 9:00 - 17:00
-    workinghours mon 9:00 - 17:00
-    workinghours sun off
+project myFuckingProj "Commercial Construction" 2020-08-03 +344d {
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
 # ------------END-------------
 
 # ------------Shifts-------------
-shift shift2 "Evening Shift" {
-    timezone "UTC"
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-shift shift3 "Night Shift" {
-    timezone "UTC"
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-}
-shift shift1 "Day Shift" {
-    replace
-    timezone "UTC"
-    workinghours thu off
-    workinghours tue off
-    workinghours wed off
-    workinghours sat off
-    workinghours fri off
-    workinghours mon off
-    workinghours sun off
-    leaves annual "Unknown" 2025-01-01 +1d
-    vacation "Unknown" 2025-01-01 - 2025-03-04
-}
-
 # ------------END-------------
 
 
 # ------------Flags-------------
-flags
-revenue,
-expenses
 # ------------END-------------
 
 
 # ----------------Accounts-------------
-account acct1 "Project Expenses" {
-    aggregate tasks
-    flags expenses
-    credits 2025-01-01 "Initial funding" 100000.0
-    credits 2025-06-01 "Mid-year funding" 50000.0
-}
-account acct2 "Revenue" {
-    aggregate tasks
-    flags revenue
-    credits 2025-01-01 "Expected revenue" 200000
-}
-
+account dev "Primary account"
 # ------------END-------------
 
 
 # ------------Resources-------------
+resource res1 "G.C. General Management" {
+    rate 93.0
+}
+resource res2 "G.C. Project Management" {
+    rate 69.0
+}
+resource res3 "G.C. Scheduler" {
+    rate 113.0
+}
+resource res4 "G.C. Procurement" {
+    rate 85.0
+}
+resource res5 "Steel Erection Contractor Management" {
+    rate 64.0
+}
+resource res6 "Roofing Contractor Management" {
+    rate 96.0
+}
+resource res7 "Elevator Contractor Management" {
+    rate 65.0
+}
+resource res8 "Plumbing Contractor Management" {
+    rate 85.0
+}
+resource res9 "Electric Contractor Management" {
+    rate 93.0
+}
+resource res10 "HVAC Contractor Management" {
+    rate 79.0
+}
+resource res11 "Steel Erection Contractor" {
+    rate 88.0
+}
+resource res12 "Electric Contractor" {
+    rate 100.0
+}
+resource res13 "Plumbing Contractor" {
+    rate 91.0
+}
+resource res14 "G.C. Superintendent" {
+    rate 80.0
+}
+resource res15 "G.C. Labor Crew" {
+    rate 44.0
+}
+resource res16 "G.C. Survey Crew" {
+    rate 74.0
+}
+resource res17 "Site Grading Contractor" {
+    rate 139.0
+}
+resource res18 "G.C. Rough Carpenter Crew" {
+    rate 49.0
+}
+resource res19 "G.C. Concrete Crew" {
+    rate 68.0
+}
+resource res20 "Elevator Contractor" {
+    rate 133.0
+}
+resource res21 "Drywall Contractor" {
+    rate 77.0
+}
+resource res22 "Masonry Contractor" {
+    rate 97.0
+}
+resource res23 "Roofing Contractor" {
+    rate 79.0
+}
+resource res24 "Tile Contractor" {
+    rate 106.0
+}
+resource res25 "HVAC Contractor" {
+    rate 83.0
+}
+resource res26 "Window Contractor" {
+    rate 134.0
+}
+resource res27 "G.C. Finish Carpenter Crew" {
+    rate 43.0
+}
+resource res28 "Painting Contractor" {
+    rate 96.0
+}
+resource res29 "Carpet Contractor" {
+    rate 126.0
+}
+resource res30 "Landscape Contractor" {
+    rate 110.0
+}
+resource res31 "Paving Contractor" {
+    rate 78.0
+}
+resource res32 "G.C. Accounting" {
+    rate 51.0
+}
 
 # ------------END-------------
 
 
 
 # ------------Tasks-------------
+task task2 "General Conditions" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 17d
+    complete 79
+    charge 1000 onend
+}
+task task3 "Receive notice to proceed and sign contract" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 3d
+    complete 100
+    charge 1000 onend
+}
+task task4 "Submit bond and insurance documents" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task2
+    priority 500
+    duration 2d
+    complete 100
+    charge 1000 onend
+}
+task task5 "Prepare and submit project schedule" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task3
+    priority 500
+    duration 2d
+    complete 100
+    charge 1000 onend
+}
+task task6 "Prepare and submit schedule of values" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task4
+    priority 500
+    duration 2d
+    complete 100
+    charge 1000 onend
+}
+task task7 "Obtain building permits" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task2
+    priority 500
+    duration 4d
+    complete 100
+    charge 1000 onend
+}
+task task8 "Submit preliminary shop drawings" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task6
+    priority 500
+    duration 2d
+    complete 50
+    charge 1000 onend
+}
+task task9 "Submit monthly requests for payment" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task2
+    priority 500
+    duration 1d
+    complete 100
+    charge 1000 onend
+}
+task task10 "Long Lead Procurement" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 70d
+    complete 7
+    charge 1000 onend
+}
+task task11 "Submit shop drawings and order long lead items - steel" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task8
+    priority 500
+    duration 2d
+    complete 80
+    charge 1000 onend
+}
+task task12 "Submit shop drawings and order long lead items - roofing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task7
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task13 "Submit shop drawings and order long lead items - elevator" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task7
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task14 "Submit shop drawings and order long lead items - plumbing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task7
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task15 "Submit shop drawings and order long lead items - electric" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task7
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task16 "Submit shop drawings and order long lead items - HVAC" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task7
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task17 "Detail, fabricate and deliver steel" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task10
+    priority 500
+    duration 12d
+    charge 1000 onend
+}
+task task18 "Mobilize on Site" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 10d
+    complete 92
+    charge 1000 onend
+}
+task task19 "Install temporary power" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task2
+    priority 500
+    duration 2d
+    complete 100
+    charge 1000 onend
+}
+task task20 "Install temporary water service" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task2
+    priority 500
+    duration 2d
+    complete 100
+    charge 1000 onend
+}
+task task21 "Set up site office" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task18, task19
+    priority 500
+    duration 3d
+    complete 100
+    charge 1000 onend
+}
+task task22 "Set line and grade benchmarks" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task20
+    priority 500
+    duration 3d
+    complete 100
+    charge 1000 onend
+}
+task task23 "Prepare site - lay down yard and temporary fencing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task21
+    priority 500
+    duration 2d
+    complete 50
+    charge 1000 onend
+}
+task task24 "Site Grading and Utilities" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 35d
+    charge 1000 onend
+}
+task task25 "Clear and grub site" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task20, task22
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task26 "Stone site access and temporary parking area" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task24, task22
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task27 "Rough grade site (cut and fill)" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task25
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task28 "Install storm drainage" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task26
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task29 "Install exterior fire line and building fire riser" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task26
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task31 "Erect building batter boards and layout building" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task29
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task32 "Foundations" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 33d
+    charge 1000 onend
+}
+task task33 "Excavate foundations" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task30
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task34 "Excavate elevator pit" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task30
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task35 "Form column piers and spread foundations" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task32
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task36 "Rough-in electric and plumbing in elevator" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task33
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task37 "Form elevator pit walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task35
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task38 "Set reinforcing and anchor bolts" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task34
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task39 "Pour column piers and foundations" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task37
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task40 "Pour concrete elevator walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task36
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task41 "Cure elevator wall concrete" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task39
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task42 "Cure piers and foundations" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task38
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task43 "Strip wall forms" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task40
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task44 "Strip column piers and foundation forms" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task41
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task45 "Install pneumatic tube in elevator pit" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task42
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task46 "Prepare and pour concrete floor in elevator pit" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task44
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task47 "Steel Erection" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 45d
+    charge 1000 onend
+}
+task task48 "Erect steel columns, beams and joist - 1st and 2nd floors" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task43, task16
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task49 "Erect steel columns, beams and joist - 3rd floor and roof" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task47
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task50 "Install miscellaneous iron and bracing - 1st and 2nd floors" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task47
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task51 "Install miscellaneous iron and bracing - 3rd floor and roof" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task48
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task52 "Install stairs and miscellaneous iron railing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task50
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task53 "Touch-up paint on steel" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task51
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task54 "Form and Pour Concrete - Floors and Roof" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 85d
+    charge 1000 onend
+}
+task task55 "Form 2nd floor including all floor openings" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task52, task13, task14, task15, task47
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task56 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task47
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task57 "Pour 2nd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task55, task54
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task58 "Cure 2nd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task56
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task59 "Strip forms from 2nd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task57
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task60 "Form 3rd floor including all floor openings" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task57
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task61 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task57
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task62 "Pour 3rd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task60, task59
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task63 "Cure 3rd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task61
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task64 "Strip forms from 3rd floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task62
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task65 "Form roof slab including all floor openings" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task62
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task66 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task62
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task67 "Pour roof slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task65, task64
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task68 "Cure roof slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task66
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task69 "Strip forms from roof slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task67
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task70 "Form 1st floor" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task58
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task71 "Install electrical underground" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task58
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task72 "Install plumbing underground" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task58
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task73 "Install rebar and in-floor utilities" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task58
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task74 "Pour 1st floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task69, task72, task70, task71
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task75 "Cure 1st floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task73
+    priority 500
+    duration 7d
+    charge 1000 onend
+}
+task task76 "Strip forms from 1st floor slab" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task74
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task77 "Carpentry Work" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 15d
+    charge 1000 onend
+}
+task task78 "Install exterior sheathing and metal studs" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task63, task68
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task79 "Masonry Work" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 110d
+    charge 1000 onend
+}
+task task80 "Rough-in plumbing at toilets and masonry walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task75, task13
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task81 "Lay masonry at core, mechanical, and toilets" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task49, task50
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task82 "Install exterior masonry work" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task77
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task83 "Install roof drains" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task81
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task84 "Install tile in toilet rooms" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task79
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task85 "Clean masonry" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task81
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task86 "Clean toilet room tile" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task83
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task87 "Roofing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 31d
+    charge 1000 onend
+}
+task task88 "Install flashing at parapet walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task81
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task89 "Pour lightweight concrete roof fill" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task11, task82, task87
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task91 "Spread stone ballast on seamless roof" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task89
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task92 "Set rooftop equipment" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task90
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task93 "Window wall and store front closures" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 60d
+    charge 1000 onend
+}
+task task94 "Install window wall aluminum and glass" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task81
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task95 "Install interior stud walls and drywall" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task93
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task96 "Install interior doors and hardware" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task94
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task97 "Install store front doors and hardware" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task81
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task98 "Building Finishes" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 80d
+    charge 1000 onend
+}
+task task99 "Install millwork and wood trim" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task96, task94
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task100 "Paint walls and woodwork" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task98, task95
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task101 "Install conduit at ceiling plenum space" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task93
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task102 "Install duct in ceiling plenum space" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task94, task100
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task103 "Install ceiling grid" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task94, task101
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task104 "Install ceiling tile" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task102
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task105 "Hang wallpaper" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task102
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task106 "Install building carpet" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task99
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task107 "Install hardware and accessories" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task99
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task108 "Complete interior and exterior sod and plantings" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task99
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task109 "Pave, curb, and stripe parking lot" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task107
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task110 "Elevators" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 40d
+    charge 1000 onend
+}
+task task111 "Set elevator equipment in shafts" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task80, task45, task12
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task112 "Set equipment in mechanical room" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task110
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task113 "Test and align doors and equipment" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task111
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task114 "Plumbing" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 90d
+    charge 1000 onend
+}
+task task115 "Rough-in plumbing in drywall walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task93
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task116 "Tie-in fire line riser and set valves" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task84
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task117 "Set plumbing fixtures and trim" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task85, task114, task79
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task118 "Flush, test, and clean piping and fixtures" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task99, task115, task116
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task119 "Electrical" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 139d
+    charge 1000 onend
+}
+task task120 "Rough-in electrical in masonry walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task75, task14
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task121 "Rough-in electrical in drywall walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task93
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task122 "Pull wire in conduit and set area transformers" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task119, task100
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task123 "Install and terminate electrical devices" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task121, task120
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task124 "Make electrical terminations for HVAC equipment" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task121, task91
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task125 "Install light fixtures - test and clean" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task102, task122
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task126 "Heating and Ventilating - AC" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 180d
+    charge 1000 onend
+}
+task task127 "Set equipment in mechanical room" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task80, task15
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task128 "Rough-in mechanical in masonry walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task75
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task129 "Rough-in mechanical in drywall walls" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task93
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task130 "Install duct in building chase" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task126, task127, task93
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task131 "Set HVAC trim and test and balance system" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task102, task129, task123
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task132 "Final Clean-up and Occupancy" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 60d
+    charge 1000 onend
+}
+task task133 "Install hard tile flooring in common areas" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task94
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task134 "Clean hard tile floors" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task132
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
+task task136 "Substantial completion date" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task134
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task137 "Complete Final Inspections" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 6d
+    charge 1000 onend
+}
+task task138 "Complete elevator inspection and certification" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task134, task112
+    priority 500
+    duration 3d
+    charge 1000 onend
+}
+task task139 "Perform architect's inspection" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task134, task108, task137
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task140 "Perform local building agency inspection" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task138
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task141 "Perform Fire Marshal's inspection" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task139
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task142 "Complete punch list items from all inspections" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task140
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task143 "Obtain certificate of occupancy" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task141
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task144 "Issue final completion documents including warranties" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task141
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task145 "Issue final request for payment" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task142, task143
+    priority 500
+    duration 1d
+    charge 1000 onend
+}
+task task30 "Perform final site grading" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task28
+    priority 500
+    duration 2d
+    charge 1000 onend
+}
+task task90 "Install seamless roofing material" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    priority 500
+    duration 5d
+    charge 1000 onend
+}
+task task135 "Remove debris from building and do final clean-up" {
+    scheduling asap
+    responsible res1
+    chargeset dev
+    depends task105, task104, task106, task107, task117
+    priority 500
+    duration 4d
+    charge 1000 onend
+}
 
 # ------------END-------------
 

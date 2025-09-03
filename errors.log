@@ -988,3 +988,75 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:64: Error: Date 2025-06-01-00:00-+0000 must be within the project time frame 2025-01-01-00:00-+0000  - 2025-01-11-00:00-+0000
     credits 2025-06-01
  - 2025-09-01 13:56:55
+ERROR: 
+Failed to fetch data from index named ().
+Details: Connection timed out - 2025-09-02 20:00:34
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:22: Error: Unexpected token 'task' found. Expecting one of 'include', 'macro', 'project'
+task
+ - 2025-09-02 20:15:03
+ERROR: Project with id = proj2025 not found! - 2025-09-02 20:19:34
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c1e5940> - 2025-09-02 20:25:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '-' found. Expecting :STRING
+project act-
+ - 2025-09-02 20:25:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Unexpected token '-' found. Expecting :STRING
+project MIiQCZkBhyhQ-
+ - 2025-09-02 20:26:20
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:25: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+resource 1
+ - 2025-09-02 20:27:03
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:129: Error: Unknown account dev
+    chargeset dev
+ - 2025-09-02 20:31:37
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:130: Error: Unknown account dev
+    chargeset dev
+ - 2025-09-02 20:33:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:134: Error: This duration criteria is overwriting a previously provided criteria (duration, effort, length or milestone).
+    duration 17d
+ - 2025-09-02 20:34:29
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c16ad50> - 2025-09-02 20:42:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c18c190> - 2025-09-02 20:42:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c1c9d10> - 2025-09-02 20:42:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c18c550> - 2025-09-02 20:42:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c18ccd0> - 2025-09-02 20:42:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f731c18d1d0> - 2025-09-02 20:42:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:135: Error: This duration criteria is overwriting a previously provided criteria (duration, effort, length or milestone).
+    duration 17d
+ - 2025-09-02 20:42:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:367: Error: Unexpected token '27' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+    depends 27
+ - 2025-09-02 20:44:40
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:367: Error: Unexpected token '27' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+    depends 27
+ - 2025-09-02 20:47:29
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:833: Error: Unexpected token '88' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+    depends 88
+ - 2025-09-02 20:50:05
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1174: Error: Task task135 has unknown depends task000
+ - 2025-09-02 20:51:42
+ERROR: Project with id = proj2025 not found! - 2025-09-03 15:55:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fd60af89940> - 2025-09-03 15:57:12
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:136: Error: Unexpected token '}' found. Expecting one of 'onstart', 'onend', 'perhour', 'perday', 'perweek'
+}
+ - 2025-09-03 15:57:13

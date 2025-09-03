@@ -45,18 +45,19 @@ async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
     data_map = {}
     project_data: dict | None = await term_query(connection, indexes_names['project'], "_id", project_id)
     
-    if not project_data:
+    if not project_data.get(indexes_names["project"]):
         raise BadInputError(message=f"Project with id = {project_id} not found!", status_code=404)
-    
+        
     data_map[indexes_names['project']] = list(project_data.values())[0]
              
-    results = await asyncio.gather(
-        term_query(connection, indexes_names['task'], "projectid", project_id),
-        term_query(connection, indexes_names['resource'], "projectid", project_id),
-        term_query(connection, indexes_names['account'], "projectid", project_id),
-        term_query(connection, indexes_names['shift'], "projectid", project_id),
-        term_query(connection, indexes_names['scenario'], "projectid", project_id)
-    )
+    queries = []
+
+    for key in ['task', 'resource', 'account', 'shift', 'scenario']:
+        index_name = indexes_names.get(key)
+        if index_name:
+            queries.append(term_query(connection, index_name, "projectid", project_id))
+
+    results = await asyncio.gather(*queries)
 
     data_map.update({list(r.keys())[0]: list(r.values())[0] for r in results})
 
@@ -72,12 +73,12 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
                       trim_blocks=True, lstrip_blocks=True)
     body_template = env.get_template("main.j2")
     try:
-        projects = initialize_projects(data_map.get(indexes_names['project'], []))
-        shifts = initialize_shifts(data_map.get(indexes_names['shift'], []))
-        tasks = initialize_tasks(data_map.get(indexes_names['task'], []))
-        resources = initialize_resources(data_map.get(indexes_names['resource'], []))
-        accounts = initialize_accounts(data_map.get(indexes_names['account'], []))
-        scenarios = initialize_scenarios(data_map.get(indexes_names['scenario'], []))
+        projects = initialize_projects(data_map.get(indexes_names['project'], [])) 
+        shifts = initialize_shifts(data_map.get(indexes_names['shift'], [])) 
+        tasks = initialize_tasks(data_map.get(indexes_names['task'], [])) 
+        resources = initialize_resources(data_map.get(indexes_names['resource'], [])) 
+        accounts = initialize_accounts(data_map.get(indexes_names['account'], [])) 
+        scenarios = initialize_scenarios(data_map.get(indexes_names['scenario'], [])) 
         flags = define_flags(tasks, resources, accounts)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
@@ -85,6 +86,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         raise ProcessFailureError(message, 500)
 
     report_path = get_config("paths.reports")
+
     body = body_template.render(
         project=projects[0],
         scenarios=scenarios,
@@ -163,7 +165,7 @@ async def run(request: Request, project_id: str):
 
 
 
-# if __name__ == "__main__":
-#     main("proj2025")
+if __name__ == "__main__":
+    main("proj2025")
 
 

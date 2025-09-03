@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field, fields
 from datetime import date, datetime
+from helpers.utility import time_unit_to_an_abbreviation
 
 @dataclass
 class Project:
@@ -26,13 +27,12 @@ class Project:
             return
 
         source = self.json_document.get("_source", {})
-
         for f in fields(self):
             if not f.name in source:
                 continue
-
             value = source[f.name]
             setattr(self, f.name, value)
+        self.duration_unit = time_unit_to_an_abbreviation(self.duration_unit)
 
 
 
