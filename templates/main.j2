@@ -34,7 +34,7 @@ account dev "Primary account"
 # ------------Resources-------------
 {% if resources %}
 {% import "resources.j2" as resource %}
-{{ resource.resources(resources) }}
+{{ resource.render_resources(resources) }}
 {% endif %}
 # ------------END-------------
 
@@ -43,7 +43,7 @@ account dev "Primary account"
 # ------------Tasks-------------
 {% if tasks %}
 {% import "tasks.j2" as task %}
-{{ task.tasks(tasks) }}
+{{ task.render_tasks(tasks) }}
 {% endif %}
 # ------------END-------------
 

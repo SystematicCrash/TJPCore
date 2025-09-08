@@ -1,4 +1,4 @@
-{% macro tasks(tasks) %}
+{% macro render_tasks(tasks) %}
 {% for task in tasks %}
 task {{ task.id }} "{{ task.name }}" {
     {% if task.milestone %}
@@ -99,6 +99,11 @@ task {{ task.id }} "{{ task.name }}" {
 
     {%- if task.flags %}
     flags {{ task.flags | join(', ') }}
+    {% endif %}
+
+    {%- if task.sub_tasks_objs %}
+
+    {{ render_tasks(task.sub_tasks_objs) | indent(4, false) }}
     {% endif %}
 }
 {% endfor %}

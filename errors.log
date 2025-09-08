@@ -1060,3 +1060,55 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:136: Error: Unexpected token '}' found. Expecting one of 'onstart', 'onend', 'perhour', 'perday', 'perweek'
 }
  - 2025-09-03 15:57:13
+ERROR: Project with id = proj2025 not found! - 2025-09-08 19:31:02
+ERROR: Project with id = myFuckingProj not found! - 2025-09-08 19:32:03
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-08 19:34:15
+ERROR: Failed to generate tjp file!
+Details: Type List cannot be instantiated; use list() instead - 2025-09-08 20:20:26
+ERROR: Failed to generate tjp file!
+Details: 'list' object has no attribute 'subtasks_objs' - 2025-09-08 20:21:32
+ERROR: Failed to generate tjp file!
+Details: 'Task' object has no attribute 'parent_id' - 2025-09-08 20:23:13
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:311: Error: Task task142 has unknown depends task140
+ - 2025-09-08 20:25:00
+ERROR: Failed to generate tjp file!
+Details: 'Task' object has no attribute 'sub_tasks_objs' - 2025-09-08 20:28:02
+ERROR: Failed to generate tjp file!
+Details: 'Task' object has no attribute 'subtasks_objs' - 2025-09-08 20:28:55
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:140: Error: All charge sets for this property must have different top-level accounts.
+    priority
+ - 2025-09-08 20:29:19
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:140: Error: All charge sets for this property must have different top-level accounts.
+    priority
+ - 2025-09-08 20:30:58
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:139: Error: All charge sets for this property must have different top-level accounts.
+    priority
+ - 2025-09-08 20:31:48
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:140: Error: All charge sets for this property must have different top-level accounts.
+    priority
+ - 2025-09-08 20:39:39
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f18ebfc9be0> - 2025-09-08 20:42:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f18ebf4ccd0> - 2025-09-08 20:42:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f18ebf48190> - 2025-09-08 20:42:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f18ebd77b10> - 2025-09-08 20:42:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f18ebdc2fd0> - 2025-09-08 20:42:00
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:140: Error: All charge sets for this property must have different top-level accounts.
+        priority
+ - 2025-09-08 20:42:01
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:140: Error: All charge sets for this property must have different top-level accounts.
+        priority
+ - 2025-09-08 21:51:57

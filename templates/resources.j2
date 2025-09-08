@@ -1,4 +1,4 @@
-{% macro resources(resources, info) %}
+{% macro render_resources(resources, info) %}
 {% for resource in resources %}
 resource {{resource.id}} "{{resource.name}}" {
     {% if resource.rate %}

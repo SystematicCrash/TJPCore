@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field, fields
 from decimal import Decimal
 from datetime import date
+from typing import List
 
 
 
@@ -12,6 +13,7 @@ class Task:
     note: str = ''
     scheduling: str = ''
     responsible: str = ''
+    parentId: str = ''
     scheduled: bool = False
     milestone: bool = False
     priority: int = 0
@@ -28,6 +30,8 @@ class Task:
     start_date: date = None
     end_date: date = None
     charge: Decimal = Decimal("0")
+    subtasks: list[str] = field(default_factory=list[str])
+    sub_tasks_objs: List["Task"] = field(default_factory=list)
     shifts: list[str] = field(default_factory=list[str])
     chargeset: list[str] = field(default_factory=list[str])
     flags: list[str]  = field(default_factory=list[str])
@@ -49,15 +53,24 @@ class Task:
 
             if f.name == "charge":
                 setattr(self, f.name, Decimal(str(value)))
-            
             else:
                 setattr(self, f.name, value)
+            
+
 
     
 
 
 def initialize_tasks(data: list):
     tasks = []
+    top_level_tasks = []
     for task in data:
         tasks.append(Task(json_document=task))
-    return tasks
+
+    for task in tasks:
+        if task.parentId:
+            parent = [t for t in tasks if t.id == task.parentId][0]
+            parent.sub_tasks_objs.append(task)
+        
+    top_level_tasks = [task for task in tasks if not task.parentId]
+    return top_level_tasks
