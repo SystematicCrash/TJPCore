@@ -60,6 +60,7 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
 {%- elif project.weekstartssunday %}
     weekstartssunday
 {% endif %}
+    outputdir "exports"
 }
 {% endmacro %}
 

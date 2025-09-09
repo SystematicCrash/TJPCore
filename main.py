@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from concurrent.futures import ThreadPoolExecutor
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, write_on_index, term_query, fetch_index
+from helpers.elastic_helper import make_connection, write_on_index, term_query
 from helpers.config_helper import get_config
 from models.project import initialize_projects
 from models.task import initialize_tasks, Task
@@ -24,6 +24,7 @@ from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, B
 
 indexes_names = get_config('data_indexes')
 
+""" Tjp file flags """
 def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Account]):
     flags = set()
     for task in tasks:
@@ -40,34 +41,29 @@ def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Ac
     return flags
 
 
-
+""" Fetching project data from data engine """
 async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
     data_map = {}
     project_data: dict | None = await term_query(connection, indexes_names['project'], "_id", project_id)
-    
     if not project_data.get(indexes_names["project"]):
-        raise BadInputError(message=f"Project with id = {project_id} not found!", status_code=404)
-        
+        raise BadInputError(message=f"Project with id = ({project_id}) not found!", status_code=404)
+    
     data_map[indexes_names['project']] = list(project_data.values())[0]
-             
     queries = []
-
     for key in ['task', 'resource', 'account', 'shift', 'scenario']:
         index_name = indexes_names.get(key)
         if index_name:
             queries.append(term_query(connection, index_name, "projectid", project_id))
 
     results = await asyncio.gather(*queries)
-
     data_map.update({list(r.keys())[0]: list(r.values())[0] for r in results})
-
     return data_map
 
     
 
 
 
-# Generating TJP file
+""" Tjp file generation """
 def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     env = Environment(loader=FileSystemLoader(get_config("paths.templates")),
                       trim_blocks=True, lstrip_blocks=True)
@@ -101,7 +97,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         f.write(body)
 
 
-# Indexing reports into database
+""" Indexing reports in elastic search """
 def indexing_reports(connection: AsyncElasticsearch):
     reports_result = dict()
     sources: dict = get_config("paths.reports.files")
@@ -119,7 +115,7 @@ def indexing_reports(connection: AsyncElasticsearch):
                     executor.submit(write_on_index, connection, data, index_name)
 
 
-# Processing
+""" Processing """
 async def main(project_id: str):
     connection = make_connection()
     data_map = await gather_project_data(connection, project_id)
@@ -133,13 +129,13 @@ async def main(project_id: str):
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
         error_register(connection, message)
         raise TJ3ProcessError(message, 500)
-    connection.close()
+    await connection.close()
     # indexing_reports(connection)
 
 
 app = FastAPI()
 
-
+""" Fast api endpoint """
 @app.post('/tjp-core/run/{project_id}')
 async def run(request: Request, project_id: str):
     auth_header = request.headers.get("authorization")
@@ -165,7 +161,7 @@ async def run(request: Request, project_id: str):
 
 
 
-if __name__ == "__main__":
-    main("proj2025")
+# if __name__ == "__main__":
+#     main("proj2025")
 
 

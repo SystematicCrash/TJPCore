@@ -45,6 +45,7 @@ resource {{resource.id}} "{{resource.name}}" {
     {%- for vacation in resource.vacation %}
     vacation "{{vacation.get("name")}}" {{vacation.get("start")}} - {{vacation.get("end")}}
     {% endfor %}
+    chargeset resCost
 }
 {% endfor %}
 {% endmacro %}

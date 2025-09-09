@@ -27,6 +27,12 @@ flags
 {{ account.accounts(accounts) }}
 {% else %}
 account dev "Primary account"
+account resCost "Resources costs" {
+    aggregate resources
+}
+account taskCost "Tasks costs" {
+    aggregate tasks
+}
 {% endif %}
 # ------------END-------------
 
