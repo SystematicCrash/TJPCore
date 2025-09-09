@@ -25,7 +25,7 @@ from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, B
 indexes_names = get_config('data_indexes')
 
 """ Tjp file flags """
-def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Account]):
+def define_flags(tasks: list[Task], resources: list[Resource]):
     flags = set()
     for task in tasks:
         if task.flags:
@@ -34,10 +34,7 @@ def define_flags(tasks: list[Task], resources: list[Resource], accounts: list[Ac
     for resource in resources:
         if resource.flags:
             flags.update(resource.flags)
-    
-    for account in accounts:
-        if account.flags:
-            flags.update(account.flags)
+            
     return flags
 
 
@@ -73,9 +70,8 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         shifts = initialize_shifts(data_map.get(indexes_names['shift'], [])) 
         tasks = initialize_tasks(data_map.get(indexes_names['task'], [])) 
         resources = initialize_resources(data_map.get(indexes_names['resource'], [])) 
-        accounts = initialize_accounts(data_map.get(indexes_names['account'], [])) 
         scenarios = initialize_scenarios(data_map.get(indexes_names['scenario'], [])) 
-        flags = define_flags(tasks, resources, accounts)
+        flags = define_flags(tasks, resources)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
         traceback.print_exc()
@@ -87,11 +83,10 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         project=projects[0],
         scenarios=scenarios,
         shifts=shifts,
-        accounts=accounts,
         flags=flags,
         resources=resources,
         tasks=tasks,
-        reports=report_path,
+        reports=report_path
     )
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(body)

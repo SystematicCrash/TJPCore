@@ -1,17 +1,11 @@
-{% macro accounts(accounts) %}
-{%- for account in accounts %}
-account {{ account.id }} "{{ account.name }}" {
-    {% if account.aggregate %}
-    aggregate {{ account.aggregate }}
-    {% endif %}
-
-    {%- if account.flags %}
-    flags {{ account.flags | join(', ') }}
-    {% endif %}
-
-    {%- for credit in account.credits %}
-    credits {{credit.get("date")}} "{{credit.get("description")}}" {{credit.get("amount")}}
-    {% endfor %}
+{% macro render_accounts() %}
+account cost "Primary cost account" {
+    account resCost "Resources costs" {
+        aggregate resources
+    }
+    account taskCost "Tasks costs" {
+        aggregate tasks
+    }
 }
-{% endfor %}
+account rev "Primary revenue account"
 {% endmacro %}

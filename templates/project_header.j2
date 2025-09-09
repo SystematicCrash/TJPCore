@@ -1,4 +1,4 @@
-{% macro header(project, scenarios) %}
+{% macro header(project, scenarios, output_dir) %}
 project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}}{{project.duration_unit[0]}} {
 {% if project.timezone %}
     timezone "{{project.timezone}}"
@@ -60,7 +60,7 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
 {%- elif project.weekstartssunday %}
     weekstartssunday
 {% endif %}
-    outputdir "exports"
+    outputdir "{{ output_dir }}"
 }
 {% endmacro %}
 

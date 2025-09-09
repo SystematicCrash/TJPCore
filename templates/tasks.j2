@@ -25,6 +25,10 @@ task {{ task.id }} "{{ task.name }}" {
     chargeset {{ task.chargeset | join(', ') }}
     {% endif %}
 
+    {%- if task.allocate %}
+    allocate {{ task.allocate | join(', ') }}
+    {% endif %}
+
     {%- if task.depends %}
     depends {{ task.depends | join(', ') }}
     {% endif %}
@@ -41,15 +45,15 @@ task {{ task.id }} "{{ task.name }}" {
     priority {{task.priority}}
     {% endif %}
 
-    {%- if task.effort and not task.duration and task.allocate %}
+    {%- if task.effort and not (task.duration or task.milestone) and task.allocate %}
     effort {{task.effort}}d
     {% endif %}
 
-    {%- if task.effortdone and not (task.duration or task.effort) %}
+    {%- if task.effortdone and not (task.duration or task.effort or task.milestone) %}
     effortdone {{task.effortdone}}d
     {% endif %}
 
-    {%- if task.duration %}
+    {%- if task.duration and not task.milestone %}
     duration {{task.duration}}d
     {% endif %}
 
@@ -57,7 +61,7 @@ task {{ task.id }} "{{ task.name }}" {
     effortleft {{task.effortleft}}d
     {% endif %}
 
-    {%- if task.length and not (task.duration or task.length) %}
+    {%- if task.length and not (task.duration or task.effort or task.milestone) %}
     length {{task.length}}d
     {% endif %}
 

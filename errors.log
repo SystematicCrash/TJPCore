@@ -1304,3 +1304,262 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:177: Error: All charge sets for this property must have different top-level accounts.
         depends
  - 2025-09-09 13:14:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1362: Error: Unexpected token 'Deadline' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    Deadline
+ - 2025-09-09 14:06:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1362: Error: Unexpected token 'Deadline' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    Deadline
+ - 2025-09-09 14:07:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1366: Error: Unknown account cost
+    balance cost
+ - 2025-09-09 14:07:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f4405d65d30> - 2025-09-09 14:08:28
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f4405cd7c50> - 2025-09-09 14:08:28
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f4405257250> - 2025-09-09 14:08:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1369: Error: Unexpected token 'length' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    length
+ - 2025-09-09 14:24:33
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f440525df90> - 2025-09-09 14:26:40
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1371: Error: Unexpected token 'output' found. Expecting '}'
+    output
+ - 2025-09-09 14:35:17
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1371: Error: Sorting criterium expected (e.g. tree, start.up or plan.end.down).
+    sorttasks wbs
+ - 2025-09-09 14:47:45
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f85950> - 2025-09-09 14:52:03
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1368: Error: Unexpected token 'resource' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    resource
+ - 2025-09-09 14:52:27
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1368: Error: Unexpected token 'allocate' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    allocate
+ - 2025-09-09 14:54:38
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1368: Error: Unexpected token 'allocate' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    allocate
+ - 2025-09-09 14:55:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:172: Error: priority is not a defined resource.
+    priority
+ - 2025-09-09 15:08:51
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:177: Error: Drywall is not a defined resource.
+        allocate Drywall
+ - 2025-09-09 15:09:25
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1494: Error: Unexpected token 'bulleted' found. Expecting one of 'bullets', 'comma', 'numbered'
+    resources{title "resources" listtype bulleted
+ - 2025-09-09 16:11:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1494: Error: Unexpected token ',' found. Expecting '}'
+    resources{title "resources",
+ - 2025-09-09 16:11:38
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e9b610> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d23d6350> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e99310> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e68a50> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e99bd0> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e69a90> - 2025-09-09 16:12:46
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e99810> - 2025-09-09 16:12:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1494: Error: Unexpected token 'bulleted' found. Expecting one of 'bullets', 'comma', 'numbered'
+    resources{title "resources" listtype bulleted
+ - 2025-09-09 16:12:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1485: Error: Unexpected token 'cellattr' found. Expecting '}'
+    name{title "name" cellattr
+ - 2025-09-09 16:23:50
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1485: Error: Unexpected token ',' found. Expecting '}'
+    name{title "name",
+ - 2025-09-09 16:24:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1485: Error: Unexpected token 'cellattr' found. Expecting '}'
+    name{title "name" cellattr
+ - 2025-09-09 16:24:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1486: Error: Unexpected token 'milestone' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    milestone
+ - 2025-09-09 16:26:16
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1401: Error: Container task task79 may not be marked as a milestone.
+ - 2025-09-09 16:28:06
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1469: Error: This duration criteria is overwriting a previously provided criteria (duration, effort, length or milestone).
+        duration 1d
+ - 2025-09-09 16:29:05
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e6ac10> - 2025-09-09 16:42:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e98e10> - 2025-09-09 16:42:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e98cd0> - 2025-09-09 16:42:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e99090> - 2025-09-09 16:42:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e98b90> - 2025-09-09 16:42:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e9a350> - 2025-09-09 16:42:12
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1506: Error: Undeclared flag 'treelevel'
+  hidetask treelevel >
+ - 2025-09-09 16:43:29
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1505: Error: Undeclared flag 'treelevel'
+  hidetask treelevel >
+ - 2025-09-09 16:44:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e996d0> - 2025-09-09 16:57:47
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f81590> - 2025-09-09 16:57:47
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token ',' found. Expecting '}'
+    effort { title "Whole Effort (hours)",
+ - 2025-09-09 16:57:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token 'units' found. Expecting '}'
+    effort { title "Whole Effort (hours)" units
+ - 2025-09-09 16:58:02
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token 'unit' found. Expecting '}'
+    effort { title "Whole Effort (hours)" unit
+ - 2025-09-09 16:58:27
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token 'unit' found. Expecting '}'
+    effort { title "Whole Effort (hours)" unit
+ - 2025-09-09 16:58:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token 'loadunits' found. Expecting '}'
+    effort { title "Whole Effort (hours)" loadunits
+ - 2025-09-09 16:59:15
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1508: Error: Unexpected token 'loadunit' found. Expecting '}'
+    effort { title "Whole Effort (hours)" loadunit
+ - 2025-09-09 16:59:34
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2d2f4d0> - 2025-09-09 16:59:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f279d0> - 2025-09-09 16:59:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f27d90> - 2025-09-09 16:59:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2d74190> - 2025-09-09 16:59:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d23cb610> - 2025-09-09 16:59:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e99590> - 2025-09-09 17:19:05
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f26850> - 2025-09-09 17:19:05
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2d2c910> - 2025-09-09 17:19:05
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1499: Error: Unexpected token 'ballance' found. Expecting '}'
+    ballance
+ - 2025-09-09 17:22:09
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1499: Error: Unknown account cost
+    balance cost
+ - 2025-09-09 17:22:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1499: Error: Unexpected token '-' found. Expecting :ID
+    balance taskCost -
+ - 2025-09-09 17:23:08
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1501: Error: Unknown account sorttasks
+    sorttasks
+ - 2025-09-09 17:23:21
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2cdd090> - 2025-09-09 17:24:09
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d309fed0> - 2025-09-09 17:24:09
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e47250> - 2025-09-09 17:24:09
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2f7e5d0> - 2025-09-09 17:24:09
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1500: Error: Unexpected token '-' found. Expecting :ID
+    balance taskCost -
+ - 2025-09-09 17:24:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1499: Error: taskCost is not a container account
+    sorttasks
+ - 2025-09-09 17:40:57
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:171: Error: Unknown account dev
+    chargeset dev
+ - 2025-09-09 17:41:56
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:172: Error: The task does not have a chargeset defined.
+    charge 1130.0 onend
+ - 2025-09-09 17:42:30
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:172: Error: The task does not have a chargeset defined.
+    charge 1130.0 onend
+ - 2025-09-09 17:43:25
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:172: Error: The task does not have a chargeset defined.
+    charge 1130.0 onend
+ - 2025-09-09 17:44:08
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:172: Error: The task does not have a chargeset defined.
+    charge 1130.0 onend
+ - 2025-09-09 17:44:26
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d23d02d0> - 2025-09-09 17:45:41
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2e9aad0> - 2025-09-09 17:45:41
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d30a7390> - 2025-09-09 17:45:41
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d30b34d0> - 2025-09-09 17:45:41
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f21d2d86fd0> - 2025-09-09 17:45:41
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1501: Error: The cost account taskCost is not a top-level account.
+    balance taskCost rev
+ - 2025-09-09 17:48:35
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:28: Error: Unknown account resCost
+    chargeset resCost
+ - 2025-09-09 17:54:20
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1511: Warning: The keyword 'hierarchindex' has been deprecated! See the reference manual for details.
+  columns hierarchindex
+tjp_outputs/project.tjp:1511: Error: Unexpected token 'hidden' found. Expecting '}'
+  columns hierarchindex { title "ID" hidden
+ - 2025-09-09 18:06:50
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1514: Error: Unexpected token 'celltext' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+          celltext
+ - 2025-09-09 18:07:14
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1514: Error: Unexpected token 'remainingcost' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+          remainingcost
+ - 2025-09-09 18:08:13
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1514: Error: Unexpected token 'hidetask' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+  hidetask
+ - 2025-09-09 18:08:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1515: Error: taskCost is not a container account
+  caption
+ - 2025-09-09 18:08:41

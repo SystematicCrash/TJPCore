@@ -1,7 +1,7 @@
 # ----------------Project Header-------------
 {% if project %}
 {% import "project_header.j2" as project_header %}
-{{ project_header.header(project, scenarios) }}
+{{ project_header.header(project, scenarios, reports.dirs.csv_dir) }}
 {% endif %}
 # ------------END-------------
 
@@ -22,18 +22,8 @@ flags
 
 
 # ----------------Accounts-------------
-{% if accounts %}
 {% import "accounts.j2" as account %}
-{{ account.accounts(accounts) }}
-{% else %}
-account dev "Primary account"
-account resCost "Resources costs" {
-    aggregate resources
-}
-account taskCost "Tasks costs" {
-    aggregate tasks
-}
-{% endif %}
+{{ account.render_accounts() }}
 # ------------END-------------
 
 
@@ -54,3 +44,10 @@ account taskCost "Tasks costs" {
 # ------------END-------------
 
 
+
+# ------------Reports-------------
+{% if reports %}
+{% import "reports.j2" as reporter %}
+{{ reporter.render_reports() }}
+{% endif %}
+# ------------END-------------

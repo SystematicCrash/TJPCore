@@ -1,41 +1,46 @@
-{% macro define_reports(reports) %}
-taskreport taskReports "{{ reports.files.task_report }}" {
+{% macro render_reports() %}
+taskreport taskReports "TaskReport" {
     headline "Tasks Table"
-    formats csv
+    formats csv, html
     columns
-    bsi{title "wbs"}, id{title "id"}, name{title "name"},
-    start{title "start"}, end{title "end"},
-    minstart{title "min_start"}, maxstart{title "max_start"},
-    minend{title "min_end"}, maxend{title "max_end"},
-    Deadline{title "deadline"}, duration{title "duration"},
-    effort{title "effort"}, priority{title "priority"},
-    children{title "sub_tasks"}, resources{title "resources"},
-    flags{title "task_linking"} , complete{title "complete"}
+    bsi{title "wbs"}, 
+    id{title "id"}, 
+    name{title "name"},
+    start{title "start"}, 
+    end{title "end"},
+    duration{title "duration"},
+    effort{title "effort"}, 
+    effortdone{title "effortDone"},
+    effortleft{title "effortLeft"},
+    priority{title "priority"},
+    responsible{title "responsible"},
+    resources{title "resources" listtype bullets width 200},
+    status{title "status"},
+    complete{title "complete"},
+    cost { title "Total Cost" width 120 }
+
     balance cost rev
-    hideresource @all
+    sorttasks tree
 }
 
-taskreport tasksGanttChart "{{ reports.files.task_gantt_report }}" {
-    headline "Tasks Gantt Chart"
-    formats csv
-    columns id{title "id"}, name, start, end, duration, effort, chart
+
+
+taskreport workReport "WorkReport" {
+  formats csv, html
+  headline "Project Work Overview"
+  columns 
+    name { title "Project" }, 
+    duration { title "Whole Duration(hours)" }, 
+    effort { title "Whole Effort (hours)" }, 
+    complete { title "Progress (%)" }, 
+    effortdone { title "Done (hours)" }, 
+    effortleft { title "Remaining (hours)" }
+    loadunit hours
 }
 
-resourcereport resourceReports "{{ reports.files.resource_report }}" {
-    headline "Resources Table"
-    formats csv
-    columns
-    bsi{title "wbs"}, id{title "id"}, name{title "name"},
-    BaseCost{title "base_cost"}, ActualCost{title "actual_cost"},
-    rate{title "rate"}, AccrueAt{title "accrue_at"},
-    OvertimeCost{title "overtime_cost"}, efficiency{title "efficiency"}, Type{title "type"},
-    Availability{title "availability_date"}, flags
-    hidetask @all
-    sortresources tree
-}
 
-accountreport accountReports "{{ reports.files.account_report }}" {
-    formats csv
-    columns bsi, id{title "id"}, name
+accountreport accountReport "CostReport" {
+    formats csv, html
+    headline "Project costs"
 }
 {% endmacro %}
