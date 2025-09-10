@@ -4,7 +4,7 @@ from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
 
 
-# Making connection to DB
+""" Making connection to DB """
 def make_connection():
     conf = get_config("elasticsearch")
     return AsyncElasticsearch(
@@ -14,7 +14,7 @@ def make_connection():
     )
 
 
-# Writing data to an index
+""" Writing data to an index """
 async def write_on_index(connection: AsyncElasticsearch, data, index_name):
     try:
         for item in data:
@@ -29,7 +29,7 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
         raise ElasticSearchQueryError(message, 503)
 
 
-# Fetching docs from an index
+""" Fetching docs from an index """
 async def fetch_index(es: AsyncElasticsearch, index_name):
     try:
         query = {
@@ -48,7 +48,7 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
 
         
 
-# Run custom queries
+""" Run custom queries """
 async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
     try:
         result = await es.search(index=index_name, body=query, size=10_000)
@@ -58,8 +58,12 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
         raise ElasticSearchQueryError(message, 503)
 
 
-
-async def term_query(es: AsyncElasticsearch, index_name: str, field: str, value: str):
+    
+""" Query by searching a term """
+async def term_query(
+        es: AsyncElasticsearch, index_name: str, 
+        field: str, value: str, sortby=None, order="asc"
+        ):
     try:
         query = {
             "_source": {
@@ -71,6 +75,8 @@ async def term_query(es: AsyncElasticsearch, index_name: str, field: str, value:
                 }
             }
         }
+        if sortby:
+            query["sort"] = [{sortby: {"order": order}}]
         result = await es.search(index=index_name, body=query, size=10_000)
         return {index_name: result['hits']['hits']} or None
     except Exception as e:

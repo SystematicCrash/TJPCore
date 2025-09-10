@@ -1,0 +1,443 @@
+"wbs";"id";"name";"start";"end";"duration";"effort";"effortDone";"effortLeft";"priority";"responsible";"resources";"status";"active sub-tasks";"open sub-tasks";"closed sub-tasks";"complete";"flowers";"depends on";"path criticalness";"Schedule gauge";"Total Cost"
+"1";"task2";"General Conditions";"2020-08-03";"2020-08-12";9.0;22.5;22.5;0.0;500;"G.C. General Management";"";"in progress";7;0;7;"79%";" * Install temporary power (task18.task19) ]->[ 2020-08-12
+
+ * Install temporary water service (task18.task20) ]->[ 2020-08-12";"";0.0;"behind schedule";"10056,50"
+"1.1";"task2.task3";"  Receive notice to proceed and sign contract";"2020-08-03";"2020-08-06";3.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. General Management (res1)";"done";0;0;1;"100%";" * Submit bond and insurance documents (task2.task4) ]->[ 2020-08-06
+
+ * Prepare and submit project schedule (task2.task5) ]->[ 2020-08-06";"";0.0;"on schedule";"1355,88"
+"1.2";"task2.task4";"  Submit bond and insurance documents";"2020-08-06";"2020-08-08";2.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Project Management (res2)
+
+ * G.C. General Management (res1)";"done";0;0;1;"100%";" * Prepare and submit schedule of values (task2.task6) ]->[ 2020-08-08";" * Receive notice to proceed and sign contract (task2.task3) ]->[ 2020-08-06";0.0;"on schedule";"1219,50"
+"1.3";"task2.task5";"  Prepare and submit project schedule";"2020-08-06";"2020-08-08";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Scheduler (res3)";"done";0;0;1;"100%";"";" * Receive notice to proceed and sign contract (task2.task3) ]->[ 2020-08-06";0.0;"on schedule";"1070,25"
+"1.4";"task2.task6";"  Prepare and submit schedule of values";"2020-08-08";"2020-08-10";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Submit preliminary shop drawings (task2.task8) ]->[ 2020-08-10";" * Submit bond and insurance documents (task2.task4) ]->[ 2020-08-08";0.0;"on schedule";"973,00"
+"1.5";"task2.task7";"  Obtain building permits";"2020-08-03";"2020-08-07";4.0;7.9;7.9;0.0;500;"G.C. General Management";" * G.C. Project Management (res2)
+
+ * G.C. Procurement (res4)";"done";0;0;1;"100%";" * Submit shop drawings and order long lead items - roofing (task10.task12) ]->[
+   2020-08-07
+
+ * Submit shop drawings and order long lead items - elevator (task10.task13)
+   ]->[ 2020-08-07
+
+ * Submit shop drawings and order long lead items - plumbing (task10.task14)
+   ]->[ 2020-08-07
+
+ * Submit shop drawings and order long lead items - electric (task10.task15)
+   ]->[ 2020-08-07
+
+ * Submit shop drawings and order long lead items - HVAC (task10.task16) ]->[
+   2020-08-07";"";0.0;"on schedule";"1582,38"
+"1.6";"task2.task8";"  Submit preliminary shop drawings";"2020-08-10";"2020-08-12";2.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Project Management (res2)
+
+ * G.C. Procurement (res4)";"in progress";0;0;1;"50%";" * Submit shop drawings and order long lead items - steel (task10.task11) ]->[
+   2020-08-12";" * Prepare and submit schedule of values (task2.task6) ]->[ 2020-08-10";0.0;"behind schedule";"1761,50"
+"1.7";"task2.task9";"  Submit monthly requests for payment";"2020-08-03";"2020-08-04";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";"";0.0;"on schedule";"1196,00"
+"2";"task10";"Long Lead Procurement";"2020-08-03";"2020-08-15";12.0;28.1;28.1;0.0;500;"G.C. General Management";"";"in progress";7;0;7;"7%";"";"";0.0;"behind schedule";"10480,25"
+"2.1";"task10.task11";"  Submit shop drawings and order long lead items - steel";"2020-08-12";"2020-08-14";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Steel Erection Contractor Management (res5)";"in progress";0;0;1;"80%";" * Pour lightweight concrete roof fill (task87.task89) ]->[ 2020-10-13";" * Submit preliminary shop drawings (task2.task8) ]->[ 2020-08-12";0.0;"behind schedule";"1669,00"
+"2.2";"task10.task12";"  Submit shop drawings and order long lead items - roofing";"2020-08-07";"2020-08-09";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Roofing Contractor Management (res6)";"done";0;0;1;"100%";" * Set elevator equipment in shafts (task110.task111) ]->[ 2020-10-02";" * Obtain building permits (task2.task7) ]->[ 2020-08-07";0.0;"on schedule";"1267,00"
+"2.3";"task10.task13";"  Submit shop drawings and order long lead items - elevator";"2020-08-07";"2020-08-09";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Elevator Contractor Management (res7)";"done";0;0;1;"100%";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-05
+
+ * Rough-in plumbing at toilets and masonry walls (task79.task80) ]->[
+   2020-09-28";" * Obtain building permits (task2.task7) ]->[ 2020-08-07";0.0;"on schedule";"1526,13"
+"2.4";"task10.task14";"  Submit shop drawings and order long lead items - plumbing";"2020-08-07";"2020-08-09";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Plumbing Contractor Management (res8)";"done";0;0;1;"100%";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-05
+
+ * Rough-in electrical in masonry walls (task119.task120) ]->[ 2020-09-28";" * Obtain building permits (task2.task7) ]->[ 2020-08-07";0.0;"on schedule";"795,63"
+"2.5";"task10.task15";"  Submit shop drawings and order long lead items - electric";"2020-08-07";"2020-08-09";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Electric Contractor Management (res9)";"done";0;0;1;"100%";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-05
+
+ * Set equipment in mechanical room (task126.task127) ]->[ 2020-10-02";" * Obtain building permits (task2.task7) ]->[ 2020-08-07";0.0;"on schedule";"954,63"
+"2.6";"task10.task16";"  Submit shop drawings and order long lead items - HVAC";"2020-08-07";"2020-08-09";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * HVAC Contractor Management (res10)";"done";0;0;1;"100%";" * Erect steel columns, beams and joist - 1st and 2nd floors (task47.task48)
+   ]->[ 2020-08-31";" * Obtain building permits (task2.task7) ]->[ 2020-08-07";0.0;"on schedule";"795,88"
+"2.7";"task10.task17";"  Detail, fabricate and deliver steel";"2020-08-03";"2020-08-15";12.0;20.3;20.3;0.0;500;"G.C. General Management";" * Steel Erection Contractor Management (res5)
+
+ * Steel Erection Contractor (res11)";"done";0;0;1;"100%";"";"";0.0;"on schedule";"2624,00"
+"3";"task18";"Mobilize on Site";"2020-08-12";"2020-08-19";7.0;12.4;12.4;0.0;500;"G.C. General Management";"";"in progress";5;0;5;"92%";"";"";0.0;"behind schedule";"9187,25"
+"3.1";"task18.task19";"  Install temporary power";"2020-08-12";"2020-08-14";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";" * Set up site office (task18.task21) ]->[ 2020-08-14";" * General Conditions (task2) ]->[ 2020-08-12";0.0;"on schedule";"2177,00"
+"3.2";"task18.task20";"  Install temporary water service";"2020-08-12";"2020-08-14";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Set line and grade benchmarks (task18.task22) ]->[ 2020-08-14
+
+ * Clear and grub site (task24.task25) ]->[ 2020-08-17";" * General Conditions (task2) ]->[ 2020-08-12";0.0;"on schedule";"1973,75"
+"3.3";"task18.task21";"  Set up site office";"2020-08-14";"2020-08-17";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Superintendent (res14)
+
+ * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Prepare site - lay down yard and temporary fencing (task18.task23) ]->[
+   2020-08-17";" * Install temporary power (task18.task19) ]->[ 2020-08-14";0.0;"on schedule";"1075,50"
+"3.4";"task18.task22";"  Set line and grade benchmarks";"2020-08-14";"2020-08-17";3.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Survey Crew (res16)";"done";0;0;1;"100%";" * Clear and grub site (task24.task25) ]->[ 2020-08-17
+
+ * Stone site access and temporary parking area (task24.task26) ]->[ 2020-08-17";" * Install temporary water service (task18.task20) ]->[ 2020-08-14";0.0;"on schedule";"1428,25"
+"3.5";"task18.task23";"  Prepare site - lay down yard and temporary fencing";"2020-08-17";"2020-08-19";2.0;4.5;4.5;0.0;500;"G.C. General Management";" * Site Grading Contractor (res17)
+
+ * G.C. Labor Crew (res15)";"in progress";0;0;1;"50%";"";" * Set up site office (task18.task21) ]->[ 2020-08-17";0.0;"behind schedule";"1490,75"
+"4";"task24";"Site Grading and Utilities";"2020-08-17";"2020-08-23";6.0;6.8;6.8;0.0;500;"G.C. General Management";"";"done";7;0;7;"100%";"";"";0.0;"on schedule";"10260,13"
+"4.1";"task24.task25";"  Clear and grub site";"2020-08-17";"2020-08-20";3.0;1.1;1.1;0.0;500;"G.C. General Management";" * Site Grading Contractor (res17)";"done";0;0;1;"100%";" * Rough grade site (cut and fill) (task24.task27) ]->[ 2020-08-20";" * Install temporary water service (task18.task20) ]->[ 2020-08-14
+
+ * Set line and grade benchmarks (task18.task22) ]->[ 2020-08-17";0.0;"on schedule";"1219,38"
+"4.2";"task24.task26";"  Stone site access and temporary parking area";"2020-08-17";"2020-08-19";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Install storm drainage (task24.task28) ]->[ 2020-08-19
+
+ * Install exterior fire line and building fire riser (task24.task29) ]->[
+   2020-08-19";" * Set line and grade benchmarks (task18.task22) ]->[ 2020-08-17";0.0;"on schedule";"1802,00"
+"4.3";"task24.task27";"  Rough grade site (cut and fill)";"2020-08-20";"2020-08-21";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * Site Grading Contractor (res17)";"done";0;0;1;"100%";"";" * Clear and grub site (task24.task25) ]->[ 2020-08-20";0.0;"on schedule";"1043,38"
+"4.4";"task24.task28";"  Install storm drainage";"2020-08-19";"2020-08-21";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Perform final site grading (task24.task30) ]->[ 2020-08-21";" * Stone site access and temporary parking area (task24.task26) ]->[ 2020-08-19";0.0;"on schedule";"1889,00"
+"4.5";"task24.task29";"  Install exterior fire line and building fire riser";"2020-08-19";"2020-08-21";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Erect building batter boards and layout building (task24.task31) ]->[
+   2020-08-21";" * Stone site access and temporary parking area (task24.task26) ]->[ 2020-08-19";0.0;"on schedule";"992,75"
+"4.6";"task24.task30";"  Perform final site grading";"2020-08-21";"2020-08-23";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Site Grading Contractor (res17)";"done";0;0;1;"100%";" * Excavate foundations (task32.task33) ]->[ 2020-08-23
+
+ * Excavate elevator pit (task32.task34) ]->[ 2020-08-23";" * Install storm drainage (task24.task28) ]->[ 2020-08-21";0.0;"on schedule";"1177,38"
+"4.7";"task24.task31";"  Erect building batter boards and layout building";"2020-08-21";"2020-08-22";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Survey Crew (res16)";"done";0;0;1;"100%";"";" * Install exterior fire line and building fire riser (task24.task29) ]->[
+   2020-08-21";0.0;"on schedule";"1175,25"
+"5";"task32";"Foundations";"2020-08-03";"2020-09-08";36.0;39.4;39.4;0.0;500;"G.C. General Management";"";"done";14;0;14;"100%";"";"";0.0;"on schedule";"20713,25"
+"5.1";"task32.task33";"  Excavate foundations";"2020-08-23";"2020-08-25";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Site Grading Contractor (res17)";"done";0;0;1;"100%";" * Rough-in electric and plumbing in elevator (task32.task36) ]->[ 2020-08-25";" * Perform final site grading (task24.task30) ]->[ 2020-08-23";0.0;"on schedule";"1671,38"
+"5.2";"task32.task34";"  Excavate elevator pit";"2020-08-23";"2020-08-25";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Set reinforcing and anchor bolts (task32.task38) ]->[ 2020-08-25";" * Perform final site grading (task24.task30) ]->[ 2020-08-23";0.0;"on schedule";"981,00"
+"5.3";"task32.task35";"  Form column piers and spread foundations";"2020-08-03";"2020-08-07";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)";"done";0;0;1;"100%";" * Form elevator pit walls (task32.task37) ]->[ 2020-08-07";"";0.0;"on schedule";"915,50"
+"5.4";"task32.task36";"  Rough-in electric and plumbing in elevator";"2020-08-25";"2020-08-29";4.0;9.0;9.0;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)
+
+ * Electric Contractor (res12)";"done";0;0;1;"100%";" * Pour concrete elevator walls (task32.task40) ]->[ 2020-08-29";" * Excavate foundations (task32.task33) ]->[ 2020-08-25";0.0;"on schedule";"2623,50"
+"5.5";"task32.task37";"  Form elevator pit walls";"2020-08-07";"2020-08-11";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)";"done";0;0;1;"100%";" * Pour column piers and foundations (task32.task39) ]->[ 2020-08-11";" * Form column piers and spread foundations (task32.task35) ]->[ 2020-08-07";0.0;"on schedule";"1695,25"
+"5.6";"task32.task38";"  Set reinforcing and anchor bolts";"2020-08-25";"2020-08-29";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)";"done";0;0;1;"100%";" * Cure piers and foundations (task32.task42) ]->[ 2020-08-29";" * Excavate elevator pit (task32.task34) ]->[ 2020-08-25";0.0;"on schedule";"2033,50"
+"5.7";"task32.task39";"  Pour column piers and foundations";"2020-08-11";"2020-08-16";5.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";" * Cure elevator wall concrete (task32.task41) ]->[ 2020-08-16";" * Form elevator pit walls (task32.task37) ]->[ 2020-08-11";0.0;"on schedule";"2106,00"
+"5.8";"task32.task40";"  Pour concrete elevator walls";"2020-08-29";"2020-08-30";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Strip wall forms (task32.task43) ]->[ 2020-08-30";" * Rough-in electric and plumbing in elevator (task32.task36) ]->[ 2020-08-29";0.0;"on schedule";"1840,00"
+"5.9";"task32.task41";"  Cure elevator wall concrete";"2020-08-16";"2020-08-23";7.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Strip column piers and foundation forms (task32.task44) ]->[ 2020-08-23";" * Pour column piers and foundations (task32.task39) ]->[ 2020-08-16";0.0;"on schedule";"733,50"
+"5.10";"task32.task42";"  Cure piers and foundations";"2020-08-29";"2020-09-05";7.0;5.6;5.6;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Install pneumatic tube in elevator pit (task32.task45) ]->[ 2020-09-05";" * Set reinforcing and anchor bolts (task32.task38) ]->[ 2020-08-29";0.0;"on schedule";"1004,50"
+"5.11";"task32.task43";"  Strip wall forms";"2020-08-30";"2020-08-31";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Erect steel columns, beams and joist - 1st and 2nd floors (task47.task48)
+   ]->[ 2020-08-31";" * Pour concrete elevator walls (task32.task40) ]->[ 2020-08-30";0.0;"on schedule";"1317,00"
+"5.12";"task32.task44";"  Strip column piers and foundation forms";"2020-08-23";"2020-08-26";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Prepare and pour concrete floor in elevator pit (task32.task46) ]->[
+   2020-08-26";" * Cure elevator wall concrete (task32.task41) ]->[ 2020-08-23";0.0;"on schedule";"808,00"
+"5.13";"task32.task45";"  Install pneumatic tube in elevator pit";"2020-09-05";"2020-09-08";3.0;1.1;1.1;0.0;500;"G.C. General Management";" * Elevator Contractor (res20)";"done";0;0;1;"100%";" * Set elevator equipment in shafts (task110.task111) ]->[ 2020-10-02";" * Cure piers and foundations (task32.task42) ]->[ 2020-09-05";0.0;"on schedule";"1313,63"
+"5.14";"task32.task46";"  Prepare and pour concrete floor in elevator pit";"2020-08-26";"2020-08-27";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";"";" * Strip column piers and foundation forms (task32.task44) ]->[ 2020-08-26";0.0;"on schedule";"1154,50"
+"6";"task47";"Steel Erection";"2020-08-03";"2020-09-05";33.0;5.6;5.6;0.0;500;"G.C. General Management";"";"done";6;0;6;"100%";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-05
+
+ * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task56) ]->[ 2020-09-05";"";0.0;"on schedule";"10514,00"
+"6.1";"task47.task48";"  Erect steel columns, beams and joist - 1st and 2nd floors";"2020-08-31";"2020-09-02";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Steel Erection Contractor (res11)";"done";0;0;1;"100%";" * Install miscellaneous iron and bracing - 3rd floor and roof (task47.task51)
+   ]->[ 2020-09-02";" * Strip wall forms (task32.task43) ]->[ 2020-08-31
+
+ * Submit shop drawings and order long lead items - HVAC (task10.task16) ]->[
+   2020-08-09";0.0;"on schedule";"1017,00"
+"6.2";"task47.task49";"  Erect steel columns, beams and joist - 3rd floor and roof";"2020-08-03";"2020-08-05";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-05";"";0.0;"on schedule";"888,00"
+"6.3";"task47.task50";"  Install miscellaneous iron and bracing - 1st and 2nd floors";"2020-08-03";"2020-08-05";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Install stairs and miscellaneous iron railing (task47.task52) ]->[ 2020-08-05
+
+ * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-05";"";0.0;"on schedule";"1276,00"
+"6.4";"task47.task51";"  Install miscellaneous iron and bracing - 3rd floor and roof";"2020-09-02";"2020-09-04";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Steel Erection Contractor (res11)";"done";0;0;1;"100%";" * Touch-up paint on steel (task47.task53) ]->[ 2020-09-04";" * Erect steel columns, beams and joist - 1st and 2nd floors (task47.task48)
+   ]->[ 2020-09-02";0.0;"on schedule";"2165,00"
+"6.5";"task47.task52";"  Install stairs and miscellaneous iron railing";"2020-08-05";"2020-08-07";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-05";" * Install miscellaneous iron and bracing - 1st and 2nd floors (task47.task50)
+   ]->[ 2020-08-05";0.0;"on schedule";"1986,00"
+"6.6";"task47.task53";"  Touch-up paint on steel";"2020-09-04";"2020-09-05";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * Steel Erection Contractor (res11)";"done";0;0;1;"100%";"";" * Install miscellaneous iron and bracing - 3rd floor and roof (task47.task51)
+   ]->[ 2020-09-04";0.0;"on schedule";"1475,00"
+"7";"task54";"Form and Pour Concrete - Floors and Roof";"2020-09-05";"2020-10-10";35.0;74.3;74.3;0.0;500;"G.C. General Management";"";"done";22;0;22;"100%";"";"";0.0;"on schedule";"36932,50"
+"7.1";"task54.task55";"  Form 2nd floor including all floor openings";"2020-09-05";"2020-09-10";5.0;6.8;6.8;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)
+
+ * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Pour 2nd floor slab (task54.task57) ]->[ 2020-09-10";" * Install stairs and miscellaneous iron railing (task47.task52) ]->[ 2020-08-07
+
+ * Submit shop drawings and order long lead items - elevator (task10.task13)
+   ]->[ 2020-08-09
+
+ * Submit shop drawings and order long lead items - plumbing (task10.task14)
+   ]->[ 2020-08-09
+
+ * Submit shop drawings and order long lead items - electric (task10.task15)
+   ]->[ 2020-08-09
+
+ * Steel Erection (task47) ]->[ 2020-09-05";0.0;"on schedule";"935,88"
+"7.2";"task54.task56";"  Install rebar and in-floor utilities (including mechanical, electrical, plumbing)";"2020-09-05";"2020-09-10";5.0;6.8;6.8;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)
+
+ * Electric Contractor (res12)";"done";0;0;1;"100%";" * Cure 2nd floor slab (task54.task58) ]->[ 2020-09-10";" * Steel Erection (task47) ]->[ 2020-09-05";0.0;"on schedule";"2122,63"
+"7.3";"task54.task57";"  Pour 2nd floor slab";"2020-09-10";"2020-09-14";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";" * Strip forms from 2nd floor slab (task54.task59) ]->[ 2020-09-14
+
+ * Form 3rd floor including all floor openings (task54.task60) ]->[ 2020-09-14
+
+ * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task61) ]->[ 2020-09-14";" * Form 2nd floor including all floor openings (task54.task55) ]->[ 2020-09-10";0.0;"on schedule";"658,00"
+"7.4";"task54.task58";"  Cure 2nd floor slab";"2020-09-10";"2020-09-17";7.0;5.6;5.6;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Form 1st floor (task54.task70) ]->[ 2020-09-17
+
+ * Install electrical underground (task54.task71) ]->[ 2020-09-17
+
+ * Install plumbing underground (task54.task72) ]->[ 2020-09-17
+
+ * Install rebar and in-floor utilities (task54.task73) ]->[ 2020-09-17";" * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task56) ]->[ 2020-09-10";0.0;"on schedule";"2161,50"
+"7.5";"task54.task59";"  Strip forms from 2nd floor slab";"2020-09-14";"2020-09-16";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour 3rd floor slab (task54.task62) ]->[ 2020-09-19";" * Pour 2nd floor slab (task54.task57) ]->[ 2020-09-14";0.0;"on schedule";"1357,00"
+"7.6";"task54.task60";"  Form 3rd floor including all floor openings";"2020-09-14";"2020-09-19";5.0;7.9;7.9;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)
+
+ * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Pour 3rd floor slab (task54.task62) ]->[ 2020-09-19";" * Pour 2nd floor slab (task54.task57) ]->[ 2020-09-14";0.0;"on schedule";"2171,63"
+"7.7";"task54.task61";"  Install rebar and in-floor utilities (including mechanical, electrical, plumbing)";"2020-09-14";"2020-09-19";5.0;11.3;11.3;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)
+
+ * Electric Contractor (res12)";"done";0;0;1;"100%";" * Cure 3rd floor slab (task54.task63) ]->[ 2020-09-19";" * Pour 2nd floor slab (task54.task57) ]->[ 2020-09-14";0.0;"on schedule";"1849,38"
+"7.8";"task54.task62";"  Pour 3rd floor slab";"2020-09-19";"2020-09-23";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";" * Strip forms from 3rd floor slab (task54.task64) ]->[ 2020-09-23
+
+ * Form roof slab including all floor openings (task54.task65) ]->[ 2020-09-23
+
+ * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task66) ]->[ 2020-09-23";" * Form 3rd floor including all floor openings (task54.task60) ]->[ 2020-09-19
+
+ * Strip forms from 2nd floor slab (task54.task59) ]->[ 2020-09-16";0.0;"on schedule";"1116,00"
+"7.9";"task54.task63";"  Cure 3rd floor slab";"2020-09-19";"2020-09-26";7.0;5.6;5.6;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Install exterior sheathing and metal studs (task77.task78) ]->[ 2020-10-05";" * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task61) ]->[ 2020-09-19";0.0;"on schedule";"1898,50"
+"7.10";"task54.task64";"  Strip forms from 3rd floor slab";"2020-09-23";"2020-09-25";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour roof slab (task54.task67) ]->[ 2020-09-28";" * Pour 3rd floor slab (task54.task62) ]->[ 2020-09-23";0.0;"on schedule";"1846,00"
+"7.11";"task54.task65";"  Form roof slab including all floor openings";"2020-09-23";"2020-09-28";5.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. Rough Carpenter Crew (res18)";"done";0;0;1;"100%";" * Pour roof slab (task54.task67) ]->[ 2020-09-28";" * Pour 3rd floor slab (task54.task62) ]->[ 2020-09-23";0.0;"on schedule";"957,38"
+"7.12";"task54.task66";"  Install rebar and in-floor utilities (including mechanical, electrical, plumbing)";"2020-09-23";"2020-09-28";5.0;6.8;6.8;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)
+
+ * Electric Contractor (res12)";"done";0;0;1;"100%";" * Cure roof slab (task54.task68) ]->[ 2020-09-28";" * Pour 3rd floor slab (task54.task62) ]->[ 2020-09-23";0.0;"on schedule";"2215,63"
+"7.13";"task54.task67";"  Pour roof slab";"2020-09-28";"2020-10-02";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";" * Strip forms from roof slab (task54.task69) ]->[ 2020-10-02";" * Form roof slab including all floor openings (task54.task65) ]->[ 2020-09-28
+
+ * Strip forms from 3rd floor slab (task54.task64) ]->[ 2020-09-25";0.0;"on schedule";"2138,00"
+"7.14";"task54.task68";"  Cure roof slab";"2020-09-28";"2020-10-05";7.0;5.6;5.6;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";" * Install exterior sheathing and metal studs (task77.task78) ]->[ 2020-10-05";" * Install rebar and in-floor utilities (including mechanical, electrical,
+   plumbing) (task54.task66) ]->[ 2020-09-28";0.0;"on schedule";"1892,50"
+"7.15";"task54.task69";"  Strip forms from roof slab";"2020-10-02";"2020-10-04";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour 1st floor slab (task54.task74) ]->[ 2020-10-04";" * Pour roof slab (task54.task67) ]->[ 2020-10-02";0.0;"on schedule";"1943,00"
+"7.16";"task54.task70";"  Form 1st floor";"2020-09-17";"2020-09-21";4.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour 1st floor slab (task54.task74) ]->[ 2020-10-04";" * Cure 2nd floor slab (task54.task58) ]->[ 2020-09-17";0.0;"on schedule";"1061,00"
+"7.17";"task54.task71";"  Install electrical underground";"2020-09-17";"2020-09-18";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour 1st floor slab (task54.task74) ]->[ 2020-10-04";" * Cure 2nd floor slab (task54.task58) ]->[ 2020-09-17";0.0;"on schedule";"1359,00"
+"7.18";"task54.task72";"  Install plumbing underground";"2020-09-17";"2020-09-18";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pour 1st floor slab (task54.task74) ]->[ 2020-10-04";" * Cure 2nd floor slab (task54.task58) ]->[ 2020-09-17";0.0;"on schedule";"1912,00"
+"7.19";"task54.task73";"  Install rebar and in-floor utilities";"2020-09-17";"2020-09-21";4.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Cure 1st floor slab (task54.task75) ]->[ 2020-09-21";" * Cure 2nd floor slab (task54.task58) ]->[ 2020-09-17";0.0;"on schedule";"1928,00"
+"7.20";"task54.task74";"  Pour 1st floor slab";"2020-10-04";"2020-10-08";4.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. Concrete Crew (res19)";"done";0;0;1;"100%";" * Strip forms from 1st floor slab (task54.task76) ]->[ 2020-10-08";" * Strip forms from roof slab (task54.task69) ]->[ 2020-10-04
+
+ * Install plumbing underground (task54.task72) ]->[ 2020-09-18
+
+ * Form 1st floor (task54.task70) ]->[ 2020-09-21
+
+ * Install electrical underground (task54.task71) ]->[ 2020-09-18";0.0;"on schedule";"1469,50"
+"7.21";"task54.task75";"  Cure 1st floor slab";"2020-09-21";"2020-09-28";7.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Rough-in plumbing at toilets and masonry walls (task79.task80) ]->[
+   2020-09-28
+
+ * Rough-in electrical in masonry walls (task119.task120) ]->[ 2020-09-28
+
+ * Rough-in mechanical in masonry walls (task126.task128) ]->[ 2020-09-28";" * Install rebar and in-floor utilities (task54.task73) ]->[ 2020-09-21";0.0;"on schedule";"1440,00"
+"7.22";"task54.task76";"  Strip forms from 1st floor slab";"2020-10-08";"2020-10-10";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";"";" * Pour 1st floor slab (task54.task74) ]->[ 2020-10-08";0.0;"on schedule";"1832,00"
+"8";"task77";"Carpentry Work";"2020-10-05";"2020-10-08";3.0;3.4;3.4;0.0;500;"G.C. General Management";"";"done";1;0;1;"100%";" * Install exterior masonry work (task79.task82) ]->[ 2020-10-08";"";0.0;"on schedule";"2233,88"
+"8.1";"task77.task78";"  Install exterior sheathing and metal studs";"2020-10-05";"2020-10-08";3.0;3.4;3.4;0.0;500;"G.C. General Management";" * Drywall Contractor (res21)";"done";0;0;1;"100%";"";" * Cure 3rd floor slab (task54.task63) ]->[ 2020-09-26
+
+ * Cure roof slab (task54.task68) ]->[ 2020-10-05";0.0;"on schedule";"1103,88"
+"9";"task79";"Masonry Work";"2020-08-05";"2020-10-13";69.0;14.6;14.6;0.0;500;"G.C. General Management";"";"done";7;0;7;"100%";" * Set plumbing fixtures and trim (task114.task117) ]->[ 2020-10-13";"";0.0;"on schedule";"10331,63"
+"9.1";"task79.task80";"  Rough-in plumbing at toilets and masonry walls";"2020-09-28";"2020-10-02";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Set elevator equipment in shafts (task110.task111) ]->[ 2020-10-02
+
+ * Set equipment in mechanical room (task126.task127) ]->[ 2020-10-02";" * Cure 1st floor slab (task54.task75) ]->[ 2020-09-28
+
+ * Submit shop drawings and order long lead items - elevator (task10.task13)
+   ]->[ 2020-08-09";0.0;"on schedule";"2125,50"
+"9.2";"task79.task81";"  Lay masonry at core, mechanical, and toilets";"2020-08-05";"2020-08-09";4.0;3.4;3.4;0.0;500;"G.C. General Management";" * Masonry Contractor (res22)";"done";0;0;1;"100%";" * Install roof drains (task79.task83) ]->[ 2020-08-09
+
+ * Clean masonry (task79.task85) ]->[ 2020-08-09
+
+ * Install flashing at parapet walls (task87.task88) ]->[ 2020-08-09
+
+ * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-09
+
+ * Install store front doors and hardware (task93.task97) ]->[ 2020-08-09";" * Erect steel columns, beams and joist - 3rd floor and roof (task47.task49)
+   ]->[ 2020-08-05
+
+ * Install miscellaneous iron and bracing - 1st and 2nd floors (task47.task50)
+   ]->[ 2020-08-05";0.0;"on schedule";"974,38"
+"9.3";"task79.task82";"  Install exterior masonry work";"2020-10-08";"2020-10-13";5.0;3.4;3.4;0.0;500;"G.C. General Management";" * Masonry Contractor (res22)";"done";0;0;1;"100%";" * Pour lightweight concrete roof fill (task87.task89) ]->[ 2020-10-13";" * Carpentry Work (task77) ]->[ 2020-10-08";0.0;"on schedule";"872,38"
+"9.4";"task79.task83";"  Install roof drains";"2020-08-09";"2020-08-11";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Roofing Contractor (res23)";"done";0;0;1;"100%";" * Install tile in toilet rooms (task79.task84) ]->[ 2020-08-11
+
+ * Clean toilet room tile (task79.task86) ]->[ 2020-08-11";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-09";0.0;"on schedule";"1201,88"
+"9.5";"task79.task84";"  Install tile in toilet rooms";"2020-08-11";"2020-08-13";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Tile Contractor (res24)";"done";0;0;1;"100%";" * Tie-in fire line riser and set valves (task114.task116) ]->[ 2020-08-13";" * Install roof drains (task79.task83) ]->[ 2020-08-11";0.0;"on schedule";"2086,50"
+"9.6";"task79.task85";"  Clean masonry";"2020-08-09";"2020-08-10";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Set plumbing fixtures and trim (task114.task117) ]->[ 2020-10-13";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-09";0.0;"on schedule";"801,00"
+"9.7";"task79.task86";"  Clean toilet room tile";"2020-08-11";"2020-08-12";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Install roof drains (task79.task83) ]->[ 2020-08-11";0.0;"on schedule";"1073,00"
+"10";"task87";"Roofing";"2020-08-03";"2020-10-20";78.0;13.5;13.5;0.0;500;"G.C. General Management";"";"done";5;0;5;"100%";"";"";0.0;"on schedule";"6633,50"
+"10.1";"task87.task88";"  Install flashing at parapet walls";"2020-08-09";"2020-08-13";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * Roofing Contractor (res23)";"done";0;0;1;"100%";" * Pour lightweight concrete roof fill (task87.task89) ]->[ 2020-10-13";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-09";0.0;"on schedule";"1636,75"
+"10.2";"task87.task89";"  Pour lightweight concrete roof fill";"2020-10-13";"2020-10-15";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Roofing Contractor (res23)";"done";0;0;1;"100%";" * Spread stone ballast on seamless roof (task87.task91) ]->[ 2020-10-15";" * Submit shop drawings and order long lead items - steel (task10.task11) ]->[
+   2020-08-14
+
+ * Install exterior masonry work (task79.task82) ]->[ 2020-10-13
+
+ * Install flashing at parapet walls (task87.task88) ]->[ 2020-08-13";0.0;"on schedule";"721,75"
+"10.3";"task87.task90";"  Install seamless roofing material";"2020-08-03";"2020-08-08";5.0;5.6;5.6;0.0;500;"G.C. General Management";" * Roofing Contractor (res23)";"done";0;0;1;"100%";" * Set rooftop equipment (task87.task92) ]->[ 2020-08-08";"";0.0;"on schedule";"1085,38"
+"10.4";"task87.task91";"  Spread stone ballast on seamless roof";"2020-10-15";"2020-10-20";5.0;3.4;3.4;0.0;500;"G.C. General Management";" * Roofing Contractor (res23)";"done";0;0;1;"100%";" * Make electrical terminations for HVAC equipment (task119.task124) ]->[
+   2020-10-20";" * Pour lightweight concrete roof fill (task87.task89) ]->[ 2020-10-15";0.0;"on schedule";"825,63"
+"10.5";"task87.task92";"  Set rooftop equipment";"2020-08-08";"2020-08-10";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Install seamless roofing material (task87.task90) ]->[ 2020-08-08";0.0;"on schedule";"1038,00"
+"11";"task93";"Window wall and store front closures";"2020-08-09";"2020-08-19";10.0;9.0;9.0;0.0;500;"G.C. General Management";"";"done";4;0;4;"100%";" * Install conduit at ceiling plenum space (task98.task101) ]->[ 2020-08-19
+
+ * Rough-in plumbing in drywall walls (task114.task115) ]->[ 2020-08-19
+
+ * Rough-in electrical in drywall walls (task119.task121) ]->[ 2020-08-19
+
+ * Rough-in mechanical in drywall walls (task126.task129) ]->[ 2020-08-19
+
+ * Install duct in building chase (task126.task130) ]->[ 2020-10-04";"";0.0;"on schedule";"6721,25"
+"11.1";"task93.task94";"  Install window wall aluminum and glass";"2020-08-09";"2020-08-14";5.0;4.5;4.5;0.0;500;"G.C. General Management";" * Window Contractor (res26)";"done";0;0;1;"100%";" * Install interior stud walls and drywall (task93.task95) ]->[ 2020-08-14
+
+ * Install interior doors and hardware (task93.task96) ]->[ 2020-08-14
+
+ * Install millwork and wood trim (task98.task99) ]->[ 2020-08-16
+
+ * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-23
+
+ * Install ceiling grid (task98.task103) ]->[ 2020-08-22
+
+ * Install hard tile flooring in common areas (task132.task133) ]->[ 2020-08-14";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-09";0.0;"on schedule";"1477,00"
+"11.2";"task93.task95";"  Install interior stud walls and drywall";"2020-08-14";"2020-08-19";5.0;3.4;3.4;0.0;500;"G.C. General Management";" * Drywall Contractor (res21)";"done";0;0;1;"100%";" * Paint walls and woodwork (task98.task100) ]->[ 2020-08-19";" * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14";0.0;"on schedule";"1490,88"
+"11.3";"task93.task96";"  Install interior doors and hardware";"2020-08-14";"2020-08-16";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Finish Carpenter Crew (res27)";"done";0;0;1;"100%";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-16";" * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14";0.0;"on schedule";"1461,38"
+"11.4";"task93.task97";"  Install store front doors and hardware";"2020-08-09";"2020-08-12";3.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Lay masonry at core, mechanical, and toilets (task79.task81) ]->[ 2020-08-09";0.0;"on schedule";"810,00"
+"12";"task98";"Building Finishes";"2020-08-16";"2020-08-28";12.0;24.8;24.8;0.0;500;"G.C. General Management";"";"done";11;0;11;"100%";"";"";0.0;"on schedule";"16721,13"
+"12.1";"task98.task99";"  Install millwork and wood trim";"2020-08-16";"2020-08-19";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Finish Carpenter Crew (res27)";"done";0;0;1;"100%";" * Paint walls and woodwork (task98.task100) ]->[ 2020-08-19
+
+ * Install building carpet (task98.task106) ]->[ 2020-08-19
+
+ * Install hardware and accessories (task98.task107) ]->[ 2020-08-19
+
+ * Complete interior and exterior sod and plantings (task98.task108) ]->[
+   2020-08-19
+
+ * Flush, test, and clean piping and fixtures (task114.task118) ]->[ 2020-08-23";" * Install interior doors and hardware (task93.task96) ]->[ 2020-08-16
+
+ * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14";0.0;"on schedule";"1694,75"
+"12.2";"task98.task100";"  Paint walls and woodwork";"2020-08-19";"2020-08-23";4.0;3.4;3.4;0.0;500;"G.C. General Management";" * Painting Contractor (res28)";"done";0;0;1;"100%";" * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-23
+
+ * Pull wire in conduit and set area transformers (task119.task122) ]->[
+   2020-08-23";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-19
+
+ * Install interior stud walls and drywall (task93.task95) ]->[ 2020-08-19";0.0;"on schedule";"1544,00"
+"12.3";"task98.task101";"  Install conduit at ceiling plenum space";"2020-08-19";"2020-08-22";3.0;3.4;3.4;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";" * Install ceiling grid (task98.task103) ]->[ 2020-08-22";" * Window wall and store front closures (task93) ]->[ 2020-08-19";0.0;"on schedule";"2201,50"
+"12.4";"task98.task102";"  Install duct in ceiling plenum space";"2020-08-23";"2020-08-26";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";" * Install ceiling tile (task98.task104) ]->[ 2020-08-26
+
+ * Hang wallpaper (task98.task105) ]->[ 2020-08-26
+
+ * Install light fixtures - test and clean (task119.task125) ]->[ 2020-08-26
+
+ * Set HVAC trim and test and balance system (task126.task131) ]->[ 2020-10-05";" * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14
+
+ * Paint walls and woodwork (task98.task100) ]->[ 2020-08-23";0.0;"on schedule";"1567,75"
+"12.5";"task98.task103";"  Install ceiling grid";"2020-08-22";"2020-08-24";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14
+
+ * Install conduit at ceiling plenum space (task98.task101) ]->[ 2020-08-22";0.0;"on schedule";"1271,00"
+"12.6";"task98.task104";"  Install ceiling tile";"2020-08-26";"2020-08-28";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Drywall Contractor (res21)";"done";0;0;1;"100%";" * Remove debris from building and do final clean-up (task132.task135) ]->[
+   2020-10-16";" * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-26";0.0;"on schedule";"1976,25"
+"12.7";"task98.task105";"  Hang wallpaper";"2020-08-26";"2020-08-28";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Painting Contractor (res28)";"done";0;0;1;"100%";" * Remove debris from building and do final clean-up (task132.task135) ]->[
+   2020-10-16";" * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-26";0.0;"on schedule";"1244,00"
+"12.8";"task98.task106";"  Install building carpet";"2020-08-19";"2020-08-23";4.0;3.4;3.4;0.0;500;"G.C. General Management";" * Carpet Contractor (res29)";"done";0;0;1;"100%";" * Remove debris from building and do final clean-up (task132.task135) ]->[
+   2020-10-16";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-19";0.0;"on schedule";"1116,25"
+"12.9";"task98.task107";"  Install hardware and accessories";"2020-08-19";"2020-08-22";3.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. Finish Carpenter Crew (res27)";"done";0;0;1;"100%";" * Pave, curb, and stripe parking lot (task98.task109) ]->[ 2020-08-22
+
+ * Remove debris from building and do final clean-up (task132.task135) ]->[
+   2020-10-16";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-19";0.0;"on schedule";"1679,13"
+"12.10";"task98.task108";"  Complete interior and exterior sod and plantings";"2020-08-19";"2020-08-21";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Landscape Contractor (res30)";"done";0;0;1;"100%";" * Perform architect's inspection (task137.task139) ]->[ 2020-08-21";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-19";0.0;"on schedule";"835,50"
+"12.11";"task98.task109";"  Pave, curb, and stripe parking lot";"2020-08-22";"2020-08-24";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Install hardware and accessories (task98.task107) ]->[ 2020-08-22";0.0;"on schedule";"909,00"
+"13";"task110";"Elevators";"2020-10-02";"2020-10-08";6.0;4.5;4.5;0.0;500;"G.C. General Management";"";"done";3;0;3;"100%";"";"";0.0;"on schedule";"7669,50"
+"13.1";"task110.task111";"  Set elevator equipment in shafts";"2020-10-02";"2020-10-06";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * Elevator Contractor (res20)";"done";0;0;1;"100%";" * Set equipment in mechanical room (task110.task112) ]->[ 2020-10-06
+
+ * Test and align doors and equipment (task110.task113) ]->[ 2020-10-06";" * Rough-in plumbing at toilets and masonry walls (task79.task80) ]->[
+   2020-10-02
+
+ * Install pneumatic tube in elevator pit (task32.task45) ]->[ 2020-09-08
+
+ * Submit shop drawings and order long lead items - roofing (task10.task12) ]->[
+   2020-08-09";0.0;"on schedule";"2040,25"
+"13.2";"task110.task112";"  Set equipment in mechanical room";"2020-10-06";"2020-10-08";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Elevator Contractor (res20)";"done";0;0;1;"100%";" * Complete elevator inspection and certification (task137.task138) ]->[
+   2020-10-08";" * Set elevator equipment in shafts (task110.task111) ]->[ 2020-10-06";0.0;"on schedule";"2159,25"
+"13.3";"task110.task113";"  Test and align doors and equipment";"2020-10-06";"2020-10-08";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Set elevator equipment in shafts (task110.task111) ]->[ 2020-10-06";0.0;"on schedule";"1860,00"
+"14";"task114";"Plumbing";"2020-08-13";"2020-10-16";64.0;6.8;6.8;0.0;500;"G.C. General Management";"";"done";4;0;4;"100%";"";"";0.0;"on schedule";"5105,25"
+"14.1";"task114.task115";"  Rough-in plumbing in drywall walls";"2020-08-19";"2020-08-23";4.0;1.1;1.1;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Flush, test, and clean piping and fixtures (task114.task118) ]->[ 2020-08-23";" * Window wall and store front closures (task93) ]->[ 2020-08-19";0.0;"on schedule";"684,38"
+"14.2";"task114.task116";"  Tie-in fire line riser and set valves";"2020-08-13";"2020-08-15";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Set plumbing fixtures and trim (task114.task117) ]->[ 2020-10-13
+
+ * Flush, test, and clean piping and fixtures (task114.task118) ]->[ 2020-08-23";" * Install tile in toilet rooms (task79.task84) ]->[ 2020-08-13";0.0;"on schedule";"1478,38"
+"14.3";"task114.task117";"  Set plumbing fixtures and trim";"2020-10-13";"2020-10-16";3.0;3.4;3.4;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";" * Remove debris from building and do final clean-up (task132.task135) ]->[
+   2020-10-16";" * Clean masonry (task79.task85) ]->[ 2020-08-10
+
+ * Tie-in fire line riser and set valves (task114.task116) ]->[ 2020-08-15
+
+ * Masonry Work (task79) ]->[ 2020-10-13";0.0;"on schedule";"1324,13"
+"14.4";"task114.task118";"  Flush, test, and clean piping and fixtures";"2020-08-23";"2020-08-25";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * Plumbing Contractor (res13)";"done";0;0;1;"100%";"";" * Install millwork and wood trim (task98.task99) ]->[ 2020-08-19
+
+ * Rough-in plumbing in drywall walls (task114.task115) ]->[ 2020-08-23
+
+ * Tie-in fire line riser and set valves (task114.task116) ]->[ 2020-08-15";0.0;"on schedule";"794,38"
+"15";"task119";"Electrical";"2020-08-19";"2020-10-22";64.0;9.0;9.0;0.0;500;"G.C. General Management";"";"done";6;0;6;"100%";"";"";0.0;"on schedule";"10887,00"
+"15.1";"task119.task120";"  Rough-in electrical in masonry walls";"2020-09-28";"2020-10-02";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";" * Install and terminate electrical devices (task119.task123) ]->[ 2020-10-02";" * Cure 1st floor slab (task54.task75) ]->[ 2020-09-28
+
+ * Submit shop drawings and order long lead items - plumbing (task10.task14)
+   ]->[ 2020-08-09";0.0;"on schedule";"2115,00"
+"15.2";"task119.task121";"  Rough-in electrical in drywall walls";"2020-08-19";"2020-08-23";4.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Pull wire in conduit and set area transformers (task119.task122) ]->[
+   2020-08-23
+
+ * Install and terminate electrical devices (task119.task123) ]->[ 2020-10-02
+
+ * Make electrical terminations for HVAC equipment (task119.task124) ]->[
+   2020-10-20";" * Window wall and store front closures (task93) ]->[ 2020-08-19";0.0;"on schedule";"539,00"
+"15.3";"task119.task122";"  Pull wire in conduit and set area transformers";"2020-08-23";"2020-08-26";3.0;1.1;1.1;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";" * Install light fixtures - test and clean (task119.task125) ]->[ 2020-08-26";" * Rough-in electrical in drywall walls (task119.task121) ]->[ 2020-08-23
+
+ * Paint walls and woodwork (task98.task100) ]->[ 2020-08-23";0.0;"on schedule";"1512,50"
+"15.4";"task119.task123";"  Install and terminate electrical devices";"2020-10-02";"2020-10-05";3.0;1.1;1.1;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";" * Set HVAC trim and test and balance system (task126.task131) ]->[ 2020-10-05";" * Rough-in electrical in drywall walls (task119.task121) ]->[ 2020-08-23
+
+ * Rough-in electrical in masonry walls (task119.task120) ]->[ 2020-10-02";0.0;"on schedule";"966,50"
+"15.5";"task119.task124";"  Make electrical terminations for HVAC equipment";"2020-10-20";"2020-10-22";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * Electric Contractor (res12)";"done";0;0;1;"100%";"";" * Rough-in electrical in drywall walls (task119.task121) ]->[ 2020-08-23
+
+ * Spread stone ballast on seamless roof (task87.task91) ]->[ 2020-10-20";0.0;"on schedule";"2108,00"
+"15.6";"task119.task125";"  Install light fixtures - test and clean";"2020-08-26";"2020-08-28";2.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-26
+
+ * Pull wire in conduit and set area transformers (task119.task122) ]->[
+   2020-08-26";0.0;"on schedule";"1973,00"
+"16";"task126";"Heating and Ventilating - AC";"2020-08-19";"2020-10-09";51.0;12.4;12.4;0.0;500;"G.C. General Management";"";"done";5;0;5;"100%";"";"";0.0;"on schedule";"9924,13"
+"16.1";"task126.task127";"  Set equipment in mechanical room";"2020-10-02";"2020-10-04";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";" * Install duct in building chase (task126.task130) ]->[ 2020-10-04";" * Rough-in plumbing at toilets and masonry walls (task79.task80) ]->[
+   2020-10-02
+
+ * Submit shop drawings and order long lead items - electric (task10.task15)
+   ]->[ 2020-08-09";0.0;"on schedule";"1573,38"
+"16.2";"task126.task128";"  Rough-in mechanical in masonry walls";"2020-09-28";"2020-10-02";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";"";" * Cure 1st floor slab (task54.task75) ]->[ 2020-09-28";0.0;"on schedule";"1964,50"
+"16.3";"task126.task129";"  Rough-in mechanical in drywall walls";"2020-08-19";"2020-08-21";2.0;2.3;2.3;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";" * Install duct in building chase (task126.task130) ]->[ 2020-10-04
+
+ * Set HVAC trim and test and balance system (task126.task131) ]->[ 2020-10-05";" * Window wall and store front closures (task93) ]->[ 2020-08-19";0.0;"on schedule";"825,75"
+"16.4";"task126.task130";"  Install duct in building chase";"2020-10-04";"2020-10-07";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";"";" * Rough-in mechanical in drywall walls (task126.task129) ]->[ 2020-08-21
+
+ * Set equipment in mechanical room (task126.task127) ]->[ 2020-10-04
+
+ * Window wall and store front closures (task93) ]->[ 2020-08-19";0.0;"on schedule";"2048,75"
+"16.5";"task126.task131";"  Set HVAC trim and test and balance system";"2020-10-05";"2020-10-09";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * HVAC Contractor (res25)";"done";0;0;1;"100%";"";" * Install duct in ceiling plenum space (task98.task102) ]->[ 2020-08-26
+
+ * Rough-in mechanical in drywall walls (task126.task129) ]->[ 2020-08-21
+
+ * Install and terminate electrical devices (task119.task123) ]->[ 2020-10-05";0.0;"on schedule";"1560,75"
+"17";"task132";"Final Clean-up and Occupancy";"2020-08-03";"2020-10-20";78.0;9.0;9.0;0.0;500;"G.C. General Management";"";"done";4;0;4;"100%";"";"";0.0;"on schedule";"8211,25"
+"17.1";"task132.task133";"  Install hard tile flooring in common areas";"2020-08-14";"2020-08-15";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * Tile Contractor (res24)";"done";0;0;1;"100%";"";" * Install window wall aluminum and glass (task93.task94) ]->[ 2020-08-14";0.0;"on schedule";"1238,25"
+"17.2";"task132.task134";"  Clean hard tile floors";"2020-08-03";"2020-08-07";4.0;4.5;4.5;0.0;500;"G.C. General Management";" * Tile Contractor (res24)";"done";0;0;1;"100%";" * Substantial completion date (task132.task136) ]->[ 2020-08-07
+
+ * Complete elevator inspection and certification (task137.task138) ]->[
+   2020-10-08
+
+ * Perform architect's inspection (task137.task139) ]->[ 2020-08-21";"";0.0;"on schedule";"1689,00"
+"17.3";"task132.task135";"  Remove debris from building and do final clean-up";"2020-10-16";"2020-10-20";4.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Labor Crew (res15)";"done";0;0;1;"100%";"";" * Hang wallpaper (task98.task105) ]->[ 2020-08-28
+
+ * Install ceiling tile (task98.task104) ]->[ 2020-08-28
+
+ * Install building carpet (task98.task106) ]->[ 2020-08-23
+
+ * Install hardware and accessories (task98.task107) ]->[ 2020-08-22
+
+ * Set plumbing fixtures and trim (task114.task117) ]->[ 2020-10-16";0.0;"on schedule";"1611,00"
+"17.4";"task132.task136";"  Substantial completion date";"2020-08-07";"2020-08-08";1.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Superintendent (res14)";"done";0;0;1;"100%";"";" * Clean hard tile floors (task132.task134) ]->[ 2020-08-07";0.0;"on schedule";"2072,00"
+"18";"task137";"Complete Final Inspections";"2020-08-21";"2020-10-12";52.0;4.5;4.5;0.0;500;"G.C. General Management";"";"done";4;0;4;"100%";"";"";0.0;"on schedule";"6795,88"
+"18.1";"task137.task138";"  Complete elevator inspection and certification";"2020-10-08";"2020-10-11";3.0;2.3;2.3;0.0;500;"G.C. General Management";" * Elevator Contractor (res20)";"done";0;0;1;"100%";" * Perform local building agency inspection (task137.task140) ]->[ 2020-10-11";" * Clean hard tile floors (task132.task134) ]->[ 2020-08-07
+
+ * Set equipment in mechanical room (task110.task112) ]->[ 2020-10-08";0.0;"on schedule";"1626,25"
+"18.2";"task137.task139";"  Perform architect's inspection";"2020-08-21";"2020-08-22";1.0;2.3;2.3;0.0;500;"G.C. General Management";" * G.C. Superintendent (res14)
+
+ * G.C. Project Management (res2)";"done";0;0;1;"100%";" * Perform Fire Marshal's inspection (task137.task141) ]->[ 2020-08-22";" * Clean hard tile floors (task132.task134) ]->[ 2020-08-07
+
+ * Complete interior and exterior sod and plantings (task98.task108) ]->[
+   2020-08-21";0.0;"on schedule";"1781,63"
+"18.3";"task137.task140";"  Perform local building agency inspection";"2020-10-11";"2020-10-12";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Complete punch list items from all inspections (task142) ]->[ 2020-10-12";" * Complete elevator inspection and certification (task137.task138) ]->[
+   2020-10-11";0.0;"on schedule";"1620,00"
+"18.4";"task137.task141";"  Perform Fire Marshal's inspection";"2020-08-22";"2020-08-23";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";" * Obtain certificate of occupancy (task143) ]->[ 2020-08-23
+
+ * Issue final completion documents including warranties (task144) ]->[
+   2020-08-23";" * Perform architect's inspection (task137.task139) ]->[ 2020-08-22";0.0;"on schedule";"1072,00"
+"19";"task142";"Complete punch list items from all inspections";"2020-10-12";"2020-10-14";2.0;19.1;19.1;0.0;500;"G.C. General Management";" * G.C. Superintendent (res14)
+
+ * G.C. Labor Crew (res15)
+
+ * Plumbing Contractor (res13)
+
+ * Electric Contractor (res12)
+
+ * HVAC Contractor (res25)
+
+ * Drywall Contractor (res21)
+
+ * Carpet Contractor (res29)
+
+ * Paving Contractor (res31)
+
+ * Painting Contractor (res28)";"done";0;0;1;"100%";" * Issue final request for payment (task145) ]->[ 2020-10-14";" * Perform local building agency inspection (task137.task140) ]->[ 2020-10-12";0.0;"on schedule";"2475,38"
+"20";"task143";"Obtain certificate of occupancy";"2020-08-23";"2020-08-25";2.0;1.1;1.1;0.0;500;"G.C. General Management";" * G.C. Project Management (res2)";"done";0;0;1;"100%";" * Issue final request for payment (task145) ]->[ 2020-10-14";" * Perform Fire Marshal's inspection (task137.task141) ]->[ 2020-08-23";0.0;"on schedule";"1247,63"
+"21";"task144";"Issue final completion documents including warranties";"2020-08-23";"2020-08-24";1.0;0.0;0.0;0.0;500;"G.C. General Management";"";"done";0;0;1;"100%";"";" * Perform Fire Marshal's inspection (task137.task141) ]->[ 2020-08-23";0.0;"on schedule";"1563,00"
+"22";"task145";"Issue final request for payment";"2020-10-14";"2020-10-15";1.0;3.4;3.4;0.0;500;"G.C. General Management";" * G.C. Project Management (res2)
+
+ * G.C. Accounting (res32)
+
+ * G.C. General Management (res1)";"done";0;0;1;"100%";"";" * Complete punch list items from all inspections (task142) ]->[ 2020-10-14
+
+ * Obtain certificate of occupancy (task143) ]->[ 2020-08-25";0.0;"on schedule";"1457,63"

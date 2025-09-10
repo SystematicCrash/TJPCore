@@ -1,4 +1,5 @@
 from __future__ import annotations
+import re
 from dataclasses import dataclass, field, fields
 from decimal import Decimal
 from datetime import date
@@ -99,6 +100,15 @@ def convert_dependencies_to_absolute(tasks: dict[str, Task], task: Task):
                 task.depends[i] = depends_on.absolute_id
 
 
+""" Sorting a list of tasks """
+def sort_tasks_list_by_id(tasks: list[Task]):
+    return list(sorted(tasks, key=lambda task: int(re.search(r'\d+', task.id).group())))
+
+
+""" Sorting a dict of tasks by their keys """
+def sort_tasks_dict_by_id(tasks: dict[str, Task]):
+    return dict(sorted(tasks.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+
 
 """ Instanciating Tasks Objects With Json Documents """
 def initialize_tasks(data: list):
@@ -109,14 +119,21 @@ def initialize_tasks(data: list):
 
     for task in tasks.values():
         find_parent(tasks, task)
+
+
+    
+    tasks = sort_tasks_dict_by_id(tasks)
     
     for task in tasks.values():
-        if not task.parent:
-            top_level_tasks.append(task)
-            assign_absolute_ids(task, '')
-            remove_inherited_properties(task)
+        if task.parent:
+            continue
+        top_level_tasks.append(task)
+        assign_absolute_ids(task, '')
+        remove_inherited_properties(task)
+        task.sub_tasks_objs = sort_tasks_list_by_id(task.sub_tasks_objs)
             
     for task in tasks.values():
         convert_dependencies_to_absolute(tasks, task)
+    
 
     return top_level_tasks

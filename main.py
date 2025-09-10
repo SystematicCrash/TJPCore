@@ -14,7 +14,6 @@ from helpers.config_helper import get_config
 from models.project import initialize_projects
 from models.task import initialize_tasks, Task
 from models.resource import initialize_resources, Resource
-from models.account import initialize_accounts, Account
 from models.shift import initialize_shifts
 from models.scenario import initialize_scenarios
 from helpers.utility import cast_string_fields_to_numeric_types
@@ -41,16 +40,14 @@ def define_flags(tasks: list[Task], resources: list[Resource]):
 """ Fetching project data from data engine """
 async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
     data_map = {}
-    project_data: dict | None = await term_query(connection, indexes_names['project'], "_id", project_id)
+    project_data: dict | None = await term_query(connection, indexes_names.get('project'), "_id", project_id)
     if not project_data.get(indexes_names["project"]):
         raise BadInputError(message=f"Project with id = ({project_id}) not found!", status_code=404)
     
     data_map[indexes_names['project']] = list(project_data.values())[0]
     queries = []
-    for key in ['task', 'resource', 'account', 'shift', 'scenario']:
-        index_name = indexes_names.get(key)
-        if index_name:
-            queries.append(term_query(connection, index_name, "projectid", project_id))
+    queries.append(term_query(connection, indexes_names.get("task"), "projectid", project_id))
+    queries.append(term_query(connection, indexes_names.get("resource"), "projectid", project_id))
 
     results = await asyncio.gather(*queries)
     data_map.update({list(r.keys())[0]: list(r.values())[0] for r in results})

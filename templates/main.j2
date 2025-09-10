@@ -1,7 +1,7 @@
 # ----------------Project Header-------------
 {% if project %}
 {% import "project_header.j2" as project_header %}
-{{ project_header.header(project, scenarios, reports.dirs.csv_dir) }}
+{{ project_header.header(project, scenarios, reports.main_dir) }}
 {% endif %}
 # ------------END-------------
 

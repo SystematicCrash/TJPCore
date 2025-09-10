@@ -1,3 +1,4 @@
+import re
 from dataclasses import dataclass, field, fields
 from decimal import Decimal
 
@@ -39,10 +40,13 @@ class Resource:
 
 
 def initialize_resources(data: list):
-    resources = []
+    resources = {}
     for resource in data:
-        resources.append(Resource(json_document=resource))
-    return resources
+        resources[resource["_source"]["id"]] = Resource(json_document=resource)
+
+    resources = dict(sorted(resources.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+
+    return resources.values()
 
 
 

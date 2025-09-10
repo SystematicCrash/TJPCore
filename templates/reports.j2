@@ -16,31 +16,40 @@ taskreport taskReports "TaskReport" {
     responsible{title "responsible"},
     resources{title "resources" listtype bullets width 200},
     status{title "status"},
+    activetasks{title "active sub-tasks"},
+    opentasks{title "open sub-tasks"},
+    closedtasks{title "closed sub-tasks"},
     complete{title "complete"},
+    followers{title "flowers" listtype bullets width 200},
+    precursors{title "depends on" listtype bullets width 200},
+    pathcriticalness{title "path criticalness"},
+    gauge,
     cost { title "Total Cost" width 120 }
 
     balance cost rev
     sorttasks tree
+    selfcontained yes
 }
 
-
-
-taskreport workReport "WorkReport" {
-  formats csv, html
-  headline "Project Work Overview"
-  columns 
-    name { title "Project" }, 
-    duration { title "Whole Duration(hours)" }, 
-    effort { title "Whole Effort (hours)" }, 
-    complete { title "Progress (%)" }, 
-    effortdone { title "Done (hours)" }, 
-    effortleft { title "Remaining (hours)" }
-    loadunit hours
-}
-
-
-accountreport accountReport "CostReport" {
+resourcereport resourceReports "ResourceReport" {
+    headline "Resources Table"
     formats csv, html
-    headline "Project costs"
+    columns
+    bsi{title "wbs"},
+    id{title "id"},
+    name{title "name"},
+    rate{title "rate"},
+    efficiency{title "efficiency"},
+    cost{title "cost"},
+    duties{title "assigned tasks" listtype bullets},
+    freetime{title "unallocated work time"},
+    freework{title "unallocated work capacity"},
+    criticalness,
+    fte{title "full-time-equivalent"},
+    managers{title "managers" listtype bullets}
+
+    balance cost rev
+    sortresources tree
+    selfcontained yes
 }
 {% endmacro %}
