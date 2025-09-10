@@ -5,7 +5,7 @@ project proj2025 "Commercial Construction" 2020-08-03 +344d {
     workinghours wed 08:00 - 17:00
     workinghours fri 08:00 - 17:00
     workinghours mon 08:00 - 17:00
-    outputdir "exports"
+    outputdir "reports"
 }
 
 # ------------END-------------
@@ -1479,9 +1479,9 @@ task task145 "Issue final request for payment" {
 
 
 # ------------Reports-------------
-taskreport taskReports "TaskReport" {
+taskreport taskReports "tasksReport" {
     headline "Tasks Table"
-    formats csv, html
+    formats csv
     columns
     bsi{title "wbs"}, 
     id{title "id"}, 
@@ -1494,26 +1494,26 @@ taskreport taskReports "TaskReport" {
     effortleft{title "effortLeft"},
     priority{title "priority"},
     responsible{title "responsible"},
-    resources{title "resources" listtype bullets width 200},
+    resources{title "resources"},
     status{title "status"},
-    activetasks{title "active sub-tasks"},
-    opentasks{title "open sub-tasks"},
-    closedtasks{title "closed sub-tasks"},
+    activetasks{title "active_sub_tasks"},
+    opentasks{title "open_sub_tasks"},
+    closedtasks{title "closed_sub_tasks"},
     complete{title "complete"},
-    followers{title "flowers" listtype bullets width 200},
-    precursors{title "depends on" listtype bullets width 200},
-    pathcriticalness{title "path criticalness"},
-    gauge,
-    cost { title "Total Cost" width 120 }
+    followers{title "flowers"},
+    precursors{title "depends_on"},
+    pathcriticalness{title "path_criticalness"},
+    gauge{title "schedule_gauge"},
+    cost { title "total_cost"}
 
     balance cost rev
     sorttasks tree
     selfcontained yes
 }
 
-resourcereport resourceReports "ResourceReport" {
+resourcereport resourceReports "resourceReport" {
     headline "Resources Table"
-    formats csv, html
+    formats csv
     columns
     bsi{title "wbs"},
     id{title "id"},
@@ -1521,12 +1521,12 @@ resourcereport resourceReports "ResourceReport" {
     rate{title "rate"},
     efficiency{title "efficiency"},
     cost{title "cost"},
-    duties{title "assigned tasks" listtype bullets},
-    freetime{title "unallocated work time"},
-    freework{title "unallocated work capacity"},
+    duties{title "assigned_tasks"},
+    freetime{title "unallocated_work_time"},
+    freework{title "unallocated_work_capacity"},
     criticalness,
-    fte{title "full-time-equivalent"},
-    managers{title "managers" listtype bullets}
+    fte{title "full_time_equivalent"},
+    managers{title "managers"}
 
     balance cost rev
     sortresources tree

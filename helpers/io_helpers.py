@@ -1,7 +1,6 @@
 import csv
 import json
 import logging
-from concurrent.futures.thread import ThreadPoolExecutor
 from os import path
 from helpers.config_helper import get_config
 from helpers.utility import colorized_print
@@ -55,10 +54,9 @@ def logger(message: str, mode: str = 'warning', console: bool = True):
 
 
 # Writing logical tj3 errors on elasticsearch index
-def error_register(connection: Elasticsearch, error_message: str):
+async def error_register(connection: Elasticsearch, error_message: str):
     if not get_config("exceptions.save_logs_in_db"):
         return
     from helpers.elastic_helper import write_on_index
     data = {'id': uuid4().hex, 'message': error_message}
-    with ThreadPoolExecutor(max_workers=1) as executor:
-        executor.submit(write_on_index, connection, [data], get_config('error_index'))
+    await write_on_index(connection, [data], get_config('error_index'))

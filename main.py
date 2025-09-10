@@ -1,4 +1,5 @@
 import traceback
+import os
 import time
 import subprocess
 import asyncio
@@ -9,15 +10,16 @@ from fastapi.responses import JSONResponse
 from concurrent.futures import ThreadPoolExecutor
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, write_on_index, term_query
+from helpers.elastic_helper import make_connection, write_on_index, term_query, truncate_index
 from helpers.config_helper import get_config
-from models.project import initialize_projects
-from models.task import initialize_tasks, Task
-from models.resource import initialize_resources, Resource
-from models.shift import initialize_shifts
-from models.scenario import initialize_scenarios
+from data_models.project import initialize_projects
+from data_models.task import initialize_tasks, Task
+from data_models.resource import initialize_resources, Resource
+from data_models.shift import initialize_shifts
+from data_models.scenario import initialize_scenarios
 from helpers.utility import cast_string_fields_to_numeric_types
 from helpers.io_helpers import read_csv, error_register
+from helpers.reports_post_processing import manipulation
 from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError
 
 
@@ -74,7 +76,10 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         traceback.print_exc()
         raise ProcessFailureError(message, 500)
 
-    report_path = get_config("paths.reports")
+    report_paths = get_config("paths.reports")
+    # Creating reports directory if its not exist
+    if not os.path.isdir(report_paths['dir']):
+        os.makedirs(report_paths['dir'])
 
     body = body_template.render(
         project=projects[0],
@@ -83,46 +88,58 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         flags=flags,
         resources=resources,
         tasks=tasks,
-        reports=report_path
+        reports=report_paths
     )
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(body)
 
 
+    
+
 """ Indexing reports in elastic search """
-def indexing_reports(connection: AsyncElasticsearch):
+async def indexing_reports(connection: AsyncElasticsearch):
     reports_result = dict()
     sources: dict = get_config("paths.reports.files")
-    csv_dir = get_config("paths.reports.dirs.csv_dir")
+    report_dir = get_config("paths.reports.dir")
+
     for report_name, file_name in sources.items():
-        reports_result[report_name] = read_csv(csv_dir + file_name + ".csv")
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = {}
-        for k, v in reports_result.items():
-            futures[k] = executor.submit(cast_string_fields_to_numeric_types, v)
-        reports_result = {k: v.result() for k,v in futures.items()}
-        for report_name, data in reports_result.items():
-            for component, index_name in dict(get_config("report_indexes")).items():
-                if report_name.__contains__(component):
-                    executor.submit(write_on_index, connection, data, index_name)
+        reports_result[report_name] = read_csv(report_dir + "/" + file_name + ".csv")
+
+    reports_result = {
+        report_name: cast_string_fields_to_numeric_types(data) 
+        for report_name, data in reports_result.items()
+        }
+    
+    manipulation(reports_result)
+        
+    report_indexes: dict = get_config("report_indexes")
+
+    [await truncate_index(connection, index) for index in report_indexes.values()]
+
+    for report_name, data in reports_result.items():
+        if report_name in report_indexes.keys():
+            await write_on_index(connection, data, report_indexes.get(report_name))
 
 
 """ Processing """
 async def main(project_id: str):
     connection = make_connection()
     data_map = await gather_project_data(connection, project_id)
+    output_path = get_config("paths.tjp_output")
 
-    generate_tjp(data_map, get_config("paths.tjp_output"))
+    generate_tjp(data_map, output_path)
+
     result = subprocess.run(
-        "tj3 " + get_config("paths.tjp_output"), shell=True, stdout=subprocess.DEVNULL,
+        "tj3 " + output_path, shell=True, stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE, text=True, encoding='utf-8'
     )
+    
     if result.returncode != 0:
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
-        error_register(connection, message)
+        await error_register(connection, message)
         raise TJ3ProcessError(message, 500)
     await connection.close()
-    # indexing_reports(connection)
+    await indexing_reports(connection)
 
 
 app = FastAPI()

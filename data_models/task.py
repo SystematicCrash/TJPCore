@@ -68,15 +68,26 @@ def assign_absolute_ids(task: Task, prefix: str):
 
 
 
+""" Finding task's abs id """
+def create_abs_id(task: Task, parts: list):
+    if task.parent:
+        create_abs_id(task.parent, parts)   
+    parts.append(task.id) 
+    return parts
+
+
+
 """ Building a Breakdown Structure of Tasks """
-def find_parent(tasks: dict[str, Task], task: Task):
+def task_leveling(task: Task, tasks: dict[str, Task]):
+    is_top_level_task = False
     if not task.parentId:
-        return
+        is_top_level_task = True
     parent = tasks.get(task.parentId, None)
-    if not parent:
-        return
-    parent.sub_tasks_objs.append(task)
-    task.parent = parent
+    if parent:
+        parent.sub_tasks_objs.append(task)
+        task.parent = parent
+        remove_inherited_properties(task)
+    return is_top_level_task
 
 
 
@@ -87,9 +98,6 @@ def remove_inherited_properties(task: Task):
             cs for cs in task.chargeset 
             if not cs in task.parent.chargeset
         ]
-    for child in task.sub_tasks_objs:
-        remove_inherited_properties(child)
-
 
 
 """ Converting task dependecies ids to absolute ids """
@@ -97,43 +105,30 @@ def convert_dependencies_to_absolute(tasks: dict[str, Task], task: Task):
         for i, dep_id in enumerate(task.depends):
             depends_on = tasks.get(dep_id)
             if depends_on:
+                if not depends_on.absolute_id:
+                    depends_on.absolute_id = '.'.join(create_abs_id(depends_on, []))
                 task.depends[i] = depends_on.absolute_id
 
-
-""" Sorting a list of tasks """
-def sort_tasks_list_by_id(tasks: list[Task]):
-    return list(sorted(tasks, key=lambda task: int(re.search(r'\d+', task.id).group())))
-
-
+    
 """ Sorting a dict of tasks by their keys """
-def sort_tasks_dict_by_id(tasks: dict[str, Task]):
+def sort_tasks_by_id(tasks: dict[str, Task]):
     return dict(sorted(tasks.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+
 
 
 """ Instanciating Tasks Objects With Json Documents """
 def initialize_tasks(data: list):
+    from datetime import datetime
     tasks: dict[str, Task] = {}
     top_level_tasks = []
     
     tasks = {doc["_source"]["id"]: Task(json_document=doc) for doc in data}
 
-    for task in tasks.values():
-        find_parent(tasks, task)
+    tasks = sort_tasks_by_id(tasks)
 
-
-    
-    tasks = sort_tasks_dict_by_id(tasks)
-    
-    for task in tasks.values():
-        if task.parent:
-            continue
-        top_level_tasks.append(task)
-        assign_absolute_ids(task, '')
-        remove_inherited_properties(task)
-        task.sub_tasks_objs = sort_tasks_list_by_id(task.sub_tasks_objs)
-            
-    for task in tasks.values():
+    for task in tasks.values(): 
+        if task_leveling(task, tasks):
+            top_level_tasks.append(task)
         convert_dependencies_to_absolute(tasks, task)
-    
 
     return top_level_tasks

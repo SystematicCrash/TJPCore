@@ -1602,3 +1602,270 @@ ERROR: Failed to generate tjp file!
 Details: 'tuple' object has no attribute 'flags' - 2025-09-10 11:37:08
 ERROR: Failed to generate tjp file!
 Details: 'list' object has no attribute 'values' - 2025-09-10 11:47:38
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 12:12:34
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 12:12:57
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 12:13:12
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3c4b275fd0> - 2025-09-10 12:13:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3c4b1e3390> - 2025-09-10 12:13:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3c4b000190> - 2025-09-10 12:13:54
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection error caused by: ConnectionError(Connection error caused by: ClientConnectorError(Cannot connect to host 87.236.211.68:9200 ssl:default [Network is unreachable])) - 2025-09-10 12:30:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f3c4b0007d0> - 2025-09-10 12:30:43
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff41) not found! - 2025-09-10 12:33:30
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff41) not found! - 2025-09-10 12:33:31
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fa5c6d366f0>, 10026.204361759)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fa5c6dbda90> - 2025-09-10 12:33:37
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fa5c6d379b0>, 10027.514472387)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fa5c6d42350> - 2025-09-10 12:33:37
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:207: Warning: Task task2.task6 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:395: Warning: Task task24.task26 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:413: Warning: Task task24.task28 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:467: Warning: Task task32.task34 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:520: Warning: Task task32.task40 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:547: Warning: Task task32.task43 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:601: Warning: Task task47.task49 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:609: Warning: Task task47.task50 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:626: Warning: Task task47.task52 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:689: Warning: Task task54.task59 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:734: Warning: Task task54.task64 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:779: Warning: Task task54.task69 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:788: Warning: Task task54.task70 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:797: Warning: Task task54.task71 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:806: Warning: Task task54.task72 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:815: Warning: Task task54.task73 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:833: Warning: Task task54.task75 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:923: Warning: Task task79.task85 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:932: Warning: Task task79.task86 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:985: Warning: Task task87.task92 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1030: Warning: Task task93.task97 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1084: Warning: Task task98.task103 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1138: Warning: Task task98.task109 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1174: Warning: Task task110.task113 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1246: Warning: Task task119.task121 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1282: Warning: Task task119.task125 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1416: Warning: Task task137.task140 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1425: Warning: Task task137.task141 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1456: Warning: Task task144 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+ - 2025-09-10 12:45:44
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 12:47:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 12:48:22
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 12:48:51
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 12:49:45
+ERROR: 
+Failed to write data to index named (error_index).
+Details: 'coroutine' object has no attribute 'body' - 2025-09-10 12:50:18
+ERROR: 
+Failed to write data to index named (error_index).
+Details: 'coroutine' object has no attribute 'body' - 2025-09-10 12:51:45
+ERROR: 
+Failed to write data to index named (error_index).
+Details: 'coroutine' object has no attribute 'body' - 2025-09-10 12:53:25
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 12:55:52
+ERROR: 
+Failed to write data to index named (error_index).
+Details: string indices must be integers, not 'str' - 2025-09-10 12:57:54
+ERROR: 
+Failed to write data to index named (error_index).
+Details: string indices must be integers, not 'str' - 2025-09-10 12:58:29
+ERROR: 
+Failed to write data to index named (error_index).
+Details: string indices must be integers, not 'str' - 2025-09-10 12:58:44
+ERROR: 
+Failed to write data to index named (error_index).
+Details: string indices must be integers, not 'str' - 2025-09-10 12:59:26
+ERROR: 
+Failed to write data to index named (error_index).
+Details: 'coroutine' object has no attribute 'body' - 2025-09-10 13:00:50
+ERROR: 
+Failed to write data to index named (error_index).
+Details: 'coroutine' object has no attribute 'body' - 2025-09-10 13:01:39
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 13:02:32
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 13:02:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 13:03:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fd6a7f85fd0> - 2025-09-10 13:05:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fd6a7d51bd0> - 2025-09-10 13:05:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fd6a7c22990> - 2025-09-10 13:05:35
+ERROR: Failed to generate tjp file!
+Details: 'NoneType' object is not reversible - 2025-09-10 14:41:49
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 14:56:25
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 14:56:38
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fc664e35e80> - 2025-09-10 14:57:27
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fc664d9aad0> - 2025-09-10 14:57:27
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:191: Error: Unexpected token ''task2', 'task3'' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+        depends ['task2', 'task3']
+ - 2025-09-10 14:57:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:207: Warning: Task task2.task6 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:395: Warning: Task task24.task26 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:413: Warning: Task task24.task28 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:467: Warning: Task task32.task34 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:520: Warning: Task task32.task40 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:547: Warning: Task task32.task43 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:601: Warning: Task task47.task49 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:609: Warning: Task task47.task50 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:626: Warning: Task task47.task52 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:689: Warning: Task task54.task59 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:734: Warning: Task task54.task64 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:779: Warning: Task task54.task69 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:788: Warning: Task task54.task70 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:797: Warning: Task task54.task71 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:806: Warning: Task task54.task72 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:815: Warning: Task task54.task73 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:833: Warning: Task task54.task75 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:923: Warning: Task task79.task85 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:932: Warning: Task task79.task86 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:985: Warning: Task task87.task92 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1030: Warning: Task task93.task97 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1084: Warning: Task task98.task103 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1138: Warning: Task task98.task109 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1174: Warning: Task task110.task113 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1246: Warning: Task task119.task121 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1282: Warning: Task task119.task125 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1416: Warning: Task task137.task140 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1425: Warning: Task task137.task141 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1456: Warning: Task task144 has resource allocation requested, but did not get any resources assigned. Either use 'effort' to ensure allocations or use a higher 'priority'.
+tjp_outputs/project.tjp:1482: Error: Report taskReports has output formats requested, but the file name is empty.
+ - 2025-09-10 15:22:04
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1525: Error: Unexpected token 'resource' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    freetime{title "unallocated work time"},resource
+ - 2025-09-10 15:23:28
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1525: Error: Unexpected token 'resource' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    freetime{title "unallocated work time"},resource
+ - 2025-09-10 15:24:08
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb4340e9d30> - 2025-09-10 15:24:50
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb434059950> - 2025-09-10 15:24:50
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb433d8a710> - 2025-09-10 15:24:50
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:2: Error: Output directory 'exports' does not exist or is not a directory!
+}
+ - 2025-09-10 15:28:13
+ERROR: Failed to generate tjp file!
+Details: 'shift' - 2025-09-10 15:53:29
+ERROR: Failed to generate tjp file!
+Details: 'shift' - 2025-09-10 15:55:05
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 17:14:44
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 17:15:39
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:853: Error: Container task task77 may not be marked as a milestone.
+ - 2025-09-10 17:16:14
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:20:32
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:21:13
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:21:30
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:24:07
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:30:12
+ERROR: 
+Failed to perorm query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:30:25
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:30:46
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:41:35
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:41:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f1bdc059fd0> - 2025-09-10 17:41:52
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f1bdbfd2990> - 2025-09-10 17:41:52
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:41:54
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:44:10
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:44:35
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:45:19
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:46:00
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:46:14
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f7b2e7b5fd0> - 2025-09-10 17:46:18
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f7b2e742990> - 2025-09-10 17:46:18
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:46:48
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:49:20
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: 1 document(s) failed to index. - 2025-09-10 17:50:33
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:51:09
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-10 17:51:26
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fa496711fd0> - 2025-09-10 17:51:31
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fa49669afd0> - 2025-09-10 17:51:31

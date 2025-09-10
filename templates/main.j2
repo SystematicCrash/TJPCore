@@ -1,7 +1,7 @@
 # ----------------Project Header-------------
 {% if project %}
 {% import "project_header.j2" as project_header %}
-{{ project_header.header(project, scenarios, reports.main_dir) }}
+{{ project_header.header(project, scenarios, reports.dir) }}
 {% endif %}
 # ------------END-------------
 
@@ -48,6 +48,6 @@ flags
 # ------------Reports-------------
 {% if reports %}
 {% import "reports.j2" as reporter %}
-{{ reporter.render_reports() }}
+{{ reporter.render_reports(reports) }}
 {% endif %}
 # ------------END-------------

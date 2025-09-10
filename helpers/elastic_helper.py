@@ -23,10 +23,12 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
                 "_id": item["id"],
                 "_source": item
             }]
-            helpers.bulk(connection, actions)
+            await helpers.async_bulk(connection, actions=actions)
     except Exception as e:
+        import traceback
         message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 503)
+        print(e.errors)
+        raise ElasticSearchQueryError(message, 500)
 
 
 """ Fetching docs from an index """
@@ -44,7 +46,7 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
         return {index_name : result['hits']['hits']} or None
     except Exception as e:
         message = f"\nFailed to fetch data from index named ({index_name}).\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 503)
+        raise ElasticSearchQueryError(message, 500)
 
         
 
@@ -55,7 +57,17 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
         return {index_name : result['hits']['hits']} or None 
     except Exception as e:
         message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 503)
+        raise ElasticSearchQueryError(message, 500)
+
+
+
+""" Removing all docuements from an index """
+async def truncate_index(es: AsyncElasticsearch, index_name: str):
+    try:
+        await es.delete_by_query(index=index_name, query={"match_all": {}})
+    except Exception as e:
+        message = f"\nFalied to truncate index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)
 
 
     
@@ -80,5 +92,5 @@ async def term_query(
         result = await es.search(index=index_name, body=query, size=10_000)
         return {index_name: result['hits']['hits']} or None
     except Exception as e:
-        message = f"\nFailed to perorm query on index named ({index_name}).\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 503)
+        message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)

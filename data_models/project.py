@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field, fields
-from datetime import date, datetime
+from datetime import date
 from helpers.utility import time_unit_to_an_abbreviation
 
 @dataclass
