@@ -17,17 +17,13 @@ def make_connection():
 """ Writing data to an index """
 async def write_on_index(connection: AsyncElasticsearch, data, index_name):
     try:
-        for item in data:
-            actions = [{
-                "_index": index_name,
-                "_id": item["id"],
-                "_source": item
-            }]
-            await helpers.async_bulk(connection, actions=actions)
+        data = [
+            {"_index": index_name, "_id": doc["id"], "_source": doc}
+            for doc in data
+            ]
+        await helpers.async_bulk(connection, data, chunk_size=2000, request_timeout=60)
     except Exception as e:
-        import traceback
         message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
-        print(e.errors)
         raise ElasticSearchQueryError(message, 500)
 
 

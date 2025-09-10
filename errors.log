@@ -1869,3 +1869,40 @@ ERROR: Unclosed client session
 client_session: <aiohttp.client.ClientSession object at 0x7fa496711fd0> - 2025-09-10 17:51:31
 ERROR: Unclosed client session
 client_session: <aiohttp.client.ClientSession object at 0x7fa49669afd0> - 2025-09-10 17:51:31
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:47:52
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:20
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:23
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:30
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:32
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:33
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0ee01dde80> - 2025-09-10 19:48:34
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0143c50>, 626.376740837)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee014a850> - 2025-09-10 19:48:34
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0150ef0>, 629.730201568)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee01565d0> - 2025-09-10 19:48:34
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0152150>, 636.219804437)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee01aa5d0> - 2025-09-10 19:48:34
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee01533b0>, 638.359063659)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee01a9f90> - 2025-09-10 19:48:34
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0170650>, 639.718643756)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee0156fd0> - 2025-09-10 19:48:34
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff) not found! - 2025-09-10 19:48:35
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRY) not found! - 2025-09-10 19:48:40
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRY) not found! - 2025-09-10 19:48:42
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0151df0>, 646.339092195)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee01aa490> - 2025-09-10 19:48:48
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7f0ee0150950>, 648.256619846)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7f0ee01aa210> - 2025-09-10 19:48:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f0ee01a9f90> - 2025-09-10 19:49:06
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: BadRequestError(400, 'action_request_validation_exception', 'Validation Failed: 1: index is missing;2: index is missing;3: index is missing;4: index is missing;5: index is missing;6: index is missing;7: index is missing;8: index is missing;9: index is missing;10: index is missing;11: index is missing;12: index is missing;13: index is missing;14: index is missing;15: index is missing;16: index is missing;17: index is missing;18: index is missing;19: index is missing;20: index is missing;21: index is missing;22: index is missing;23: index is missing;24: index is missing;25: index is missing;26: index is missing;27: index is missing;28: index is missing;29: index is missing;30: index is missing;31: index is missing;32: index is missing;33: index is missing;34: index is missing;35: index is missing;36: index is missing;37: index is missing;38: index is missing;39: index is missing;40: index is missing;41: index is missing;42: index is missing;43: index is missing;44: index is missing;45: index is missing;46: index is missing;47: index is missing;48: index is missing;49: index is missing;50: index is missing;51: index is missing;52: index is missing;53: index is missing;54: index is missing;55: index is missing;56: index is missing;57: index is missing;58: index is missing;59: index is missing;60: index is missing;61: index is missing;62: index is missing;63: index is missing;64: index is missing;65: index is missing;66: index is missing;67: index is missing;68: index is missing;69: index is missing;70: index is missing;71: index is missing;72: index is missing;73: index is missing;74: index is missing;75: index is missing;76: index is missing;77: index is missing;78: index is missing;79: index is missing;80: index is missing;81: index is missing;82: index is missing;83: index is missing;84: index is missing;85: index is missing;86: index is missing;87: index is missing;88: index is missing;89: index is missing;90: index is missing;91: index is missing;92: index is missing;93: index is missing;94: index is missing;95: index is missing;96: index is missing;97: index is missing;98: index is missing;99: index is missing;100: index is missing;101: index is missing;102: index is missing;103: index is missing;104: index is missing;105: index is missing;106: index is missing;107: index is missing;108: index is missing;109: index is missing;110: index is missing;111: index is missing;112: index is missing;113: index is missing;114: index is missing;115: index is missing;116: index is missing;117: index is missing;118: index is missing;119: index is missing;120: index is missing;121: index is missing;122: index is missing;123: index is missing;124: index is missing;125: index is missing;126: index is missing;127: index is missing;128: index is missing;129: index is missing;130: index is missing;131: index is missing;132: index is missing;133: index is missing;134: index is missing;135: index is missing;136: index is missing;137: index is missing;138: index is missing;139: index is missing;140: index is missing;141: index is missing;142: index is missing;143: index is missing;144: index is missing;') - 2025-09-10 20:15:08

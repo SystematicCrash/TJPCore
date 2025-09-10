@@ -1,4 +1,3 @@
-import traceback
 import os
 import time
 import subprocess
@@ -7,7 +6,6 @@ from jinja2 import Environment, FileSystemLoader
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
-from concurrent.futures import ThreadPoolExecutor
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
 from helpers.elastic_helper import make_connection, write_on_index, term_query, truncate_index
@@ -73,7 +71,6 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         flags = define_flags(tasks, resources)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
-        traceback.print_exc()
         raise ProcessFailureError(message, 500)
 
     report_paths = get_config("paths.reports")
@@ -101,34 +98,41 @@ async def indexing_reports(connection: AsyncElasticsearch):
     reports_result = dict()
     sources: dict = get_config("paths.reports.files")
     report_dir = get_config("paths.reports.dir")
-
-    for report_name, file_name in sources.items():
-        reports_result[report_name] = read_csv(report_dir + "/" + file_name + ".csv")
+    
+    reports_result = {
+        report_name: read_csv(report_dir + "/" + file_name + ".csv")
+        for report_name, file_name in sources.items()
+        }
 
     reports_result = {
         report_name: cast_string_fields_to_numeric_types(data) 
         for report_name, data in reports_result.items()
         }
     
+    # Corrections
     manipulation(reports_result)
         
     report_indexes: dict = get_config("report_indexes")
 
-    [await truncate_index(connection, index) for index in report_indexes.values()]
+    # removing previous documents
+    await asyncio.gather(*(truncate_index(connection, index) for index in report_indexes.values()))
 
-    for report_name, data in reports_result.items():
-        if report_name in report_indexes.keys():
-            await write_on_index(connection, data, report_indexes.get(report_name))
+    await asyncio.gather(*(
+        write_on_index(connection, data, report_indexes[report_name])
+        for report_name, data in reports_result.items()
+        if report_name in report_indexes
+    ))
 
 
 """ Processing """
 async def main(project_id: str):
     connection = make_connection()
+
     data_map = await gather_project_data(connection, project_id)
     output_path = get_config("paths.tjp_output")
 
     generate_tjp(data_map, output_path)
-
+    
     result = subprocess.run(
         "tj3 " + output_path, shell=True, stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE, text=True, encoding='utf-8'
@@ -138,8 +142,9 @@ async def main(project_id: str):
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
         await error_register(connection, message)
         raise TJ3ProcessError(message, 500)
-    await connection.close()
+    
     await indexing_reports(connection)
+    await connection.close()
 
 
 app = FastAPI()
@@ -167,10 +172,5 @@ async def run(request: Request, project_id: str):
         content={'status' : 'success', 'message' : 'Process finished!', 'duration' : f'{duration:.2f}'},
         status_code=200)
 
-
-
-
-# if __name__ == "__main__":
-#     main("proj2025")
 
 
