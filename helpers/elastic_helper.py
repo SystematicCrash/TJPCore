@@ -1,5 +1,4 @@
 from elasticsearch import AsyncElasticsearch, helpers
-from concurrent.futures import ThreadPoolExecutor
 from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
 
@@ -21,8 +20,10 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
             {"_index": index_name, "_id": doc["id"], "_source": doc}
             for doc in data
             ]
-        await helpers.async_bulk(connection, data, chunk_size=2000, request_timeout=60)
+        await helpers.async_bulk(connection, data, chunk_size=2000, request_timeout=200)
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
 
@@ -60,7 +61,7 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
 """ Removing all docuements from an index """
 async def truncate_index(es: AsyncElasticsearch, index_name: str):
     try:
-        await es.delete_by_query(index=index_name, query={"match_all": {}})
+        await es.delete_by_query(index=index_name, query={"match_all": {}}, conflicts="proceed")
     except Exception as e:
         message = f"\nFalied to truncate index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)

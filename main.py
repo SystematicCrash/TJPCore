@@ -17,7 +17,8 @@ from data_models.shift import initialize_shifts
 from data_models.scenario import initialize_scenarios
 from helpers.utility import cast_string_fields_to_numeric_types
 from helpers.io_helpers import read_csv, error_register
-from helpers.reports_post_processing import manipulation
+from helpers.embedding_helper import embedd_data
+from helpers.report_manipulation import manipulation
 from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError
 
 
@@ -103,20 +104,18 @@ async def indexing_reports(connection: AsyncElasticsearch):
         report_name: read_csv(report_dir + "/" + file_name + ".csv")
         for report_name, file_name in sources.items()
         }
-
     reports_result = {
         report_name: cast_string_fields_to_numeric_types(data) 
         for report_name, data in reports_result.items()
         }
-    
     # Corrections
     manipulation(reports_result)
-        
     report_indexes: dict = get_config("report_indexes")
-
     # removing previous documents
     await asyncio.gather(*(truncate_index(connection, index) for index in report_indexes.values()))
-
+    for data in reports_result.values():
+        for doc in data:
+            doc["vector"] = embedd_data(data)
     await asyncio.gather(*(
         write_on_index(connection, data, report_indexes[report_name])
         for report_name, data in reports_result.items()
