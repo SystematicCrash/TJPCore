@@ -1974,3 +1974,18 @@ Failed to write data to index named (projectplan365_resource_report).
 Details: 32 document(s) failed to index. - 2025-09-11 19:27:06
 ERROR: Unclosed client session
 client_session: <aiohttp.client.ClientSession object at 0x7f3240d69160> - 2025-09-11 19:28:13
+ERROR: 
+Failed to perform query on index named (projectplan365_tasks).
+Details: Connection timed out - 2025-09-11 21:26:33
+ERROR: 
+Failed to perform query on index named (projectplan365_project).
+Details: Connection timed out - 2025-09-11 21:26:47
+ERROR: 
+Failed to write data to index named (projectplan365_resource_report).
+Details: Connection timed out - 2025-09-11 21:29:40
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: Connection timed out - 2025-09-11 21:30:18
+ERROR: 
+Failed to write data to index named (projectplan365_tasks_report).
+Details: Connection timed out - 2025-09-11 21:30:18

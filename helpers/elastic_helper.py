@@ -20,7 +20,7 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
             {"_index": index_name, "_id": doc["id"], "_source": doc}
             for doc in data
             ]
-        await helpers.async_bulk(connection, data, chunk_size=2000, request_timeout=200)
+        await helpers.async_bulk(connection, data, chunk_size=2000)
     except Exception as e:
         import traceback
         traceback.print_exc()

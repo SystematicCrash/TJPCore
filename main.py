@@ -113,9 +113,11 @@ async def indexing_reports(connection: AsyncElasticsearch):
     report_indexes: dict = get_config("report_indexes")
     # removing previous documents
     await asyncio.gather(*(truncate_index(connection, index) for index in report_indexes.values()))
+
     for data in reports_result.values():
         for doc in data:
             doc["vector"] = embedd_data(data)
+
     await asyncio.gather(*(
         write_on_index(connection, data, report_indexes[report_name])
         for report_name, data in reports_result.items()
