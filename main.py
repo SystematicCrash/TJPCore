@@ -18,10 +18,10 @@ from data_models.scenario import initialize_scenarios
 from helpers.io_helpers import read_csv, read_json, error_register
 from helpers.embedding_helper import embedd_data
 from helpers.report_manipulation import manipulation
-from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError
+from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError, DataValidationError
 
 
-indexes_names = get_config('data_indexes')
+_indexes_names = get_config('data_indexes')
 
 """ Tjp file flags """
 def define_flags(tasks: list[Task], resources: list[Resource]):
@@ -40,17 +40,23 @@ def define_flags(tasks: list[Task], resources: list[Resource]):
 """ Fetching project data from data engine """
 async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
     data_map = {}
-    project_data: dict | None = await term_query(connection, indexes_names.get('project'), "_id", project_id)
-    if not project_data.get(indexes_names["project"]):
+    project_data: dict | None = await term_query(connection, _indexes_names.get('project'), "_id", project_id)
+    if not project_data.get(_indexes_names["project"]):
         raise BadInputError(message=f"Project with id = ({project_id}) not found!", status_code=404)
     
-    data_map[indexes_names['project']] = list(project_data.values())[0]
+    data_map[_indexes_names['project']] = list(project_data.values())[0]
     queries = []
-    queries.append(term_query(connection, indexes_names.get("task"), "projectid", project_id))
-    queries.append(term_query(connection, indexes_names.get("resource"), "projectid", project_id))
+    queries.append(term_query(connection, _indexes_names.get("task"), "projectid", project_id))
+    queries.append(term_query(connection, _indexes_names.get("resource"), "projectid", project_id))
 
     results = await asyncio.gather(*queries)
     data_map.update({list(r.keys())[0]: list(r.values())[0] for r in results})
+
+    if not data_map[_indexes_names['resource']]:
+        raise DataValidationError(f"No resources found for project with id =({project_id})!", 500)
+
+    if not data_map[_indexes_names['task']]:
+        raise DataValidationError(f"No tasks found for project with id =({project_id})!", 500)
     return data_map
 
     
@@ -63,14 +69,16 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
                       trim_blocks=True, lstrip_blocks=True)
     body_template = env.get_template("main.j2")
     try:
-        projects = initialize_projects(data_map.get(indexes_names['project'], [])) 
-        shifts = initialize_shifts(data_map.get(indexes_names['shift'], [])) 
-        tasks = initialize_tasks(data_map.get(indexes_names['task'], [])) 
-        resources = initialize_resources(data_map.get(indexes_names['resource'], [])) 
-        scenarios = initialize_scenarios(data_map.get(indexes_names['scenario'], [])) 
+        projects = initialize_projects(data_map.get(_indexes_names['project'], [])) 
+        shifts = initialize_shifts(data_map.get(_indexes_names['shift'], [])) 
+        tasks = initialize_tasks(data_map.get(_indexes_names['task'], [])) 
+        resources = initialize_resources(data_map.get(_indexes_names['resource'], [])) 
+        scenarios = initialize_scenarios(data_map.get(_indexes_names['scenario'], [])) 
         flags = define_flags(tasks, resources)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
+        import traceback
+        traceback.print_exc()
         raise ProcessFailureError(message, 500)
 
     report_paths = get_config("paths.reports")
@@ -107,8 +115,8 @@ async def indexing_reports(connection: AsyncElasticsearch):
     manipulation(reports_result)
     report_indexes: dict = get_config("report_indexes")
     # Dropping and recreating indexes
-    await reset_index(connection, report_indexes.get("task"), read_json("task_report_mapping.json"))
-    await reset_index(connection, report_indexes.get("resource"), read_json("resource_report_mapping.json"))
+    await reset_index(connection, report_indexes.get("task"), read_json("mappings/task_report_mapping.json"))
+    await reset_index(connection, report_indexes.get("resource"), read_json("mappings/resource_report_mapping.json"))
     # Writing docs on indexes
     await asyncio.gather(*(
         write_on_index(connection, data, report_indexes[report_name])

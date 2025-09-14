@@ -102,7 +102,7 @@ async def term_query(
                 "excludes": ["*vector"]
             },
             "query": {
-                "term": {
+                "match": {
                     field: value
                 }
             }

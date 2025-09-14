@@ -61,5 +61,5 @@ async def error_register(connection: Elasticsearch, error_message: str):
         return
     data = {'id': uuid4().hex, 'message': error_message}
     await drop_index(connection, index_name)
-    await create_index(connection, index_name, read_json("error_index_mapping.json"))
+    await create_index(connection, index_name, read_json("mappings/error_index_mapping.json"))
     await write_on_index(connection, [data], get_config('error_index'))

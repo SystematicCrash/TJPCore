@@ -2007,3 +2007,382 @@ Details: BadRequestError(400, 'resource_already_exists_exception', 'index [proje
 ERROR: Failed to finish processing! Because of below errors:
 Error: No tasks defined
  - 2025-09-14 01:34:44
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-14 10:33:39
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f17366f1fd0> - 2025-09-14 10:34:31
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-14 10:34:33
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-14 10:35:21
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-14 10:36:23
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 10:38:37
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 10:39:49
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 10:43:17
+ERROR: No tasks found for project with id =(MIiQCZkBhyhQ-KdRYff4)! - 2025-09-14 10:43:55
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7ff9c69dbed0> - 2025-09-14 10:44:17
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 10:44:17
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 12:03:48
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:04:43
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:06:32
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:08:41
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:09:46
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:11:55
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:12:20
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:12:59
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:13:38
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:13:51
+ERROR: Failed to generate tjp file!
+Details: unhashable type: 'list' - 2025-09-14 13:14:07
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:43: Error: Unknown account dev
+    chargeset dev
+ - 2025-09-14 13:14:20
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b7e30e0> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b899310> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b6e5e50> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b74d090> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b89ad50> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b771090> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b6e79d0> - 2025-09-14 13:17:00
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f745b74dd10> - 2025-09-14 13:17:00
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:43: Error: Account cost is a group account and cannot be used in a chargeset.
+    priority
+ - 2025-09-14 13:17:03
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:51: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:17:31
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:51: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:33:57
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:51: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:37:35
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:51: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:39:48
+ERROR: No resources found for project with id =(MIiQCZkBhyhQ-KdRYff4)! - 2025-09-14 13:41:27
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:36: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+resource 1
+ - 2025-09-14 13:48:36
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:36: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+resource 1
+ - 2025-09-14 13:49:30
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:36: Error: Unexpected token '1' found. Expecting one of :ID, :STRING
+resource 1
+ - 2025-09-14 13:50:35
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:180: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:51:15
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:180: Error: Unexpected token 'G.C' found. Expecting :ID
+        responsible G.C
+ - 2025-09-14 13:54:14
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb47eb0e0> - 2025-09-14 14:06:31
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade16ad0> - 2025-09-14 14:06:31
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad8cc7d0> - 2025-09-14 14:06:31
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade14f50> - 2025-09-14 14:06:31
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45d2350> - 2025-09-14 14:06:31
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:436: Error: Unexpected token '27' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+        depends 27
+ - 2025-09-14 14:06:33
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:976: Error: Unexpected token '88' found. Expecting one of :ABSOLUTE_ID, :ID, '!'
+        depends 88
+ - 2025-09-14 14:08:48
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:187: Error: Task task2.task4 cannot depend on parent task2
+ - 2025-09-14 14:10:02
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:187: Error: Task task2.task4 cannot depend on parent task2
+ - 2025-09-14 14:10:53
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:216: Error: Task task2.task7 cannot depend on parent task2
+ - 2025-09-14 14:11:53
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:235: Error: Task task2.task9 cannot depend on parent task2
+ - 2025-09-14 14:12:15
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44e60d0> - 2025-09-14 14:12:37
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44d5450> - 2025-09-14 14:12:37
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44bc7d0> - 2025-09-14 14:12:37
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade8fb10> - 2025-09-14 14:12:37
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad9a2e90> - 2025-09-14 14:12:37
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb46377d0>, 9130.129030585), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb46372f0>, 9130.333338008)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdad9a2d50> - 2025-09-14 14:12:37
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:306: Error: Task task10.task17 cannot depend on parent task10
+ - 2025-09-14 14:12:39
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:344: Error: Task task18.task21 cannot depend on parent task18
+ - 2025-09-14 14:12:58
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:391: Error: Task task24.task26 cannot depend on parent task24
+ - 2025-09-14 14:13:15
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:471: Error: Task task32.task35 cannot depend on parent task32
+ - 2025-09-14 14:13:34
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:596: Error: Task task47.task49 cannot depend on parent task47
+ - 2025-09-14 14:13:55
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:604: Error: Task task47.task50 cannot depend on parent task47
+ - 2025-09-14 14:14:15
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45d1e50> - 2025-09-14 14:14:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44bfb10> - 2025-09-14 14:14:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44c6e90> - 2025-09-14 14:14:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44ecf50> - 2025-09-14 14:14:48
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdadea3250> - 2025-09-14 14:14:48
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:666: Error: Task task54.task57 cannot depend on parent task54
+ - 2025-09-14 14:14:50
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:908: Error: Task task79.task84 cannot depend on parent task79
+ - 2025-09-14 14:15:09
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:952: Error: Task task87.task89 cannot depend on parent task87
+ - 2025-09-14 14:15:27
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1005: Error: Task task93.task95 cannot depend on parent task93
+ - 2025-09-14 14:15:39
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1049: Error: Task task98.task100 cannot depend on parent task98
+ - 2025-09-14 14:15:54
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1156: Error: Task task110.task112 cannot depend on parent task110
+ - 2025-09-14 14:16:08
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45e6350> - 2025-09-14 14:16:21
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb4675a90> - 2025-09-14 14:16:21
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45b7890> - 2025-09-14 14:16:21
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade556d0> - 2025-09-14 14:16:21
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdad92b650>, 9348.808467043), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdad9286b0>, 9349.002286431)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade55450> - 2025-09-14 14:16:21
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade2f610> - 2025-09-14 14:16:21
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb44c5d90>, 9363.297207219), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb44c58b0>, 9363.501879606)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade2f4d0> - 2025-09-14 14:16:21
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1200: Error: Task task114.task117 cannot depend on parent task114
+ - 2025-09-14 14:16:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1244: Error: Task task119.task122 cannot depend on parent task119
+ - 2025-09-14 14:16:35
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1315: Error: Task task126.task130 cannot depend on parent task126
+ - 2025-09-14 14:16:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1350: Error: Task task132.task134 cannot depend on parent task132
+ - 2025-09-14 14:16:58
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1358: Error: Task task132.task135 has unknown depends task000
+ - 2025-09-14 14:17:13
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1393: Error: Task task137.task139 cannot depend on parent task137
+ - 2025-09-14 14:17:29
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb43f2710> - 2025-09-14 14:17:44
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb4651450> - 2025-09-14 14:17:44
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44ed310> - 2025-09-14 14:17:44
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45b5a90> - 2025-09-14 14:17:44
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade5b9d0> - 2025-09-14 14:17:44
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdad92a690>, 9444.39965577), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb4412ed0>, 9444.602103307)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade5b890> - 2025-09-14 14:17:44
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:170: Error: Container task task2 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:17:46
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:170: Error: Container task task2 may not be marked as a milestone.
+ - 2025-09-14 14:18:52
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:170: Error: Container task task2 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:19:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:170: Error: Container task task2 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:19:29
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:242: Error: Container task task10 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:20:03
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:314: Error: Container task task18 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:20:22
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad99fb10> - 2025-09-14 14:20:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb440b110> - 2025-09-14 14:20:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb4409950> - 2025-09-14 14:20:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb4651e50> - 2025-09-14 14:20:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb43f1f90> - 2025-09-14 14:20:35
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43ba810>, 9617.167133768), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43ba330>, 9617.384713711)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdb43f0410> - 2025-09-14 14:20:35
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:372: Error: Container task task24 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:20:38
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb45e56d0> - 2025-09-14 14:20:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb440a210> - 2025-09-14 14:20:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb46765d0> - 2025-09-14 14:20:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad99e990> - 2025-09-14 14:20:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdadea2ad0> - 2025-09-14 14:20:54
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade951d0> - 2025-09-14 14:20:54
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb44cd0d0>, 9632.883529611), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb44ccbf0>, 9633.111853229)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade95090> - 2025-09-14 14:20:54
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:442: Error: Container task task32 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:20:57
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:575: Error: Container task task47 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:21:14
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:635: Error: Container task task54 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:21:29
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:840: Error: Container task task77 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:21:40
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:857: Error: Container task task79 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:21:52
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:857: Error: Container task task79 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:22:02
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44cdd10> - 2025-09-14 14:22:16
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44bd090> - 2025-09-14 14:22:16
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad934410> - 2025-09-14 14:22:16
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdad983750> - 2025-09-14 14:22:16
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43d6db0>, 9706.840448656), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43d7110>, 9707.054061405)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdad983610> - 2025-09-14 14:22:16
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdadeaead0> - 2025-09-14 14:22:16
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdade375f0>, 9717.703759248), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43d70b0>, 9717.908344666)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdadeae990> - 2025-09-14 14:22:16
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:927: Error: Container task task87 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:22:18
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:979: Error: Container task task93 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:22:49
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1022: Error: Container task task98 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:02
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1022: Error: Container task task98 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:13
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1022: Error: Container task task98 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:20
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1128: Error: Container task task110 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:30
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade5a0d0> - 2025-09-14 14:23:42
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb4671450> - 2025-09-14 14:23:42
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdb44cfc50> - 2025-09-14 14:23:42
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43d6f30>, 9788.359977364), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdb43d46b0>, 9788.564548875)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdb44cfed0> - 2025-09-14 14:23:42
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade47b10> - 2025-09-14 14:23:42
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdade36e10>, 9795.056179693), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdade37590>, 9795.252772931)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade479d0> - 2025-09-14 14:23:42
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fcdade05e50> - 2025-09-14 14:23:42
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x7fcdad8c5af0>, 9804.843529384), (<aiohttp.client_proto.ResponseHandler object at 0x7fcdad8c5610>, 9805.040180493)])']
+connector: <aiohttp.connector.TCPConnector object at 0x7fcdade05f90> - 2025-09-14 14:23:42
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1162: Error: Container task task114 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:45
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1205: Error: Container task task119 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:23:57
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1266: Error: Container task task126 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:24:10
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1318: Error: Container task task132 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:24:23
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1360: Error: Container task task137 may not have a duration or be marked as milestones.
+ - 2025-09-14 14:24:37
