@@ -1,0 +1,96 @@
+{
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 1,
+        "refresh_interval": "1s"
+    },
+
+    "mappings": {
+        "properties": {
+            "wbs": {
+                "type": "float"
+            },
+            "id": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "start": {
+                "type": "date"
+            },
+            "end": {
+                "type": "date"
+            },
+            "duration": {
+                "type": "float"
+            },
+            "effort": {
+                "type": "float"
+            },
+            "effortDone": {
+                "type": "float"
+            },
+            "effortLeft": {
+                "type": "float"
+            },
+            "priority": {
+                "type": "float"
+            },
+            "responsible": {
+                "type": "keyword",
+                "index": true
+            },
+            "resources": {
+                "type": "keyword",
+                "index": true
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "active_sub_tasks": {
+                "type": "integer"
+            },
+            "open_sub_tasks": {
+                "type": "integer"
+            },
+            "closed_sub_tasks": {
+                "type": "integer"
+            },
+            "complete": {
+                "type": "float"
+            },
+            "flowers": {
+                "type": "keyword",
+                "index": true
+            },
+            "depends_on": {
+                "type": "keyword",
+                "index": true
+            },
+            "path_criticalness": {
+                "type": "float"
+            },
+            "schedule_gauge": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "total_cost": {
+                "type": "float"
+            },
+            "vector": {
+                "type": "dense_vector",
+                "dims": 384
+            }
+        }
+    }
+}

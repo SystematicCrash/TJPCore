@@ -1989,3 +1989,21 @@ Details: Connection timed out - 2025-09-11 21:30:18
 ERROR: 
 Failed to write data to index named (projectplan365_tasks_report).
 Details: Connection timed out - 2025-09-11 21:30:18
+ERROR: 
+Failed to create index named (projectplan365_tasks).
+Details: IndicesClient.create() got an unexpected keyword argument 'data' - 2025-09-14 01:17:43
+ERROR: 
+Failed to create index named (projectplan365_resources).
+Details: BadRequestError(400, 'resource_already_exists_exception', 'index [projectplan365_resources/0kz4SqcNTw-WWpupdPiVPw] already exists') - 2025-09-14 01:18:33
+ERROR: 
+Failed to create index named (projectplan365_resources).
+Details: BadRequestError(400, 'resource_already_exists_exception', 'index [projectplan365_resources/0kz4SqcNTw-WWpupdPiVPw] already exists') - 2025-09-14 01:22:00
+ERROR: 
+Failed to create index named (projectplan365_resources).
+Details: BadRequestError(400, 'resource_already_exists_exception', 'index [projectplan365_resources/0kz4SqcNTw-WWpupdPiVPw] already exists') - 2025-09-14 01:25:20
+ERROR: 
+Failed to create index named (projectplan365_resources).
+Details: BadRequestError(400, 'resource_already_exists_exception', 'index [projectplan365_resources/0kz4SqcNTw-WWpupdPiVPw] already exists') - 2025-09-14 01:27:36
+ERROR: Failed to finish processing! Because of below errors:
+Error: No tasks defined
+ - 2025-09-14 01:34:44

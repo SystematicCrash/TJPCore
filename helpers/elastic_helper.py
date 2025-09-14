@@ -63,9 +63,32 @@ async def truncate_index(es: AsyncElasticsearch, index_name: str):
     try:
         await es.delete_by_query(index=index_name, query={"match_all": {}}, conflicts="proceed")
     except Exception as e:
-        message = f"\nFalied to truncate index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to truncate index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
 
+
+""" Dropping an index """
+async def drop_index(es: AsyncElasticsearch, index_name: str):
+    try:
+        await es.indices.delete(index=index_name, ignore=[404])
+    except Exception as e:
+        message = f"\nFailed to drop index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)
+
+
+""" Creating a new index """
+async def create_index(es: AsyncElasticsearch, index_name: str, mapping_and_setting: dict):
+    try:
+        await es.indices.create(index=index_name, body=mapping_and_setting)
+        await es.cluster.health(wait_for_status="yellow")
+    except Exception as e:
+        message = f"\nFailed to create index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)
+
+
+async def reset_index(es: AsyncElasticsearch, index_name: str, mapping: dict):
+    await drop_index(es, index_name)
+    await create_index(es, index_name, mapping)
 
     
 """ Query by searching a term """

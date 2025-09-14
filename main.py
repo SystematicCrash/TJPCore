@@ -8,15 +8,14 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, write_on_index, term_query, truncate_index
+from helpers.elastic_helper import make_connection, write_on_index, term_query, reset_index
 from helpers.config_helper import get_config
 from data_models.project import initialize_projects
 from data_models.task import initialize_tasks, Task
 from data_models.resource import initialize_resources, Resource
 from data_models.shift import initialize_shifts
 from data_models.scenario import initialize_scenarios
-from helpers.utility import cast_string_fields_to_numeric_types
-from helpers.io_helpers import read_csv, error_register
+from helpers.io_helpers import read_csv, read_json, error_register
 from helpers.embedding_helper import embedd_data
 from helpers.report_manipulation import manipulation
 from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError
@@ -104,20 +103,13 @@ async def indexing_reports(connection: AsyncElasticsearch):
         report_name: read_csv(report_dir + "/" + file_name + ".csv")
         for report_name, file_name in sources.items()
         }
-    reports_result = {
-        report_name: cast_string_fields_to_numeric_types(data) 
-        for report_name, data in reports_result.items()
-        }
     # Corrections
     manipulation(reports_result)
     report_indexes: dict = get_config("report_indexes")
-    # removing previous documents
-    await asyncio.gather(*(truncate_index(connection, index) for index in report_indexes.values()))
-
-    for data in reports_result.values():
-        for doc in data:
-            doc["vector"] = embedd_data(data)
-
+    # Dropping and recreating indexes
+    await reset_index(connection, report_indexes.get("task"), read_json("task_report_mapping.json"))
+    await reset_index(connection, report_indexes.get("resource"), read_json("resource_report_mapping.json"))
+    # Writing docs on indexes
     await asyncio.gather(*(
         write_on_index(connection, data, report_indexes[report_name])
         for report_name, data in reports_result.items()

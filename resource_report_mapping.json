@@ -1,0 +1,58 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "refresh_interval": "1s"
+  },
+    "mappings": {
+        "properties": {
+            "wbs": {
+                "type": "keyword"
+            },
+            "id": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "rate": {
+                "type": "float"
+            },
+            "efficiency": {
+                "type": "float"
+            },
+            "cost": {
+                "type": "float"
+            },
+            "assigned_tasks": {
+                "type": "keyword",
+                "index": true
+            },
+            "unallocated_work_time": {
+                "type": "float"
+            },
+            "unallocated_work_capacity": {
+                "type": "float"
+            },
+            "criticalness": {
+                "type": "float"
+            },
+            "full_time_equivalent": {
+                "type": "float"
+            },
+            "managers": {
+                "type": "keyword",
+                "index": true
+            },
+            "vector": {
+                "type": "dense_vector",
+                "dims": 384
+            }
+        }
+    }
+}
