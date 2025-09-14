@@ -16,7 +16,6 @@ from data_models.resource import initialize_resources, Resource
 from data_models.shift import initialize_shifts
 from data_models.scenario import initialize_scenarios
 from helpers.io_helpers import read_csv, read_json, error_register
-from helpers.embedding_helper import embedd_data
 from helpers.report_manipulation import manipulation
 from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError, DataValidationError
 
