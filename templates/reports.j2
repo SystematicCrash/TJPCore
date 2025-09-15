@@ -24,7 +24,7 @@ taskreport taskReports "{{report_paths.files.task}}" {
     precursors{title "depends_on"},
     pathcriticalness{title "path_criticalness"},
     gauge{title "schedule_gauge"},
-    cost { title "total_cost"}
+    cost { title "cost"}
 
     balance cost rev
     sorttasks tree

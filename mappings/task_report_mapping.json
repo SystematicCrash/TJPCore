@@ -65,7 +65,7 @@
             "complete": {
                 "type": "float"
             },
-            "flowers": {
+            "folowers": {
                 "type": "keyword",
                 "index": true
             },
@@ -84,7 +84,7 @@
                     }
                 }
             },
-            "total_cost": {
+            "cost": {
                 "type": "float"
             },
             "vector": {
