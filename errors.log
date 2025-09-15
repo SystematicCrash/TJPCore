@@ -11,3 +11,7 @@ client_session: <aiohttp.client.ClientSession object at 0x709244eb04d0> - 2025-0
 ERROR: Unclosed connector
 connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x709244eaf6b0>, 1987893.963096015), (<aiohttp.client_proto.ResponseHandler object at 0x709244eacb30>, 1987893.971795187)])']
 connector: <aiohttp.connector.TCPConnector object at 0x709244eb3b60> - 2025-09-15 10:29:50
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1459: Error: Unexpected token 'length' found. Expecting one of 'activetasks', 'annualleave', 'annualleavebalance', 'annualleavelist', 'alert', 'alertmessages', 'alertsummaries', 'alerttrend', 'balance', 'bsi', 'chart', 'children', 'closedtasks', 'competitorcount', 'competitors', 'complete', 'completed', 'criticalness', 'cost', 'daily', 'directreports', 'duration', 'duties', 'efficiency', 'effort', 'effortdone', 'effortleft', 'email', 'end', 'flags', 'followers', 'freetime', 'freework', 'fte', 'gauge', 'headcount', 'hierarchindex', 'hourly', 'id', 'index', 'inputs', 'journal', 'journal_sub', 'journalmessages', 'journalsummaries', 'line', 'managers', 'maxend', 'maxstart', 'minend', 'minstart', 'monthly', 'no', 'name', 'note', 'opentasks', 'pathcriticalness', 'precursors', 'priority', 'quarterly', 'rate', 'reports', 'resources', 'responsible', 'revenue', 'scenario', 'scheduling', 'seqno', 'sickleave', 'specialleave', 'start', 'status', 'targets', 'turnover', 'wbs', 'unpaidleave', 'weekly', 'yearly'
+    length
+ - 2025-09-15 18:10:08

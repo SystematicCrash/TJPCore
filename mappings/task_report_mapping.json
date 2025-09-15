@@ -33,10 +33,10 @@
             "effort": {
                 "type": "float"
             },
-            "effortDone": {
+            "effortdone": {
                 "type": "float"
             },
-            "effortLeft": {
+            "effortleft": {
                 "type": "float"
             },
             "priority": {
