@@ -65,7 +65,7 @@
             "complete": {
                 "type": "float"
             },
-            "folowers": {
+            "followers": {
                 "type": "keyword",
                 "index": true
             },
