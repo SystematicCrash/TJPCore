@@ -12,7 +12,7 @@ def manipulation(reports: dict[str, list]):
 def _tasks_reports_manipulation(data: list[dict]):
     for doc in data:
         doc["complete"] = float(doc["complete"].replace("%", ""))  
-        doc["total_cost"] = float(doc["total_cost"].replace(",", "."))
+        doc["cost"] = float(doc["cost"].replace(",", "."))
 
 
 
