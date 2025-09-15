@@ -1,0 +1,13 @@
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1360: Error: Container task task137 may not be marked as a milestone.
+ - 2025-09-15 10:28:35
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x709244eb2030> - 2025-09-15 10:29:11
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1360: Error: Container task task137 may not be marked as a milestone.
+ - 2025-09-15 10:29:30
+ERROR: Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x709244eb04d0> - 2025-09-15 10:29:50
+ERROR: Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x709244eaf6b0>, 1987893.963096015), (<aiohttp.client_proto.ResponseHandler object at 0x709244eacb30>, 1987893.971795187)])']
+connector: <aiohttp.connector.TCPConnector object at 0x709244eb3b60> - 2025-09-15 10:29:50
