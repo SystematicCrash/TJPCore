@@ -8,7 +8,7 @@ from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
 from elasticsearch import AsyncElasticsearch
 from helpers.io_helpers import logger
-from helpers.elastic_helper import make_connection, write_on_index, term_query, reset_index
+from helpers.elastic_helper import make_connection, term_query, compensating_insertion
 from helpers.config_helper import get_config
 from data_models.project import initialize_projects
 from data_models.task import initialize_tasks, Task
@@ -84,7 +84,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     # Creating reports directory if its not exist
     if not os.path.isdir(report_paths['dir']):
         os.makedirs(report_paths['dir'])
-
+    # Putting data in template file
     body = body_template.render(
         project=projects[0],
         scenarios=scenarios,
@@ -98,7 +98,8 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
         f.write(body)
 
 
-    
+
+
 
 """ Indexing reports in elastic search """
 async def indexing_reports(connection: AsyncElasticsearch):
@@ -113,15 +114,20 @@ async def indexing_reports(connection: AsyncElasticsearch):
     # Corrections
     manipulation(reports_result)
     report_indexes: dict = get_config("report_indexes")
-    # Dropping and recreating indexes
-    await reset_index(connection, report_indexes.get("task"), read_json("mappings/task_report_mapping.json"))
-    await reset_index(connection, report_indexes.get("resource"), read_json("mappings/resource_report_mapping.json"))
-    # Writing docs on indexes
-    await asyncio.gather(*(
-        write_on_index(connection, data, report_indexes[report_name])
-        for report_name, data in reports_result.items()
-        if report_name in report_indexes
-    ))
+
+    await compensating_insertion(
+        es=connection, 
+        old_index_name=report_indexes.get("task"),
+        mapping=read_json(get_config("paths.mappings.task")),
+        data=reports_result.get("task")
+    )
+
+    await compensating_insertion(
+        es=connection, 
+        old_index_name=report_indexes.get("resource"),
+        mapping=read_json(get_config("paths.mappings.resource")),
+        data=reports_result.get("resource")
+    )
 
 
 """ Processing """

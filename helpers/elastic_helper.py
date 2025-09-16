@@ -1,6 +1,7 @@
 from elasticsearch import AsyncElasticsearch, helpers
 from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
+from datetime import datetime
 
 
 """ Making connection to DB """
@@ -86,9 +87,30 @@ async def create_index(es: AsyncElasticsearch, index_name: str, mapping_and_sett
         raise ElasticSearchQueryError(message, 500)
 
 
-async def reset_index(es: AsyncElasticsearch, index_name: str, mapping: dict):
-    await drop_index(es, index_name)
-    await create_index(es, index_name, mapping)
+""" Setting alias for index """
+async def set_index_alias(es: AsyncElasticsearch, index_name: str, alias: str):
+    try:
+        body = {
+            "actions": [
+                {"remove": {"alias": alias, "index": "*"}},
+                {"add": {"alias": alias, "index": index_name}}
+            ]
+        }
+        await es.indices.update_aliases(body=body)
+    except Exception as e:
+        message = f"\nFailed to set alias '{alias}' for index '{index_name}'.\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)
+
+
+""" Check if a specific index exists or not """
+async def check_index_exists(es: AsyncElasticsearch, index_name: str):
+    try:
+        return await es.indices.exists(index=index_name)
+    except Exception as e:
+        message = f"\nFailed to check existance of index named '{index_name}.\nDetails: {e}'"
+        raise ElasticSearchQueryError(message, 500)
+
+
 
     
 """ Query by searching a term """
@@ -113,4 +135,25 @@ async def term_query(
         return {index_name: result['hits']['hits']} or None
     except Exception as e:
         message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
+        raise ElasticSearchQueryError(message, 500)
+    
+
+
+
+""" Reseting indexes and writing data on new indexes (near transactional | compensating action) """
+async def compensating_insertion(es: AsyncElasticsearch, old_index_name: str, mapping: dict, data: dict):
+    postfix = 'fresh'
+    if await es.indices.exists(index=f"{old_index_name}_{postfix}"):
+        postfix = "new"
+    new_index_name = f"{old_index_name}_{postfix}"
+    try:
+        await create_index(es, new_index_name, mapping)
+        await write_on_index(es, data, new_index_name)
+        if postfix == "fresh":
+            await drop_index(es, f"{old_index_name}_new")
+        else:
+            await drop_index(es, f"{old_index_name}_fresh")
+        await set_index_alias(es, index_name=new_index_name, alias=old_index_name)
+    except Exception as e:
+        message = f"\nCompensating insertion failed for index '{old_index_name}'.\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
