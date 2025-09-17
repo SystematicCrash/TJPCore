@@ -155,5 +155,7 @@ async def compensating_insertion(es: AsyncElasticsearch, old_index_name: str, ma
             await drop_index(es, f"{old_index_name}_fresh")
         await set_index_alias(es, index_name=new_index_name, alias=old_index_name)
     except Exception as e:
+        if check_index_exists(es, new_index_name):
+            drop_index(es, new_index_name)
         message = f"\nCompensating insertion failed for index '{old_index_name}'.\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
