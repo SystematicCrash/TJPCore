@@ -1,5 +1,4 @@
-{% macro render_resources(resources, info) %}
-{% for resource in resources %}
+{% macro render_resource(resource, scenario) %}
 resource {{resource.id}} "{{resource.name}}" {
     {% if resource.rate %}
     rate {{resource.rate}}
@@ -49,6 +48,10 @@ resource {{resource.id}} "{{resource.name}}" {
     {%- if resource.chargeset %}
     chargeset {{ resource.chargeset | join(', ') }}
     {% endif %}
+
+    {%- if scenario %}
+    {% import "resource_scenario_specific.j2" as resource_scenario_specific_builder %}
+    {{ resource_scenario_specific_builder.render_scenario_specific(scenario.name, resource.scenario_specific_values) }}
+    {% endif %}
 }
-{% endfor %}
 {% endmacro %}

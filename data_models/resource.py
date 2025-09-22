@@ -1,4 +1,5 @@
 import re
+from http_api.models import Scenario
 from dataclasses import dataclass, field, fields
 from decimal import Decimal
 
@@ -20,6 +21,7 @@ class Resource:
     limits: dict = field(default_factory=dict) 
     vacation: list[dict] = field(default_factory=list[dict])
     workinghours: dict = field(default_factory=dict)
+    scenario_specific_values: dict = field(default_factory=dict)
     json_document: dict = field(default_factory=dict)
 
     def __post_init__(self):
@@ -36,15 +38,21 @@ class Resource:
                 setattr(self, f.name, Decimal(str(value)))
             else:
                 setattr(self, f.name, value)
+    
 
 
-
-def initialize_resources(data: list):
-    resources = {}
+def initialize_resources(data: list, scenario: Scenario):
+    resources: dict[str, Resource] = {}
     for resource in data:
         resources[resource["_source"]["id"]] = Resource(json_document=resource)
-
+    
     resources = dict(sorted(resources.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+
+    # Setting scenario specific values 
+    if scenario:
+        for resource in resources.values():
+            if resource.id in scenario.body.keys():
+                resource.scenario_specific_values = scenario.body[resource.id]
 
     return resources.values()
 

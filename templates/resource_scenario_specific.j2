@@ -1,0 +1,51 @@
+{% macro render_scenario_specific(scenario_name, properties) %}
+{%- if properties.rate %}
+{{scenario_name}}:rate {{properties.rate}}
+{% endif %}
+
+{%- if properties.email%}
+{{scenario_name}}:email {{properties.email}}
+{% endif%}
+
+{%- if properties.managers %}
+{{scenario_name}}:managers {{ properties.managers | join(', ') }}
+{% endif %}
+
+{%- if properties.flags %}
+{{scenario_name}}:flags {{ properties.flags | join(', ') }}
+{% endif %}
+
+{%- if properties.efficiency %}
+{{scenario_name}}:efficiency {{properties.efficiency}}
+{% endif %}
+
+{%- if properties.shifts %}
+{{scenario_name}}:shifts {{ properties.shifts | join(', ') }}
+{% endif %}
+
+{%- if properties.workinghours %}
+{% for key in properties.workinghours.keys() | list %}
+{% set day = properties.workinghours.get(key, {}) %}
+{% if not day %}
+{{scenario_name}}:workinghours {{key}} off
+{% elif day.get("start") and day.get("end") %}
+{{scenario_name}}:workinghours {{key}} {{day["start"]}} - {{day["end"]}}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{%- for leave in properties.leaves %}
+{% if leave.get("duration_unit") %}
+{{scenario_name}}:leaves {{leave.get("type")}} "{{leave.get("name")}}" {{leave.get("start")}} +{{leave.get("duration")}}{{leave.get("duration_unit")[0]}}
+{% endif %}
+{% endfor %}
+
+{%- for vacation in properties.vacation %}
+{{scenario_name}}:vacation "{{vacation.get("name")}}" {{vacation.get("start")}} - {{vacation.get("end")}}
+{% endfor %}
+
+{%- if properties.chargeset %}
+{{scenario_name}}:chargeset {{ properties.chargeset | join(', ') }}
+{% endif %}
+
+{% endmacro %}

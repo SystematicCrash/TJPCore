@@ -1,5 +1,4 @@
-{% macro render_tasks(tasks) %}
-{% for task in tasks %}
+{% macro render_task(task, scenario) %}
 task {{ task.id }} "{{ task.name }}" {
     {% if task.milestone %}
     milestone
@@ -105,10 +104,16 @@ task {{ task.id }} "{{ task.name }}" {
     flags {{ task.flags | join(', ') }}
     {% endif %}
 
-    {%- if task.sub_tasks_objs %}
+    {%- if scenario %}
+    {% import "task_scenario_specific.j2" as task_scenario_specific_builder %}
+    {{ task_scenario_specific_builder.render_scenario_specific(scenario.name, task.scenario_specific_values) }}
+    {% endif %}
 
-    {{ render_tasks(task.sub_tasks_objs) | indent(4, false) }}
+    {%- if task.sub_tasks_objs %}
+    {% for sub_task in task.sub_tasks_objs %}
+
+    {{ render_task(sub_task, scenario) | indent(4, false) }}
+    {% endfor %}
     {% endif %}
 }
-{% endfor %}
 {% endmacro %}

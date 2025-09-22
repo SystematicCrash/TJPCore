@@ -1,5 +1,6 @@
 from __future__ import annotations
 import re
+from http_api.models import Scenario
 from dataclasses import dataclass, field, fields
 from decimal import Decimal
 from datetime import date
@@ -42,6 +43,7 @@ class Task:
     precedes: list[str] = field(default_factory=list[str])
     limits: dict = field(default_factory=dict)
     allocate: list[dict] = field(default_factory=list[dict])
+    scenario_specific_values: dict = field(default_factory=dict)
     json_document: dict = field(default_factory=dict)
 
     def __post_init__(self):
@@ -117,8 +119,7 @@ def sort_tasks_by_id(tasks: dict[str, Task]):
 
 
 """ Instanciating Tasks Objects With Json Documents """
-def initialize_tasks(data: list):
-    from datetime import datetime
+def initialize_tasks(data: list, scenario: Scenario):
     tasks: dict[str, Task] = {}
     top_level_tasks = []
     
@@ -126,9 +127,16 @@ def initialize_tasks(data: list):
 
     tasks = sort_tasks_by_id(tasks)
 
+    # Setting scenario specific values
+    if scenario:
+        for task in tasks.values():
+            if task.id in scenario.body.keys():
+                task.scenario_specific_values = scenario.body[task.id]
+
     for task in tasks.values(): 
         if task_leveling(task, tasks):
             top_level_tasks.append(task)
         convert_dependencies_to_absolute(tasks, task)
+    
 
     return top_level_tasks

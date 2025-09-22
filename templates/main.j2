@@ -1,7 +1,7 @@
 # ----------------Project Header-------------
 {% if project %}
 {% import "project_header.j2" as project_header %}
-{{ project_header.header(project, scenarios, reports.dir) }}
+{{ project_header.header(project, scenario, reports.dir) }}
 {% endif %}
 # ------------END-------------
 
@@ -30,8 +30,10 @@ flags
 
 # ------------Resources-------------
 {% if resources %}
-{% import "resources.j2" as resource %}
-{{ resource.render_resources(resources) }}
+{% import "resources.j2" as resource_builder %}
+{% for resource in resources %}
+{{ resource_builder.render_resource(resource, scenario) }}
+{% endfor %}
 {% endif %}
 # ------------END-------------
 
@@ -39,8 +41,10 @@ flags
 
 # ------------Tasks-------------
 {% if tasks %}
-{% import "tasks.j2" as task %}
-{{ task.render_tasks(tasks) }}
+{% import "tasks.j2" as task_builder %}
+{% for task in tasks %}
+{{ task_builder.render_task(task, scenario) }}
+{% endfor %}
 {% endif %}
 # ------------END-------------
 
@@ -49,6 +53,6 @@ flags
 # ------------Reports-------------
 {% if reports %}
 {% import "reports.j2" as reporter %}
-{{ reporter.render_reports(reports) }}
+{{ reporter.render_reports(reports, scenario) }}
 {% endif %}
 # ------------END-------------

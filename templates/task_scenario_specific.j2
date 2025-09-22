@@ -1,0 +1,105 @@
+{% macro render_scenario_specific(scenario_name, properties) %}
+{% if properties.milestone %}
+{{scenario_name}}:milestone
+{% endif %}
+
+{%- if properties.note %}
+{{scenario_name}}:note "{{properties.note}}"
+{% endif %}
+
+{%- if properties.scheduling %}
+{{scenario_name}}:scheduling {{properties.scheduling}}
+{% endif %}
+
+{%- if properties.responsible %}
+{{scenario_name}}:responsible {{properties.responsible}}
+{% endif %}
+
+{%- if properties.shifts %}
+{{scenario_name}}:shifts {{ properties.shifts | join(', ') }}
+{% endif %}
+
+{%- if properties.chargeset %}
+{{scenario_name}}:chargeset {{ properties.chargeset | join(', ') }}
+{% endif %}
+
+{%- if properties.allocate %}
+{{scenario_name}}:allocate {{ properties.allocate | join(', ') }}
+{% endif %}
+
+{%- if properties.depends %}
+{{scenario_name}}:depends {{ properties.depends | join(', ') }}
+{% endif %}
+
+{%- if properties.precedes %}
+{{scenario_name}}:precedes {{ properties.precedes | join(', ') }}
+{% endif %}
+
+{%- if properties.scheduled %}
+{{scenario_name}}:scheduled
+{% endif %}
+
+{%- if properties.priority %}
+{{scenario_name}}:priority {{properties.priority}}
+{% endif %}
+
+{%- if properties.effort and not (properties.duration or properties.milestone) and properties.allocate %}
+{{scenario_name}}:effort {{properties.effort}}d
+{% endif %}
+
+{%- if properties.effortdone and not (properties.duration or properties.effort or properties.milestone) %}
+{{scenario_name}}:effortdone {{properties.effortdone}}d
+{% endif %}
+
+{%- if properties.duration and not properties.milestone %}
+{{scenario_name}}:duration {{properties.duration}}d
+{% endif %}
+
+{%- if properties.effortleft and not (properties.duration or properties.effort) %}
+{{scenario_name}}:effortleft {{properties.effortleft}}d
+{% endif %}
+
+{%- if properties.length and not (properties.duration or properties.effort or properties.milestone) %}
+{{scenario_name}}:length {{properties.length}}d
+{% endif %}
+
+{%- if properties.complete %}
+{{scenario_name}}:complete {{properties.complete}}
+{% endif %}
+
+{%- if properties.maxstart %}
+{{scenario_name}}:maxstart {{properties.maxstart}}
+{% endif %}
+
+{%- if properties.minstart %}
+{{scenario_name}}:minstart {{properties.minstart}}
+{% endif %}
+
+{%- if properties.maxend %}
+{{scenario_name}}:maxend {{properties.maxend}}
+{% endif %}
+
+{%- if properties.minend %}
+{{scenario_name}}:minend {{properties.minend}}
+{% endif %}
+
+{%- if properties.start %}
+{{scenario_name}}:start {{properties.start}}
+{% endif %}
+
+{%- if properties.end %}
+{{scenario_name}}:end {{properties.end}}
+{% endif %}
+
+{%- if properties.charge %}
+{{scenario_name}}:charge {{properties.charge}} onend
+{% endif %}
+
+{%- if properties.maxend %}
+{{scenario_name}}:maxend {{properties.maxend}}
+{% endif %}
+
+{%- if properties.flags %}
+{{scenario_name}}:flags {{ properties.flags | join(', ') }}
+{% endif %}
+{% endmacro %}

@@ -1,5 +1,5 @@
-{%- macro render_scenarios() %}
-scenario plan "Palnned" {
-    scenario delay "delayed" {}
+{% macro render_scenarios(scenario) %}
+scenario plan "planned" {
+    scenario {{scenario.name}} "{{scenario.name}}"
 }
 {% endmacro%}

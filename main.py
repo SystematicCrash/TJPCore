@@ -1,26 +1,22 @@
 import os
-import time
 import subprocess
 import asyncio
+from http_api.models import Scenario
 from jinja2 import Environment, FileSystemLoader
-from fastapi import FastAPI, Request
-from fastapi.exceptions import HTTPException
-from fastapi.responses import JSONResponse
 from elasticsearch import AsyncElasticsearch
-from helpers.io_helpers import logger
 from helpers.elastic_helper import make_connection, term_query, compensating_insertion
 from helpers.config_helper import get_config
 from data_models.project import initialize_projects
 from data_models.task import initialize_tasks, Task
 from data_models.resource import initialize_resources, Resource
-from data_models.shift import initialize_shifts
-from data_models.scenario import initialize_scenarios
 from helpers.io_helpers import read_csv, read_json, error_register
 from helpers.report_manipulation import manipulation
 from exceptions.custom_exceptions import ProcessFailureError, TJ3ProcessError, BadInputError, DataValidationError
 
 
 _indexes_names = get_config('data_indexes')
+
+
 
 """ Tjp file flags """
 def define_flags(tasks: list[Task], resources: list[Resource]):
@@ -34,6 +30,8 @@ def define_flags(tasks: list[Task], resources: list[Resource]):
             flags.update(resource.flags)
             
     return flags
+
+
 
 
 """ Fetching project data from data engine """
@@ -63,16 +61,14 @@ async def gather_project_data(connection: AsyncElasticsearch, project_id: str):
 
 
 """ Tjp file generation """
-def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
+def generate_tjp(data_map, output_path="tjp_outputs/project.tjp", scenario:Scenario = None):
     env = Environment(loader=FileSystemLoader(get_config("paths.templates")),
                       trim_blocks=True, lstrip_blocks=True)
     body_template = env.get_template("main.j2")
     try:
         projects = initialize_projects(data_map.get(_indexes_names['project'], [])) 
-        shifts = initialize_shifts(data_map.get(_indexes_names['shift'], [])) 
-        tasks = initialize_tasks(data_map.get(_indexes_names['task'], [])) 
-        resources = initialize_resources(data_map.get(_indexes_names['resource'], [])) 
-        scenarios = initialize_scenarios(data_map.get(_indexes_names['scenario'], [])) 
+        tasks = initialize_tasks(data_map.get(_indexes_names['task'], []), scenario) 
+        resources = initialize_resources(data_map.get(_indexes_names['resource'], []), scenario) 
         flags = define_flags(tasks, resources)
     except Exception as e:
         message = f"Failed to generate tjp file!\nDetails: {e}"
@@ -87,8 +83,7 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
     # Putting data in template file
     body = body_template.render(
         project=projects[0],
-        scenarios=scenarios,
-        shifts=shifts,
+        scenario=scenario,
         flags=flags,
         resources=resources,
         tasks=tasks,
@@ -99,21 +94,24 @@ def generate_tjp(data_map, output_path="tjp_outputs/project.tjp"):
 
 
 
-
-
-""" Indexing reports in elastic search """
-async def indexing_reports(connection: AsyncElasticsearch):
+""" Get reports result as a dictionary """
+def get_reports_result():
     reports_result = dict()
     sources: dict = get_config("paths.reports.files")
     report_dir = get_config("paths.reports.dir")
-    
     reports_result = {
         report_name: read_csv(report_dir + "/" + file_name + ".csv")
         for report_name, file_name in sources.items()
-        }
+    }
     # Corrections
     manipulation(reports_result)
-    report_indexes: dict = get_config("report_indexes")
+    return reports_result
+
+
+
+""" Indexing reports in elastic search """
+async def indexing_reports(connection: AsyncElasticsearch, reports_result: dict):
+    report_indexes = get_config('report_indexes')
 
     await compensating_insertion(
         es=connection, 
@@ -121,7 +119,6 @@ async def indexing_reports(connection: AsyncElasticsearch):
         mapping=read_json(get_config("paths.mappings.task")),
         data=reports_result.get("task")
     )
-
     await compensating_insertion(
         es=connection, 
         old_index_name=report_indexes.get("resource"),
@@ -130,53 +127,32 @@ async def indexing_reports(connection: AsyncElasticsearch):
     )
 
 
-""" Processing """
-async def main(project_id: str):
-    connection = make_connection()
 
+
+""" Processing """
+async def main(project_id: str, scenario: Scenario = None):
+    connection = make_connection()
     data_map = await gather_project_data(connection, project_id)
     output_path = get_config("paths.tjp_output")
 
-    generate_tjp(data_map, output_path)
+    generate_tjp(data_map, output_path, scenario)
     
     result = subprocess.run(
         "tj3 " + output_path, shell=True, stdout=subprocess.DEVNULL,
         stderr=subprocess.PIPE, text=True, encoding='utf-8'
     )
-    
     if result.returncode != 0:
         message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
         await error_register(connection, message)
         raise TJ3ProcessError(message, 500)
-    
-    await indexing_reports(connection)
+    reports_result = get_reports_result()
+    """ No need to indexing data in scenario mode """
+    if not scenario:
+        await indexing_reports(connection, reports_result)
+    else:
+        return reports_result
     await connection.close()
 
-
-app = FastAPI()
-
-""" Fast api endpoint """
-@app.post('/tjp-core/run/{project_id}')
-async def run(request: Request, project_id: str):
-    auth_header = request.headers.get("authorization")
-    expected_token = 'Bearer ' + get_config('api_key')
-
-    if auth_header != expected_token:
-        return JSONResponse(content={'status' : 'fail', 'message' : 'Access Denied!'}, status_code=403)
-    
-    if not project_id:
-        return JSONResponse(content={'status' : 'fail', 'message' : 'No project id specified!'}, status_code=400)
-    
-    start = time.time()
-    try:
-        await main(project_id)        
-    except HTTPException as exp:
-        logger(exp.detail,mode='error', console=False)
-        return JSONResponse(content={'status' : 'fail', 'message' : exp.detail}, status_code=exp.status_code)
-    duration = time.time() - start
-    return JSONResponse(
-        content={'status' : 'success', 'message' : 'Process finished!', 'duration' : f'{duration:.2f}'},
-        status_code=200)
 
 
 

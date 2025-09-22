@@ -1,4 +1,4 @@
-{% macro header(project, scenarios, output_dir) %}
+{% macro header(project, scenario, output_dir) %}
 project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}}{{project.duration_unit[0]}} {
 {% if project.timezone %}
     timezone "{{project.timezone}}"
@@ -51,8 +51,10 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
     outputdir "{{ output_dir }}"
 
 # ------------Scenarios-------------
-{% import "scenarios.j2" as scenario %}
-{{ scenario.render_scenarios() }}
+{% if scenario %}
+{% import "scenarios.j2" as scenario_builder %}
+{{ scenario_builder.render_scenarios(scenario) }}
+{% endif %}
 # ------------END-------------
 }
 {% endmacro %}

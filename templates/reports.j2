@@ -1,4 +1,4 @@
-{% macro render_reports(report_paths) %}
+{% macro render_reports(report_paths, scenario) %}
 taskreport taskReports "{{report_paths.files.task}}" {
     headline "Tasks Table"
     formats csv
@@ -29,6 +29,7 @@ taskreport taskReports "{{report_paths.files.task}}" {
     balance cost rev
     sorttasks tree
     selfcontained yes
+    scenarios {{ scenario.name }}
 }
 
 resourcereport resourceReports "{{report_paths.files.resource}}" {
@@ -51,5 +52,6 @@ resourcereport resourceReports "{{report_paths.files.resource}}" {
     balance cost rev
     sortresources tree
     selfcontained yes
+    scenarios {{ scenario.name }}
 }
 {% endmacro %}
