@@ -6,9 +6,17 @@ project proj2025 "Commercial Construction" 2020-08-03 +344d {
     workinghours fri 08:00 - 17:00
     workinghours mon 08:00 - 17:00
     outputdir "reports"
+
+# ------------Scenarios-------------
+scenario plan "Palnned" {
+    scenario delay "delayed" {}
 }
 
 # ------------END-------------
+}
+
+# ------------END-------------
+
 
 # ------------Shifts-------------
 # ------------END-------------

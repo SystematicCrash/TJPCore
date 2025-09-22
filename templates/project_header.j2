@@ -27,18 +27,6 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
     {% endfor %}
 {% endif %}
 
-{%- if scenarios %}
-    {% for scenario in scenarios %}
-    scenario {{scenario.id}} "{{scenario.name}}" {
-        {% if scenario.active %}
-        active yes
-        {% else %}
-        active no
-        {% endif %}
-    }
-    {% endfor %}
-{% endif %}
-
 {%- if project.markdate %}
     markdate {{project.markdate}}
 {% endif %}
@@ -61,6 +49,11 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
     weekstartssunday
 {% endif %}
     outputdir "{{ output_dir }}"
+
+# ------------Scenarios-------------
+{% import "scenarios.j2" as scenario %}
+{{ scenario.render_scenarios() }}
+# ------------END-------------
 }
 {% endmacro %}
 
