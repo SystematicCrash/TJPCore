@@ -1,7 +1,6 @@
 from elasticsearch import AsyncElasticsearch, helpers
 from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
-from datetime import datetime
 
 
 """ Making connection to DB """
@@ -46,7 +45,6 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
         message = f"\nFailed to fetch data from index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
 
-        
 
 """ Run custom queries """
 async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
@@ -56,7 +54,6 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
     except Exception as e:
         message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
-
 
 
 """ Removing all docuements from an index """
@@ -111,8 +108,6 @@ async def check_index_exists(es: AsyncElasticsearch, index_name: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-
-    
 """ Query by searching a term """
 async def term_query(
         es: AsyncElasticsearch, index_name: str, 

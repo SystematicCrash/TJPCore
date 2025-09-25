@@ -29,7 +29,9 @@ taskreport taskReports "{{report_paths.files.task}}" {
     balance cost rev
     sorttasks tree
     selfcontained yes
+    {% if scenario %}
     scenarios {{ scenario.name }}
+    {% endif %}
 }
 
 resourcereport resourceReports "{{report_paths.files.resource}}" {
@@ -52,6 +54,8 @@ resourcereport resourceReports "{{report_paths.files.resource}}" {
     balance cost rev
     sortresources tree
     selfcontained yes
+    {% if scenario %}
     scenarios {{ scenario.name }}
+    {% endif %}
 }
 {% endmacro %}

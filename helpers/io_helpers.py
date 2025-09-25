@@ -7,6 +7,7 @@ from helpers.utility import colorized_print
 from elasticsearch import Elasticsearch
 from uuid import uuid4
 
+
 def generating_json_file_from_csv(csv_path: str, json_path: str):
     if not path.exists(csv_path):
         message = f"Path does not exist: {csv_path} in config.json: paths->reports->csv_path"

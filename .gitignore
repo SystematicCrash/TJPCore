@@ -3,3 +3,6 @@ config.json
 .venv
 __pycache__
 errors.log
+node_modules
+package-lock.json
+package.json

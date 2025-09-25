@@ -51,16 +51,15 @@ def colorized_print(color: str, text: str, tqdm_write=True):
 def cast_string_fields_to_numeric_types(data_set: dict):
     INTEGER_REGEX = r'^[+-]?\d+$'
     FLOAT_REGEX = r'^[+-]?(?:\d+\.\d*|\.\d+|\d+\.\d+)(?:[eE][+-]?\d+)?$'
-    for item in data_set:
-        for field, value in item.items():
-            if not isinstance(value, str) or field in ['wbs', 'id']:
-                continue
-            if field == 'rate':
-                value = value.replace(',', '.')
-            if re.fullmatch(INTEGER_REGEX, value):
-                item[field] = int(value)
-            elif re.fullmatch(FLOAT_REGEX, value):
-                item[field] = float(value)
+    for field, value in data_set.items():
+        if not isinstance(value, str) or field in ['wbs', 'id']:
+            continue
+        if field == 'rate':
+            value = value.replace(',', '.')
+        if re.fullmatch(INTEGER_REGEX, value):
+            data_set[field] = int(value)
+        elif re.fullmatch(FLOAT_REGEX, value):
+            data_set[field] = float(value)
     return data_set
 
 
@@ -81,7 +80,6 @@ def animate_processing():
         dots += direction
         if dots == 5 or dots == 0:
             dots = 0
-
 
 
 def progress_bar():

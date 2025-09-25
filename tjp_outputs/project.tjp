@@ -44,204 +44,146 @@ account rev "Primary revenue account"
 resource res1 "G.C. General Management" {
     rate 93.0
     chargeset resCost
-    
-
 }
 
 resource res2 "G.C. Project Management" {
     rate 69.0
     chargeset resCost
-    
-
 }
 
 resource res3 "G.C. Scheduler" {
     rate 113.0
     chargeset resCost
-    
-
 }
 
 resource res4 "G.C. Procurement" {
     rate 85.0
     chargeset resCost
-    
-
 }
 
 resource res5 "Steel Erection Contractor Management" {
     rate 64.0
     chargeset resCost
-    
-
 }
 
 resource res6 "Roofing Contractor Management" {
     rate 96.0
     chargeset resCost
-    
-
 }
 
 resource res7 "Elevator Contractor Management" {
     rate 65.0
     chargeset resCost
-    
-
 }
 
 resource res8 "Plumbing Contractor Management" {
     rate 85.0
     chargeset resCost
-    
-
 }
 
 resource res9 "Electric Contractor Management" {
     rate 93.0
     chargeset resCost
-    
-
 }
 
 resource res10 "HVAC Contractor Management" {
     rate 79.0
     chargeset resCost
-    
-
 }
 
 resource res11 "Steel Erection Contractor" {
     rate 88.0
     chargeset resCost
-    
-
 }
 
 resource res12 "Electric Contractor" {
     rate 100.0
     chargeset resCost
-    
-
 }
 
 resource res13 "Plumbing Contractor" {
     rate 91.0
     chargeset resCost
-    
-
 }
 
 resource res14 "G.C. Superintendent" {
     rate 80.0
     chargeset resCost
-    
-
 }
 
 resource res15 "G.C. Labor Crew" {
     rate 44.0
     chargeset resCost
-    
-
 }
 
 resource res16 "G.C. Survey Crew" {
     rate 74.0
     chargeset resCost
-    
-
 }
 
 resource res17 "Site Grading Contractor" {
     rate 139.0
     chargeset resCost
-    
-
 }
 
 resource res18 "G.C. Rough Carpenter Crew" {
     rate 49.0
     chargeset resCost
-    
-
 }
 
 resource res19 "G.C. Concrete Crew" {
     rate 68.0
     chargeset resCost
-    
-
 }
 
 resource res20 "Elevator Contractor" {
     rate 133.0
     chargeset resCost
-    
-
 }
 
 resource res21 "Drywall Contractor" {
     rate 77.0
     chargeset resCost
-    
-
 }
 
 resource res22 "Masonry Contractor" {
     rate 97.0
     chargeset resCost
-    
-
 }
 
 resource res23 "Roofing Contractor" {
     rate 79.0
     chargeset resCost
-    
-
 }
 
 resource res24 "Tile Contractor" {
     rate 106.0
     chargeset resCost
-    
-
 }
 
 resource res25 "HVAC Contractor" {
     rate 83.0
     chargeset resCost
-    
-
 }
 
 resource res26 "Window Contractor" {
     rate 134.0
     chargeset resCost
-    
-
 }
 
 resource res27 "G.C. Finish Carpenter Crew" {
     rate 43.0
     chargeset resCost
-    
-
 }
 
 resource res28 "Painting Contractor" {
     rate 96.0
     chargeset resCost
-    
-
 }
 
 resource res29 "Carpet Contractor" {
     rate 126.0
     chargeset resCost
-    
-
 }
 
 resource res30 "Landscape Contractor" {
@@ -255,15 +197,11 @@ resource res30 "Landscape Contractor" {
 resource res31 "Paving Contractor" {
     rate 78.0
     chargeset resCost
-    
-
 }
 
 resource res32 "G.C. Accounting" {
     rate 51.0
     chargeset resCost
-    
-
 }
 
 # ------------END-------------
@@ -277,7 +215,6 @@ task task2 "General Conditions" {
     priority 500
     complete 79
     charge 13552.0 onend
-    
 
     task task3 "Receive notice to proceed and sign contract" {
         scheduling asap
@@ -301,7 +238,6 @@ task task2 "General Conditions" {
         duration 2d
         complete 100
         charge 3000.0 onend
-        
     }
 
 
@@ -314,7 +250,6 @@ task task2 "General Conditions" {
         duration 2d
         complete 100
         charge 2400.0 onend
-        
     }
 
 
@@ -327,7 +262,6 @@ task task2 "General Conditions" {
         duration 2d
         complete 100
         charge 2323.2 onend
-        
     }
 
 
@@ -339,7 +273,6 @@ task task2 "General Conditions" {
         duration 4d
         complete 100
         charge 3200.0 onend
-        
     }
 
 
@@ -352,7 +285,6 @@ task task2 "General Conditions" {
         duration 2d
         complete 50
         charge 8000.0 onend
-        
     }
 
 
@@ -361,7 +293,6 @@ task task2 "General Conditions" {
         priority 500
         duration 1d
         complete 100
-        
     }
 
 }
@@ -372,7 +303,7 @@ task task10 "Long Lead Procurement" {
     priority 500
     complete 7
     charge 67200.0 onend
-    delayed:scheduling alap
+    delayed:scheduling asap
 
 
     task task11 "Submit shop drawings and order long lead items - steel" {
@@ -384,7 +315,6 @@ task task10 "Long Lead Procurement" {
         duration 2d
         complete 80
         charge 6800.0 onend
-        
     }
 
 
@@ -396,7 +326,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 2d
         charge 6800.0 onend
-        
     }
 
 
@@ -408,7 +337,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 2d
         charge 7600.0 onend
-        
     }
 
 
@@ -420,7 +348,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 
@@ -432,7 +359,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 
@@ -444,7 +370,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 2d
         charge 6400.0 onend
-        
     }
 
 
@@ -455,7 +380,6 @@ task task10 "Long Lead Procurement" {
         priority 500
         duration 12d
         charge 40800.0 onend
-        
     }
 
 }
@@ -466,7 +390,6 @@ task task18 "Mobilize on Site" {
     priority 500
     complete 92
     charge 7000.0 onend
-    
 
     task task19 "Install temporary power" {
         scheduling asap
@@ -477,7 +400,6 @@ task task18 "Mobilize on Site" {
         duration 2d
         complete 100
         charge 1200.0 onend
-        
     }
 
 
@@ -490,7 +412,6 @@ task task18 "Mobilize on Site" {
         duration 2d
         complete 100
         charge 1200.0 onend
-        
     }
 
 
@@ -502,7 +423,6 @@ task task18 "Mobilize on Site" {
         duration 3d
         complete 100
         charge 3036.0 onend
-        
     }
 
 
@@ -515,7 +435,6 @@ task task18 "Mobilize on Site" {
         duration 3d
         complete 100
         charge 1680.0 onend
-        
     }
 
 
@@ -528,7 +447,6 @@ task task18 "Mobilize on Site" {
         duration 2d
         complete 50
         charge 1320.0 onend
-        
     }
 
 }
@@ -538,7 +456,6 @@ task task24 "Site Grading and Utilities" {
     chargeset taskCost
     priority 500
     charge 25200.0 onend
-    
 
     task task25 "Clear and grub site" {
         scheduling asap
@@ -548,7 +465,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 3d
         charge 1680.0 onend
-        
     }
 
 
@@ -559,7 +475,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 2d
         charge 1120.0 onend
-        
     }
 
 
@@ -571,7 +486,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 1d
         charge 2800.0 onend
-        
     }
 
 
@@ -583,7 +497,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -595,7 +508,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 
@@ -607,7 +519,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -619,7 +530,6 @@ task task24 "Site Grading and Utilities" {
         priority 500
         duration 1d
         charge 2800.0 onend
-        
     }
 
 }
@@ -629,7 +539,6 @@ task task32 "Foundations" {
     chargeset taskCost
     priority 500
     charge 23240.0 onend
-    
 
     task task33 "Excavate foundations" {
         scheduling asap
@@ -639,7 +548,6 @@ task task32 "Foundations" {
         priority 500
         duration 2d
         charge 1400.0 onend
-        
     }
 
 
@@ -651,7 +559,6 @@ task task32 "Foundations" {
         priority 500
         duration 2d
         charge 1120.0 onend
-        
     }
 
 
@@ -662,7 +569,6 @@ task task32 "Foundations" {
         priority 500
         duration 4d
         charge 2080.0 onend
-        
     }
 
 
@@ -674,7 +580,6 @@ task task32 "Foundations" {
         priority 500
         duration 4d
         charge 9600.0 onend
-        
     }
 
 
@@ -686,7 +591,6 @@ task task32 "Foundations" {
         priority 500
         duration 4d
         charge 2080.0 onend
-        
     }
 
 
@@ -698,7 +602,6 @@ task task32 "Foundations" {
         priority 500
         duration 4d
         charge 2080.0 onend
-        
     }
 
 
@@ -710,7 +613,6 @@ task task32 "Foundations" {
         priority 500
         duration 5d
         charge 2400.0 onend
-        
     }
 
 
@@ -722,7 +624,6 @@ task task32 "Foundations" {
         priority 500
         duration 1d
         charge 480.0 onend
-        
     }
 
 
@@ -734,7 +635,6 @@ task task32 "Foundations" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -746,7 +646,6 @@ task task32 "Foundations" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -758,7 +657,6 @@ task task32 "Foundations" {
         priority 500
         duration 1d
         charge 4.0 onend
-        
     }
 
 
@@ -770,7 +668,6 @@ task task32 "Foundations" {
         priority 500
         duration 3d
         charge 1200.0 onend
-        
     }
 
 
@@ -782,7 +679,6 @@ task task32 "Foundations" {
         priority 500
         duration 3d
         charge 2280.0 onend
-        
     }
 
 
@@ -794,7 +690,6 @@ task task32 "Foundations" {
         priority 500
         duration 1d
         charge 480.0 onend
-        
     }
 
 }
@@ -804,7 +699,6 @@ task task47 "Steel Erection" {
     chargeset taskCost
     priority 500
     charge 22960.0 onend
-    
 
     task task48 "Erect steel columns, beams and joist - 1st and 2nd floors" {
         scheduling asap
@@ -814,7 +708,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 2d
         charge 6800.0 onend
-        
     }
 
 
@@ -825,7 +718,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 2d
         charge 6800.0 onend
-        
     }
 
 
@@ -836,7 +728,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 2d
         charge 3825.0 onend
-        
     }
 
 
@@ -848,7 +739,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 2d
         charge 3825.0 onend
-        
     }
 
 
@@ -860,7 +750,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 2d
         charge 1700.0 onend
-        
     }
 
 
@@ -872,7 +761,6 @@ task task47 "Steel Erection" {
         priority 500
         duration 1d
         charge 136.0 onend
-        
     }
 
 }
@@ -882,7 +770,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
     chargeset taskCost
     priority 500
     charge 42061.6 onend
-    
 
     task task55 "Form 2nd floor including all floor openings" {
         scheduling asap
@@ -892,7 +779,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 3600.0 onend
-        
     }
 
 
@@ -904,7 +790,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 2613.6 onend
-        
     }
 
 
@@ -915,7 +800,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 1920.0 onend
-        
     }
 
 
@@ -927,7 +811,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -939,7 +822,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 2d
         charge 800.0 onend
-        
     }
 
 
@@ -951,7 +833,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 1190.0 onend
-        
     }
 
 
@@ -963,7 +844,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 2613.6 onend
-        
     }
 
 
@@ -975,7 +855,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 1920.0 onend
-        
     }
 
 
@@ -987,7 +866,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -999,7 +877,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 2d
         charge 800.0 onend
-        
     }
 
 
@@ -1011,7 +888,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 3600.0 onend
-        
     }
 
 
@@ -1023,7 +899,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 5d
         charge 2613.6 onend
-        
     }
 
 
@@ -1035,7 +910,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 1920.0 onend
-        
     }
 
 
@@ -1047,7 +921,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -1059,7 +932,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 2d
         charge 800.0 onend
-        
     }
 
 
@@ -1071,7 +943,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 2080.0 onend
-        
     }
 
 
@@ -1083,7 +954,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 1d
         charge 3000.0 onend
-        
     }
 
 
@@ -1095,7 +965,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 1d
         charge 3000.0 onend
-        
     }
 
 
@@ -1107,7 +976,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 2090.88 onend
-        
     }
 
 
@@ -1119,7 +987,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 4d
         charge 1920.0 onend
-        
     }
 
 
@@ -1131,7 +998,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 7d
         charge 28.0 onend
-        
     }
 
 
@@ -1143,7 +1009,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         priority 500
         duration 2d
         charge 800.0 onend
-        
     }
 
 }
@@ -1153,7 +1018,6 @@ task task77 "Carpentry Work" {
     chargeset taskCost
     priority 500
     charge 8400.0 onend
-    
 
     task task78 "Install exterior sheathing and metal studs" {
         scheduling asap
@@ -1163,7 +1027,6 @@ task task77 "Carpentry Work" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 }
@@ -1173,7 +1036,6 @@ task task79 "Masonry Work" {
     chargeset taskCost
     priority 500
     charge 45920.0 onend
-    
 
     task task80 "Rough-in plumbing at toilets and masonry walls" {
         scheduling asap
@@ -1183,7 +1045,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 4d
         charge 12000.0 onend
-        
     }
 
 
@@ -1195,7 +1056,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 4d
         charge 11200.0 onend
-        
     }
 
 
@@ -1207,7 +1067,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 5d
         charge 14000.0 onend
-        
     }
 
 
@@ -1219,7 +1078,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 2d
         charge 1120.0 onend
-        
     }
 
 
@@ -1230,7 +1088,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1242,7 +1099,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 1d
         charge 700.0 onend
-        
     }
 
 
@@ -1254,7 +1110,6 @@ task task79 "Masonry Work" {
         priority 500
         duration 1d
         charge 700.0 onend
-        
     }
 
 }
@@ -1264,7 +1119,6 @@ task task87 "Roofing" {
     chargeset taskCost
     priority 500
     charge 14560.0 onend
-    
 
     task task88 "Install flashing at parapet walls" {
         scheduling asap
@@ -1274,7 +1128,6 @@ task task87 "Roofing" {
         priority 500
         duration 4d
         charge 2240.0 onend
-        
     }
 
 
@@ -1285,7 +1138,6 @@ task task87 "Roofing" {
         priority 500
         duration 2d
         charge 1120.0 onend
-        
     }
 
 
@@ -1297,7 +1149,6 @@ task task87 "Roofing" {
         priority 500
         duration 5d
         charge 2800.0 onend
-        
     }
 
 
@@ -1309,7 +1160,6 @@ task task87 "Roofing" {
         priority 500
         duration 5d
         charge 2800.0 onend
-        
     }
 
 
@@ -1321,7 +1171,6 @@ task task87 "Roofing" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 }
@@ -1331,7 +1180,6 @@ task task93 "Window wall and store front closures" {
     chargeset taskCost
     priority 500
     charge 42000.0 onend
-    
 
     task task94 "Install window wall aluminum and glass" {
         scheduling asap
@@ -1341,7 +1189,6 @@ task task93 "Window wall and store front closures" {
         priority 500
         duration 5d
         charge 14000.0 onend
-        
     }
 
 
@@ -1352,7 +1199,6 @@ task task93 "Window wall and store front closures" {
         priority 500
         duration 5d
         charge 14000.0 onend
-        
     }
 
 
@@ -1364,7 +1210,6 @@ task task93 "Window wall and store front closures" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1376,7 +1221,6 @@ task task93 "Window wall and store front closures" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 }
@@ -1386,7 +1230,6 @@ task task98 "Building Finishes" {
     chargeset taskCost
     priority 500
     charge 84000.0 onend
-    
 
     task task99 "Install millwork and wood trim" {
         scheduling asap
@@ -1396,7 +1239,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 
@@ -1407,7 +1249,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 4d
         charge 11200.0 onend
-        
     }
 
 
@@ -1419,7 +1260,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 3d
         charge 9000.0 onend
-        
     }
 
 
@@ -1431,7 +1271,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 
@@ -1443,7 +1282,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1455,7 +1293,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1467,7 +1304,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1479,7 +1315,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 4d
         charge 11200.0 onend
-        
     }
 
 
@@ -1491,7 +1326,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 
@@ -1503,7 +1337,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1515,7 +1348,6 @@ task task98 "Building Finishes" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 }
@@ -1525,7 +1357,6 @@ task task110 "Elevators" {
     chargeset taskCost
     priority 500
     charge 22400.0 onend
-    
 
     task task111 "Set elevator equipment in shafts" {
         scheduling asap
@@ -1535,7 +1366,6 @@ task task110 "Elevators" {
         priority 500
         duration 4d
         charge 15200.0 onend
-        
     }
 
 
@@ -1546,7 +1376,6 @@ task task110 "Elevators" {
         priority 500
         duration 2d
         charge 7600.0 onend
-        
     }
 
 
@@ -1558,7 +1387,6 @@ task task110 "Elevators" {
         priority 500
         duration 2d
         charge 7600.0 onend
-        
     }
 
 }
@@ -1568,7 +1396,6 @@ task task114 "Plumbing" {
     chargeset taskCost
     priority 500
     charge 30800.0 onend
-    
 
     task task115 "Rough-in plumbing in drywall walls" {
         scheduling asap
@@ -1578,7 +1405,6 @@ task task114 "Plumbing" {
         priority 500
         duration 4d
         charge 12000.0 onend
-        
     }
 
 
@@ -1590,7 +1416,6 @@ task task114 "Plumbing" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 
@@ -1601,7 +1426,6 @@ task task114 "Plumbing" {
         priority 500
         duration 3d
         charge 9000.0 onend
-        
     }
 
 
@@ -1613,7 +1437,6 @@ task task114 "Plumbing" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 }
@@ -1623,7 +1446,6 @@ task task119 "Electrical" {
     chargeset taskCost
     priority 500
     charge 45920.0 onend
-    
 
     task task120 "Rough-in electrical in masonry walls" {
         scheduling asap
@@ -1633,7 +1455,6 @@ task task119 "Electrical" {
         priority 500
         duration 4d
         charge 12000.0 onend
-        
     }
 
 
@@ -1645,7 +1466,6 @@ task task119 "Electrical" {
         priority 500
         duration 4d
         charge 12000.0 onend
-        
     }
 
 
@@ -1656,7 +1476,6 @@ task task119 "Electrical" {
         priority 500
         duration 3d
         charge 9000.0 onend
-        
     }
 
 
@@ -1668,7 +1487,6 @@ task task119 "Electrical" {
         priority 500
         duration 3d
         charge 9000.0 onend
-        
     }
 
 
@@ -1680,7 +1498,6 @@ task task119 "Electrical" {
         priority 500
         duration 2d
         charge 1200.0 onend
-        
     }
 
 
@@ -1692,7 +1509,6 @@ task task119 "Electrical" {
         priority 500
         duration 2d
         charge 6000.0 onend
-        
     }
 
 }
@@ -1702,7 +1518,6 @@ task task126 "Heating and Ventilating - AC" {
     chargeset taskCost
     priority 500
     charge 42000.0 onend
-    
 
     task task127 "Set equipment in mechanical room" {
         scheduling asap
@@ -1712,7 +1527,6 @@ task task126 "Heating and Ventilating - AC" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1724,7 +1538,6 @@ task task126 "Heating and Ventilating - AC" {
         priority 500
         duration 4d
         charge 11200.0 onend
-        
     }
 
 
@@ -1736,7 +1549,6 @@ task task126 "Heating and Ventilating - AC" {
         priority 500
         duration 2d
         charge 5600.0 onend
-        
     }
 
 
@@ -1747,7 +1559,6 @@ task task126 "Heating and Ventilating - AC" {
         priority 500
         duration 3d
         charge 8400.0 onend
-        
     }
 
 
@@ -1759,7 +1570,6 @@ task task126 "Heating and Ventilating - AC" {
         priority 500
         duration 4d
         charge 11200.0 onend
-        
     }
 
 }
@@ -1769,7 +1579,6 @@ task task132 "Final Clean-up and Occupancy" {
     chargeset taskCost
     priority 500
     charge 6720.0 onend
-    
 
     task task133 "Install hard tile flooring in common areas" {
         scheduling asap
@@ -1779,7 +1588,6 @@ task task132 "Final Clean-up and Occupancy" {
         priority 500
         duration 1d
         charge 2800.0 onend
-        
     }
 
 
@@ -1790,7 +1598,6 @@ task task132 "Final Clean-up and Occupancy" {
         priority 500
         duration 4d
         charge 560.0 onend
-        
     }
 
 
@@ -1801,7 +1608,6 @@ task task132 "Final Clean-up and Occupancy" {
         priority 500
         duration 4d
         charge 1600.0 onend
-        
     }
 
 
@@ -1813,7 +1619,6 @@ task task132 "Final Clean-up and Occupancy" {
         priority 500
         duration 1d
         charge 880.0 onend
-        
     }
 
 }
@@ -1823,7 +1628,6 @@ task task137 "Complete Final Inspections" {
     chargeset taskCost
     priority 500
     charge 3360.0 onend
-    
 
     task task138 "Complete elevator inspection and certification" {
         scheduling asap
@@ -1833,7 +1637,6 @@ task task137 "Complete Final Inspections" {
         priority 500
         duration 3d
         charge 2280.0 onend
-        
     }
 
 
@@ -1844,7 +1647,6 @@ task task137 "Complete Final Inspections" {
         priority 500
         duration 1d
         charge 920.0 onend
-        
     }
 
 
@@ -1856,7 +1658,6 @@ task task137 "Complete Final Inspections" {
         priority 500
         duration 1d
         charge 920.0 onend
-        
     }
 
 
@@ -1868,7 +1669,6 @@ task task137 "Complete Final Inspections" {
         priority 500
         duration 1d
         charge 920.0 onend
-        
     }
 
 }
@@ -1882,7 +1682,6 @@ task task142 "Complete punch list items from all inspections" {
     priority 500
     duration 2d
     charge 5749.92 onend
-    
 }
 
 task task143 "Obtain certificate of occupancy" {
@@ -1894,7 +1693,6 @@ task task143 "Obtain certificate of occupancy" {
     priority 500
     duration 2d
     charge 1920.0 onend
-    
 }
 
 task task144 "Issue final completion documents including warranties" {
@@ -1906,7 +1704,6 @@ task task144 "Issue final completion documents including warranties" {
     priority 500
     duration 1d
     charge 960.0 onend
-    
 }
 
 task task145 "Issue final request for payment" {
@@ -1918,7 +1715,6 @@ task task145 "Issue final request for payment" {
     priority 500
     duration 1d
     charge 810.22 onend
-    
 }
 
 # ------------END-------------

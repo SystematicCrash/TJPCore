@@ -134,3 +134,11 @@ ERROR: Failed to finish processing! Because of below errors:
 tjp_outputs/project.tjp:12: Error: Unexpected token 'scenario' found. Expecting one of 'account', 'auxdir', 'copyright', 'balance', 'flags', 'include', 'leaves', 'limits', 'macro', 'navigator', 'projectid', 'projectids', 'rate', 'icalreport', 'nikureport', 'accountreport', 'export', 'resourcereport', 'taskreport', 'textreport', 'tracereport', 'tagfile', 'statussheetreport', 'timesheetreport', 'resource', 'shift', 'statussheet', 'supplement', 'task', 'timesheet', 'vacation', :eof
 scenario
  - 2025-09-22 12:13:24
+ERROR: Failed to finish processing! Because of below errors:
+tjp_outputs/project.tjp:1744: Error: Unexpected token '}' found. Expecting :ID
+}
+ - 2025-09-22 18:42:10
+ERROR: Project with id = (MIiQCZkBhyhQ-KdRYff4) not found! - 2025-09-22 19:18:47
+ERROR: No resources found for project with id =(mm)! - 2025-09-22 19:18:57
+ERROR: No tasks found for project with id =(mm)! - 2025-09-22 19:19:30
+ERROR: Project with id = (mm) not found! - 2025-09-25 13:21:24
