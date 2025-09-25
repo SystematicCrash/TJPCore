@@ -52,8 +52,9 @@ project {{project.id}} "{{project.name}}" {{project.start}} +{{project.duration}
 
 # ------------Scenarios-------------
 {% if scenario %}
-{% import "scenarios.j2" as scenario_builder %}
-{{ scenario_builder.render_scenarios(scenario) }}
+scenario plan "planned" {
+    scenario {{scenario.name}} "{{scenario.description}}"
+}
 {% endif %}
 # ------------END-------------
 }

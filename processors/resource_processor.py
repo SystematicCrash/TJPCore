@@ -1,0 +1,31 @@
+import re
+from models.data_models import Resource
+from models.api_models import Scenario
+
+
+
+# Effecting scenario changes in tasks
+def _effect_scenario_changes(scenario: Scenario, resources: dict[str, Resource]):
+    resources.update({
+        scenario_resource.id: scenario_resource for scenario_resource in scenario.resources_to_add
+        })    
+    for updated_rsource in scenario.resources_to_update:
+        resource = resources.get(updated_rsource.id)
+        if resource:
+            resource.scenario_specific_obj = updated_rsource
+    for removed_resource in scenario.resources_to_remove:
+        resources.pop(removed_resource, None)
+    
+
+
+
+def initialize_resources(data: list, scenario: Scenario) -> list[Resource]:
+    resources: dict[str, Resource] = {}
+    for resource in data:
+        resources[resource["_source"]["id"]] = Resource(json_document=resource)
+    if scenario:
+        _effect_scenario_changes(scenario, resources)
+    resources = dict(sorted(resources.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+
+
+    return resources.values()

@@ -3,7 +3,7 @@ from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
 
 
-""" Making connection to DB """
+# Making connection to DB 
 def make_connection():
     conf = get_config("elasticsearch")
     return AsyncElasticsearch(
@@ -13,22 +13,20 @@ def make_connection():
     )
 
 
-""" Writing data to an index """
+# Writing data to an index 
 async def write_on_index(connection: AsyncElasticsearch, data, index_name):
     try:
         data = [
             {"_index": index_name, "_id": doc["id"], "_source": doc}
             for doc in data
             ]
-        await helpers.async_bulk(connection, data, chunk_size=2000)
+        await helpers.async_bulk(connection, data, chunk_size=500, request_timeout=60, refresh=False)
     except Exception as e:
-        import traceback
-        traceback.print_exc()
         message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Fetching docs from an index """
+# Fetching docs from an index 
 async def fetch_index(es: AsyncElasticsearch, index_name):
     try:
         query = {
@@ -46,7 +44,7 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Run custom queries """
+# Run custom queries 
 async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
     try:
         result = await es.search(index=index_name, body=query, size=10_000)
@@ -56,7 +54,7 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Removing all docuements from an index """
+# Removing all docuements from an index 
 async def truncate_index(es: AsyncElasticsearch, index_name: str):
     try:
         await es.delete_by_query(index=index_name, query={"match_all": {}}, conflicts="proceed")
@@ -65,7 +63,7 @@ async def truncate_index(es: AsyncElasticsearch, index_name: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Dropping an index """
+# Dropping an index
 async def drop_index(es: AsyncElasticsearch, index_name: str):
     try:
         await es.indices.delete(index=index_name, ignore=[404])
@@ -74,7 +72,7 @@ async def drop_index(es: AsyncElasticsearch, index_name: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Creating a new index """
+# Creating a new index 
 async def create_index(es: AsyncElasticsearch, index_name: str, mapping_and_setting: dict):
     try:
         await es.indices.create(index=index_name, body=mapping_and_setting)
@@ -84,7 +82,7 @@ async def create_index(es: AsyncElasticsearch, index_name: str, mapping_and_sett
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Setting alias for index """
+# Setting alias for index 
 async def set_index_alias(es: AsyncElasticsearch, index_name: str, alias: str):
     try:
         body = {
@@ -99,7 +97,7 @@ async def set_index_alias(es: AsyncElasticsearch, index_name: str, alias: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Check if a specific index exists or not """
+# Check if a specific index exists or not
 async def check_index_exists(es: AsyncElasticsearch, index_name: str):
     try:
         return await es.indices.exists(index=index_name)
@@ -108,7 +106,7 @@ async def check_index_exists(es: AsyncElasticsearch, index_name: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-""" Query by searching a term """
+# Query by searching a term 
 async def term_query(
         es: AsyncElasticsearch, index_name: str, 
         field: str, value: str, sortby=None, order="asc"
@@ -132,25 +130,3 @@ async def term_query(
         message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
     
-
-
-
-""" Reseting indexes and writing data on new indexes (near transactional | compensating action) """
-async def compensating_insertion(es: AsyncElasticsearch, old_index_name: str, mapping: dict, data: dict):
-    postfix = 'fresh'
-    if await es.indices.exists(index=f"{old_index_name}_{postfix}"):
-        postfix = "new"
-    new_index_name = f"{old_index_name}_{postfix}"
-    try:
-        await create_index(es, new_index_name, mapping)
-        await write_on_index(es, data, new_index_name)
-        if postfix == "fresh":
-            await drop_index(es, f"{old_index_name}_new")
-        else:
-            await drop_index(es, f"{old_index_name}_fresh")
-        await set_index_alias(es, index_name=new_index_name, alias=old_index_name)
-    except Exception as e:
-        if check_index_exists(es, new_index_name):
-            drop_index(es, new_index_name)
-        message = f"\nCompensating insertion failed for index '{old_index_name}'.\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 500)

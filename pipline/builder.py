@@ -1,18 +1,18 @@
 import os
 import traceback
 from jinja2 import Environment, FileSystemLoader
-from data_models.task import Task, initialize_tasks
-from data_models.resource import Resource, initialize_resources
-from data_models.project import initialize_projects
-from helpers.io_helpers import get_config
-from http_api.models import Scenario
+from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ProcessFailureError
-
+from models.data_models import Resource, Task
+from models.api_models import Scenario
+from processors.project_processor import initialize_projects
+from processors.resource_processor import initialize_resources
+from processors.task_processor import initialize_tasks
 
 _indexes_names = get_config('data_indexes')
 
 
-""" Tjp file flags """
+# Tjp file flags
 def _define_flags(tasks: list[Task], resources: list[Resource]) -> set[str]:
     flags = set()
     for task in tasks:
@@ -26,7 +26,7 @@ def _define_flags(tasks: list[Task], resources: list[Resource]) -> set[str]:
     return flags
 
 
-""" Initialize and return jinja template """
+# Initialize and return jinja template 
 def _setup_template_environment() -> Environment:
     return Environment(
         loader=FileSystemLoader(get_config("paths.templates")),
@@ -35,7 +35,7 @@ def _setup_template_environment() -> Environment:
     )
 
 
-"""Initialize projects, tasks, and resources from data map."""
+# Initialize projects, tasks, and resources from data map 
 def _initialize_entities(data_map: dict, scenario: Scenario) -> tuple:
     try:
         projects = initialize_projects(data_map.get(_indexes_names["project"], []))
@@ -49,7 +49,7 @@ def _initialize_entities(data_map: dict, scenario: Scenario) -> tuple:
         raise ProcessFailureError(message, 500)
 
 
-""" Create reports directory if it doesn't exist """
+# Create reports directory if it doesn't exist 
 def _ensure_report_directory() -> dict[str, any]:
     report_paths = get_config("paths.reports")
     if not os.path.isdir(report_paths["dir"]):
@@ -57,7 +57,7 @@ def _ensure_report_directory() -> dict[str, any]:
     return report_paths
 
 
-""" Render provided entities in the main template file """
+# Render provided entities in the main template file 
 def _render_template(env: Environment, projects, tasks, resources, flags, scenario, report_paths: dict) -> str:
     body_template = env.get_template("main.j2")
     return body_template.render(
@@ -70,13 +70,13 @@ def _render_template(env: Environment, projects, tasks, resources, flags, scenar
     )
 
 
-"""Write the rendered template body to tjp file"""
+# Write the rendered template body to tjp file
 def _write_output(body: str, tjp_output: str) -> None:
     with open(tjp_output, "w", encoding="utf-8") as f:
         f.write(body)
 
 
-""" Tjp file generation based on given data """
+# Tjp file generation based on given data
 def generate_tjp(data_map: dict, tjp_output="tjp_outputs/project.tjp", scenario: Scenario = None) -> None:
     env = _setup_template_environment()
 

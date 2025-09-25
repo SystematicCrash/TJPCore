@@ -1,5 +1,6 @@
 from helpers.utility import cast_string_fields_to_numeric_types
-from helpers.io_helpers import get_config, read_csv
+from helpers.config_helper import get_config
+from helpers.io_helper import read_csv
 
 
 _NORMALIZATION_RULES = {
@@ -9,7 +10,7 @@ _NORMALIZATION_RULES = {
 }
 
 
-""" Normalizing reports result """
+# Normalizing reports result
 def _normalize_reports(reports: dict[str, list[dict]]) -> None:
     for report_name, data in reports.items():
         rules = _NORMALIZATION_RULES.get(report_name, {})
@@ -19,7 +20,7 @@ def _normalize_reports(reports: dict[str, list[dict]]) -> None:
             cast_string_fields_to_numeric_types(doc)
     
 
-""" Read reports CSV results into a dictionary """
+# Read reports CSV results into a dictionary
 def _read_reports_csv() -> dict[str, list[dict]]:
     sources: dict = get_config("paths.reports.files")
     report_dir = get_config("paths.reports.dir")
@@ -29,7 +30,7 @@ def _read_reports_csv() -> dict[str, list[dict]]:
     }
 
 
-""" Preparing reports data for index or api response """
+# Preparing reports data for index or api response
 def perpare_reports() -> dict[str, list[dict]]:
     reports_result = _read_reports_csv()
 

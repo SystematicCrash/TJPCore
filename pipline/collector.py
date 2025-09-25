@@ -1,6 +1,6 @@
 from typing import Any
 from asyncio import gather
-from helpers.io_helpers import get_config
+from helpers.config_helper import get_config
 from elasticsearch import AsyncElasticsearch
 from helpers.elastic_helper import term_query
 from exceptions.custom_exceptions import DataValidationError, BadInputError
@@ -8,7 +8,7 @@ from exceptions.custom_exceptions import DataValidationError, BadInputError
 _indexes_names = get_config('data_indexes')
 
 
-"""Fetch a single project by its ID """
+# Fetch a single project by its ID 
 async def _fetch_single_project(connection: AsyncElasticsearch, project_id: str) -> dict[str, Any]:
     project_data: dict | None = await term_query(
         connection,
@@ -24,7 +24,7 @@ async def _fetch_single_project(connection: AsyncElasticsearch, project_id: str)
     return list(project_data.values())[0]
 
 
-"""Fetch related tasks and resources to this project """
+# Fetch related tasks and resources to this project
 async def _fetch_related_entities(connection: AsyncElasticsearch, project_id: str) -> dict[str, Any]:
     queries = [
         term_query(connection, _indexes_names["task"], "projectid", project_id),
@@ -34,7 +34,7 @@ async def _fetch_related_entities(connection: AsyncElasticsearch, project_id: st
     return {list(r.keys())[0]: list(r.values())[0] for r in results}
 
 
-""" Ensure that tasks exist for this project """
+# Ensure that tasks exist for this project 
 def _validate_tasks(data_map: dict[str, Any], project_id: str) -> None:
     if not data_map[_indexes_names["task"]]:
         raise DataValidationError(
@@ -42,7 +42,7 @@ def _validate_tasks(data_map: dict[str, Any], project_id: str) -> None:
         )
 
 
-""" fetch project, tasks, and resources, and validate them """
+# fetch project, tasks, and resources, and validate them 
 async def gather_project_data(connection: AsyncElasticsearch, project_id: str) -> dict[str, Any]:
     data_map = {}
 

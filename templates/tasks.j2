@@ -20,7 +20,7 @@ task {{ task.id }} "{{ task.name }}" {
     shifts {{ task.shifts | join(', ') }}
     {% endif %}
 
-    {%- if task.chargeset %}
+    {%- if task.chargeset and not task.inherited_chargeset %}
     chargeset {{ task.chargeset | join(', ') }}
     {% endif %}
 
@@ -84,11 +84,11 @@ task {{ task.id }} "{{ task.name }}" {
     minend {{task.minend}}
     {% endif %}
 
-    {%- if task.start %}
+    {%- if task.start and not task.milestone %}
     start {{task.start}}
     {% endif %}
 
-    {%- if task.end %}
+    {%- if task.end and not task.milestone %}
     end {{task.end}}
     {% endif %}
 
@@ -96,17 +96,13 @@ task {{ task.id }} "{{ task.name }}" {
     charge {{task.charge}} onend
     {% endif %}
 
-    {%- if task.maxend %}
-    maxend {{task.maxend}}
-    {% endif %}
-
     {%- if task.flags %}
     flags {{ task.flags | join(', ') }}
     {% endif %}
 
-    {%- if scenario and task.scenario_specific_values %}
+    {%- if scenario and task.scenario_specific_obj %}
     {% import "task_scenario_specific.j2" as task_scenario_specific_builder %}
-    {{ task_scenario_specific_builder.render_scenario_specific(scenario.name, task.scenario_specific_values) }}
+    {{ task_scenario_specific_builder.render_scenario_specific(scenario.name, task.scenario_specific_obj) | indent(4, false) }}
     {% endif %}
 
     {%- if task.sub_tasks_objs %}

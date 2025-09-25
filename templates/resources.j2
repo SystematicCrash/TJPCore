@@ -49,9 +49,9 @@ resource {{resource.id}} "{{resource.name}}" {
     chargeset {{ resource.chargeset | join(', ') }}
     {% endif %}
 
-    {%- if scenario and resource.scenario_specific_values %}
+    {%- if scenario and resource.scenario_specific_obj %}
     {% import "resource_scenario_specific.j2" as resource_scenario_specific_builder %}
-    {{ resource_scenario_specific_builder.render_scenario_specific(scenario.name, resource.scenario_specific_values) }}
+    {{ resource_scenario_specific_builder.render_scenario_specific(scenario.name, resource.scenario_specific_obj) | indent(4, false) }}
     {% endif %}
 }
 {% endmacro %}

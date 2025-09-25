@@ -7,7 +7,7 @@
     "mappings": {
         "properties": {
             "wbs": {
-                "type": "float"
+                "type": "keyword"
             },
             "id": {
                 "type": "keyword"

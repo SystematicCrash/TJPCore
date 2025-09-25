@@ -6,6 +6,9 @@ from helpers.config_helper import get_config
 from helpers.utility import colorized_print
 from elasticsearch import Elasticsearch
 from uuid import uuid4
+import logging
+from pathlib import Path
+
 
 
 def generating_json_file_from_csv(csv_path: str, json_path: str):
@@ -30,31 +33,7 @@ def read_json(json_path: str):
         return json.load(jsonfile)
 
 
-# Writing runtime errors in log file
-def logger(message: str, mode: str = 'warning', console: bool = True):
-    if mode not in ['debug', 'info', 'warning', 'error', 'critical']:
-        raise ValueError(f"{mode} is not a valid mode")
-    if console:
-        logging.basicConfig(level=mode.upper(), format="{levelname}: {message}", style='{')
-    else:
-        logging.basicConfig(
-            filename=get_config('logging.filename'),
-            filemode=get_config('logging.filemode'),
-            level=mode.upper(), format="{levelname}: {message} - {asctime}",
-            datefmt="%Y-%m-%d %H:%M:%S", style='{')
-    if mode == 'debug':
-        logging.debug(message)
-    elif mode == 'info':
-        logging.info(message)
-    elif mode == 'warning':
-        logging.warning(message)
-    elif mode == 'error':
-        logging.error(message)
-    elif mode == 'critical':
-        logging.critical(message)
-
-
-# Writing logical tj3 errors on elasticsearch index
+# Writing logical tj3 errors on elasticsearch index 
 async def error_register(connection: Elasticsearch, error_message: str):
     from helpers.elastic_helper import write_on_index, drop_index, create_index
     index_name = get_config("error_index")

@@ -1,17 +1,16 @@
 import subprocess
 from elasticsearch import AsyncElasticsearch
-from http_api.models import Scenario
 from helpers.elastic_helper import make_connection
 from helpers.config_helper import get_config
-from helpers.io_helpers import error_register
+from helpers.io_helper import error_register
 from exceptions.custom_exceptions import TJ3ProcessError
-from pipline.data_collector import gather_project_data
-from pipline.tj_builder import generate_tjp
-from pipline.data_persister import indexing_reports
-from pipline.data_normalizer import perpare_reports
+from pipline.collector import gather_project_data
+from pipline.builder import generate_tjp
+from pipline.persister import indexing_reports
+from pipline.normalizer import perpare_reports
+from models.api_models import Scenario
 
-
-""" Running taskjuggler project manager """
+# Running taskjuggler project manager
 async def _run_tj3(connection: AsyncElasticsearch, output_path: str) -> None:
     result = subprocess.run(
         "tj3 " + output_path, shell=True, stdout=subprocess.DEVNULL,
@@ -23,7 +22,7 @@ async def _run_tj3(connection: AsyncElasticsearch, output_path: str) -> None:
         raise TJ3ProcessError(message, 500)
 
 
-""" Processing """
+# Processing 
 async def main(project_id: str, scenario: Scenario = None) -> dict|None:
     connection = make_connection()
 
@@ -37,10 +36,10 @@ async def main(project_id: str, scenario: Scenario = None) -> dict|None:
 
     reports_data = perpare_reports()
 
-    if not scenario: # No need to indexing data in scenario mode
-        await indexing_reports(connection, reports_data)
-    else:
+    if scenario: # No need to indexing data in scenario mode
+        await connection.close()
         return reports_data
+    await indexing_reports(connection, reports_data)
     await connection.close()
 
 
