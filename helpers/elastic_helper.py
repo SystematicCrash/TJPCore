@@ -22,7 +22,7 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
             ]
         await helpers.async_bulk(connection, data, chunk_size=500, request_timeout=60, refresh=False)
     except Exception as e:
-        message = f"\nFailed to write data to index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to write data to index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -40,7 +40,7 @@ async def fetch_index(es: AsyncElasticsearch, index_name):
         result = await es.search(index=index_name, body=query, size=10000)
         return {index_name : result['hits']['hits']} or None
     except Exception as e:
-        message = f"\nFailed to fetch data from index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to fetch data from index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -50,7 +50,7 @@ async def run_query(es: AsyncElasticsearch, index_name: str, query: dict):
         result = await es.search(index=index_name, body=query, size=10_000)
         return {index_name : result['hits']['hits']} or None 
     except Exception as e:
-        message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to perform query on index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -59,7 +59,7 @@ async def truncate_index(es: AsyncElasticsearch, index_name: str):
     try:
         await es.delete_by_query(index=index_name, query={"match_all": {}}, conflicts="proceed")
     except Exception as e:
-        message = f"\nFailed to truncate index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to truncate index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -68,7 +68,7 @@ async def drop_index(es: AsyncElasticsearch, index_name: str):
     try:
         await es.indices.delete(index=index_name, ignore=[404])
     except Exception as e:
-        message = f"\nFailed to drop index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to drop index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -78,7 +78,7 @@ async def create_index(es: AsyncElasticsearch, index_name: str, mapping_and_sett
         await es.indices.create(index=index_name, body=mapping_and_setting)
         await es.cluster.health(wait_for_status="yellow")
     except Exception as e:
-        message = f"\nFailed to create index named ({index_name}).\nDetails: {e}"
+        message = f"\nFailed to create index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -93,7 +93,7 @@ async def set_index_alias(es: AsyncElasticsearch, index_name: str, alias: str):
         }
         await es.indices.update_aliases(body=body)
     except Exception as e:
-        message = f"\nFailed to set alias '{alias}' for index '{index_name}'.\nDetails: {e}"
+        message = f"\nFailed to set alias '{alias}' for index '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 
 
@@ -102,31 +102,34 @@ async def check_index_exists(es: AsyncElasticsearch, index_name: str):
     try:
         return await es.indices.exists(index=index_name)
     except Exception as e:
-        message = f"\nFailed to check existance of index named '{index_name}.\nDetails: {e}'"
+        message = f"\nFailed to check existance of index with name = '{index_name}'.Details: {e}'"
         raise ElasticSearchQueryError(message, 500)
 
 
-# Query by searching a term 
-async def term_query(
-        es: AsyncElasticsearch, index_name: str, 
-        field: str, value: str, sortby=None, order="asc"
-        ):
+# Fetching data by search a term
+async def term_query(es: AsyncElasticsearch,index_name: str, field: str, value: str, sortby: str = None, order: str = "asc",):
+    scroll_time = '2m'
+    page_size = 500
     try:
-        query = {
-            "_source": {
-                "excludes": ["*vector"]
-            },
-            "query": {
-                "match": {
-                    field: value
-                }
-            }
-        }
+        query = {"_source": {"excludes": ["*vector"]}, "query": {"match": {field: value}}}
         if sortby:
             query["sort"] = [{sortby: {"order": order}}]
-        result = await es.search(index=index_name, body=query, size=10_000)
-        return {index_name: result['hits']['hits']} or None
-    except Exception as e:
-        message = f"\nFailed to perform query on index named ({index_name}).\nDetails: {e}"
+        response = await es.search(
+            index=index_name,
+            body=query,
+            scroll=scroll_time,
+            size=page_size
+        )
+        scroll_id = response["_scroll_id"]
+        documents = response["hits"]["hits"]
+        while True:
+            response = await es.scroll(scroll_id=scroll_id, scroll=scroll_time)
+            hits = response["hits"]["hits"]
+            if not hits:
+                break
+            documents.extend(hits)
+        await es.clear_scroll(scroll_id=scroll_id)
+        return {index_name: documents} or None
+    except ElasticSearchQueryError as e:
+        message = f"\nFailed to perform query on index with name = '({index_name}'.\nDetails: {e}"
         raise ElasticSearchQueryError(message, 500)
-    

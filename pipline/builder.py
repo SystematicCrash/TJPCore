@@ -8,6 +8,8 @@ from models.api_models import Scenario
 from processors.project_processor import initialize_projects
 from processors.resource_processor import initialize_resources
 from processors.task_processor import initialize_tasks
+from fastapi.exceptions import HTTPException
+
 
 _indexes_names = get_config('data_indexes')
 
@@ -43,10 +45,10 @@ def _initialize_entities(data_map: dict, scenario: Scenario) -> tuple:
         resources = initialize_resources(data_map.get(_indexes_names["resource"], []), scenario)
         flags = _define_flags(tasks, resources)
         return projects, tasks, resources, flags
-    except Exception as e:
-        message = f"Failed to generate tjp file!\nDetails: {e}"
+    except HTTPException as e:
+        message = f"Failed to generate tjp file!Details: {e}"
         traceback.print_exc()
-        raise ProcessFailureError(message, 500)
+        raise ProcessFailureError(message, e.status_code)
 
 
 # Create reports directory if it doesn't exist 

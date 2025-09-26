@@ -33,6 +33,11 @@ def read_json(json_path: str):
         return json.load(jsonfile)
 
 
+# Converting data to json stream
+async def json_stream(data: dict):
+    yield json.dumps(data)
+
+
 # Writing logical tj3 errors on elasticsearch index 
 async def error_register(connection: Elasticsearch, error_message: str):
     from helpers.elastic_helper import write_on_index, drop_index, create_index

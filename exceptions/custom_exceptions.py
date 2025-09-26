@@ -21,7 +21,7 @@ class ElasticSearchQueryError(HTTPException):
 
 
 class DataValidationError(HTTPException):
-    def __init__(self, message: str = 'Data validation failed', status_code: int = 500) -> None:
+    def __init__(self, message: str = 'Data validation failed', status_code: int = 422) -> None:
         super().__init__(detail=message, status_code=status_code)
 
 
@@ -40,6 +40,6 @@ class ProcessFailureError(HTTPException):
         super().__init__(detail=message, status_code=status_code)
 
 
-class BadInputError(HTTPException):
+class BadDataError(HTTPException):
     def __init__(self, message: str = "Bad input!", status_code: int = 400)-> None:
         super().__init__(detail=message, status_code=status_code)

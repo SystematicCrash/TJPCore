@@ -3,7 +3,7 @@ from asyncio import gather
 from helpers.config_helper import get_config
 from elasticsearch import AsyncElasticsearch
 from helpers.elastic_helper import term_query
-from exceptions.custom_exceptions import DataValidationError, BadInputError
+from exceptions.custom_exceptions import DataValidationError, BadDataError
 
 _indexes_names = get_config('data_indexes')
 
@@ -17,7 +17,7 @@ async def _fetch_single_project(connection: AsyncElasticsearch, project_id: str)
         project_id
     )
     if not project_data.get(_indexes_names["project"]):
-        raise BadInputError(
+        raise BadDataError(
             message=f"Project with id = ({project_id}) not found!",
             status_code=404
         )
@@ -27,8 +27,8 @@ async def _fetch_single_project(connection: AsyncElasticsearch, project_id: str)
 # Fetch related tasks and resources to this project
 async def _fetch_related_entities(connection: AsyncElasticsearch, project_id: str) -> dict[str, Any]:
     queries = [
-        term_query(connection, _indexes_names["task"], "projectid", project_id),
-        term_query(connection, _indexes_names["resource"], "projectid", project_id),
+        term_query(connection, _indexes_names["task"], "project_id", project_id),
+        term_query(connection, _indexes_names["resource"], "project_id", project_id),
     ]
     results = await gather(*queries)
     return {list(r.keys())[0]: list(r.values())[0] for r in results}

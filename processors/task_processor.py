@@ -1,6 +1,7 @@
 import re
 from models.data_models import Task
 from models.api_models import Scenario
+from exceptions.custom_exceptions import DataValidationError
 
 
 # Assiging Tasks Absolute Ids with DFS
@@ -54,13 +55,17 @@ def _sort_tasks_by_id(tasks: dict[str, Task]) -> dict[str, Task]:
 
 # Effecting scenario changes in tasks
 def _effect_scenario_changes(scenario: Scenario, tasks: dict[str, Task]):
-    tasks.update({
-        scenario_task.id: scenario_task for scenario_task in scenario.tasks_to_add
-        })    
+
+    for new_task in scenario.tasks_to_add:
+        if not new_task.id:
+            raise DataValidationError(message="Scenario task defined without id!", status_code=422)
+        tasks[new_task.id] = new_task
+
     for updated_task in scenario.tasks_to_update:
         task = tasks.get(updated_task.id)
         if task:
             task.scenario_specific_obj = updated_task
+
     for removed_task in scenario.tasks_to_remove:
         tasks.pop(removed_task, None)
     
@@ -72,7 +77,8 @@ def initialize_tasks(data: list, scenario: Scenario) -> list[Task]:
     
     tasks = {doc["_source"]["id"]: Task(json_document=doc) for doc in data}
 
-    print(scenario)
+    print(len(tasks.keys()))
+
     if scenario:
         _effect_scenario_changes(scenario, tasks)
 

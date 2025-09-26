@@ -5,8 +5,8 @@ from helpers.logging_helper import logger
 from helpers.config_helper import get_config
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
-from fastapi.responses import JSONResponse
-
+from fastapi.responses import JSONResponse, StreamingResponse
+from helpers.io_helper import json_stream
 
 app = FastAPI()
 
@@ -59,9 +59,7 @@ async def scenario_analyze(project_id: str, scenario: Scenario, request: Request
         return JSONResponse(content={'status': 'fail', 'message': exp.detail}, status_code=exp.status_code)
     
     duration = time.time() - start
-    return JSONResponse(
-        content={'status': 'success', 'message': 'Process finished!', 'duration': f'{duration:.2f}', 'data': result},
-        status_code=200
-    )
+    content = {'status': 'success', 'message': 'Process finished!', 'duration': f'{duration:.2f}', 'data': result}
+    return StreamingResponse(content=json_stream(content), status_code=200, media_type="application/json")
 
 

@@ -17,9 +17,9 @@ async def _run_tj3(connection: AsyncElasticsearch, output_path: str) -> None:
         stderr=subprocess.PIPE, text=True, encoding='utf-8'
     )
     if result.returncode != 0:
-        message = f"Failed to finish processing! Because of below errors:\n{result.stderr}"
+        message = f"Failed to finish processing! Because of errors:{result.stderr}"
         await error_register(connection, message)
-        raise TJ3ProcessError(message, 500)
+        raise TJ3ProcessError(message, 422)
 
 
 # Processing 

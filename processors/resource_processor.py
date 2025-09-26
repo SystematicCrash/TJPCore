@@ -1,18 +1,23 @@
 import re
 from models.data_models import Resource
 from models.api_models import Scenario
+from exceptions.custom_exceptions import DataValidationError
 
 
 
 # Effecting scenario changes in tasks
 def _effect_scenario_changes(scenario: Scenario, resources: dict[str, Resource]):
-    resources.update({
-        scenario_resource.id: scenario_resource for scenario_resource in scenario.resources_to_add
-        })    
+
+    for new_resource in scenario.resources_to_add:
+        if not new_resource.id:
+            raise DataValidationError(message="Scenario resource defined without id!", status_code=422)
+        resources[new_resource.id] = new_resource
+
     for updated_rsource in scenario.resources_to_update:
         resource = resources.get(updated_rsource.id)
         if resource:
             resource.scenario_specific_obj = updated_rsource
+
     for removed_resource in scenario.resources_to_remove:
         resources.pop(removed_resource, None)
     
