@@ -76,9 +76,6 @@ def initialize_tasks(data: list, scenario: Scenario) -> list[Task]:
     top_level_tasks = []
     
     tasks = {doc["_source"]["id"]: Task(json_document=doc) for doc in data}
-
-    print(len(tasks.keys()))
-
     if scenario:
         _effect_scenario_changes(scenario, tasks)
 

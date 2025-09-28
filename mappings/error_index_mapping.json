@@ -12,6 +12,10 @@
       "message": {
         "type": "text",
         "analyzer": "standard"
+      },
+      "time": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
       }
     }
   }

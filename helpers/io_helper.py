@@ -1,13 +1,11 @@
 import csv
 import json
-import logging
+from datetime import datetime
 from os import path
 from helpers.config_helper import get_config
 from helpers.utility import colorized_print
 from elasticsearch import Elasticsearch
 from uuid import uuid4
-import logging
-from pathlib import Path
 
 
 
@@ -44,7 +42,7 @@ async def error_register(connection: Elasticsearch, error_message: str):
     index_name = get_config("error_index")
     if not get_config("exceptions.save_logs_in_db"):
         return
-    data = {'id': uuid4().hex, 'message': error_message}
+    data = {'id': uuid4().hex, 'message': error_message, "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     await drop_index(connection, index_name)
     await create_index(connection, index_name, read_json("mappings/error_index_mapping.json"))
     await write_on_index(connection, [data], get_config('error_index'))

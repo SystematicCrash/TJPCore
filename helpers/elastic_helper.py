@@ -22,6 +22,7 @@ async def write_on_index(connection: AsyncElasticsearch, data, index_name):
             ]
         await helpers.async_bulk(connection, data, chunk_size=500, request_timeout=60, refresh=False)
     except Exception as e:
+        print(e.errors)
         message = f"\nFailed to write data to index with name = '{index_name}'.Details: {e}"
         raise ElasticSearchQueryError(message, 500)
 

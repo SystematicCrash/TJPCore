@@ -27,8 +27,8 @@ async def _fetch_single_project(connection: AsyncElasticsearch, project_id: str)
 # Fetch related tasks and resources to this project
 async def _fetch_related_entities(connection: AsyncElasticsearch, project_id: str) -> dict[str, Any]:
     queries = [
-        term_query(connection, _indexes_names["task"], "project_id", project_id),
-        term_query(connection, _indexes_names["resource"], "project_id", project_id),
+        term_query(connection, _indexes_names["task"], "projectid", project_id),
+        term_query(connection, _indexes_names["resource"], "projectid", project_id),
     ]
     results = await gather(*queries)
     return {list(r.keys())[0]: list(r.values())[0] for r in results}
