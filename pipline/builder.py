@@ -11,7 +11,7 @@ from processors.task_processor import initialize_tasks
 from fastapi.exceptions import HTTPException
 
 
-_indexes_names = get_config('data_indexes')
+_data_indexes = get_config('data_indexes')
 
 
 # Tjp file flags
@@ -40,9 +40,9 @@ def _setup_template_environment() -> Environment:
 # Initialize projects, tasks, and resources from data map 
 def _initialize_entities(data_map: dict, scenario: Scenario) -> tuple:
     try:
-        projects = initialize_projects(data_map.get(_indexes_names["project"], []))
-        tasks = initialize_tasks(data_map.get(_indexes_names["task"], []), scenario)
-        resources = initialize_resources(data_map.get(_indexes_names["resource"], []), scenario)
+        projects = initialize_projects(data_map.get(_data_indexes["project"], []))
+        tasks = initialize_tasks(data_map.get(_data_indexes["task"], []), scenario)
+        resources = initialize_resources(data_map.get(_data_indexes["resource"], []), scenario)
         flags = _define_flags(tasks, resources)
         return projects, tasks, resources, flags
     except HTTPException as e:
@@ -86,6 +86,14 @@ def generate_tjp(data_map: dict, tjp_output="tjp_outputs/project.tjp", scenario:
 
     report_paths = _ensure_report_directory()
 
-    body = _render_template(env, projects, tasks, resources, flags, scenario, report_paths)
+    body = _render_template(
+        env=env, 
+        projects=projects, 
+        tasks=tasks, 
+        resources=resources, 
+        flags=flags, 
+        scenario=scenario, 
+        report_paths=report_paths
+        )
 
     _write_output(body, tjp_output)

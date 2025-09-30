@@ -19,6 +19,26 @@ def _create_abs_id(task: Task, parts: list) -> list[str]:
     return parts
 
 
+# Removing additional time criterias when task has one of them (This is nessaccery, otherwise may cause tj3 errors)
+def _removing_additional_time_criterias(task: Task):
+    time_fields = [
+        "start", "end", "minstart", "maxstart", "minend", 
+        "maxend", "duration", "effort", "effortdone", 
+        "effortleft", "length"
+        ]
+    if task.milestone:
+        [setattr(task, f, None) for f in time_fields]
+
+    elif getattr(task, "start") and getattr(task, "end"):
+        [setattr(task, field, None) for field in time_fields if field not in ['start', 'end']]
+        
+    else:
+        for field in time_fields:
+            if getattr(task, field):
+                [setattr(task, f, None) for f in time_fields if f != field]
+                break
+
+
 # Building a Breakdown Structure of Tasks 
 def _task_leveling(task: Task, tasks: dict[str, Task]) -> bool:
     is_top_level_task = False
@@ -84,6 +104,7 @@ def initialize_tasks(data: list, scenario: Scenario) -> list[Task]:
     for task in tasks.values(): 
         if _task_leveling(task, tasks):
             top_level_tasks.append(task)
+        _removing_additional_time_criterias(task)
         _convert_dependencies_to_absolute(tasks, task)
     
     return top_level_tasks

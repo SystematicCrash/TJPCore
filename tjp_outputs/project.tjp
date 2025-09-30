@@ -1,5 +1,5 @@
 # ----------------Project Header-------------
-project proj2025 "Commercial Construction" 2020-08-03 +344d {
+project proj2025 "Commercial Construction" 2020-08-03 +500d {
     workinghours thu 08:00 - 17:00
     workinghours tue 08:00 - 17:00
     workinghours wed 08:00 - 17:00
@@ -216,7 +216,6 @@ task task2 "General Conditions" {
         responsible res1
         allocate res1
         priority 500
-        duration 3d
         complete 100
         start 2020-08-03
         end 2020-08-05
@@ -229,7 +228,6 @@ task task2 "General Conditions" {
         responsible res2
         allocate res2, res1
         priority 500
-        duration 2d
         complete 100
         start 2020-08-06
         end 2020-08-07
@@ -243,7 +241,6 @@ task task2 "General Conditions" {
         allocate res2, res3
         depends task2.task3
         priority 500
-        duration 2d
         complete 100
         start 2020-08-10
         end 2020-08-11
@@ -257,7 +254,6 @@ task task2 "General Conditions" {
         allocate res1, res2
         depends task2.task4
         priority 500
-        duration 2d
         complete 100
         start 2020-08-12
         end 2020-08-13
@@ -270,7 +266,6 @@ task task2 "General Conditions" {
         responsible res2
         allocate res2, res4
         priority 500
-        duration 4d
         complete 100
         start 2020-08-06
         end 2020-08-11
@@ -284,10 +279,9 @@ task task2 "General Conditions" {
         allocate res2, res4
         depends task2.task6
         priority 500
-        duration 2d
         complete 50
-        start 2020-08-12
-        end 2020-08-25
+        start 2020-08-14
+        end 2020-08-14
         charge 8000.0 onend
     }
 
@@ -295,7 +289,6 @@ task task2 "General Conditions" {
     task task9 "Submit monthly requests for payment" {
         scheduling asap
         priority 500
-        duration 1d
         complete 100
         start 2020-08-06
         end 2020-08-06
@@ -318,7 +311,6 @@ task task10 "Long Lead Procurement" {
         allocate res5
         depends task2.task8
         priority 500
-        duration 2d
         complete 80
         start 2020-08-07
         end 2020-08-20
@@ -332,7 +324,6 @@ task task10 "Long Lead Procurement" {
         allocate res6
         depends task2.task7
         priority 500
-        duration 2d
         start 2020-08-26
         end 2020-09-08
         charge 6800.0 onend
@@ -345,7 +336,6 @@ task task10 "Long Lead Procurement" {
         allocate res7
         depends task2.task7
         priority 500
-        duration 2d
         start 2020-08-26
         end 2020-09-08
         charge 7600.0 onend
@@ -358,7 +348,6 @@ task task10 "Long Lead Procurement" {
         allocate res8
         depends task2.task7
         priority 500
-        duration 2d
         start 2020-08-26
         end 2020-09-08
         charge 6000.0 onend
@@ -371,7 +360,6 @@ task task10 "Long Lead Procurement" {
         allocate res9
         depends task2.task7
         priority 500
-        duration 2d
         start 2020-08-26
         end 2020-09-08
         charge 6000.0 onend
@@ -384,7 +372,6 @@ task task10 "Long Lead Procurement" {
         allocate res10
         depends task2.task7
         priority 500
-        duration 2d
         start 2020-08-26
         end 2020-09-08
         charge 6400.0 onend
@@ -396,7 +383,6 @@ task task10 "Long Lead Procurement" {
         responsible res5
         allocate res5, res11
         priority 500
-        duration 12d
         start 2020-08-21
         end 2020-11-12
         charge 40800.0 onend
@@ -419,7 +405,6 @@ task task18 "Mobilize on Site" {
         allocate res12
         depends task2
         priority 500
-        duration 2d
         complete 100
         start 2020-08-06
         end 2020-08-07
@@ -433,7 +418,6 @@ task task18 "Mobilize on Site" {
         allocate res13
         depends task2
         priority 500
-        duration 2d
         complete 100
         start 2020-08-06
         end 2020-08-07
@@ -446,7 +430,6 @@ task task18 "Mobilize on Site" {
         responsible res14
         allocate res14, res15
         priority 500
-        duration 3d
         complete 100
         start 2020-08-10
         end 2020-08-12
@@ -460,7 +443,6 @@ task task18 "Mobilize on Site" {
         allocate res16
         depends task18.task20
         priority 500
-        duration 3d
         complete 100
         start 2020-08-13
         end 2020-08-17
@@ -474,7 +456,6 @@ task task18 "Mobilize on Site" {
         allocate res17, res15
         depends task18.task21
         priority 500
-        duration 2d
         complete 50
         start 2020-08-18
         end 2020-08-19
@@ -497,7 +478,6 @@ task task24 "Site Grading and Utilities" {
         allocate res17
         depends task18.task20, task18.task22
         priority 500
-        duration 3d
         start 2020-08-20
         end 2020-08-24
         charge 1680.0 onend
@@ -509,7 +489,6 @@ task task24 "Site Grading and Utilities" {
         responsible res17
         allocate res17
         priority 500
-        duration 2d
         start 2020-08-25
         end 2020-08-26
         charge 1120.0 onend
@@ -522,7 +501,6 @@ task task24 "Site Grading and Utilities" {
         allocate res17
         depends task24.task25
         priority 500
-        duration 1d
         start 2020-08-27
         end 2020-09-02
         charge 2800.0 onend
@@ -535,7 +513,6 @@ task task24 "Site Grading and Utilities" {
         allocate res17
         depends task24.task26
         priority 500
-        duration 2d
         start 2020-09-03
         end 2020-09-16
         charge 5600.0 onend
@@ -548,7 +525,6 @@ task task24 "Site Grading and Utilities" {
         allocate res13
         depends task24.task26
         priority 500
-        duration 2d
         start 2020-09-03
         end 2020-09-16
         charge 6000.0 onend
@@ -561,7 +537,6 @@ task task24 "Site Grading and Utilities" {
         allocate res17
         depends task24.task28
         priority 500
-        duration 2d
         start 2020-09-17
         end 2020-09-30
         charge 5600.0 onend
@@ -574,7 +549,6 @@ task task24 "Site Grading and Utilities" {
         allocate res16
         depends task24.task29
         priority 500
-        duration 1d
         start 2020-10-01
         end 2020-10-07
         charge 2800.0 onend
@@ -596,7 +570,6 @@ task task32 "Foundations" {
         allocate res17
         depends task24.task30
         priority 500
-        duration 2d
         start 2020-10-08
         end 2020-10-21
         charge 1400.0 onend
@@ -609,7 +582,6 @@ task task32 "Foundations" {
         allocate res17
         depends task24.task30
         priority 500
-        duration 2d
         start 2020-10-08
         end 2020-10-09
         charge 1120.0 onend
@@ -621,7 +593,6 @@ task task32 "Foundations" {
         responsible res18
         allocate res18
         priority 500
-        duration 4d
         start 2020-10-22
         end 2020-10-27
         charge 2080.0 onend
@@ -634,7 +605,6 @@ task task32 "Foundations" {
         allocate res13, res12
         depends task32.task33
         priority 500
-        duration 4d
         start 2020-10-12
         end 2020-10-15
         charge 9600.0 onend
@@ -647,7 +617,6 @@ task task32 "Foundations" {
         allocate res18
         depends task32.task35
         priority 500
-        duration 4d
         start 2020-10-16
         end 2020-10-21
         charge 2080.0 onend
@@ -660,7 +629,6 @@ task task32 "Foundations" {
         allocate res18
         depends task32.task34
         priority 500
-        duration 4d
         start 2020-10-28
         end 2020-11-02
         charge 2080.0 onend
@@ -673,7 +641,6 @@ task task32 "Foundations" {
         allocate res19
         depends task32.task37
         priority 500
-        duration 5d
         start 2020-11-03
         end 2020-11-09
         charge 2400.0 onend
@@ -686,7 +653,6 @@ task task32 "Foundations" {
         allocate res19
         depends task32.task36
         priority 500
-        duration 1d
         start 2020-10-22
         end 2020-10-22
         charge 480.0 onend
@@ -699,7 +665,6 @@ task task32 "Foundations" {
         allocate res15
         depends task32.task39
         priority 500
-        duration 7d
         start 2020-10-23
         end 2020-11-02
         charge 28.0 onend
@@ -712,7 +677,6 @@ task task32 "Foundations" {
         allocate res15
         depends task32.task38
         priority 500
-        duration 7d
         start 2020-11-10
         end 2020-11-18
         charge 28.0 onend
@@ -725,7 +689,6 @@ task task32 "Foundations" {
         allocate res15
         depends task32.task40
         priority 500
-        duration 1d
         start 2020-11-03
         end 2020-11-03
         charge 4.0 onend
@@ -738,7 +701,6 @@ task task32 "Foundations" {
         allocate res15
         depends task32.task41
         priority 500
-        duration 3d
         start 2020-11-19
         end 2020-11-23
         charge 1200.0 onend
@@ -751,7 +713,6 @@ task task32 "Foundations" {
         allocate res20
         depends task32.task42
         priority 500
-        duration 3d
         start 2020-11-04
         end 2020-11-06
         charge 2280.0 onend
@@ -764,7 +725,6 @@ task task32 "Foundations" {
         allocate res19
         depends task32.task44
         priority 500
-        duration 1d
         start 2020-11-09
         end 2020-11-09
         charge 480.0 onend
@@ -786,7 +746,6 @@ task task47 "Steel Erection" {
         allocate res11
         depends task32.task43, task10.task16
         priority 500
-        duration 2d
         start 2020-11-24
         end 2020-12-07
         charge 6800.0 onend
@@ -798,7 +757,6 @@ task task47 "Steel Erection" {
         responsible res11
         allocate res11
         priority 500
-        duration 2d
         start 2020-12-08
         end 2020-12-21
         charge 6800.0 onend
@@ -810,7 +768,6 @@ task task47 "Steel Erection" {
         responsible res11
         allocate res11
         priority 500
-        duration 2d
         start 2020-12-08
         end 2020-12-21
         charge 3825.0 onend
@@ -823,7 +780,6 @@ task task47 "Steel Erection" {
         allocate res11
         depends task47.task48
         priority 500
-        duration 2d
         start 2020-12-22
         end 2021-01-04
         charge 3825.0 onend
@@ -836,7 +792,6 @@ task task47 "Steel Erection" {
         allocate res11
         depends task47.task50
         priority 500
-        duration 2d
         start 2021-01-05
         end 2021-01-18
         charge 1700.0 onend
@@ -849,7 +804,6 @@ task task47 "Steel Erection" {
         allocate res11
         depends task47.task51
         priority 500
-        duration 1d
         start 2021-01-19
         end 2021-01-25
         charge 136.0 onend
@@ -871,7 +825,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res18, res15
         depends task47.task52, task10.task13, task10.task14, task10.task15, task47
         priority 500
-        duration 5d
         start 2021-01-26
         end 2021-02-01
         charge 3600.0 onend
@@ -884,7 +837,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15, res13, res12
         depends task47
         priority 500
-        duration 5d
         start 2020-12-08
         end 2020-12-14
         charge 2613.6 onend
@@ -896,7 +848,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         responsible res19
         allocate res19
         priority 500
-        duration 4d
         start 2021-02-02
         end 2021-02-05
         charge 1920.0 onend
@@ -909,7 +860,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task56
         priority 500
-        duration 7d
         start 2021-02-08
         end 2021-02-16
         charge 28.0 onend
@@ -922,7 +872,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task57
         priority 500
-        duration 2d
         start 2021-02-17
         end 2021-02-18
         charge 800.0 onend
@@ -935,7 +884,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res18, res15
         depends task54.task57
         priority 500
-        duration 5d
         start 2021-02-17
         end 2021-02-23
         charge 1190.0 onend
@@ -948,7 +896,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15, res13, res12
         depends task54.task57
         priority 500
-        duration 5d
         start 2021-02-17
         end 2021-02-23
         charge 2613.6 onend
@@ -961,7 +908,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res19
         depends task54.task60, task54.task59
         priority 500
-        duration 4d
         start 2021-02-24
         end 2021-03-01
         charge 1920.0 onend
@@ -974,7 +920,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task61
         priority 500
-        duration 7d
         start 2021-03-02
         end 2021-03-10
         charge 28.0 onend
@@ -987,7 +932,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task62
         priority 500
-        duration 2d
         start 2021-03-11
         end 2021-03-12
         charge 800.0 onend
@@ -1000,7 +944,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res18, res15
         depends task54.task62
         priority 500
-        duration 5d
         start 2021-03-11
         end 2021-03-17
         charge 3600.0 onend
@@ -1013,7 +956,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15, res13, res12
         depends task54.task62
         priority 500
-        duration 5d
         start 2021-03-11
         end 2021-03-17
         charge 2613.6 onend
@@ -1026,7 +968,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res19
         depends task54.task65, task54.task64
         priority 500
-        duration 4d
         start 2021-03-18
         end 2021-03-23
         charge 1920.0 onend
@@ -1039,7 +980,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task66
         priority 500
-        duration 7d
         start 2021-03-24
         end 2021-04-01
         charge 28.0 onend
@@ -1052,7 +992,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task67
         priority 500
-        duration 2d
         start 2021-04-02
         end 2021-04-05
         charge 800.0 onend
@@ -1065,7 +1004,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res18
         depends task54.task58
         priority 500
-        duration 4d
         start 2021-02-19
         end 2021-02-24
         charge 2080.0 onend
@@ -1078,7 +1016,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res12
         depends task54.task58
         priority 500
-        duration 1d
         start 2021-02-19
         end 2021-02-25
         charge 3000.0 onend
@@ -1091,7 +1028,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res13
         depends task54.task58
         priority 500
-        duration 1d
         start 2021-02-19
         end 2021-02-25
         charge 3000.0 onend
@@ -1104,7 +1040,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15, res13, res12
         depends task54.task58
         priority 500
-        duration 4d
         start 2021-02-19
         end 2021-02-24
         charge 2090.88 onend
@@ -1117,7 +1052,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res19
         depends task54.task69, task54.task72, task54.task70, task54.task71
         priority 500
-        duration 4d
         start 2021-02-26
         end 2021-03-03
         charge 1920.0 onend
@@ -1130,7 +1064,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task73
         priority 500
-        duration 7d
         start 2021-03-04
         end 2021-03-12
         charge 28.0 onend
@@ -1143,7 +1076,6 @@ task task54 "Form and Pour Concrete - Floors and Roof" {
         allocate res15
         depends task54.task74
         priority 500
-        duration 2d
         start 2021-03-15
         end 2021-03-16
         charge 800.0 onend
@@ -1165,7 +1097,6 @@ task task77 "Carpentry Work" {
         allocate res21
         depends task54.task63, task54.task68
         priority 500
-        duration 3d
         start 2021-04-06
         end 2021-04-26
         charge 8400.0 onend
@@ -1187,7 +1118,6 @@ task task79 "Masonry Work" {
         allocate res13
         depends task54.task75, task10.task13
         priority 500
-        duration 4d
         start 2021-03-17
         end 2021-04-13
         charge 12000.0 onend
@@ -1200,7 +1130,6 @@ task task79 "Masonry Work" {
         allocate res22
         depends task47.task49, task47.task50
         priority 500
-        duration 4d
         start 2021-01-05
         end 2021-02-01
         charge 11200.0 onend
@@ -1213,7 +1142,6 @@ task task79 "Masonry Work" {
         allocate res22
         depends task77
         priority 500
-        duration 5d
         start 2021-04-27
         end 2021-05-31
         charge 14000.0 onend
@@ -1226,7 +1154,6 @@ task task79 "Masonry Work" {
         allocate res23
         depends task79.task81
         priority 500
-        duration 2d
         start 2021-06-01
         end 2021-06-02
         charge 1120.0 onend
@@ -1238,7 +1165,6 @@ task task79 "Masonry Work" {
         responsible res24
         allocate res24
         priority 500
-        duration 2d
         start 2021-04-14
         end 2021-04-27
         charge 5600.0 onend
@@ -1251,7 +1177,6 @@ task task79 "Masonry Work" {
         allocate res22
         depends task79.task81
         priority 500
-        duration 1d
         start 2021-06-01
         end 2021-06-07
         charge 700.0 onend
@@ -1264,7 +1189,6 @@ task task79 "Masonry Work" {
         allocate res24
         depends task79.task83
         priority 500
-        duration 1d
         start 2021-04-28
         end 2021-05-04
         charge 700.0 onend
@@ -1286,7 +1210,6 @@ task task87 "Roofing" {
         allocate res23
         depends task79.task81
         priority 500
-        duration 4d
         start 2021-06-01
         end 2021-06-04
         charge 2240.0 onend
@@ -1298,7 +1221,6 @@ task task87 "Roofing" {
         responsible res23
         allocate res23
         priority 500
-        duration 2d
         start 2021-06-07
         end 2021-06-08
         charge 1120.0 onend
@@ -1311,7 +1233,6 @@ task task87 "Roofing" {
         allocate res23
         depends task87.task89
         priority 500
-        duration 5d
         start 2021-06-16
         end 2021-06-22
         charge 2800.0 onend
@@ -1324,7 +1245,6 @@ task task87 "Roofing" {
         allocate res23
         depends task87.task89
         priority 500
-        duration 5d
         start 2021-06-23
         end 2021-06-29
         charge 2800.0 onend
@@ -1337,7 +1257,6 @@ task task87 "Roofing" {
         allocate res25
         depends task87.task90
         priority 500
-        duration 2d
         start 2021-06-30
         end 2021-07-13
         charge 5600.0 onend
@@ -1359,7 +1278,6 @@ task task93 "Window wall and store front closures" {
         allocate res26
         depends task79.task81
         priority 500
-        duration 5d
         start 2021-06-01
         end 2021-07-05
         charge 14000.0 onend
@@ -1371,7 +1289,6 @@ task task93 "Window wall and store front closures" {
         responsible res21
         allocate res21
         priority 500
-        duration 5d
         start 2021-07-06
         end 2021-08-09
         charge 14000.0 onend
@@ -1384,7 +1301,6 @@ task task93 "Window wall and store front closures" {
         allocate res27
         depends task93.task94
         priority 500
-        duration 2d
         start 2021-08-10
         end 2021-08-23
         charge 5600.0 onend
@@ -1397,7 +1313,6 @@ task task93 "Window wall and store front closures" {
         allocate res26
         depends task79.task81
         priority 500
-        duration 3d
         start 2021-06-01
         end 2021-06-21
         charge 8400.0 onend
@@ -1419,7 +1334,6 @@ task task98 "Building Finishes" {
         allocate res27
         depends task93.task96, task93.task94
         priority 500
-        duration 3d
         start 2021-08-10
         end 2021-08-30
         charge 8400.0 onend
@@ -1431,7 +1345,6 @@ task task98 "Building Finishes" {
         responsible res28
         allocate res28
         priority 500
-        duration 4d
         start 2021-08-31
         end 2021-09-27
         charge 11200.0 onend
@@ -1444,7 +1357,6 @@ task task98 "Building Finishes" {
         allocate res12
         depends task93
         priority 500
-        duration 3d
         start 2021-07-06
         end 2021-07-26
         charge 9000.0 onend
@@ -1457,7 +1369,6 @@ task task98 "Building Finishes" {
         allocate res25
         depends task93.task94, task98.task100
         priority 500
-        duration 3d
         start 2021-08-10
         end 2021-08-30
         charge 8400.0 onend
@@ -1470,7 +1381,6 @@ task task98 "Building Finishes" {
         allocate res21
         depends task93.task94, task98.task101
         priority 500
-        duration 2d
         start 2021-08-31
         end 2021-09-13
         charge 5600.0 onend
@@ -1483,7 +1393,6 @@ task task98 "Building Finishes" {
         allocate res21
         depends task98.task102
         priority 500
-        duration 2d
         start 2021-09-14
         end 2021-09-27
         charge 5600.0 onend
@@ -1496,7 +1405,6 @@ task task98 "Building Finishes" {
         allocate res28
         depends task98.task102
         priority 500
-        duration 2d
         start 2021-09-14
         end 2021-09-27
         charge 5600.0 onend
@@ -1509,7 +1417,6 @@ task task98 "Building Finishes" {
         allocate res29
         depends task98.task99
         priority 500
-        duration 4d
         start 2021-09-28
         end 2021-10-25
         charge 11200.0 onend
@@ -1522,7 +1429,6 @@ task task98 "Building Finishes" {
         allocate res27
         depends task98.task99
         priority 500
-        duration 3d
         start 2021-09-28
         end 2021-10-18
         charge 8400.0 onend
@@ -1535,7 +1441,6 @@ task task98 "Building Finishes" {
         allocate res30
         depends task98.task99
         priority 500
-        duration 2d
         start 2021-09-28
         end 2021-10-11
         charge 5600.0 onend
@@ -1548,7 +1453,6 @@ task task98 "Building Finishes" {
         allocate res31
         depends task98.task107
         priority 500
-        duration 2d
         start 2021-10-12
         end 2021-10-25
         charge 5600.0 onend
@@ -1570,7 +1474,6 @@ task task110 "Elevators" {
         allocate res20
         depends task79.task80, task32.task45, task10.task12
         priority 500
-        duration 4d
         start 2021-02-02
         end 2021-03-01
         charge 15200.0 onend
@@ -1582,7 +1485,6 @@ task task110 "Elevators" {
         responsible res20
         allocate res20
         priority 500
-        duration 2d
         start 2021-03-02
         end 2021-03-15
         charge 7600.0 onend
@@ -1595,7 +1497,6 @@ task task110 "Elevators" {
         allocate res20
         depends task110.task111
         priority 500
-        duration 2d
         start 2021-03-16
         end 2021-03-29
         charge 7600.0 onend
@@ -1617,7 +1518,6 @@ task task114 "Plumbing" {
         allocate res13
         depends task93
         priority 500
-        duration 4d
         start 2021-07-06
         end 2021-08-02
         charge 12000.0 onend
@@ -1630,7 +1530,6 @@ task task114 "Plumbing" {
         allocate res13
         depends task79.task84
         priority 500
-        duration 2d
         start 2021-06-08
         end 2021-06-21
         charge 6000.0 onend
@@ -1642,7 +1541,6 @@ task task114 "Plumbing" {
         responsible res13
         allocate res13
         priority 500
-        duration 3d
         start 2021-08-03
         end 2021-08-23
         charge 9000.0 onend
@@ -1655,7 +1553,6 @@ task task114 "Plumbing" {
         allocate res13
         depends task98.task99, task114.task115, task114.task116
         priority 500
-        duration 2d
         start 2021-09-28
         end 2021-10-11
         charge 6000.0 onend
@@ -1677,7 +1574,6 @@ task task119 "Electrical" {
         allocate res12
         depends task54.task75, task10.task14
         priority 500
-        duration 4d
         start 2021-03-17
         end 2021-04-13
         charge 12000.0 onend
@@ -1690,7 +1586,6 @@ task task119 "Electrical" {
         allocate res12
         depends task93
         priority 500
-        duration 4d
         start 2021-07-06
         end 2021-08-02
         charge 12000.0 onend
@@ -1702,7 +1597,6 @@ task task119 "Electrical" {
         responsible res12
         allocate res12
         priority 500
-        duration 3d
         start 2021-07-27
         end 2021-08-16
         charge 9000.0 onend
@@ -1715,7 +1609,6 @@ task task119 "Electrical" {
         allocate res12
         depends task119.task121, task119.task120
         priority 500
-        duration 3d
         start 2021-08-17
         end 2021-09-06
         charge 9000.0 onend
@@ -1728,7 +1621,6 @@ task task119 "Electrical" {
         allocate res12
         depends task119.task121, task87.task91
         priority 500
-        duration 2d
         start 2021-08-17
         end 2021-08-18
         charge 1200.0 onend
@@ -1741,7 +1633,6 @@ task task119 "Electrical" {
         allocate res12
         depends task98.task102, task119.task122
         priority 500
-        duration 2d
         start 2021-09-14
         end 2021-09-27
         charge 6000.0 onend
@@ -1763,7 +1654,6 @@ task task126 "Heating and Ventilating - AC" {
         allocate res25
         depends task79.task80, task10.task15
         priority 500
-        duration 2d
         start 2021-02-02
         end 2021-02-15
         charge 5600.0 onend
@@ -1776,7 +1666,6 @@ task task126 "Heating and Ventilating - AC" {
         allocate res25
         depends task54.task75
         priority 500
-        duration 4d
         start 2021-03-17
         end 2021-04-13
         charge 11200.0 onend
@@ -1789,7 +1678,6 @@ task task126 "Heating and Ventilating - AC" {
         allocate res25
         depends task93
         priority 500
-        duration 2d
         start 2021-07-06
         end 2021-07-19
         charge 5600.0 onend
@@ -1801,7 +1689,6 @@ task task126 "Heating and Ventilating - AC" {
         responsible res25
         allocate res25
         priority 500
-        duration 3d
         start 2021-07-06
         end 2021-07-26
         charge 8400.0 onend
@@ -1814,7 +1701,6 @@ task task126 "Heating and Ventilating - AC" {
         allocate res25
         depends task98.task102, task126.task129, task119.task123
         priority 500
-        duration 4d
         start 2021-09-14
         end 2021-10-11
         charge 11200.0 onend
@@ -1836,7 +1722,6 @@ task task132 "Final Clean-up and Occupancy" {
         allocate res24
         depends task93.task94
         priority 500
-        duration 1d
         start 2021-08-10
         end 2021-08-16
         charge 2800.0 onend
@@ -1848,7 +1733,6 @@ task task132 "Final Clean-up and Occupancy" {
         responsible res24
         allocate res24
         priority 500
-        duration 4d
         start 2021-08-17
         end 2021-08-20
         charge 560.0 onend
@@ -1860,7 +1744,6 @@ task task132 "Final Clean-up and Occupancy" {
         responsible res15
         allocate res15
         priority 500
-        duration 4d
         start 2021-10-26
         end 2021-10-29
         charge 1600.0 onend
@@ -1873,7 +1756,6 @@ task task132 "Final Clean-up and Occupancy" {
         allocate res14
         depends task132.task134
         priority 500
-        duration 1d
         start 2021-11-01
         end 2021-11-01
         charge 880.0 onend
@@ -1895,7 +1777,6 @@ task task137 "Complete Final Inspections" {
         allocate res20
         depends task132.task134, task110.task112
         priority 500
-        duration 3d
         start 2021-11-01
         end 2021-11-03
         charge 2280.0 onend
@@ -1907,7 +1788,6 @@ task task137 "Complete Final Inspections" {
         responsible res14
         allocate res14, res2
         priority 500
-        duration 1d
         start 2021-11-04
         end 2021-11-04
         charge 920.0 onend
@@ -1920,7 +1800,6 @@ task task137 "Complete Final Inspections" {
         allocate res2, res14
         depends task137.task138
         priority 500
-        duration 1d
         start 2021-11-05
         end 2021-11-05
         charge 920.0 onend
@@ -1933,7 +1812,6 @@ task task137 "Complete Final Inspections" {
         allocate res14, res2
         depends task137.task139
         priority 500
-        duration 1d
         start 2021-11-08
         end 2021-11-08
         charge 920.0 onend
@@ -1948,7 +1826,6 @@ task task142 "Complete punch list items from all inspections" {
     allocate res14, res15, res13, res12, res25, res21, res29, res31, res28
     depends task137.task140
     priority 500
-    duration 2d
     start 2021-11-09
     end 2021-11-22
     charge 5749.92 onend
@@ -1961,7 +1838,6 @@ task task143 "Obtain certificate of occupancy" {
     allocate res2
     depends task137.task141
     priority 500
-    duration 2d
     start 2021-11-23
     end 2021-11-24
     charge 1920.0 onend
@@ -1974,7 +1850,6 @@ task task144 "Issue final completion documents including warranties" {
     allocate res2
     depends task137.task141
     priority 500
-    duration 1d
     start 2021-11-23
     end 2021-11-23
     charge 960.0 onend
@@ -1987,7 +1862,6 @@ task task145 "Issue final request for payment" {
     allocate res2, res32, res1
     depends task142, task143
     priority 500
-    duration 1d
     start 2021-11-25
     end 2021-11-25
     charge 810.22 onend

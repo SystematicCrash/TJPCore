@@ -1,4 +1,6 @@
+import asyncio
 from elasticsearch import AsyncElasticsearch, helpers
+from elasticsearch.helpers import async_scan
 from helpers.config_helper import get_config
 from exceptions.custom_exceptions import ElasticSearchQueryError
 
@@ -107,30 +109,22 @@ async def check_index_exists(es: AsyncElasticsearch, index_name: str):
         raise ElasticSearchQueryError(message, 500)
 
 
-# Fetching data by search a term
-async def term_query(es: AsyncElasticsearch,index_name: str, field: str, value: str, sortby: str = None, order: str = "asc",):
-    scroll_time = '2m'
-    page_size = 500
-    try:
-        query = {"_source": {"excludes": ["*vector"]}, "query": {"match": {field: value}}}
-        if sortby:
-            query["sort"] = [{sortby: {"order": order}}]
-        response = await es.search(
-            index=index_name,
-            body=query,
-            scroll=scroll_time,
-            size=page_size
-        )
-        scroll_id = response["_scroll_id"]
-        documents = response["hits"]["hits"]
-        while True:
-            response = await es.scroll(scroll_id=scroll_id, scroll=scroll_time)
-            hits = response["hits"]["hits"]
-            if not hits:
-                break
-            documents.extend(hits)
-        await es.clear_scroll(scroll_id=scroll_id)
-        return {index_name: documents} or None
-    except ElasticSearchQueryError as e:
-        message = f"\nFailed to perform query on index with name = '({index_name}'.\nDetails: {e}"
-        raise ElasticSearchQueryError(message, 500)
+async def _fetch_slice(es, index_name, field, value, slice_id, max_slices, page_size=500):
+    q = {
+        "_source": {"excludes": ["*vector"]},
+        "query": {"match": {field: value}},
+        "slice": {"id": slice_id, "max": max_slices}
+    }
+    docs = []
+    async for hit in async_scan(es, query=q, index=index_name, scroll="2m", size=page_size):
+        docs.append(hit)
+    return docs
+
+
+async def term_query_sliced(es, index_name, field, value, num_slices=4):
+    tasks = [_fetch_slice(es, index_name, field, value, i, num_slices) for i in range(num_slices)]
+    results = await asyncio.gather(*tasks)
+    combined = []
+    for r in results:
+        combined.extend(r)
+    return {index_name: combined}

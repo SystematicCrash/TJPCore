@@ -44,23 +44,23 @@ task {{ task.id }} "{{ task.name }}" {
     priority {{task.priority}}
     {% endif %}
 
-    {%- if task.effort and not (task.duration or task.milestone) and task.allocate %}
+    {%- if task.effort %}
     effort {{task.effort}}d
     {% endif %}
 
-    {%- if task.effortdone and not (task.duration or task.effort or task.milestone) %}
+    {%- if task.effortdone %}
     effortdone {{task.effortdone}}d
     {% endif %}
 
-    {%- if task.duration and not task.milestone %}
+    {%- if task.duration %}
     duration {{task.duration}}d
     {% endif %}
 
-    {%- if task.effortleft and not (task.duration or task.effort) %}
+    {%- if task.effortleft %}
     effortleft {{task.effortleft}}d
     {% endif %}
 
-    {%- if task.length and not (task.duration or task.effort or task.milestone) %}
+    {%- if task.length %}
     length {{task.length}}d
     {% endif %}
 

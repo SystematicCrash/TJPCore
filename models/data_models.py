@@ -22,7 +22,7 @@ class Project:
     duration_unit: str = ''
     weekstartsmonday: bool = False
     weekstartssunday: bool = False
-    workinghours: dict = field(default_factory=dict)
+    workinghours: dict =  field(default_factory=dict)
     json_document: dict = field(default_factory=dict)
 
 
@@ -106,15 +106,15 @@ class Resource:
     leaveallowance: float = 0
     rate: Decimal = Decimal("0")
     scenario_specific_obj: "Resource" = None
-    chargeset: list[str] = field(default_factory=list[str])
-    shifts: list[str] = field(default_factory=list[str])
-    managers: list[str] = field(default_factory=list[str])
-    flags: list[str] = field(default_factory=list[str])
-    leaves: list[dict] = field(default_factory=list[dict])
-    limits: dict = field(default_factory=dict) 
+    chargeset: list[str] =  field(default_factory=list[str])
+    shifts: list[str] =     field(default_factory=list[str])
+    managers: list[str] =   field(default_factory=list[str])
+    flags: list[str] =      field(default_factory=list[str])
+    leaves: list[dict] =   field(default_factory=list[dict])
+    limits: dict =               field(default_factory=dict) 
     vacation: list[dict] = field(default_factory=list[dict])
-    workinghours: dict = field(default_factory=dict)
-    json_document: dict = field(default_factory=dict)
+    workinghours: dict =         field(default_factory=dict)
+    json_document: dict =        field(default_factory=dict)
 
     def __post_init__(self):
         if not self.json_document:
@@ -164,9 +164,9 @@ class Shift:
     replace: bool = False
     timezone: str = ''
     vacation: list[dict] = field(default_factory=list[dict])
-    leaves: list[dict] = field(default_factory=list[dict])
-    workinghours: dict = field(default_factory=dict)
-    json_document: dict = field(default_factory=dict)
+    leaves: list[dict] =   field(default_factory=list[dict])
+    workinghours: dict =         field(default_factory=dict)
+    json_document: dict =        field(default_factory=dict)
 
     def __post_init__(self):
         if not self.json_document:
@@ -189,9 +189,9 @@ class Account:
     name: str = ''
     projectid: str = ''
     aggregate: str = ''
-    flags: list[str] = field(default_factory=list[str])
+    flags: list[str] =     field(default_factory=list[str])
     credits: list[dict] = field(default_factory=list[dict])
-    json_document: dict = field(default_factory=dict)
+    json_document: dict =       field(default_factory=dict)
 
     def __post_init__(self):
         if not self.json_document:
