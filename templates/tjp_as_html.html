@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Viewer - {{ filename }}</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --text-color: #000;
+            --line-number-color: #888;
+            --container-bg: #fff;
+            --container-border: #ccc;
+        }
+
+        body.dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #f5f5f5;
+            --line-number-color: #999;
+            --container-bg: #2c2c2c;
+            --container-border: #555;
+        }
+
+        body {
+            font-family: monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .line-number {
+            display: inline-block;
+            width: 50px;
+            text-align: right;
+            margin-right: 10px;
+            color: var(--line-number-color);
+        }
+
+        .line-content {
+            display: inline-block;
+            white-space: pre-wrap;
+        }
+
+        .line {
+            display: flex;
+        }
+
+        .file-container {
+            background-color: var(--container-bg);
+            padding: 10px;
+            border-radius: 6px;
+            max-height: 80vh;
+            overflow-y: scroll;
+            border: 1px solid var(--container-border);
+        }
+
+        .toggle-btn {
+            padding: 5px 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" onclick="toggleMode()">Dark/Light Mode</button>
+    <h2>File: {{ filename }}</h2>
+    <div class="file-container">
+        {% for line in lines %}
+        <div class="line">
+            <span class="line-number">{{ loop.index }}</span>
+            <span class="line-content">{{ line | e }}</span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>

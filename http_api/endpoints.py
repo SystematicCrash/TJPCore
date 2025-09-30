@@ -7,6 +7,8 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
 from helpers.io_helper import json_stream
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
 app = FastAPI()
 
@@ -63,3 +65,17 @@ async def scenario_analyze(project_id: str, scenario: Scenario, request: Request
     return StreamingResponse(content=json_stream(content), status_code=200, media_type="application/json")
 
 
+
+
+# Presenting tjp file content as html content
+@app.get("/show-tjp")
+async def show_file_jinja(request: Request):
+    templates = Jinja2Templates(directory="templates")
+    file_path = Path(get_config('paths.tjp_output'))
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Tjp file not found!")
+    
+    with file_path.open("r", encoding="utf-8") as f:
+        lines = f.readlines()
+    
+    return templates.TemplateResponse("tjp_as_html.html", {"request": request, "lines": lines, "filename": file_path.name})
