@@ -20,7 +20,7 @@ def is_athenticated(token: str) -> bool:
 
 # project analyzing based on plan scenario
 @app.post('/tjp-core/run/{project_id}')
-async def run(request: Request, project_id: str):
+async def generate_reports(request: Request, project_id: str):
 
     if not is_athenticated(request.headers.get("authorization")):
         return JSONResponse(content={'status' : 'fail', 'message' : 'Access Denied!'}, status_code=403)

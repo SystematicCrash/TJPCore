@@ -3,11 +3,14 @@ FROM python:3.13-slim
 WORKDIR /app
 
 COPY requirements.txt /app/
+
 RUN apt update -y && \
-    apt install -y python3 python3-pip python3-venv ruby-full && \
-    rm -rf /var/lib/apt/lists/*
-RUN pip install --break-system-packages -r requirements.txt
-RUN gem install taskjuggler
+    apt install -y ruby-full python3-venv && \
+    rm -rf /var/lib/apt/lists/* && \
+    pip install --break-system-packages -r requirements.txt && \
+    gem install taskjuggler
+
+COPY . /app
 
 EXPOSE 8080
 

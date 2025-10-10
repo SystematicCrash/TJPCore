@@ -10,6 +10,7 @@ from pipline.persister import indexing_reports
 from pipline.normalizer import perpare_reports
 from models.api_models import Scenario
 
+
 # Running taskjuggler project manager
 async def _run_tj3(connection: AsyncElasticsearch, output_path: str) -> None:
     result = subprocess.run(
