@@ -1,9 +1,9 @@
 {
-  "api_key": "okmPqlfz92ahDmGYqfgHcfTMox3LTgD4YsSaNgU6uPpoW5QH4OpV0c8rpjZ0PbHG",
+  "api_key": "013id-2kopoekwpeKLJSDJKELkjadf3094i2idjdsapd",
   "elasticsearch": {
-    "host": "http://87.236.211.68:9200",
-    "username": "elastic",
-    "password": "y3oTc8gm6e3Q1VAeC4ro",
+    "host": "http://127.0.0.1:9200",
+    "username": "username",
+    "password": "password",
     "verify_certs": false
   },
   "data_indexes": {
