@@ -1,4 +1,4 @@
-FROM focker.ir/ubuntu:latest
+FROM python:3.13-slim
 
 WORKDIR /app
 
