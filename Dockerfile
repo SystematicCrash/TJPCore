@@ -14,4 +14,4 @@ COPY . /app
 
 EXPOSE 8080
 
-CMD ["uvicorn", "main:app", "--reload", "--port", "8080", "--host", "0.0.0.0"]
+CMD ["uvicorn", "http_api.endpoints:app", "--reload", "--port", "8080", "--host", "0.0.0.0"]
