@@ -40,7 +40,7 @@ async def main(project_id: str, scenario: Scenario = None) -> dict|None:
     if scenario: # No need to indexing data in scenario mode
         await connection.close()
         return reports_data
-    await indexing_reports(connection, reports_data)
+    # await indexing_reports(connection, reports_data)
     await connection.close()
 
 

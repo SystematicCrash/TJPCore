@@ -1824,7 +1824,6 @@ task task142 "Complete punch list items from all inspections" {
     responsible res14
     chargeset taskCost
     allocate res14, res15, res13, res12, res25, res21, res29, res31, res28
-    depends task137.task140
     priority 500
     start 2021-11-09
     end 2021-11-22
@@ -1836,7 +1835,6 @@ task task143 "Obtain certificate of occupancy" {
     responsible res2
     chargeset taskCost
     allocate res2
-    depends task137.task141
     priority 500
     start 2021-11-23
     end 2021-11-24
@@ -1848,7 +1846,6 @@ task task144 "Issue final completion documents including warranties" {
     responsible res2
     chargeset taskCost
     allocate res2
-    depends task137.task141
     priority 500
     start 2021-11-23
     end 2021-11-23
@@ -1874,7 +1871,7 @@ task task145 "Issue final request for payment" {
 # ------------Reports-------------
 taskreport taskReports "tasksReport" {
     headline "Tasks Table"
-    formats csv
+    formats html
     columns
     bsi{title "wbs"}, 
     id{title "id"}, 
@@ -1889,12 +1886,14 @@ taskreport taskReports "tasksReport" {
     responsible{title "responsible"},
     resources{title "resources"},
     status{title "status"},
+    inputs{title "prerequisted_milestones"},
     activetasks{title "active_sub_tasks"},
     opentasks{title "open_sub_tasks"},
     closedtasks{title "closed_sub_tasks"},
     complete{title "complete"},
     followers{title "followers"},
     precursors{title "depends_on"},
+    criticalness{title "cricitalness"},
     pathcriticalness{title "path_criticalness"},
     gauge{title "schedule_gauge"},
     cost { title "cost"}
@@ -1906,7 +1905,7 @@ taskreport taskReports "tasksReport" {
 
 resourcereport resourceReports "resourceReport" {
     headline "Resources Table"
-    formats csv
+    formats html
     columns
     bsi{title "wbs"},
     id{title "id"},
@@ -1917,7 +1916,7 @@ resourcereport resourceReports "resourceReport" {
     duties{title "assigned_tasks"},
     freetime{title "unallocated_work_time"},
     freework{title "unallocated_work_capacity"},
-    criticalness,
+    criticalness{title "criticalness"},
     fte{title "full_time_equivalent"},
     managers{title "managers"}
 

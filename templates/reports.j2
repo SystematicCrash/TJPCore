@@ -1,7 +1,7 @@
 {% macro render_reports(report_paths, scenario) %}
 taskreport taskReports "{{report_paths.files.task}}" {
     headline "Tasks Table"
-    formats csv
+    formats html
     columns
     bsi{title "wbs"}, 
     id{title "id"}, 
@@ -16,12 +16,14 @@ taskreport taskReports "{{report_paths.files.task}}" {
     responsible{title "responsible"},
     resources{title "resources"},
     status{title "status"},
+    inputs{title "prerequisted_milestones"},
     activetasks{title "active_sub_tasks"},
     opentasks{title "open_sub_tasks"},
     closedtasks{title "closed_sub_tasks"},
     complete{title "complete"},
     followers{title "followers"},
     precursors{title "depends_on"},
+    criticalness{title "cricitalness"},
     pathcriticalness{title "path_criticalness"},
     gauge{title "schedule_gauge"},
     cost { title "cost"}
@@ -36,7 +38,7 @@ taskreport taskReports "{{report_paths.files.task}}" {
 
 resourcereport resourceReports "{{report_paths.files.resource}}" {
     headline "Resources Table"
-    formats csv
+    formats html
     columns
     bsi{title "wbs"},
     id{title "id"},
@@ -47,7 +49,7 @@ resourcereport resourceReports "{{report_paths.files.resource}}" {
     duties{title "assigned_tasks"},
     freetime{title "unallocated_work_time"},
     freework{title "unallocated_work_capacity"},
-    criticalness,
+    criticalness{title "criticalness"},
     fte{title "full_time_equivalent"},
     managers{title "managers"}
 

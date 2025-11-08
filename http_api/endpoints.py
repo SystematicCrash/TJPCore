@@ -19,7 +19,7 @@ def is_athenticated(token: str) -> bool:
 
 
 # project analyzing based on plan scenario
-@app.post('/tjp-core/run/{project_id}')
+@app.post('/run/{project_id}')
 async def generate_reports(request: Request, project_id: str):
 
     if not is_athenticated(request.headers.get("authorization")):
@@ -43,7 +43,7 @@ async def generate_reports(request: Request, project_id: str):
 
 
 # project analyzing based on custom scenario
-@app.post("/tjp-core/scenario/{project_id}")
+@app.post("/scenario/{project_id}")
 async def scenario_analyze(project_id: str, scenario: Scenario, request: Request):
 
     if not is_athenticated(request.headers.get("authorization")):

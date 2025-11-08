@@ -1,7 +1,7 @@
 .idea
 config.json
 .venv
-__pycache__/
+/__pycache__/
 app.log
 node_modules
 package-lock.json
