@@ -79,12 +79,16 @@ def _effect_scenario_changes(scenario: Scenario, tasks: dict[str, Task]):
     for new_task in scenario.tasks_to_add:
         if not new_task.id:
             raise DataValidationError(message="Scenario task defined without id!", status_code=422)
+        if tasks.get(new_task.id):
+            raise DataValidationError(message=f"Task with id = `{new_task.id}` already exist and cannot be added!", status_code=422)
         tasks[new_task.id] = new_task
 
     for updated_task in scenario.tasks_to_update:
         task = tasks.get(updated_task.id)
         if task:
             task.scenario_specific_obj = updated_task
+        else:
+            raise DataValidationError(message=f"Task with id = `{updated_task.id}` not found to update!", status_code=422)
 
     for removed_task in scenario.tasks_to_remove:
         tasks.pop(removed_task, None)

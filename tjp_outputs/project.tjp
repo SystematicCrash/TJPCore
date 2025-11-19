@@ -8,6 +8,9 @@ project proj2025 "Commercial Construction" 2020-08-03 +500d {
     outputdir "reports"
 
 # ------------Scenarios-------------
+scenario plan "planned" {
+    scenario Test_Scenario "Just a fucking test scenario"
+}
 # ------------END-------------
 }
 
@@ -37,19 +40,12 @@ account rev "Primary revenue account"
 
 
 # ------------Resources-------------
-resource res1 "G.C. General Management" {
-    rate 93.0
-    chargeset resCost
-}
-
-resource res2 "G.C. Project Management" {
-    rate 69.0
-    chargeset resCost
-}
-
 resource res3 "G.C. Scheduler" {
     rate 113.0
     chargeset resCost
+    Test_Scenario:rate 666
+
+
 }
 
 resource res4 "G.C. Procurement" {
@@ -195,6 +191,10 @@ resource res31 "Paving Contractor" {
 resource res32 "G.C. Accounting" {
     rate 51.0
     chargeset resCost
+}
+
+resource res37 "Special Resource" {
+    rate 666
 }
 
 # ------------END-------------
@@ -1841,17 +1841,6 @@ task task143 "Obtain certificate of occupancy" {
     charge 1920.0 onend
 }
 
-task task144 "Issue final completion documents including warranties" {
-    scheduling asap
-    responsible res2
-    chargeset taskCost
-    allocate res2
-    priority 500
-    start 2021-11-23
-    end 2021-11-23
-    charge 960.0 onend
-}
-
 task task145 "Issue final request for payment" {
     scheduling asap
     responsible res2
@@ -1862,6 +1851,15 @@ task task145 "Issue final request for payment" {
     start 2021-11-25
     end 2021-11-25
     charge 810.22 onend
+    Test_Scenario:responsible res3
+
+}
+
+task task100003 "mamad" {
+    scheduling asap
+    responsible res2
+    duration 10.0d
+    charge 123123123 onend
 }
 
 # ------------END-------------
@@ -1901,6 +1899,7 @@ taskreport taskReports "tasksReport" {
     balance cost rev
     sorttasks tree
     selfcontained yes
+    scenarios Test_Scenario
 }
 
 resourcereport resourceReports "resourceReport" {
@@ -1923,6 +1922,7 @@ resourcereport resourceReports "resourceReport" {
     balance cost rev
     sortresources tree
     selfcontained yes
+    scenarios Test_Scenario
 }
 
 # ------------END-------------
