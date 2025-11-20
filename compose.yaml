@@ -1,0 +1,8 @@
+services:
+  tjpm:
+    build: .
+    container_name: tjpm
+    ports:
+     - "7557:8080"
+    volumes:
+     - .:/app:Z
