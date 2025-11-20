@@ -25,7 +25,7 @@ async def _run_tj3(connection: AsyncElasticsearch, output_path: str) -> None:
 
 # Processing 
 async def main(project_id: str, scenario: Scenario = None) -> dict|None:
-    connection = make_connection()
+    connection = await make_connection()
 
     data_map = await gather_project_data(connection, project_id)
 

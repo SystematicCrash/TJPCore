@@ -6,16 +6,21 @@ from exceptions.custom_exceptions import ElasticSearchQueryError, ElasticSearchC
 
 
 # Making connection to DB 
-def make_connection():
-    try:
-        conf = get_config("elasticsearch")
-        return AsyncElasticsearch(
-            conf["host"],
-            basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
-            verify_certs=conf.get("verify_certs", True)
-        )
-    except Exception:
-        raise ElasticSearchConnectionError(message="Failed to connect to Elasticsearch database!", status_code=500)
+async def make_connection():
+    conf = get_config("elasticsearch")
+    
+    connection = AsyncElasticsearch(
+        conf["host"],
+        request_timeout=10,
+        basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
+        verify_certs=conf.get("verify_certs", True)
+    )
+        
+    if not await connection.ping():
+        raise ElasticSearchConnectionError(
+            message="Failed to connect to Elasticsearch database!", status_code=500)
+        
+    return connection
         
         
 

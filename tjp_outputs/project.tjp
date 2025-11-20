@@ -8,9 +8,6 @@ project proj2025 "Commercial Construction" 2020-08-03 +500d {
     outputdir "reports"
 
 # ------------Scenarios-------------
-scenario plan "planned" {
-    scenario Test_Scenario "Just a fucking test scenario"
-}
 # ------------END-------------
 }
 
@@ -1867,13 +1864,6 @@ task task145 "Issue final request for payment" {
     charge 810.22 onend
 }
 
-task task100003 "" {
-    scheduling asap
-    responsible res2
-    duration 10.0d
-    charge 123123123 onend
-}
-
 # ------------END-------------
 
 
@@ -1911,7 +1901,6 @@ taskreport taskReports "tasksReport" {
     balance cost rev
     sorttasks tree
     selfcontained yes
-    scenarios Test_Scenario
 }
 
 resourcereport resourceReports "resourceReport" {
@@ -1934,7 +1923,6 @@ resourcereport resourceReports "resourceReport" {
     balance cost rev
     sortresources tree
     selfcontained yes
-    scenarios Test_Scenario
 }
 
 # ------------END-------------
