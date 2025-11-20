@@ -2,17 +2,22 @@ import asyncio
 from elasticsearch import AsyncElasticsearch, helpers
 from elasticsearch.helpers import async_scan
 from helpers.config_helper import get_config
-from exceptions.custom_exceptions import ElasticSearchQueryError
+from exceptions.custom_exceptions import ElasticSearchQueryError, ElasticSearchConnectionError
 
 
 # Making connection to DB 
 def make_connection():
-    conf = get_config("elasticsearch")
-    return AsyncElasticsearch(
-        conf["host"],
-        basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
-        verify_certs=conf.get("verify_certs", True)
-    )
+    try:
+        conf = get_config("elasticsearch")
+        return AsyncElasticsearch(
+            conf["host"],
+            basic_auth=(conf.get("username"), conf.get("password")) if "username" in conf else None,
+            verify_certs=conf.get("verify_certs", True)
+        )
+    except Exception:
+        raise ElasticSearchConnectionError(message="Failed to connect to Elasticsearch database!", status_code=500)
+        
+        
 
 
 # Writing data to an index 
