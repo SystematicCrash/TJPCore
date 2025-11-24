@@ -67,10 +67,19 @@ def _convert_dependencies_to_absolute(tasks: dict[str, Task], task: Task) -> Non
                     depends_on.absolute_id = '.'.join(_create_abs_id(depends_on, []))
                 task.depends[i] = depends_on.absolute_id
 
-    
-# Sorting a dict of tasks by their keys 
+
+# Sorting tasks with IDs
 def _sort_tasks_by_id(tasks: dict[str, Task]) -> dict[str, Task]:
-    return dict(sorted(tasks.items(), key=lambda item: int(re.search(r'\d+', item[0]).group())))
+    
+    def sort_key(item):
+        key = item[0]
+        match = re.search(r'\d+', key)
+        if match:
+            return (0, int(match.group()))  
+        else:
+            return (1, key)
+    
+    return dict(sorted(tasks.items(), key=sort_key))
 
 
 # Effecting scenario changes in tasks

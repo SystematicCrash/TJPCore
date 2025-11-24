@@ -1,10 +1,5 @@
 # ----------------Project Header-------------
-project proj2025 "Commercial Construction" 2020-08-03 +500d {
-    workinghours thu 08:00 - 17:00
-    workinghours tue 08:00 - 17:00
-    workinghours wed 08:00 - 17:00
-    workinghours fri 08:00 - 17:00
-    workinghours mon 08:00 - 17:00
+project team_leveling_final "سطح‌بندی تیمی با تقویم‌های فردی" 2025-10-22 +12w {
     outputdir "reports"
 
 # ------------Scenarios-------------
@@ -37,164 +32,100 @@ account rev "Primary revenue account"
 
 
 # ------------Resources-------------
-resource res1 "G.C. General Management" {
-    rate 93.0
-    chargeset resCost
+resource ali "علی" {
+    rate 45
+    efficiency 1.0
+    workinghours thu 09:00 - 16:00
+    workinghours tue 09:00 - 16:00
+    workinghours wed 09:00 - 16:00
+    workinghours fri 09:00 - 16:00
+    workinghours mon 09:00 - 16:00
 }
 
-resource res2 "G.C. Project Management" {
-    rate 69.0
-    chargeset resCost
+resource civil "تیم عمران" {
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res3 "G.C. Scheduler" {
-    rate 113.0
-    chargeset resCost
+resource elec "تیم برق" {
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res4 "G.C. Procurement" {
-    rate 85.0
-    chargeset resCost
+resource fatemeh "فاطمه" {
+    rate 42
+    efficiency 1.0
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res5 "Steel Erection Contractor Management" {
-    rate 64.0
-    chargeset resCost
+resource hossein "حسین" {
+    rate 48
+    efficiency 1.0
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res6 "Roofing Contractor Management" {
-    rate 96.0
-    chargeset resCost
+resource mech "تیم مکانیک" {
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours sat 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res7 "Elevator Contractor Management" {
-    rate 65.0
-    chargeset resCost
+resource mohsen "محسن" {
+    rate 38
+    efficiency 0.8
+    workinghours thu 09:00 - 16:00
+    workinghours tue 09:00 - 16:00
+    workinghours wed 09:00 - 16:00
+    workinghours fri 09:00 - 16:00
+    workinghours mon 09:00 - 16:00
 }
 
-resource res8 "Plumbing Contractor Management" {
-    rate 85.0
-    chargeset resCost
+resource narges "نرگس" {
+    rate 46
+    efficiency 1.0
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
-resource res9 "Electric Contractor Management" {
-    rate 93.0
-    chargeset resCost
+resource parsa "پارسا" {
+    rate 44
+    efficiency 1.0
+    workinghours thu 09:00 - 18:00
+    workinghours tue 09:00 - 18:00
+    workinghours wed 09:00 - 18:00
+    workinghours sat 09:00 - 18:00
+    workinghours fri 09:00 - 18:00
 }
 
-resource res10 "HVAC Contractor Management" {
-    rate 79.0
-    chargeset resCost
-}
-
-resource res11 "Steel Erection Contractor" {
-    rate 88.0
-    chargeset resCost
-}
-
-resource res12 "Electric Contractor" {
-    rate 100.0
-    chargeset resCost
-}
-
-resource res13 "Plumbing Contractor" {
-    rate 91.0
-    chargeset resCost
-}
-
-resource res14 "G.C. Superintendent" {
-    rate 80.0
-    chargeset resCost
-}
-
-resource res15 "G.C. Labor Crew" {
-    rate 44.0
-    chargeset resCost
-}
-
-resource res16 "G.C. Survey Crew" {
-    rate 74.0
-    chargeset resCost
-}
-
-resource res17 "Site Grading Contractor" {
-    rate 139.0
-    chargeset resCost
-}
-
-resource res18 "G.C. Rough Carpenter Crew" {
-    rate 49.0
-    chargeset resCost
-}
-
-resource res19 "G.C. Concrete Crew" {
-    rate 68.0
-    chargeset resCost
-}
-
-resource res20 "Elevator Contractor" {
-    rate 133.0
-    chargeset resCost
-}
-
-resource res21 "Drywall Contractor" {
-    rate 77.0
-    chargeset resCost
-}
-
-resource res22 "Masonry Contractor" {
-    rate 97.0
-    chargeset resCost
-}
-
-resource res23 "Roofing Contractor" {
-    rate 79.0
-    chargeset resCost
-}
-
-resource res24 "Tile Contractor" {
-    rate 106.0
-    chargeset resCost
-}
-
-resource res25 "HVAC Contractor" {
-    rate 83.0
-    chargeset resCost
-}
-
-resource res26 "Window Contractor" {
-    rate 134.0
-    chargeset resCost
-}
-
-resource res27 "G.C. Finish Carpenter Crew" {
-    rate 43.0
-    chargeset resCost
-}
-
-resource res28 "Painting Contractor" {
-    rate 96.0
-    chargeset resCost
-}
-
-resource res29 "Carpet Contractor" {
-    rate 126.0
-    chargeset resCost
-}
-
-resource res30 "Landscape Contractor" {
-    rate 110.0
-    chargeset resCost
-}
-
-resource res31 "Paving Contractor" {
-    rate 78.0
-    chargeset resCost
-}
-
-resource res32 "G.C. Accounting" {
-    rate 51.0
-    chargeset resCost
+resource reza "رضا" {
+    rate 40
+    efficiency 0.9
+    workinghours thu 08:00 - 17:00
+    workinghours tue 08:00 - 17:00
+    workinghours wed 08:00 - 17:00
+    workinghours sat 08:00 - 17:00
+    workinghours fri 08:00 - 17:00
+    workinghours mon 08:00 - 17:00
 }
 
 # ------------END-------------
@@ -202,1666 +133,85 @@ resource res32 "G.C. Accounting" {
 
 
 # ------------Tasks-------------
-task task2 "General Conditions" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    complete 79
-    start 2020-08-03
-    end 2020-08-25
-    charge 13552.0 onend
+task project "پروژه ساخت‌وساز (تراز تیمی)" {
 
-    task task3 "Receive notice to proceed and sign contract" {
-        scheduling asap
-        responsible res1
-        allocate res1
-        priority 500
-        complete 100
-        start 2020-08-03
-        end 2020-08-05
-        charge 2880.0 onend
-    }
-
-
-    task task4 "Submit bond and insurance documents" {
-        scheduling asap
-        responsible res2
-        allocate res2, res1
-        priority 500
-        complete 100
-        start 2020-08-06
-        end 2020-08-07
-        charge 3000.0 onend
-    }
-
-
-    task task5 "Prepare and submit project schedule" {
-        scheduling asap
-        responsible res2
-        allocate res2, res3
-        depends task2.task3
-        priority 500
-        complete 100
-        start 2020-08-10
-        end 2020-08-11
-        charge 2400.0 onend
-    }
-
-
-    task task6 "Prepare and submit schedule of values" {
-        scheduling asap
-        responsible res1
-        allocate res1, res2
-        depends task2.task4
-        priority 500
-        complete 100
-        start 2020-08-12
-        end 2020-08-13
-        charge 2323.2 onend
-    }
-
-
-    task task7 "Obtain building permits" {
-        scheduling asap
-        responsible res2
-        allocate res2, res4
-        priority 500
-        complete 100
-        start 2020-08-06
-        end 2020-08-11
-        charge 3200.0 onend
-    }
-
-
-    task task8 "Submit preliminary shop drawings" {
-        scheduling asap
-        responsible res2
-        allocate res2, res4
-        depends task2.task6
-        priority 500
-        complete 50
-        start 2020-08-14
-        end 2020-08-14
-        charge 8000.0 onend
-    }
-
-
-    task task9 "Submit monthly requests for payment" {
-        scheduling asap
-        priority 500
-        complete 100
-        start 2020-08-06
-        end 2020-08-06
-    }
-
-}
-
-task task10 "Long Lead Procurement" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    complete 7
-    start 2020-08-07
-    end 2020-11-12
-    charge 67200.0 onend
-
-    task task11 "Submit shop drawings and order long lead items - steel" {
-        scheduling asap
-        responsible res5
-        allocate res5
-        depends task2.task8
-        priority 500
-        complete 80
-        start 2020-08-07
-        end 2020-08-20
-        charge 6800.0 onend
-    }
-
-
-    task task12 "Submit shop drawings and order long lead items - roofing" {
-        scheduling asap
-        responsible res6
-        allocate res6
-        depends task2.task7
-        priority 500
-        start 2020-08-26
-        end 2020-09-08
-        charge 6800.0 onend
-    }
-
-
-    task task13 "Submit shop drawings and order long lead items - elevator" {
-        scheduling asap
-        responsible res7
-        allocate res7
-        depends task2.task7
-        priority 500
-        start 2020-08-26
-        end 2020-09-08
-        charge 7600.0 onend
-    }
-
-
-    task task14 "Submit shop drawings and order long lead items - plumbing" {
-        scheduling asap
-        responsible res8
-        allocate res8
-        depends task2.task7
-        priority 500
-        start 2020-08-26
-        end 2020-09-08
-        charge 6000.0 onend
-    }
-
-
-    task task15 "Submit shop drawings and order long lead items - electric" {
-        scheduling asap
-        responsible res9
-        allocate res9
-        depends task2.task7
-        priority 500
-        start 2020-08-26
-        end 2020-09-08
-        charge 6000.0 onend
-    }
-
-
-    task task16 "Submit shop drawings and order long lead items - HVAC" {
-        scheduling asap
-        responsible res10
-        allocate res10
-        depends task2.task7
-        priority 500
-        start 2020-08-26
-        end 2020-09-08
-        charge 6400.0 onend
-    }
-
-
-    task task17 "Detail, fabricate and deliver steel" {
-        scheduling asap
-        responsible res5
-        allocate res5, res11
-        priority 500
-        start 2020-08-21
-        end 2020-11-12
-        charge 40800.0 onend
-    }
-
-}
-
-task task18 "Mobilize on Site" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    complete 92
-    start 2020-08-06
-    end 2020-08-19
-    charge 7000.0 onend
-
-    task task19 "Install temporary power" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task2
-        priority 500
-        complete 100
-        start 2020-08-06
-        end 2020-08-07
-        charge 1200.0 onend
-    }
-
-
-    task task20 "Install temporary water service" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task2
-        priority 500
-        complete 100
-        start 2020-08-06
-        end 2020-08-07
-        charge 1200.0 onend
-    }
-
-
-    task task21 "Set up site office" {
-        scheduling asap
-        responsible res14
-        allocate res14, res15
-        priority 500
-        complete 100
-        start 2020-08-10
-        end 2020-08-12
-        charge 3036.0 onend
-    }
-
-
-    task task22 "Set line and grade benchmarks" {
-        scheduling asap
-        responsible res16
-        allocate res16
-        depends task18.task20
-        priority 500
-        complete 100
-        start 2020-08-13
-        end 2020-08-17
-        charge 1680.0 onend
-    }
-
-
-    task task23 "Prepare site - lay down yard and temporary fencing" {
-        scheduling asap
-        responsible res17
-        allocate res17, res15
-        depends task18.task21
-        priority 500
-        complete 50
-        start 2020-08-18
-        end 2020-08-19
-        charge 1320.0 onend
-    }
-
-}
-
-task task24 "Site Grading and Utilities" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2020-08-20
-    end 2020-10-07
-    charge 25200.0 onend
-
-    task task25 "Clear and grub site" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task18.task20, task18.task22
-        priority 500
-        start 2020-08-20
-        end 2020-08-24
-        charge 1680.0 onend
-    }
-
-
-    task task26 "Stone site access and temporary parking area" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        priority 500
-        start 2020-08-25
-        end 2020-08-26
-        charge 1120.0 onend
-    }
-
-
-    task task27 "Rough grade site (cut and fill)" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task24.task25
-        priority 500
-        start 2020-08-27
-        end 2020-09-02
-        charge 2800.0 onend
-    }
-
-
-    task task28 "Install storm drainage" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task24.task26
-        priority 500
-        start 2020-09-03
-        end 2020-09-16
-        charge 5600.0 onend
-    }
-
-
-    task task29 "Install exterior fire line and building fire riser" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task24.task26
-        priority 500
-        start 2020-09-03
-        end 2020-09-16
-        charge 6000.0 onend
-    }
-
-
-    task task30 "Perform final site grading" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task24.task28
-        priority 500
-        start 2020-09-17
-        end 2020-09-30
-        charge 5600.0 onend
-    }
-
-
-    task task31 "Erect building batter boards and layout building" {
-        scheduling asap
-        responsible res16
-        allocate res16
-        depends task24.task29
-        priority 500
-        start 2020-10-01
-        end 2020-10-07
-        charge 2800.0 onend
-    }
-
-}
-
-task task32 "Foundations" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2020-10-08
-    end 2020-11-23
-    charge 23240.0 onend
-
-    task task33 "Excavate foundations" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task24.task30
-        priority 500
-        start 2020-10-08
-        end 2020-10-21
-        charge 1400.0 onend
-    }
-
-
-    task task34 "Excavate elevator pit" {
-        scheduling asap
-        responsible res17
-        allocate res17
-        depends task24.task30
-        priority 500
-        start 2020-10-08
-        end 2020-10-09
-        charge 1120.0 onend
-    }
-
-
-    task task35 "Form column piers and spread foundations" {
-        scheduling asap
-        responsible res18
-        allocate res18
-        priority 500
-        start 2020-10-22
-        end 2020-10-27
-        charge 2080.0 onend
-    }
-
-
-    task task36 "Rough-in electric and plumbing in elevator" {
-        scheduling asap
-        responsible res13
-        allocate res13, res12
-        depends task32.task33
-        priority 500
-        start 2020-10-12
-        end 2020-10-15
-        charge 9600.0 onend
-    }
-
-
-    task task37 "Form elevator pit walls" {
-        scheduling asap
-        responsible res18
-        allocate res18
-        depends task32.task35
-        priority 500
-        start 2020-10-16
-        end 2020-10-21
-        charge 2080.0 onend
-    }
-
-
-    task task38 "Set reinforcing and anchor bolts" {
-        scheduling asap
-        responsible res18
-        allocate res18
-        depends task32.task34
-        priority 500
-        start 2020-10-28
-        end 2020-11-02
-        charge 2080.0 onend
-    }
-
-
-    task task39 "Pour column piers and foundations" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task32.task37
-        priority 500
-        start 2020-11-03
-        end 2020-11-09
-        charge 2400.0 onend
-    }
-
-
-    task task40 "Pour concrete elevator walls" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task32.task36
-        priority 500
-        start 2020-10-22
-        end 2020-10-22
-        charge 480.0 onend
-    }
-
-
-    task task41 "Cure elevator wall concrete" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task32.task39
-        priority 500
-        start 2020-10-23
-        end 2020-11-02
-        charge 28.0 onend
-    }
-
-
-    task task42 "Cure piers and foundations" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task32.task38
-        priority 500
-        start 2020-11-10
-        end 2020-11-18
-        charge 28.0 onend
-    }
-
-
-    task task43 "Strip wall forms" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task32.task40
-        priority 500
-        start 2020-11-03
-        end 2020-11-03
-        charge 4.0 onend
-    }
-
-
-    task task44 "Strip column piers and foundation forms" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task32.task41
-        priority 500
-        start 2020-11-19
-        end 2020-11-23
-        charge 1200.0 onend
-    }
-
-
-    task task45 "Install pneumatic tube in elevator pit" {
-        scheduling asap
-        responsible res20
-        allocate res20
-        depends task32.task42
-        priority 500
-        start 2020-11-04
-        end 2020-11-06
-        charge 2280.0 onend
-    }
-
-
-    task task46 "Prepare and pour concrete floor in elevator pit" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task32.task44
-        priority 500
-        start 2020-11-09
-        end 2020-11-09
-        charge 480.0 onend
-    }
-
-}
-
-task task47 "Steel Erection" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2020-11-24
-    end 2021-01-25
-    charge 22960.0 onend
-
-    task task48 "Erect steel columns, beams and joist - 1st and 2nd floors" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        depends task32.task43, task10.task16
-        priority 500
-        start 2020-11-24
-        end 2020-12-07
-        charge 6800.0 onend
-    }
-
-
-    task task49 "Erect steel columns, beams and joist - 3rd floor and roof" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        priority 500
-        start 2020-12-08
-        end 2020-12-21
-        charge 6800.0 onend
-    }
-
-
-    task task50 "Install miscellaneous iron and bracing - 1st and 2nd floors" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        priority 500
-        start 2020-12-08
-        end 2020-12-21
-        charge 3825.0 onend
-    }
-
-
-    task task51 "Install miscellaneous iron and bracing - 3rd floor and roof" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        depends task47.task48
-        priority 500
-        start 2020-12-22
-        end 2021-01-04
-        charge 3825.0 onend
-    }
-
-
-    task task52 "Install stairs and miscellaneous iron railing" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        depends task47.task50
-        priority 500
-        start 2021-01-05
-        end 2021-01-18
-        charge 1700.0 onend
-    }
-
-
-    task task53 "Touch-up paint on steel" {
-        scheduling asap
-        responsible res11
-        allocate res11
-        depends task47.task51
-        priority 500
-        start 2021-01-19
-        end 2021-01-25
-        charge 136.0 onend
-    }
-
-}
-
-task task54 "Form and Pour Concrete - Floors and Roof" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2020-12-08
-    end 2021-04-05
-    charge 42061.6 onend
-
-    task task55 "Form 2nd floor including all floor openings" {
-        scheduling asap
-        responsible res18
-        allocate res18, res15
-        depends task47.task52, task10.task13, task10.task14, task10.task15, task47
-        priority 500
-        start 2021-01-26
-        end 2021-02-01
-        charge 3600.0 onend
-    }
-
-
-    task task56 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
-        scheduling asap
-        responsible res15
-        allocate res15, res13, res12
-        depends task47
-        priority 500
-        start 2020-12-08
-        end 2020-12-14
-        charge 2613.6 onend
-    }
-
-
-    task task57 "Pour 2nd floor slab" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        priority 500
-        start 2021-02-02
-        end 2021-02-05
-        charge 1920.0 onend
-    }
-
-
-    task task58 "Cure 2nd floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task56
-        priority 500
-        start 2021-02-08
-        end 2021-02-16
-        charge 28.0 onend
-    }
-
-
-    task task59 "Strip forms from 2nd floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task57
-        priority 500
-        start 2021-02-17
-        end 2021-02-18
-        charge 800.0 onend
-    }
-
-
-    task task60 "Form 3rd floor including all floor openings" {
-        scheduling asap
-        responsible res18
-        allocate res18, res15
-        depends task54.task57
-        priority 500
-        start 2021-02-17
-        end 2021-02-23
-        charge 1190.0 onend
-    }
-
-
-    task task61 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
-        scheduling asap
-        responsible res15
-        allocate res15, res13, res12
-        depends task54.task57
-        priority 500
-        start 2021-02-17
-        end 2021-02-23
-        charge 2613.6 onend
-    }
-
-
-    task task62 "Pour 3rd floor slab" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task54.task60, task54.task59
-        priority 500
-        start 2021-02-24
-        end 2021-03-01
-        charge 1920.0 onend
-    }
-
-
-    task task63 "Cure 3rd floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task61
-        priority 500
-        start 2021-03-02
-        end 2021-03-10
-        charge 28.0 onend
-    }
-
-
-    task task64 "Strip forms from 3rd floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task62
-        priority 500
-        start 2021-03-11
-        end 2021-03-12
-        charge 800.0 onend
-    }
-
-
-    task task65 "Form roof slab including all floor openings" {
-        scheduling asap
-        responsible res18
-        allocate res18, res15
-        depends task54.task62
-        priority 500
-        start 2021-03-11
-        end 2021-03-17
-        charge 3600.0 onend
-    }
-
-
-    task task66 "Install rebar and in-floor utilities (including mechanical, electrical, plumbing)" {
-        scheduling asap
-        responsible res15
-        allocate res15, res13, res12
-        depends task54.task62
-        priority 500
-        start 2021-03-11
-        end 2021-03-17
-        charge 2613.6 onend
-    }
+    task phase1 "فونداسیون" {
 
+        task concrete "بتن‌ریزی" {
+            allocate ali, reza
+            depends project.phase1.rebar
+            effort 50h
+        }
 
-    task task67 "Pour roof slab" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task54.task65, task54.task64
-        priority 500
-        start 2021-03-18
-        end 2021-03-23
-        charge 1920.0 onend
-    }
-
-
-    task task68 "Cure roof slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task66
-        priority 500
-        start 2021-03-24
-        end 2021-04-01
-        charge 28.0 onend
-    }
-
-
-    task task69 "Strip forms from roof slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task67
-        priority 500
-        start 2021-04-02
-        end 2021-04-05
-        charge 800.0 onend
-    }
-
-
-    task task70 "Form 1st floor" {
-        scheduling asap
-        responsible res18
-        allocate res18
-        depends task54.task58
-        priority 500
-        start 2021-02-19
-        end 2021-02-24
-        charge 2080.0 onend
-    }
-
-
-    task task71 "Install electrical underground" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task54.task58
-        priority 500
-        start 2021-02-19
-        end 2021-02-25
-        charge 3000.0 onend
-    }
-
-
-    task task72 "Install plumbing underground" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task54.task58
-        priority 500
-        start 2021-02-19
-        end 2021-02-25
-        charge 3000.0 onend
-    }
-
-
-    task task73 "Install rebar and in-floor utilities" {
-        scheduling asap
-        responsible res15
-        allocate res15, res13, res12
-        depends task54.task58
-        priority 500
-        start 2021-02-19
-        end 2021-02-24
-        charge 2090.88 onend
-    }
-
-
-    task task74 "Pour 1st floor slab" {
-        scheduling asap
-        responsible res19
-        allocate res19
-        depends task54.task69, task54.task72, task54.task70, task54.task71
-        priority 500
-        start 2021-02-26
-        end 2021-03-03
-        charge 1920.0 onend
-    }
-
-
-    task task75 "Cure 1st floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task73
-        priority 500
-        start 2021-03-04
-        end 2021-03-12
-        charge 28.0 onend
-    }
-
-
-    task task76 "Strip forms from 1st floor slab" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        depends task54.task74
-        priority 500
-        start 2021-03-15
-        end 2021-03-16
-        charge 800.0 onend
-    }
-
-}
-
-task task77 "Carpentry Work" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-04-06
-    end 2021-04-26
-    charge 8400.0 onend
-
-    task task78 "Install exterior sheathing and metal studs" {
-        scheduling asap
-        responsible res21
-        allocate res21
-        depends task54.task63, task54.task68
-        priority 500
-        start 2021-04-06
-        end 2021-04-26
-        charge 8400.0 onend
-    }
-
-}
-
-task task79 "Masonry Work" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-01-05
-    end 2021-06-07
-    charge 45920.0 onend
-
-    task task80 "Rough-in plumbing at toilets and masonry walls" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task54.task75, task10.task13
-        priority 500
-        start 2021-03-17
-        end 2021-04-13
-        charge 12000.0 onend
-    }
-
-
-    task task81 "Lay masonry at core, mechanical, and toilets" {
-        scheduling asap
-        responsible res22
-        allocate res22
-        depends task47.task49, task47.task50
-        priority 500
-        start 2021-01-05
-        end 2021-02-01
-        charge 11200.0 onend
-    }
-
-
-    task task82 "Install exterior masonry work" {
-        scheduling asap
-        responsible res22
-        allocate res22
-        depends task77
-        priority 500
-        start 2021-04-27
-        end 2021-05-31
-        charge 14000.0 onend
-    }
-
-
-    task task83 "Install roof drains" {
-        scheduling asap
-        responsible res23
-        allocate res23
-        depends task79.task81
-        priority 500
-        start 2021-06-01
-        end 2021-06-02
-        charge 1120.0 onend
-    }
-
-
-    task task84 "Install tile in toilet rooms" {
-        scheduling asap
-        responsible res24
-        allocate res24
-        priority 500
-        start 2021-04-14
-        end 2021-04-27
-        charge 5600.0 onend
-    }
-
-
-    task task85 "Clean masonry" {
-        scheduling asap
-        responsible res22
-        allocate res22
-        depends task79.task81
-        priority 500
-        start 2021-06-01
-        end 2021-06-07
-        charge 700.0 onend
-    }
-
-
-    task task86 "Clean toilet room tile" {
-        scheduling asap
-        responsible res24
-        allocate res24
-        depends task79.task83
-        priority 500
-        start 2021-04-28
-        end 2021-05-04
-        charge 700.0 onend
-    }
-
-}
-
-task task87 "Roofing" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-06-01
-    end 2021-07-13
-    charge 14560.0 onend
-
-    task task88 "Install flashing at parapet walls" {
-        scheduling asap
-        responsible res23
-        allocate res23
-        depends task79.task81
-        priority 500
-        start 2021-06-01
-        end 2021-06-04
-        charge 2240.0 onend
-    }
-
-
-    task task89 "Pour lightweight concrete roof fill" {
-        scheduling asap
-        responsible res23
-        allocate res23
-        priority 500
-        start 2021-06-07
-        end 2021-06-08
-        charge 1120.0 onend
-    }
-
-
-    task task90 "Install seamless roofing material" {
-        scheduling asap
-        responsible res23
-        allocate res23
-        depends task87.task89
-        priority 500
-        start 2021-06-16
-        end 2021-06-22
-        charge 2800.0 onend
-    }
-
-
-    task task91 "Spread stone ballast on seamless roof" {
-        scheduling asap
-        responsible res23
-        allocate res23
-        depends task87.task89
-        priority 500
-        start 2021-06-23
-        end 2021-06-29
-        charge 2800.0 onend
-    }
-
-
-    task task92 "Set rooftop equipment" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task87.task90
-        priority 500
-        start 2021-06-30
-        end 2021-07-13
-        charge 5600.0 onend
-    }
-
-}
-
-task task93 "Window wall and store front closures" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-06-01
-    end 2021-08-23
-    charge 42000.0 onend
-
-    task task94 "Install window wall aluminum and glass" {
-        scheduling asap
-        responsible res26
-        allocate res26
-        depends task79.task81
-        priority 500
-        start 2021-06-01
-        end 2021-07-05
-        charge 14000.0 onend
-    }
-
-
-    task task95 "Install interior stud walls and drywall" {
-        scheduling asap
-        responsible res21
-        allocate res21
-        priority 500
-        start 2021-07-06
-        end 2021-08-09
-        charge 14000.0 onend
-    }
-
-
-    task task96 "Install interior doors and hardware" {
-        scheduling asap
-        responsible res27
-        allocate res27
-        depends task93.task94
-        priority 500
-        start 2021-08-10
-        end 2021-08-23
-        charge 5600.0 onend
-    }
-
-
-    task task97 "Install store front doors and hardware" {
-        scheduling asap
-        responsible res26
-        allocate res26
-        depends task79.task81
-        priority 500
-        start 2021-06-01
-        end 2021-06-21
-        charge 8400.0 onend
-    }
-
-}
-
-task task98 "Building Finishes" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-07-06
-    end 2021-10-25
-    charge 84000.0 onend
-
-    task task99 "Install millwork and wood trim" {
-        scheduling asap
-        responsible res27
-        allocate res27
-        depends task93.task96, task93.task94
-        priority 500
-        start 2021-08-10
-        end 2021-08-30
-        charge 8400.0 onend
-    }
-
-
-    task task100 "Paint walls and woodwork" {
-        scheduling asap
-        responsible res28
-        allocate res28
-        priority 500
-        start 2021-08-31
-        end 2021-09-27
-        charge 11200.0 onend
-    }
-
-
-    task task101 "Install conduit at ceiling plenum space" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task93
-        priority 500
-        start 2021-07-06
-        end 2021-07-26
-        charge 9000.0 onend
-    }
-
-
-    task task102 "Install duct in ceiling plenum space" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task93.task94, task98.task100
-        priority 500
-        start 2021-08-10
-        end 2021-08-30
-        charge 8400.0 onend
-    }
-
-
-    task task103 "Install ceiling grid" {
-        scheduling asap
-        responsible res21
-        allocate res21
-        depends task93.task94, task98.task101
-        priority 500
-        start 2021-08-31
-        end 2021-09-13
-        charge 5600.0 onend
-    }
-
-
-    task task104 "Install ceiling tile" {
-        scheduling asap
-        responsible res21
-        allocate res21
-        depends task98.task102
-        priority 500
-        start 2021-09-14
-        end 2021-09-27
-        charge 5600.0 onend
-    }
-
-
-    task task105 "Hang wallpaper" {
-        scheduling asap
-        responsible res28
-        allocate res28
-        depends task98.task102
-        priority 500
-        start 2021-09-14
-        end 2021-09-27
-        charge 5600.0 onend
-    }
-
-
-    task task106 "Install building carpet" {
-        scheduling asap
-        responsible res29
-        allocate res29
-        depends task98.task99
-        priority 500
-        start 2021-09-28
-        end 2021-10-25
-        charge 11200.0 onend
-    }
-
-
-    task task107 "Install hardware and accessories" {
-        scheduling asap
-        responsible res27
-        allocate res27
-        depends task98.task99
-        priority 500
-        start 2021-09-28
-        end 2021-10-18
-        charge 8400.0 onend
-    }
-
-
-    task task108 "Complete interior and exterior sod and plantings" {
-        scheduling asap
-        responsible res30
-        allocate res30
-        depends task98.task99
-        priority 500
-        start 2021-09-28
-        end 2021-10-11
-        charge 5600.0 onend
-    }
-
-
-    task task109 "Pave, curb, and stripe parking lot" {
-        scheduling asap
-        responsible res31
-        allocate res31
-        depends task98.task107
-        priority 500
-        start 2021-10-12
-        end 2021-10-25
-        charge 5600.0 onend
-    }
-
-}
-
-task task110 "Elevators" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-02-02
-    end 2021-03-29
-    charge 22400.0 onend
-
-    task task111 "Set elevator equipment in shafts" {
-        scheduling asap
-        responsible res20
-        allocate res20
-        depends task79.task80, task32.task45, task10.task12
-        priority 500
-        start 2021-02-02
-        end 2021-03-01
-        charge 15200.0 onend
-    }
-
-
-    task task112 "Set equipment in mechanical room" {
-        scheduling asap
-        responsible res20
-        allocate res20
-        priority 500
-        start 2021-03-02
-        end 2021-03-15
-        charge 7600.0 onend
-    }
-
-
-    task task113 "Test and align doors and equipment" {
-        scheduling asap
-        responsible res20
-        allocate res20
-        depends task110.task111
-        priority 500
-        start 2021-03-16
-        end 2021-03-29
-        charge 7600.0 onend
-    }
-
-}
-
-task task114 "Plumbing" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-06-08
-    end 2021-10-11
-    charge 30800.0 onend
-
-    task task115 "Rough-in plumbing in drywall walls" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task93
-        priority 500
-        start 2021-07-06
-        end 2021-08-02
-        charge 12000.0 onend
-    }
-
-
-    task task116 "Tie-in fire line riser and set valves" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task79.task84
-        priority 500
-        start 2021-06-08
-        end 2021-06-21
-        charge 6000.0 onend
-    }
 
+        task excavation "عملیات خاک‌برداری" {
+            allocate civil
+            effort 80h
+        }
 
-    task task117 "Set plumbing fixtures and trim" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        priority 500
-        start 2021-08-03
-        end 2021-08-23
-        charge 9000.0 onend
-    }
-
-
-    task task118 "Flush, test, and clean piping and fixtures" {
-        scheduling asap
-        responsible res13
-        allocate res13
-        depends task98.task99, task114.task115, task114.task116
-        priority 500
-        start 2021-09-28
-        end 2021-10-11
-        charge 6000.0 onend
-    }
-
-}
-
-task task119 "Electrical" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-03-17
-    end 2021-09-27
-    charge 45920.0 onend
-
-    task task120 "Rough-in electrical in masonry walls" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task54.task75, task10.task14
-        priority 500
-        start 2021-03-17
-        end 2021-04-13
-        charge 12000.0 onend
-    }
-
-
-    task task121 "Rough-in electrical in drywall walls" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task93
-        priority 500
-        start 2021-07-06
-        end 2021-08-02
-        charge 12000.0 onend
-    }
-
-
-    task task122 "Pull wire in conduit and set area transformers" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        priority 500
-        start 2021-07-27
-        end 2021-08-16
-        charge 9000.0 onend
-    }
-
-
-    task task123 "Install and terminate electrical devices" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task119.task121, task119.task120
-        priority 500
-        start 2021-08-17
-        end 2021-09-06
-        charge 9000.0 onend
-    }
-
-
-    task task124 "Make electrical terminations for HVAC equipment" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task119.task121, task87.task91
-        priority 500
-        start 2021-08-17
-        end 2021-08-18
-        charge 1200.0 onend
-    }
-
-
-    task task125 "Install light fixtures - test and clean" {
-        scheduling asap
-        responsible res12
-        allocate res12
-        depends task98.task102, task119.task122
-        priority 500
-        start 2021-09-14
-        end 2021-09-27
-        charge 6000.0 onend
-    }
-
-}
-
-task task126 "Heating and Ventilating - AC" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-02-02
-    end 2021-10-11
-    charge 42000.0 onend
-
-    task task127 "Set equipment in mechanical room" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task79.task80, task10.task15
-        priority 500
-        start 2021-02-02
-        end 2021-02-15
-        charge 5600.0 onend
-    }
-
-
-    task task128 "Rough-in mechanical in masonry walls" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task54.task75
-        priority 500
-        start 2021-03-17
-        end 2021-04-13
-        charge 11200.0 onend
-    }
-
-
-    task task129 "Rough-in mechanical in drywall walls" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task93
-        priority 500
-        start 2021-07-06
-        end 2021-07-19
-        charge 5600.0 onend
-    }
 
+        task rebar "نصب میلگرد" {
+            allocate civil
+            depends project.phase1.excavation
+            effort 60h
+        }
 
-    task task130 "Install duct in building chase" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        priority 500
-        start 2021-07-06
-        end 2021-07-26
-        charge 8400.0 onend
     }
 
 
-    task task131 "Set HVAC trim and test and balance system" {
-        scheduling asap
-        responsible res25
-        allocate res25
-        depends task98.task102, task126.task129, task119.task123
-        priority 500
-        start 2021-09-14
-        end 2021-10-11
-        charge 11200.0 onend
-    }
+    task phase2 "سازه" {
 
-}
+        task columns "قالب‌بندی و اجرای ستون‌ها" {
+            allocate civil
+            depends project.phase1.concrete
+            effort 90h
+        }
 
-task task132 "Final Clean-up and Occupancy" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-08-10
-    end 2021-11-01
-    charge 6720.0 onend
-
-    task task133 "Install hard tile flooring in common areas" {
-        scheduling asap
-        responsible res24
-        allocate res24
-        depends task93.task94
-        priority 500
-        start 2021-08-10
-        end 2021-08-16
-        charge 2800.0 onend
-    }
 
+        task mech_fixture "نصب تجهیزات مکانیکی" {
+            allocate mech
+            depends project.phase2.columns
+            effort 100h
+        }
 
-    task task134 "Clean hard tile floors" {
-        scheduling asap
-        responsible res24
-        allocate res24
-        priority 500
-        start 2021-08-17
-        end 2021-08-20
-        charge 560.0 onend
     }
 
 
-    task task135 "Remove debris from building and do final clean-up" {
-        scheduling asap
-        responsible res15
-        allocate res15
-        priority 500
-        start 2021-10-26
-        end 2021-10-29
-        charge 1600.0 onend
-    }
+    task phase3 "برق‌کشی" {
 
-
-    task task136 "Substantial completion date" {
-        scheduling asap
-        responsible res14
-        allocate res14
-        depends task132.task134
-        priority 500
-        start 2021-11-01
-        end 2021-11-01
-        charge 880.0 onend
-    }
+        task panel "نصب تابلو برق" {
+            allocate parsa, narges
+            depends project.phase3.wiring
+            effort 40h
+        }
 
-}
 
-task task137 "Complete Final Inspections" {
-    scheduling asap
-    chargeset taskCost
-    priority 500
-    start 2021-11-01
-    end 2021-11-08
-    charge 3360.0 onend
+        task wiring "اجرای سیم‌کشی" {
+            allocate elec
+            depends project.phase2.mech_fixture
+            effort 80h
+        }
 
-    task task138 "Complete elevator inspection and certification" {
-        scheduling asap
-        responsible res20
-        allocate res20
-        depends task132.task134, task110.task112
-        priority 500
-        start 2021-11-01
-        end 2021-11-03
-        charge 2280.0 onend
     }
 
 
-    task task139 "Perform architect's inspection" {
-        scheduling asap
-        responsible res14
-        allocate res14, res2
-        priority 500
-        start 2021-11-04
-        end 2021-11-04
-        charge 920.0 onend
-    }
+    task phase4 "نقاشی و پایان‌کار" {
 
+        task inspection "بازرسی نهایی" {
+            allocate mech, elec
+            depends project.phase4.painting
+            effort 40h
+        }
 
-    task task140 "Perform local building agency inspection" {
-        scheduling asap
-        responsible res2
-        allocate res2, res14
-        depends task137.task138
-        priority 500
-        start 2021-11-05
-        end 2021-11-05
-        charge 920.0 onend
-    }
 
+        task painting "عملیات نقاشی" {
+            allocate fatemeh
+            depends project.phase3.panel
+            effort 60h
+        }
 
-    task task141 "Perform Fire Marshal's inspection" {
-        scheduling asap
-        responsible res14
-        allocate res14, res2
-        depends task137.task139
-        priority 500
-        start 2021-11-08
-        end 2021-11-08
-        charge 920.0 onend
     }
-
-}
-
-task task142 "Complete punch list items from all inspections" {
-    scheduling asap
-    responsible res14
-    chargeset taskCost
-    allocate res14, res15, res13, res12, res25, res21, res29, res31, res28
-    priority 500
-    start 2021-11-09
-    end 2021-11-22
-    charge 5749.92 onend
-}
-
-task task143 "Obtain certificate of occupancy" {
-    scheduling asap
-    responsible res2
-    chargeset taskCost
-    allocate res2
-    priority 500
-    start 2021-11-23
-    end 2021-11-24
-    charge 1920.0 onend
-}
-
-task task144 "Issue final completion documents including warranties" {
-    scheduling asap
-    responsible res2
-    chargeset taskCost
-    allocate res2
-    priority 500
-    start 2021-11-23
-    end 2021-11-23
-    charge 960.0 onend
-}
 
-task task145 "Issue final request for payment" {
-    scheduling asap
-    responsible res2
-    chargeset taskCost
-    allocate res2, res32, res1
-    depends task142, task143
-    priority 500
-    start 2021-11-25
-    end 2021-11-25
-    charge 810.22 onend
 }
 
 # ------------END-------------
@@ -1871,7 +221,7 @@ task task145 "Issue final request for payment" {
 # ------------Reports-------------
 taskreport taskReports "tasksReport" {
     headline "Tasks Table"
-    formats html
+    formats csv
     columns
     bsi{title "wbs"}, 
     id{title "id"}, 
@@ -1905,7 +255,7 @@ taskreport taskReports "tasksReport" {
 
 resourcereport resourceReports "resourceReport" {
     headline "Resources Table"
-    formats html
+    formats csv
     columns
     bsi{title "wbs"},
     id{title "id"},

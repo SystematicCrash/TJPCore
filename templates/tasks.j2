@@ -45,7 +45,7 @@ task {{ task.id }} "{{ task.name }}" {
     {% endif %}
 
     {%- if task.effort %}
-    effort {{task.effort}}d
+    effort {{task.effort}}h
     {% endif %}
 
     {%- if task.effortdone %}

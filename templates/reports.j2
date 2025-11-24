@@ -1,7 +1,7 @@
 {% macro render_reports(report_paths, scenario) %}
 taskreport taskReports "{{report_paths.files.task}}" {
     headline "Tasks Table"
-    formats html
+    formats csv
     columns
     bsi{title "wbs"}, 
     id{title "id"}, 
@@ -38,7 +38,7 @@ taskreport taskReports "{{report_paths.files.task}}" {
 
 resourcereport resourceReports "{{report_paths.files.resource}}" {
     headline "Resources Table"
-    formats html
+    formats csv
     columns
     bsi{title "wbs"},
     id{title "id"},
