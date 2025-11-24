@@ -3,12 +3,13 @@ from main import main
 from models.api_models import Scenario
 from helpers.logging_helper import logger
 from helpers.config_helper import get_config
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse, StreamingResponse
 from helpers.io_helper import json_stream
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 
 app = FastAPI()
 
@@ -79,3 +80,9 @@ async def show_file_jinja(request: Request):
         lines = f.readlines()
     
     return templates.TemplateResponse("tjp_as_html.html", {"request": request, "lines": lines, "filename": file_path.name})
+
+
+# Prometheus matrics endpoint
+@app.get("/metrics")
+async def prometheus_metrics(request: Request):
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
